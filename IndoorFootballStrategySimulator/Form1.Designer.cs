@@ -28,9 +28,10 @@
             // 
             // monoGameWindow1
             // 
-            this.monoGameWindow1.Location = new System.Drawing.Point(12, 12);
+            this.monoGameWindow1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.monoGameWindow1.Location = new System.Drawing.Point(0, 0);
             this.monoGameWindow1.Name = "monoGameWindow1";
-            this.monoGameWindow1.Size = new System.Drawing.Size(1400, 837);
+            this.monoGameWindow1.Size = new System.Drawing.Size(1424, 861);
             this.monoGameWindow1.TabIndex = 0;
             this.monoGameWindow1.Text = "monoGameWindow1";
             // 
