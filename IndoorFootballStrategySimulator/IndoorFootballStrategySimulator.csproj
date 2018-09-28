@@ -33,20 +33,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MonoGame.Forms.DX, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MonoGame.Forms.DX.2.1.0\lib\net451\MonoGame.Forms.DX.dll</HintPath>
+    <Reference Include="MonoGame.Forms.DX, Version=2.1.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Forms.DX.2.1.0.1\lib\net451\MonoGame.Forms.DX.dll</HintPath>
     </Reference>
     <Reference Include="MonoGame.Framework, Version=3.7.0.1114, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MonoGame.Forms.DX.2.1.0\lib\net451\MonoGame.Framework.dll</HintPath>
+      <HintPath>..\packages\MonoGame.Forms.DX.2.1.0.1\lib\net451\MonoGame.Framework.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <HintPath>..\packages\MonoGame.Forms.DX.2.1.0\lib\net451\SharpDX.dll</HintPath>
+      <HintPath>..\packages\MonoGame.Forms.DX.2.1.0.1\lib\net451\SharpDX.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Direct3D11, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <HintPath>..\packages\MonoGame.Forms.DX.2.1.0\lib\net451\SharpDX.Direct3D11.dll</HintPath>
+      <HintPath>..\packages\MonoGame.Forms.DX.2.1.0.1\lib\net451\SharpDX.Direct3D11.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.DXGI, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <HintPath>..\packages\MonoGame.Forms.DX.2.1.0\lib\net451\SharpDX.DXGI.dll</HintPath>
+      <HintPath>..\packages\MonoGame.Forms.DX.2.1.0.1\lib\net451\SharpDX.DXGI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -67,6 +67,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Game\Entity.cs" />
+    <Compile Include="Game\EntityManager.cs" />
+    <Compile Include="Game\Extensions.cs" />
+    <Compile Include="Game\MovingEntity.cs" />
+    <Compile Include="Game\Player.cs" />
+    <Compile Include="Game\SteeringManager.cs" />
     <Compile Include="MonoGameWindow.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -84,6 +90,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Content\characterBlue %281%29.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -98,8 +107,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
