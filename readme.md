@@ -1,6 +1,6 @@
 # Indoor Football Strategy Simulator
 
-This is our team's repository for PROCP project. To get started check out the [Getting started](https://git.fhict.nl/I360147/indoor-football-strategy-simulator/wikis/Getting%20started) page
+This is our team's repository for PROCP project. For more information, check out the [Wiki](https://git.fhict.nl/I360147/indoor-football-strategy-simulator/wikis)!
 
 ## Product
 
