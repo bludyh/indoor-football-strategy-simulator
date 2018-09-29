@@ -11,14 +11,16 @@ namespace IndoorFootballStrategySimulator.Game {
 
         [Flags]
         public enum SteeringBehavior {
-            NONE = 0, SEEK = 1, ARRIVAL = 2, PURSUIT = 4
+            NONE = 0, SEEK = 1, ARRIVAL = 2, PURSUIT = 4, WALL_AVOIDANCE = 8
         }
 
         private MovingEntity entity;
         private MovingEntity targetEntity;
         private Vector2 targetPos;
-        private Vector2 steeringForce;
+        private List<Line> walls;
         private SteeringBehavior steeringBehavior;
+
+        public Vector2 SteeringForce { get; private set; }
 
         public SteeringManager(MovingEntity entity) {
             this.entity = entity;
@@ -76,37 +78,80 @@ namespace IndoorFootballStrategySimulator.Game {
                 steeringBehavior ^= SteeringBehavior.PURSUIT;
         }
 
+        private Vector2 WallAvoidance(List<Line> walls) {
+            Vector2 steeringForce = Vector2.Zero;
+            Vector2? intersectionPoint = null;
+            Vector2? closestIntersection = null;
+            Line closestWall = null;
+            float distanceToClosestIntersection = float.MaxValue;
+
+            foreach (var detector in entity.WallDetectors) {
+                foreach (var wall in walls) {
+                    if (detector.Intersect(wall, out intersectionPoint)) {
+                        float distanceToIntersection = Vector2.Distance(entity.Position, intersectionPoint.Value);
+                        if (distanceToIntersection < distanceToClosestIntersection) {
+                            distanceToClosestIntersection = distanceToIntersection;
+                            closestIntersection = intersectionPoint;
+                            closestWall = wall;
+                        }
+                    }
+                }
+                if (closestWall != null) {
+                    Vector2 excessiveVelocity = detector.End - closestIntersection.Value;
+                    steeringForce = closestWall.Normal * excessiveVelocity.Length();
+                }
+            }
+            return steeringForce;
+        }
+
+        public void StartWallAvoidance(List<Line> walls) {
+            this.walls = walls;
+            steeringBehavior |= SteeringBehavior.WALL_AVOIDANCE;
+        }
+
+        public void StopWallAvoidance() {
+            if (steeringBehavior.HasFlag(SteeringBehavior.WALL_AVOIDANCE))
+                steeringBehavior ^= SteeringBehavior.WALL_AVOIDANCE;
+        }
+
         public Vector2 Calculate() {
-            steeringForce = Vector2.Zero;
+            SteeringForce = Vector2.Zero;
             Vector2 force = Vector2.Zero;
+
+            if (steeringBehavior.HasFlag(SteeringBehavior.WALL_AVOIDANCE)) {
+                force += WallAvoidance(walls) * 10f;
+                if (!AccumulateSteeringForce(force)) return SteeringForce;
+            }
 
             if (steeringBehavior.HasFlag(SteeringBehavior.SEEK)) {
                 force += Seek(targetPos);
-                if (!AccumulateSteeringForce(force)) return steeringForce;
+                if (!AccumulateSteeringForce(force)) return SteeringForce;
             }
 
             if (steeringBehavior.HasFlag(SteeringBehavior.ARRIVAL)) {
                 force += Arrival(targetPos);
-                if (!AccumulateSteeringForce(force)) return steeringForce;
+                if (!AccumulateSteeringForce(force)) return SteeringForce;
             }
 
             if (steeringBehavior.HasFlag(SteeringBehavior.PURSUIT)) {
                 force += Pursuit(targetEntity);
-                if (!AccumulateSteeringForce(force)) return steeringForce;
+                if (!AccumulateSteeringForce(force)) return SteeringForce;
             }
 
-            return steeringForce;
+            return SteeringForce;
         }
 
         private bool AccumulateSteeringForce(Vector2 force) {
-            float remainingForceMagnitude = entity.MaxForce - steeringForce.Length();
-            if (remainingForceMagnitude <= 0f) return false;
+            if (force.Length() > 0) {
+                float remainingForceMagnitude = entity.MaxForce - SteeringForce.Length();
+                if (remainingForceMagnitude <= 0f) return false;
 
-            float forceMagnitude = force.Length();
-            if (forceMagnitude > remainingForceMagnitude)
-                forceMagnitude = remainingForceMagnitude;
+                float forceMagnitude = force.Length();
+                if (forceMagnitude > remainingForceMagnitude)
+                    forceMagnitude = remainingForceMagnitude;
 
-            steeringForce += Vector2.Normalize(force) * forceMagnitude;
+                SteeringForce += Vector2.Normalize(force) * forceMagnitude;
+            }
             return true;
         }
 

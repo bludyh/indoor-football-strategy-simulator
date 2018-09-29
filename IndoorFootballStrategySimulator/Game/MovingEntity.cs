@@ -12,6 +12,15 @@ namespace IndoorFootballStrategySimulator.Game {
         public Vector2 Velocity { get; set; }
         public Vector2 Heading { get { return new Vector2((float)Math.Cos(Rotation), (float)Math.Sin(Rotation)); } }
         public Vector2 Side { get { return new Vector2(-Heading.Y, Heading.X); } }
+        public List<Line> WallDetectors {
+            get {
+                return new List<Line> {
+                    new Line(Position, Position + Heading * 20f),
+                    new Line(Position, Position + Vector2.Transform(Heading, Matrix.CreateRotationZ(MathHelper.ToRadians(-45f))) * 20f),
+                    new Line(Position, Position + Vector2.Transform(Heading, Matrix.CreateRotationZ(MathHelper.ToRadians(45f))) * 20f)
+                };
+            }
+        }
         public float Mass { get; private set; }
         public float MaxForce { get; private set; }
         public float MaxSpeed { get; private set; }
@@ -20,6 +29,13 @@ namespace IndoorFootballStrategySimulator.Game {
             Mass = mass;
             MaxForce = maxForce;
             MaxSpeed = maxSpeed;
+        }
+
+        // Debug code
+        public override void Draw(SpriteBatch spriteBatch) {
+            base.Draw(spriteBatch);
+
+            MonoGameWindow.DrawLine(spriteBatch, Position, Position + Velocity, Color.Red);
         }
 
     }

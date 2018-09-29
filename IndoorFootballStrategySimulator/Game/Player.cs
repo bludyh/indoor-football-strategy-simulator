@@ -27,7 +27,8 @@ namespace IndoorFootballStrategySimulator.Game {
             Velocity += acceleration * deltaTime;
             Velocity.Truncate(MaxSpeed);
             Position += Velocity * deltaTime;
-            Rotation = (float)Math.Atan2(Velocity.Y, Velocity.X);
+            if (Velocity.Length() > 1f)
+                Rotation = (float)Math.Atan2(Velocity.Y, Velocity.X);
         }
 
     }

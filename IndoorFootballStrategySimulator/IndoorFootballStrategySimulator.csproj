@@ -70,6 +70,8 @@
     <Compile Include="Game\Entity.cs" />
     <Compile Include="Game\EntityManager.cs" />
     <Compile Include="Game\Extensions.cs" />
+    <Compile Include="Game\Field.cs" />
+    <Compile Include="Game\Line.cs" />
     <Compile Include="Game\MovingEntity.cs" />
     <Compile Include="Game\Player.cs" />
     <Compile Include="Game\SteeringManager.cs" />
@@ -91,6 +93,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="Content\characterBlue %281%29.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\characterRed %281%29.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\soccerField.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
