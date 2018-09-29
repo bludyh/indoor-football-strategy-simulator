@@ -1,6 +1,6 @@
 # Indoor Football Strategy Simulator
 
-This is our team's repository for PROCP project.
+This is our team's repository for PROCP project. To get started check out the [Getting started](Getting started) page
 
 ## Product
 
