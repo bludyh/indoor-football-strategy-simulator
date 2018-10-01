@@ -18,6 +18,11 @@ namespace IndoorFootballStrategySimulator {
         private Field field;
         private Ball ball;
         private Player playerBlue;
+<<<<<<< HEAD
+=======
+        private Player playerRed;
+        private Ball ball;
+>>>>>>> Added ball
 
         protected override void Initialize() {
             base.Initialize();
@@ -37,6 +42,7 @@ namespace IndoorFootballStrategySimulator {
 =======
             // Soccer Ball
             texture = Editor.Content.Load<Texture2D>("soccerBall");
+            ball = new Ball(texture, Color.White, new Vector2(1f, 1f), new Vector2(300f, 300f), 1f, 1000f, 100f);
             //Team Blue
             texture = Editor.Content.Load<Texture2D>("characterBlue (1)");
             playerBlue = new Player(texture, Color.White, new Vector2(1f, 1f), new Vector2(300f, 300f), 0f, 0f, 1f, 1000f, 100f);
@@ -62,7 +68,12 @@ namespace IndoorFootballStrategySimulator {
             }
 =======
             playerRed.Update(gameTime);
+<<<<<<< HEAD
 >>>>>>> Added Class for AI
+=======
+            //ball
+            ball.Update(gameTime);
+>>>>>>> Added ball
         }
 
         protected override void Draw() {
@@ -76,7 +87,13 @@ namespace IndoorFootballStrategySimulator {
 <<<<<<< HEAD
 =======
             playerRed.Draw(Editor.spriteBatch);
+<<<<<<< HEAD
 >>>>>>> Added Class for AI
+=======
+            //Ball
+            ball.Draw(Editor.spriteBatch);
+
+>>>>>>> Added ball
             Editor.spriteBatch.End();
         }
 
