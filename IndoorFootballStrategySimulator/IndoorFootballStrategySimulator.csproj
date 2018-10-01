@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game\FieldPlayer.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +74,8 @@
     <Compile Include="Game\EntityManager.cs" />
     <Compile Include="Game\Extensions.cs" />
     <Compile Include="Game\Field.cs" />
+    <Compile Include="Game\FSM.cs" />
+    <Compile Include="Game\GoalKeeper.cs" />
     <Compile Include="Game\Idle.cs" />
     <Compile Include="Game\KickBall.cs" />
     <Compile Include="Game\Line.cs" />

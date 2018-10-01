@@ -16,8 +16,8 @@ namespace IndoorFootballStrategySimulator {
 
         private float frameRate;
         private Field field;
-        private Player playerBlue;
-        private Player playerRed;
+        private FieldPlayer playerBlue;
+        private FieldPlayer playerRed;
         private Ball ball;
 
         protected override void Initialize() {
@@ -30,16 +30,17 @@ namespace IndoorFootballStrategySimulator {
             field = new Field(texture, Color.White, new Vector2(1f, 1f), new Vector2(Editor.graphics.Viewport.Width / 2f, Editor.graphics.Viewport.Height / 2f), 0f);
             // Soccer Ball
             texture = Editor.Content.Load<Texture2D>("soccerBall");
-            ball = new Ball(texture, Color.White, new Vector2(1f, 1f), new Vector2(300f, 300f), 1f, 1000f, 100f);
+            ball = new Ball(texture, Color.White, new Vector2(1f, 1f), new Vector2(300f, 300f), 0.1f, 1000f, 100f);
             //Team Blue
             texture = Editor.Content.Load<Texture2D>("characterBlue (1)");
-            playerBlue = new Player(texture, Color.White, new Vector2(1f, 1f), new Vector2(300f, 300f), 0f, 0f, 1f, 1000f, 100f);
+            playerBlue = new FieldPlayer(texture, Color.White, new Vector2(1f, 1f), new Vector2(300f, 300f), 0f, 0f, 1f, 1000f, 100f);
             // Team Red
             texture = Editor.Content.Load<Texture2D>("characterRed (1)");
-            playerRed = new Player(texture, Color.White, new Vector2(1f, 1f), new Vector2(700f, 500f), MathHelper.Pi, 0f, 1f, 200f, 50f);
-
+            playerRed = new FieldPlayer(texture, Color.White, new Vector2(1f, 1f), new Vector2(700f, 500f), MathHelper.Pi, 0f, 1f, 200f, 50f);
+            //
+            
             playerBlue.Steering.StartWallAvoidance(field.Walls);
-            playerRed.Steering.StartPursuit(playerBlue);
+            playerRed.Steering.StartPursuit(ball);
             playerRed.Steering.StartWallAvoidance(field.Walls);
         }
 
@@ -60,10 +61,12 @@ namespace IndoorFootballStrategySimulator {
 
             Editor.spriteBatch.Begin();
             Editor.spriteBatch.DrawString(Editor.Font, $"fps: { frameRate.ToString("0.0") }\nPosition: { playerBlue.Position }\nVelocity: { playerBlue.Velocity.Length() }", new Vector2(10f, 10f), Color.White);
+            //Draw Field
             field.Draw(Editor.spriteBatch);
+            //Draw Player
             playerBlue.Draw(Editor.spriteBatch);
             playerRed.Draw(Editor.spriteBatch);
-            //Ball
+            //Draw Ball
             ball.Draw(Editor.spriteBatch);
 
             Editor.spriteBatch.End();

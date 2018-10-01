@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace IndoorFootballStrategySimulator.Game
 {
-    abstract class State
+    public abstract class State<T>
     {
-        public abstract void OnEnter<T>(T owner);
-        public abstract void Handle<T>(T owner);
-        public abstract void OnExit<T>(T owner);
+        public abstract void OnEnter(T owner);
+        public abstract void Handle(T owner);
+        public abstract void OnExit(T owner);
     }
 }
