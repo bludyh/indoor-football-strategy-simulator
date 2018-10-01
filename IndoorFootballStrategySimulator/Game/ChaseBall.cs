@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace IndoorFootballStrategySimulator.Game
 {
-    class ChaseBall:State
+    class ChaseBall:State<Player>
     {
-        public override void OnEnter<Player>(Player player)
+        public override void OnEnter(Player player)
         {
             throw new NotImplementedException();
         }
-        public override void Handle<Player>(Player player)
+        public override void Handle(Player player)
         {
             throw new NotImplementedException();
         }
-        public override void OnExit<Player>(Player player)
+        public override void OnExit(Player player)
         {
             throw new NotImplementedException();
         }
