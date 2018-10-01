@@ -31,8 +31,7 @@ namespace IndoorFootballStrategySimulator.Game {
             return desiredVelocity - entity.Velocity;
         }
 
-        public void StartSeek(Vector2 targetPos) {
-            this.targetPos = targetPos;
+        public void StartSeek() {
             steeringBehavior |= SteeringBehavior.SEEK;
         }
 

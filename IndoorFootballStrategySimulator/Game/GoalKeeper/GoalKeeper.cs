@@ -18,9 +18,5 @@ namespace IndoorFootballStrategySimulator.Game
             Rotation = rot;
             Radius = radius;
         }
-        public override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-        }
     }
 }

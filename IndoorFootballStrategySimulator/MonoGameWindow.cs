@@ -16,9 +16,8 @@ namespace IndoorFootballStrategySimulator {
 
         private float frameRate;
         private Field field;
-        private FieldPlayer playerBlue;
-        private FieldPlayer playerRed;
         private Ball ball;
+        private Team blueteam, redteam;
 
         protected override void Initialize() {
             base.Initialize();
@@ -30,18 +29,22 @@ namespace IndoorFootballStrategySimulator {
             field = new Field(texture, Color.White, new Vector2(1f, 1f), new Vector2(Editor.graphics.Viewport.Width / 2f, Editor.graphics.Viewport.Height / 2f), 0f);
             // Soccer Ball
             texture = Editor.Content.Load<Texture2D>("soccerBall");
-            ball = new Ball(texture, Color.White, new Vector2(1f, 1f), new Vector2(300f, 300f), 0.1f, 1000f, 100f);
+            ball = new Ball(texture, Color.White, new Vector2(1f, 1f), new Vector2(685f, 372f), 1f, 0f, 0f);
             //Team Blue
+            
             texture = Editor.Content.Load<Texture2D>("characterBlue (1)");
-            playerBlue = new FieldPlayer(texture, Color.White, new Vector2(1f, 1f), new Vector2(300f, 300f), 0f, 0f, 1f, 1000f, 100f);
+            blueteam = new Team(Team.Formation.A, Team.TeamColor.Blue, texture);
+            //GKBlue = new GoalKeeper(texture, Color.White, new Vector2(1f, 1f), new Vector2(120f, 372f), 0f, 0f, 3f, 1000f, 100f);
+            //playerBlue = new FieldPlayer(texture, Color.White, new Vector2(1f, 1f), new Vector2(300f, 300f), 0f, 0f, 3f, 1000f, 100f);
             // Team Red
             texture = Editor.Content.Load<Texture2D>("characterRed (1)");
-            playerRed = new FieldPlayer(texture, Color.White, new Vector2(1f, 1f), new Vector2(700f, 500f), MathHelper.Pi, 0f, 1f, 200f, 50f);
-            //
-            
-            playerBlue.Steering.StartWallAvoidance(field.Walls);
-            playerRed.Steering.StartPursuit(ball);
-            playerRed.Steering.StartWallAvoidance(field.Walls);
+            redteam = new Team(Team.Formation.A, Team.TeamColor.Red, texture);
+            //playerRed = new FieldPlayer(texture, Color.White, new Vector2(1f, 1f), new Vector2(700f, 500f), MathHelper.Pi, 0f, 3f, 200f, 50f);
+            ////
+
+            ////playerBlue.Steering.StartWallAvoidance(field.Walls);
+            //playerRed.Steering.StartSeek();
+            //playerRed.Steering.StartWallAvoidance(field.Walls);
         }
 
         protected override void Update(GameTime gameTime) {
@@ -49,9 +52,9 @@ namespace IndoorFootballStrategySimulator {
 
             frameRate = 1 / (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            playerBlue.Steering.StartArrival(new Vector2(Mouse.GetState().X, Mouse.GetState().Y));
-            playerBlue.Update(gameTime);
-            playerRed.Update(gameTime);
+            //playerBlue.Steering.StartArrival(new Vector2(Mouse.GetState().X, Mouse.GetState().Y));
+            //playerBlue.Update(gameTime);
+            //playerRed.Update(gameTime);
             //ball
             ball.Update(gameTime);
         }
@@ -60,12 +63,15 @@ namespace IndoorFootballStrategySimulator {
             base.Draw();
 
             Editor.spriteBatch.Begin();
-            Editor.spriteBatch.DrawString(Editor.Font, $"fps: { frameRate.ToString("0.0") }\nPosition: { playerBlue.Position }\nVelocity: { playerBlue.Velocity.Length() }", new Vector2(10f, 10f), Color.White);
+            Editor.spriteBatch.DrawString(Editor.Font, $"fps: { frameRate.ToString("0.0") }", new Vector2(10f, 10f), Color.White);
             //Draw Field
             field.Draw(Editor.spriteBatch);
             //Draw Player
-            playerBlue.Draw(Editor.spriteBatch);
-            playerRed.Draw(Editor.spriteBatch);
+            //GKBlue.Draw(Editor.spriteBatch);
+            //playerBlue.Draw(Editor.spriteBatch);
+            //playerRed.Draw(Editor.spriteBatch);
+            blueteam.Draw(Editor.spriteBatch);
+            redteam.Draw(Editor.spriteBatch);
             //Draw Ball
             ball.Draw(Editor.spriteBatch);
 
