@@ -8,5 +8,9 @@ namespace IndoorFootballStrategySimulator.Game
 {
     class Ball
     {
+        public Ball()
+        {
+
+        }
     }
 }
