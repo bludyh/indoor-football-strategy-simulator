@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,13 +20,23 @@ namespace IndoorFootballStrategySimulator.Game
         {
             CurrentState = state;
         }
-        public void Update()
+        public void Update(GameTime gameTime)
         {
 
             if (CurrentState != null)
             {
                 CurrentState.Handle(Owner);
             }
+        }
+        public void ChangeState(State<T> newState)
+        {
+            CurrentState.OnExit(Owner);
+            CurrentState = newState;
+            CurrentState.OnEnter(Owner);
+        }
+        public bool IsInState(State<T> state)
+        {
+            return CurrentState == state;
         }
     }
 }
