@@ -18,6 +18,7 @@ namespace IndoorFootballStrategySimulator {
         private Field field;
         private Player playerBlue;
         private Player playerRed;
+        private Ball ball;
 
         protected override void Initialize() {
             base.Initialize();
@@ -29,6 +30,7 @@ namespace IndoorFootballStrategySimulator {
             field = new Field(texture, Color.White, new Vector2(1f, 1f), new Vector2(Editor.graphics.Viewport.Width / 2f, Editor.graphics.Viewport.Height / 2f), 0f);
             // Soccer Ball
             texture = Editor.Content.Load<Texture2D>("soccerBall");
+            ball = new Ball(texture, Color.White, new Vector2(1f, 1f), new Vector2(300f, 300f), 1f, 1000f, 100f);
             //Team Blue
             texture = Editor.Content.Load<Texture2D>("characterBlue (1)");
             playerBlue = new Player(texture, Color.White, new Vector2(1f, 1f), new Vector2(300f, 300f), 0f, 0f, 1f, 1000f, 100f);
@@ -49,6 +51,8 @@ namespace IndoorFootballStrategySimulator {
             playerBlue.Steering.StartArrival(new Vector2(Mouse.GetState().X, Mouse.GetState().Y));
             playerBlue.Update(gameTime);
             playerRed.Update(gameTime);
+            //ball
+            ball.Update(gameTime);
         }
 
         protected override void Draw() {
@@ -59,6 +63,9 @@ namespace IndoorFootballStrategySimulator {
             field.Draw(Editor.spriteBatch);
             playerBlue.Draw(Editor.spriteBatch);
             playerRed.Draw(Editor.spriteBatch);
+            //Ball
+            ball.Draw(Editor.spriteBatch);
+
             Editor.spriteBatch.End();
         }
 
