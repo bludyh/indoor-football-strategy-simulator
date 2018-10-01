@@ -24,13 +24,15 @@ namespace IndoorFootballStrategySimulator {
 
             lineTexture = new Texture2D(GraphicsDevice, 1, 1);
             lineTexture.SetData(new Color[] { Color.White });
-
+            //Soccer Field  
             Texture2D texture = Editor.Content.Load<Texture2D>("soccerField");
             field = new Field(texture, Color.White, new Vector2(1f, 1f), new Vector2(Editor.graphics.Viewport.Width / 2f, Editor.graphics.Viewport.Height / 2f), 0f);
-
+            // Soccer Ball
+            texture = Editor.Content.Load<Texture2D>("soccerBall");
+            //Team Blue
             texture = Editor.Content.Load<Texture2D>("characterBlue (1)");
             playerBlue = new Player(texture, Color.White, new Vector2(1f, 1f), new Vector2(300f, 300f), 0f, 0f, 1f, 1000f, 100f);
-
+            // Team Red
             texture = Editor.Content.Load<Texture2D>("characterRed (1)");
             playerRed = new Player(texture, Color.White, new Vector2(1f, 1f), new Vector2(700f, 500f), MathHelper.Pi, 0f, 1f, 200f, 50f);
 
@@ -46,7 +48,7 @@ namespace IndoorFootballStrategySimulator {
 
             playerBlue.Steering.StartArrival(new Vector2(Mouse.GetState().X, Mouse.GetState().Y));
             playerBlue.Update(gameTime);
-            //playerRed.Update(gameTime);
+            playerRed.Update(gameTime);
         }
 
         protected override void Draw() {
@@ -56,7 +58,7 @@ namespace IndoorFootballStrategySimulator {
             Editor.spriteBatch.DrawString(Editor.Font, $"fps: { frameRate.ToString("0.0") }\nPosition: { playerBlue.Position }\nVelocity: { playerBlue.Velocity.Length() }", new Vector2(10f, 10f), Color.White);
             field.Draw(Editor.spriteBatch);
             playerBlue.Draw(Editor.spriteBatch);
-            //playerRed.Draw(Editor.spriteBatch);
+            playerRed.Draw(Editor.spriteBatch);
             Editor.spriteBatch.End();
         }
 

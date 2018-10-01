@@ -67,13 +67,17 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Game\ChaseBall.cs" />
     <Compile Include="Game\Entity.cs" />
     <Compile Include="Game\EntityManager.cs" />
     <Compile Include="Game\Extensions.cs" />
     <Compile Include="Game\Field.cs" />
+    <Compile Include="Game\Idle.cs" />
+    <Compile Include="Game\KickBall.cs" />
     <Compile Include="Game\Line.cs" />
     <Compile Include="Game\MovingEntity.cs" />
     <Compile Include="Game\Player.cs" />
+    <Compile Include="Game\State.cs" />
     <Compile Include="Game\SteeringManager.cs" />
     <Compile Include="MonoGameWindow.cs">
       <SubType>Component</SubType>
@@ -98,6 +102,7 @@
     <None Include="Content\characterRed %281%29.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Content\soccerBall.xnb" />
     <None Include="Content\soccerField.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
