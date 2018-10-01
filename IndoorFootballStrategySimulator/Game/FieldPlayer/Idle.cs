@@ -6,19 +6,23 @@ using System.Threading.Tasks;
 
 namespace IndoorFootballStrategySimulator.Game
 {
-    class ChaseBall:State<Player>
+    class Idle:State<FieldPlayer>
     {
-        public override void OnEnter(Player player)
+        private static Idle instance = new Idle();
+        public static Idle Instance()
+        {
+            return instance;
+        }
+        public override void OnEnter(FieldPlayer player)
         {
             throw new NotImplementedException();
         }
-        public override void Handle(Player player)
+        public override void Handle(FieldPlayer player)
         {
             throw new NotImplementedException();
         }
-        public override void OnExit(Player player)
+        public override void OnExit(FieldPlayer player)
         {
-            throw new NotImplementedException();
         }
     }
 }
