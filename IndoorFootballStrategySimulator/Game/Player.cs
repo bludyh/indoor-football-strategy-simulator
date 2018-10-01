@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace IndoorFootballStrategySimulator.Game {
-    class Player : MovingEntity {
+    abstract class Player : MovingEntity {
 
         public SteeringManager Steering { get; private set; }
 

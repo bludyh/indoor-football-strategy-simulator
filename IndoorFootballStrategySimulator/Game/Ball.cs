@@ -63,12 +63,17 @@ namespace IndoorFootballStrategySimulator.Game
     {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Added Class for AI
 =======
         public Ball()
 =======
         public Ball(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float mass, float maxForce, float maxSpeed):base(texture,color, mass, maxForce,maxSpeed)
 >>>>>>> Added ball
+=======
+        public Ball(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float mass, float maxForce, float maxSpeed)
+            :base(texture,color, mass, maxForce,maxSpeed)
+>>>>>>> Added FSM and State
         {
             Scale = scale;
             Position = pos;
@@ -76,7 +81,7 @@ namespace IndoorFootballStrategySimulator.Game
 
         public override void Update(GameTime gameTime)
         {
-            throw new NotImplementedException();
+           
         }
 >>>>>>> Add Ball class
     }
