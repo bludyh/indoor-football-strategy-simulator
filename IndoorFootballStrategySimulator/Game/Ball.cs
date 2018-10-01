@@ -59,6 +59,13 @@ namespace IndoorFootballStrategySimulator.Game
 {
     class Ball
     {
+<<<<<<< HEAD
 >>>>>>> Added Class for AI
+=======
+        public Ball()
+        {
+
+        }
+>>>>>>> Add Ball class
     }
 }

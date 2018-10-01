@@ -68,8 +68,12 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <Compile Include="Game\Ball.cs" />
 =======
+=======
+    <Compile Include="Game\Ball.cs" />
+>>>>>>> Add Ball class
     <Compile Include="Game\ChaseBall.cs" />
 >>>>>>> Added Class for AI
     <Compile Include="Game\Entity.cs" />
@@ -109,7 +113,9 @@
     <None Include="Content\characterRed %281%29.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Content\soccerBall.xnb" />
+    <None Include="Content\soccerBall.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Content\soccerField.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
