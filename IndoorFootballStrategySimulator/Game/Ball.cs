@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+<<<<<<< HEAD
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -52,5 +53,12 @@ namespace IndoorFootballStrategySimulator.Game {
                 Velocity = Velocity.Reflect(closestWall.Normal) * 0.8f;
         }
 
+=======
+
+namespace IndoorFootballStrategySimulator.Game
+{
+    class Ball
+    {
+>>>>>>> Added Class for AI
     }
 }

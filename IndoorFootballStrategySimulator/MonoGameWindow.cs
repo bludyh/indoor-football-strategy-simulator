@@ -24,15 +24,26 @@ namespace IndoorFootballStrategySimulator {
 
             lineTexture = new Texture2D(GraphicsDevice, 1, 1);
             lineTexture.SetData(new Color[] { Color.White });
-
+            //Soccer Field  
             Texture2D texture = Editor.Content.Load<Texture2D>("soccerField");
             field = new Field(texture, Color.White, new Vector2(1f, 1f), new Vector2(Editor.graphics.Viewport.Width / 2f, Editor.graphics.Viewport.Height / 2f), 0f);
+<<<<<<< HEAD
 
             texture = Editor.Content.Load<Texture2D>("ball_soccer2");
             ball = new Ball(texture, Color.White, new Vector2(1f, 1f), new Vector2(Editor.graphics.Viewport.Width / 2f, Editor.graphics.Viewport.Height / 2f), 0f, 16f, 1f, 100f, 100f, field.Walls);
 
             texture = Editor.Content.Load<Texture2D>("characterBlue (1)");
             playerBlue = new Player(texture, Color.White, new Vector2(1f, 1f), new Vector2(300f, 300f), 0f, 0f, 1f, 500f, 100f);
+=======
+            // Soccer Ball
+            texture = Editor.Content.Load<Texture2D>("soccerBall");
+            //Team Blue
+            texture = Editor.Content.Load<Texture2D>("characterBlue (1)");
+            playerBlue = new Player(texture, Color.White, new Vector2(1f, 1f), new Vector2(300f, 300f), 0f, 0f, 1f, 1000f, 100f);
+            // Team Red
+            texture = Editor.Content.Load<Texture2D>("characterRed (1)");
+            playerRed = new Player(texture, Color.White, new Vector2(1f, 1f), new Vector2(700f, 500f), MathHelper.Pi, 0f, 1f, 200f, 50f);
+>>>>>>> Added Class for AI
 
             playerBlue.Steering.StartWallAvoidance(field.Walls);
         }
@@ -43,11 +54,15 @@ namespace IndoorFootballStrategySimulator {
             frameRate = 1 / (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             playerBlue.Update(gameTime);
+<<<<<<< HEAD
             ball.Update(gameTime);
 
             if (Mouse.GetState().LeftButton == ButtonState.Pressed) {
                 ball.Kick(new Vector2(Mouse.GetState().X, Mouse.GetState().Y) - ball.Position, 3f);
             }
+=======
+            playerRed.Update(gameTime);
+>>>>>>> Added Class for AI
         }
 
         protected override void Draw() {
@@ -58,6 +73,10 @@ namespace IndoorFootballStrategySimulator {
             field.Draw(Editor.spriteBatch);
             ball.Draw(Editor.spriteBatch);
             playerBlue.Draw(Editor.spriteBatch);
+<<<<<<< HEAD
+=======
+            playerRed.Draw(Editor.spriteBatch);
+>>>>>>> Added Class for AI
             Editor.spriteBatch.End();
         }
 
