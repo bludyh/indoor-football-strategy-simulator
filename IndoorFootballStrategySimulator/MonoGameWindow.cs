@@ -122,6 +122,7 @@ namespace IndoorFootballStrategySimulator {
             //Draw Field
             field.Draw(Editor.spriteBatch);
 <<<<<<< HEAD
+<<<<<<< HEAD
             ball.Draw(Editor.spriteBatch);
 =======
             //Draw Player
@@ -138,6 +139,9 @@ namespace IndoorFootballStrategySimulator {
             //Ball
 =======
 =======
+=======
+            //Draw Team
+>>>>>>> Change team
             //GKBlue.Draw(Editor.spriteBatch);
             //playerBlue.Draw(Editor.spriteBatch);
             //playerRed.Draw(Editor.spriteBatch);

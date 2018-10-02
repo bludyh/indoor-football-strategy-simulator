@@ -15,11 +15,11 @@ namespace IndoorFootballStrategySimulator.Game
         }
         public override void OnEnter(FieldPlayer player)
         {
-            throw new NotImplementedException();
+          
         }
         public override void Handle(FieldPlayer player)
         {
-            throw new NotImplementedException();
+        
         }
         public override void OnExit(FieldPlayer player)
         {
