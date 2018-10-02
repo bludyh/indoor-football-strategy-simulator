@@ -66,7 +66,7 @@ namespace IndoorFootballStrategySimulator {
             Editor.spriteBatch.DrawString(Editor.Font, $"fps: { frameRate.ToString("0.0") }", new Vector2(10f, 10f), Color.White);
             //Draw Field
             field.Draw(Editor.spriteBatch);
-            //Draw Player
+            //Draw Team
             //GKBlue.Draw(Editor.spriteBatch);
             //playerBlue.Draw(Editor.spriteBatch);
             //playerRed.Draw(Editor.spriteBatch);
