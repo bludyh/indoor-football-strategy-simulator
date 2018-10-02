@@ -46,7 +46,7 @@ namespace IndoorFootballStrategySimulator {
 
             playerBlue.Steering.StartArrival(new Vector2(Mouse.GetState().X, Mouse.GetState().Y));
             playerBlue.Update(gameTime);
-            //playerRed.Update(gameTime);
+            playerRed.Update(gameTime);
         }
 
         protected override void Draw() {
@@ -56,7 +56,7 @@ namespace IndoorFootballStrategySimulator {
             Editor.spriteBatch.DrawString(Editor.Font, $"fps: { frameRate.ToString("0.0") }\nPosition: { playerBlue.Position }\nVelocity: { playerBlue.Velocity.Length() }", new Vector2(10f, 10f), Color.White);
             field.Draw(Editor.spriteBatch);
             playerBlue.Draw(Editor.spriteBatch);
-            //playerRed.Draw(Editor.spriteBatch);
+            playerRed.Draw(Editor.spriteBatch);
             Editor.spriteBatch.End();
         }
 
