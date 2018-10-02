@@ -10,13 +10,20 @@ namespace IndoorFootballStrategySimulator.Game
 {
     class FieldPlayer : Player
     {
-        public FieldPlayer(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed) 
+        private FSM<FieldPlayer> fpStateMachine;
+        public FieldPlayer(State<FieldPlayer> startState,Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed) 
             : base(texture, color, scale, pos, rot, radius, mass, maxForce, maxSpeed)
         {
             Scale = scale;
             Position = pos;
             Rotation = rot;
             Radius = radius;
+            fpStateMachine = new FSM<FieldPlayer>(this);
+            if (startState != null)
+            {
+                fpStateMachine.SetCurrentState(startState);
+                fpStateMachine.CurrentState.OnEnter(this);
+            }
         }
 
     }
