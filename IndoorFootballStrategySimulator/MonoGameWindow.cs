@@ -16,8 +16,8 @@ namespace IndoorFootballStrategySimulator {
 
         private float frameRate;
         private Field field;
+        private Ball ball;
         private Player playerBlue;
-        private Player playerRed;
 
         protected override void Initialize() {
             base.Initialize();
@@ -28,15 +28,13 @@ namespace IndoorFootballStrategySimulator {
             Texture2D texture = Editor.Content.Load<Texture2D>("soccerField");
             field = new Field(texture, Color.White, new Vector2(1f, 1f), new Vector2(Editor.graphics.Viewport.Width / 2f, Editor.graphics.Viewport.Height / 2f), 0f);
 
-            texture = Editor.Content.Load<Texture2D>("characterBlue (1)");
-            playerBlue = new Player(texture, Color.White, new Vector2(1f, 1f), new Vector2(300f, 300f), 0f, 0f, 1f, 1000f, 100f);
+            texture = Editor.Content.Load<Texture2D>("ball_soccer2");
+            ball = new Ball(texture, Color.White, new Vector2(1f, 1f), new Vector2(Editor.graphics.Viewport.Width / 2f, Editor.graphics.Viewport.Height / 2f), 0f, 16f, 1f, 100f, 100f, field.Walls);
 
-            texture = Editor.Content.Load<Texture2D>("characterRed (1)");
-            playerRed = new Player(texture, Color.White, new Vector2(1f, 1f), new Vector2(700f, 500f), MathHelper.Pi, 0f, 1f, 200f, 50f);
+            texture = Editor.Content.Load<Texture2D>("characterBlue (1)");
+            playerBlue = new Player(texture, Color.White, new Vector2(1f, 1f), new Vector2(300f, 300f), 0f, 0f, 1f, 500f, 100f);
 
             playerBlue.Steering.StartWallAvoidance(field.Walls);
-            playerRed.Steering.StartPursuit(playerBlue);
-            playerRed.Steering.StartWallAvoidance(field.Walls);
         }
 
         protected override void Update(GameTime gameTime) {
@@ -44,9 +42,12 @@ namespace IndoorFootballStrategySimulator {
 
             frameRate = 1 / (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            playerBlue.Steering.StartArrival(new Vector2(Mouse.GetState().X, Mouse.GetState().Y));
             playerBlue.Update(gameTime);
-            //playerRed.Update(gameTime);
+            ball.Update(gameTime);
+
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed) {
+                ball.Kick(new Vector2(Mouse.GetState().X, Mouse.GetState().Y) - ball.Position, 3f);
+            }
         }
 
         protected override void Draw() {
@@ -55,8 +56,8 @@ namespace IndoorFootballStrategySimulator {
             Editor.spriteBatch.Begin();
             Editor.spriteBatch.DrawString(Editor.Font, $"fps: { frameRate.ToString("0.0") }\nPosition: { playerBlue.Position }\nVelocity: { playerBlue.Velocity.Length() }", new Vector2(10f, 10f), Color.White);
             field.Draw(Editor.spriteBatch);
+            ball.Draw(Editor.spriteBatch);
             playerBlue.Draw(Editor.spriteBatch);
-            //playerRed.Draw(Editor.spriteBatch);
             Editor.spriteBatch.End();
         }
 

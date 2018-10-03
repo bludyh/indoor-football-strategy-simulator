@@ -15,9 +15,9 @@ namespace IndoorFootballStrategySimulator.Game {
         public List<Line> WallDetectors {
             get {
                 return new List<Line> {
-                    new Line(Position, Position + Heading * 20f),
-                    new Line(Position, Position + Vector2.Transform(Heading, Matrix.CreateRotationZ(MathHelper.ToRadians(-45f))) * 20f),
-                    new Line(Position, Position + Vector2.Transform(Heading, Matrix.CreateRotationZ(MathHelper.ToRadians(45f))) * 20f)
+                    new Line(Position, Position + Heading * 40f),
+                    new Line(Position, Position + Vector2.Transform(Heading, Matrix.CreateRotationZ(MathHelper.ToRadians(-45f))) * 40f),
+                    new Line(Position, Position + Vector2.Transform(Heading, Matrix.CreateRotationZ(MathHelper.ToRadians(45f))) * 40f)
                 };
             }
         }

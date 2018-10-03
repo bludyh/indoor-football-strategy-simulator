@@ -15,5 +15,9 @@ namespace IndoorFootballStrategySimulator.Game {
             return vector;
         }
 
+        public static Vector2 Reflect(this Vector2 vector, Vector2 normal) {
+            return vector - 2f * Vector2.Dot(vector, normal) * normal;
+        }
+
     }
 }
