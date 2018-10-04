@@ -31,5 +31,11 @@ namespace IndoorFootballStrategySimulator.Game {
                 Rotation = (float)Math.Atan2(Velocity.Y, Velocity.X);
         }
 
+        public override void Draw(SpriteBatch spriteBatch) {
+            base.Draw(spriteBatch);
+
+            MonoGameWindow.DrawLine(spriteBatch, Position, Position + Steering.SteeringForce, Color.Red);
+        }
+
     }
 }
