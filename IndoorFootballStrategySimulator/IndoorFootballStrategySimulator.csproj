@@ -68,19 +68,8 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-<<<<<<< HEAD
-<<<<<<< HEAD
     <Compile Include="Game\Ball.cs" />
-<<<<<<< HEAD
-=======
-=======
-    <Compile Include="Game\Ball.cs" />
->>>>>>> Add Ball class
-    <Compile Include="Game\ChaseBall.cs" />
->>>>>>> Added Class for AI
-=======
     <Compile Include="Game\FieldPlayer\ChaseBall.cs" />
->>>>>>> added Team with Formation 400
     <Compile Include="Game\Entity.cs" />
     <Compile Include="Game\EntityManager.cs" />
     <Compile Include="Game\Extensions.cs" />
@@ -119,9 +108,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Content\characterRed %281%29.xnb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Content\soccerBall.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Content\soccerField.xnb">
