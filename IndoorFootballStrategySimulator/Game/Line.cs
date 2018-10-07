@@ -6,10 +6,24 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 
 namespace IndoorFootballStrategySimulator.Game {
+    /// <summary>
+    ///     Describes a 2D line segment with 2 endpoints and a normal.
+    /// </summary>
     class Line {
 
+        /// <summary>
+        ///     Gets the starting point of the <see cref="Line"/>.
+        /// </summary>
         public Vector2 Start { get; private set; }
+
+        /// <summary>
+        ///     Gets the ending point of the <see cref="Line"/>.
+        /// </summary>
         public Vector2 End { get; private set; }
+
+        /// <summary>
+        ///     Gets the normal of the <see cref="Line"/>.
+        /// </summary>
         public Vector2 Normal {
             get {
                 Vector2 direction = Vector2.Normalize(End - Start);
@@ -17,11 +31,25 @@ namespace IndoorFootballStrategySimulator.Game {
             }
         }
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="Line"/> class.
+        /// </summary>
+        /// <param name="start">starting point of the line.</param>
+        /// <param name="end">ending point of the line.</param>
         public Line(Vector2 start, Vector2 end) {
             Start = start;
             End = end;
         }
 
+        /// <summary>
+        ///     Checks for intersection between two lines. The <paramref name="interseciontPoint"/> param returns the point of intersection.
+        /// </summary>
+        /// <param name="other">other line to check for intersection.</param>
+        /// <param name="interseciontPoint">point of intersection.</param>
+        /// <returns>A boolean indicates whether the two lines intersect.</returns>
+        /// <remarks>
+        ///     <paramref name="interseciontPoint"/> returns null if there is no intersection.
+        /// </remarks>
         public bool Intersect(Line other, out Vector2? interseciontPoint) {
             interseciontPoint = null;
 
@@ -40,6 +68,19 @@ namespace IndoorFootballStrategySimulator.Game {
             return false;
         }
 
+        /// <summary>
+        ///     Checks for intersection between a <see cref="Line"/> and a circle. The <paramref name="intersectionOne"/> and <paramref name="intersectionTwo"/> params return the points of intersection.
+        /// </summary>
+        /// <param name="center">center point of the circle.</param>
+        /// <param name="radius">radius of the circle.</param>
+        /// <param name="intersectionOne">point of intersection.</param>
+        /// <param name="intersectionTwo">point of intersection.</param>
+        /// <returns>A boolean indicates whether the line intersects the circle.</returns>
+        /// <remarks>
+        ///     <para><paramref name="intersectionOne"/> and <paramref name="intersectionTwo"/> both return null if there is no intersection.</para>
+        ///     <para>Only <paramref name="intersectionOne"/> has a value if the line is a tangent to the circle. Hence, there is one intersection point.</para>
+        ///     <para><paramref name="intersectionOne"/> and <paramref name="intersectionTwo"/> both have values if the line intersects the circle at two unique points.</para>
+        /// </remarks>
         public bool Intersect(Vector2 center, float radius, out Vector2? intersectionOne, out Vector2? intersectionTwo) {
             intersectionOne = null;
             intersectionTwo = null;
@@ -67,6 +108,11 @@ namespace IndoorFootballStrategySimulator.Game {
             return false;
         }
 
+        /// <summary>
+        ///     Calculates the distance between a point to the <see cref="Line"/>.
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns>A float represents the distance.</returns>
         public float Distance(Vector2 point) {
             float l = Vector2.Distance(Start, End);
             float t = Math.Max(0, Math.Min(1, Vector2.Dot(point - Start, End - Start) / l));
