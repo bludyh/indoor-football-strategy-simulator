@@ -11,9 +11,10 @@ namespace IndoorFootballStrategySimulator.Game {
 
         [Flags]
         public enum SteeringBehavior {
-            NONE = 0, SEEK = 1, ARRIVAL = 2, PURSUIT = 4, WALL_AVOIDANCE = 8
+            NONE = 0, SEEK = 1, ARRIVAL = 2, PURSUIT = 4, WALL_AVOIDANCE = 8, SEPARATION = 10
         }
-
+        // List player
+        private List<Player> listplayers;
         private MovingEntity entity;
         private MovingEntity targetEntity;
         private Vector2 targetPos;
@@ -26,6 +27,7 @@ namespace IndoorFootballStrategySimulator.Game {
             this.entity = entity;
         }
 
+        // SEEK
         private Vector2 Seek(Vector2 targetPos) {
             Vector2 desiredVelocity = Vector2.Normalize(targetPos - entity.Position) * entity.MaxSpeed;
             return desiredVelocity - entity.Velocity;
@@ -40,6 +42,7 @@ namespace IndoorFootballStrategySimulator.Game {
                 steeringBehavior ^= SteeringBehavior.SEEK;
         }
 
+        //ARRIVAL
         private Vector2 Arrival(Vector2 targetPos) {
             Vector2 targetOffset = targetPos - entity.Position;
             float distance = targetOffset.Length();
@@ -60,11 +63,12 @@ namespace IndoorFootballStrategySimulator.Game {
                 steeringBehavior ^= SteeringBehavior.ARRIVAL;
         }
 
+        //PURSUIT
         private Vector2 Pursuit(MovingEntity targetEntity) {
             Vector2 targetOffset = targetEntity.Position - entity.Position;
             float distance = targetOffset.Length();
             float predictedInterval = distance / (entity.MaxSpeed + targetEntity.Velocity.Length());
-            return Seek(targetEntity.Position + targetEntity.Velocity * predictedInterval);
+            return Arrival(targetEntity.Position + targetEntity.Velocity * predictedInterval);
         }
 
         public void StartPursuit(MovingEntity targetEntity) {
@@ -77,6 +81,7 @@ namespace IndoorFootballStrategySimulator.Game {
                 steeringBehavior ^= SteeringBehavior.PURSUIT;
         }
 
+        //WALLAVOIDANCE
         private Vector2 WallAvoidance(List<Line> walls) {
             Vector2 steeringForce = Vector2.Zero;
             Vector2? intersectionPoint = null;
@@ -113,12 +118,17 @@ namespace IndoorFootballStrategySimulator.Game {
                 steeringBehavior ^= SteeringBehavior.WALL_AVOIDANCE;
         }
 
+        // CALCULATE
         public Vector2 Calculate() {
             SteeringForce = Vector2.Zero;
             Vector2 force = Vector2.Zero;
-
+            if (steeringBehavior.HasFlag(SteeringBehavior.SEPARATION))
+            {
+                force += Separation(listplayers);
+                if (!AccumulateSteeringForce(force)) return SteeringForce;
+            }
             if (steeringBehavior.HasFlag(SteeringBehavior.WALL_AVOIDANCE)) {
-                force += WallAvoidance(walls) * 10f;
+                //force += WallAvoidance(walls) * 10f;
                 if (!AccumulateSteeringForce(force)) return SteeringForce;
             }
 
@@ -154,5 +164,49 @@ namespace IndoorFootballStrategySimulator.Game {
             return true;
         }
 
+
+        // SEPARATION
+        public Vector2 Separation(List<Player> listPlayers)
+        {
+            Vector2 steeringforce = Vector2.Zero;
+            Vector2 distance = Vector2.Zero;
+            int j = 0;
+            for (int i = 0; i < listPlayers.Count; i++)
+            {
+                Player curPlayer = listPlayers.ElementAt(i);
+                distance = Vector2.Subtract(entity.Position, curPlayer.Position);
+                if (curPlayer != entity && distance.Length()<= entity.Radius)
+                {
+                    steeringforce += Vector2.Subtract(curPlayer.Position, entity.Position);
+                    j++;
+                }
+            }
+            if (j > 0)
+            {
+                steeringforce = Vector2.Divide(steeringforce, j);
+                steeringforce = Vector2.Negate(steeringforce);
+                steeringforce = Vector2.Normalize(steeringforce);
+                Console.WriteLine(steeringforce);
+                return steeringforce;
+            }
+            else
+            {
+                Console.WriteLine(steeringforce);
+                return steeringforce;
+            }
+
+        }
+
+        public void StartSeparation(List<Player> listPlayers)
+        {
+            this.listplayers = listPlayers;
+            steeringBehavior |= SteeringBehavior.SEPARATION;
+        }
+
+        public void StopSeparation()
+        {
+            if (steeringBehavior.HasFlag(SteeringBehavior.SEPARATION))
+                steeringBehavior ^= SteeringBehavior.SEPARATION;
+        }
     }
 }

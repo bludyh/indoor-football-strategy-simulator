@@ -23,6 +23,11 @@ namespace IndoorFootballStrategySimulator.Game {
         public override void Update(GameTime gameTime) {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             Vector2 force = Steering.Calculate();
+            if (this is GoalKeeper)
+            {
+
+            Console.WriteLine($"aaaaaaa: {force}");
+            }
             Vector2 acceleration = force / Mass;
             Velocity += acceleration * deltaTime;
             Velocity.Truncate(MaxSpeed);

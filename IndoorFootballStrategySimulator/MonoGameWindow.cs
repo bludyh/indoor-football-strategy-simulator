@@ -17,9 +17,9 @@ namespace IndoorFootballStrategySimulator {
         private float frameRate;
         private Field field;
         private Ball ball;
-        private Player playerBlue;
         private Team blueteam, redteam;
-
+        private Player player;
+        private bool firsttime = true;
         protected override void Initialize() {
             base.Initialize();
 
@@ -33,21 +33,45 @@ namespace IndoorFootballStrategySimulator {
             ball = new Ball(texture, Color.White, new Vector2(1f, 1f), new Vector2(Editor.graphics.Viewport.Width / 2f, Editor.graphics.Viewport.Height / 2f), 0f, 16f, 1f, 100f, 100f, field.Walls);
             //Team Blue
             texture = Editor.Content.Load<Texture2D>("characterBlue (1)");
-            blueteam = new Team(Team.Formation.A, Team.TeamColor.Blue, texture);
+            blueteam = new Team(Team.Formation.A, Team.TeamColor.Blue, texture, field.Walls);
+            blueteam.PursuitBall(ball);
             // Team Red
             texture = Editor.Content.Load<Texture2D>("characterRed (1)");
-            redteam = new Team(Team.Formation.A, Team.TeamColor.Red, texture);
+            redteam = new Team(Team.Formation.A, Team.TeamColor.Red, texture, field.Walls);
+            redteam.PursuitBall(ball);
+            //test
+            player = new GoalKeeper(texture, Color.White, new Vector2(1f, 1f), new Vector2(1000f, 400f), MathHelper.Pi, 100f, 3f, 75f, 50f);
+            //player.Steering.StartWallAvoidance(field.Walls);
+            player.Steering.StartSeparation(redteam.listPlayers);
+            //player.Steering.StartPursuit(ball);
         }
 
         protected override void Update(GameTime gameTime) {
             base.Update(gameTime);
 
             frameRate = 1 / (float)gameTime.ElapsedGameTime.TotalSeconds;
+            // Ball Update
             ball.Update(gameTime);
-
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed) {
-                ball.Kick(new Vector2(Mouse.GetState().X, Mouse.GetState().Y) - ball.Position, 3f);
+            // Team Update
+            //blueteam.Update(gameTime);
+            //redteam.Update(gameTime);
+            ////test
+            if (firsttime == true)
+            {
+                Console.WriteLine($"{player.Position.X}, {player.Position.Y}");
+                foreach (var item in redteam.listPlayers)
+                {
+                    Console.WriteLine($"{item.Position.X}, {item.Position.Y}");
+                }
+                Console.WriteLine($"{player.Steering.Separation(redteam.listPlayers).X}, {player.Steering.Separation(redteam.listPlayers).Y}");
+                player.Update(gameTime);
+                redteam.Update(gameTime);
+                firsttime = false;
             }
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed) {
+            ball.Kick(new Vector2(Mouse.GetState().X, Mouse.GetState().Y) - ball.Position, 3f);
+            }
+            
         }
         protected override void Draw() {
             base.Draw();
@@ -61,6 +85,9 @@ namespace IndoorFootballStrategySimulator {
             redteam.Draw(Editor.spriteBatch);
             //Draw Ball
             ball.Draw(Editor.spriteBatch);
+            //test
+            player.Draw(Editor.spriteBatch);
+
             Editor.spriteBatch.End();
         }
 
@@ -69,8 +96,6 @@ namespace IndoorFootballStrategySimulator {
             // calculate angle to rotate line
             float angle =
                 (float)Math.Atan2(edge.Y, edge.X);
-
-
             sb.Draw(lineTexture,
                 new Rectangle(// rectangle defines shape of line and position of start of line
                     (int)start.X,
