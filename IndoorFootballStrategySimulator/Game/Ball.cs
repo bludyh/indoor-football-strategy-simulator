@@ -48,7 +48,9 @@ namespace IndoorFootballStrategySimulator.Game {
 
             foreach (var wall in walls)
             {
-                if (wall.Intersect(Position, Radius, out Vector2? intersectionOne, out Vector2? intersectionTwo))
+                Vector2? intersectionOne = new Vector2?();
+                Vector2? intersectionTwo = new Vector2?();
+                if (wall.Intersect(Position, Radius, out intersectionOne, out intersectionTwo))
                 {
                     float distanceToWall = wall.Distance(Position);
                     if (distanceToWall < distanceToClosestWall)
