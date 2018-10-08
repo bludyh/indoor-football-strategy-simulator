@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace IndoorFootballStrategySimulator.Game {
+namespace IndoorFootballStrategySimulator.Simulation {
     /// <summary>
     ///     Represents a player.
     /// </summary>
-    class Player : MovingEntity {
+    public class Player : MovingEntity {
 
         /// <summary>
         ///     Gets the <see cref="SteeringManager"/> of the current <see cref="Player"/>.
@@ -35,7 +35,7 @@ namespace IndoorFootballStrategySimulator.Game {
             Position = pos;
             Rotation = rot;
             Radius = radius;
-            Steering = new SteeringManager(this, MonoGameWindow.EntityManager.Field.Walls, MonoGameWindow.EntityManager.Players);
+            Steering = new SteeringManager(this);
         }
 
         /// <summary>
@@ -55,15 +55,14 @@ namespace IndoorFootballStrategySimulator.Game {
                 Rotation = (float)Math.Atan2(Velocity.Y, Velocity.X);
         }
 
-        // Debug code
-        //public override void Draw(SpriteBatch spriteBatch) {
-        //    base.Draw(spriteBatch);
-
-        //    MonoGameWindow.DrawLine(spriteBatch, Position, Position + Steering.SteeringForce, Color.Red);
-        //}
-
+        /// <summary>
+        ///     Pulls every surrounding entities away if the bounding circles are overlapped.
+        /// </summary>
+        /// <remarks>
+        ///     This method only checks again other moving entities whose radius of the bounding circle is greater than zero.
+        /// </remarks>
         private void HandleOverlapping() {
-            foreach (var entity in MonoGameWindow.EntityManager.Entities) {
+            foreach (var entity in SimulationWindow.EntityManager.Entities) {
                 if (entity is MovingEntity movingEntity && movingEntity != this) {
                     Vector2 offset = movingEntity.Position - Position;
                     float overlap = Radius + movingEntity.Radius - offset.Length();
@@ -72,6 +71,13 @@ namespace IndoorFootballStrategySimulator.Game {
                 }
             }
         }
+
+        // Debug code
+        //public override void Draw(SpriteBatch spriteBatch) {
+        //    base.Draw(spriteBatch);
+
+        //    MonoGameWindow.DrawLine(spriteBatch, Position, Position + Steering.SteeringForce, Color.Red);
+        //}
 
     }
 }

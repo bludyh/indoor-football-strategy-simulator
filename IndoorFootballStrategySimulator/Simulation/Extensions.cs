@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace IndoorFootballStrategySimulator.Game {
+namespace IndoorFootballStrategySimulator.Simulation {
     /// <summary>
     ///     Contains extension methods.
     /// </summary>
-    static class Extensions {
+    public static class Extensions {
 
         /// <summary>
         ///     Truncates a <see cref="Vector2"/> to a maximum length.
@@ -22,16 +22,6 @@ namespace IndoorFootballStrategySimulator.Game {
             if (vector.Length() > length)
                 vector = Vector2.Normalize(vector) * length;
             return vector;
-        }
-
-        /// <summary>
-        ///     Reflects a <see cref="Vector2"/> from a <see cref="Line"/>.
-        /// </summary>
-        /// <param name="vector"></param>
-        /// <param name="normal">the normal of a line.</param>
-        /// <returns>The result reflected vector.</returns>
-        public static Vector2 Reflect(this Vector2 vector, Vector2 normal) {
-            return vector - 2 * Vector2.Dot(vector, normal) * normal;
         }
 
     }

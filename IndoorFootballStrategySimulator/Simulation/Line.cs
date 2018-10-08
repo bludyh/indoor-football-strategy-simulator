@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 
-namespace IndoorFootballStrategySimulator.Game {
+namespace IndoorFootballStrategySimulator.Simulation {
     /// <summary>
     ///     Describes a 2D line segment with 2 endpoints and a normal.
     /// </summary>
-    class Line {
+    public class Line {
 
         /// <summary>
         ///     Gets the starting point of the <see cref="Line"/>.

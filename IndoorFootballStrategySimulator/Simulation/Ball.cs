@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace IndoorFootballStrategySimulator.Game {
+namespace IndoorFootballStrategySimulator.Simulation {
     /// <summary>
     ///     Represents a soccer ball object.
     /// </summary>
-    class Ball : MovingEntity {
+    public class Ball : MovingEntity {
 
         private const float Friction = -0.02f;
 
@@ -26,7 +26,6 @@ namespace IndoorFootballStrategySimulator.Game {
         /// <param name="mass"></param>
         /// <param name="maxForce"></param>
         /// <param name="maxSpeed"></param>
-        /// <param name="walls">list of lines that defines the border of the field.</param>
         public Ball(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed)
             : base(texture, color, mass, maxForce, maxSpeed) {
             Scale = scale;
@@ -58,11 +57,15 @@ namespace IndoorFootballStrategySimulator.Game {
             Velocity = (direction * force) / Mass;
         }
 
+        /// <summary>
+        ///     Checks if the <see cref="Ball"/> collides with any walls and repels it back into the <see cref="Field"/>.
+        /// </summary>
+        /// <seealso cref="Line.Intersect(Vector2, float, out Vector2?, out Vector2?)"/>
         private void HandleWallCollisions () {
             Line closestWall = null;
             float distanceToClosestWall = float.MaxValue;
 
-            foreach (var wall in MonoGameWindow.EntityManager.Field.Walls) {
+            foreach (var wall in SimulationWindow.EntityManager.Field.Walls) {
                 if (wall.Intersect(Position, Radius, out Vector2? intersectionOne, out Vector2? intersectionTwo)) {
                     float distanceToWall = wall.Distance(Position);
                     if (distanceToWall < distanceToClosestWall) {
@@ -73,7 +76,7 @@ namespace IndoorFootballStrategySimulator.Game {
             }
 
             if (closestWall != null && Vector2.Dot(Vector2.Normalize(Velocity), closestWall.Normal) < 0)
-                Velocity = Velocity.Reflect(closestWall.Normal) * 0.8f;
+                Velocity = Vector2.Reflect(Velocity, closestWall.Normal) * 0.8f;
         }
 
     }

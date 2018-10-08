@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace IndoorFootballStrategySimulator.Game {
+namespace IndoorFootballStrategySimulator.Simulation {
     /// <summary>
     ///     Represents a moving entity.
     /// </summary>
-    abstract class MovingEntity : Entity {
+    public abstract class MovingEntity : Entity {
 
         /// <summary>
         ///     Gets or sets the velocity of the <see cref="MovingEntity"/>.

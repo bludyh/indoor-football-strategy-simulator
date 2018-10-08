@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace IndoorFootballStrategySimulator.Game {
+namespace IndoorFootballStrategySimulator.Simulation {
     /// <summary>
     ///     Represents a soccer field object.
     /// </summary>
-    class Field : Entity {
+    public class Field : Entity {
 
         /// <summary>
         ///     Gets a list of <see cref="Line"/> that defines the border of the <see cref="Field"/>.
@@ -44,7 +44,7 @@ namespace IndoorFootballStrategySimulator.Game {
             base.Draw(spriteBatch);
 
             foreach (var line in Walls)
-                MonoGameWindow.DrawLine(spriteBatch, line.Start, line.End, Color.Red);
+                SimulationWindow.DrawLine(spriteBatch, line.Start, line.End, Color.Red);
         }
     }
 }

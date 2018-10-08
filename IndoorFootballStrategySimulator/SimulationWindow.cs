@@ -7,44 +7,61 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Forms.Controls;
-using IndoorFootballStrategySimulator.Game;
+using IndoorFootballStrategySimulator.Simulation;
 
 namespace IndoorFootballStrategySimulator {
-    class MonoGameWindow : UpdateWindow {
+    public class SimulationWindow : UpdateWindow {
 
         public static Texture2D LineTexture { get; private set; }
-        public static Random Random { get; private set; }
+
+        /// <summary>
+        ///     Gets the manager that controls all entities.
+        /// </summary>
         public static EntityManager EntityManager { get; private set; }
 
-        static MonoGameWindow() {
-            Random = new Random();
-            EntityManager = new EntityManager();
-        }
-        
+        /// <summary>
+        ///     Initializes custom contents.
+        /// </summary>
         protected override void Initialize() {
             base.Initialize();
 
             LineTexture = new Texture2D(GraphicsDevice, 1, 1);
             LineTexture.SetData(new Color[] { Color.White });
-
+            EntityManager = new EntityManager();
             EntityManager.Initialize(Editor);
         }
 
+        /// <summary>
+        ///     Main update method.
+        /// </summary>
+        /// <param name="gameTime"></param>
+        /// <remarks>
+        ///     This method is the main game loop that gets called multiple time per second.
+        /// </remarks>
         protected override void Update(GameTime gameTime) {
             base.Update(gameTime);
 
             EntityManager.Update(gameTime);
         }
 
+        /// <summary>
+        ///     Main draw method.
+        /// </summary>
         protected override void Draw() {
             base.Draw();
 
             Editor.spriteBatch.Begin();
-            Editor.spriteBatch.DrawString(Editor.Font, $"Ball velocity: { EntityManager.Ball.Velocity.Length() }", new Vector2(10f, 10f), Color.White);
             EntityManager.Draw(Editor.spriteBatch);
             Editor.spriteBatch.End();
         }
 
+        /// <summary>
+        ///     Draws a <see cref="Line"/> between two points.
+        /// </summary>
+        /// <param name="sb">spritebatch object.</param>
+        /// <param name="start">starting point.</param>
+        /// <param name="end">ending point.</param>
+        /// <param name="color">color of the line.</param>
         public static void DrawLine(SpriteBatch sb, Vector2 start, Vector2 end, Color color) {
             Vector2 edge = end - start;
             // calculate angle to rotate line

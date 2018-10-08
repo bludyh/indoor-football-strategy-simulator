@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace IndoorFootballStrategySimulator.Game {
+namespace IndoorFootballStrategySimulator.Simulation {
     /// <summary>
     ///     Represents a game object.
     /// </summary>
     /// <remarks>
     ///     This is the base class of every game objects.
     /// </remarks>
-    abstract class Entity {
+    public abstract class Entity {
 
         private Texture2D texture;
         private Color color;

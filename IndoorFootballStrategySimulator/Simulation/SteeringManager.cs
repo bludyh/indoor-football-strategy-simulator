@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace IndoorFootballStrategySimulator.Game {
+namespace IndoorFootballStrategySimulator.Simulation {
     /// <summary>
     ///     Controls all the steering behaviors used by players.
     /// </summary>
-    class SteeringManager {
+    public class SteeringManager {
 
         /// <summary>
         ///     Contains all steering behaviors with their corresponding power-of-two values.
@@ -38,9 +38,7 @@ namespace IndoorFootballStrategySimulator.Game {
         ///     Initializes a new instance of the <see cref="SteeringManager"/> class.
         /// </summary>
         /// <param name="entity">the moving entity that utilizes this steering manager object.</param>
-        /// <param name="walls">list of lines that defines the border of the field.</param>
-        /// <param name="players">list of all players.</param>
-        public SteeringManager(MovingEntity entity, List<Line> walls, List<Player> players) {
+        public SteeringManager(MovingEntity entity) {
             this.entity = entity;
         }
 
@@ -116,13 +114,13 @@ namespace IndoorFootballStrategySimulator.Game {
         }
 
         /// <summary>
-        ///     Calculates the force that steers the <see cref="entity"/> towards a predicted position of another <see cref="MovingEntity"/>.
+        ///     Calculates the force that steers <see cref="entity"/> towards a predicted position of another <see cref="MovingEntity"/>.
         /// </summary>
         /// <param name="targetEntity">moving entity to pursue.</param>
         /// <returns>A vector represents the steering force.</returns>
         /// <remarks>
         ///     This method is different from <see cref="Seek(Vector2)"/> as it receives a <see cref="MovingEntity"/> object as an argument and
-        ///     it calculates the predicted postion of the <paramref name="targetEntity"/> after some time and uses seek behavior to steers <see cref="entity"/> to this position.
+        ///     it calculates the predicted postion of <paramref name="targetEntity"/> after some time and uses seek behavior to steers <see cref="entity"/> to this position.
         ///     The result is a more realistic pursuit behavior.
         /// </remarks>
         private Vector2 Pursuit(MovingEntity targetEntity) {
@@ -156,7 +154,7 @@ namespace IndoorFootballStrategySimulator.Game {
         }
 
         /// <summary>
-        ///     Calculates the force that steers the <see cref="entity"/> away from any nearby walls.
+        ///     Calculates the force that steers <see cref="entity"/> away from any nearby walls.
         /// </summary>
         /// <param name="walls">list of lines that defines the border of the field.</param>
         /// <returns>A vector represents the steering force.</returns>
@@ -172,7 +170,7 @@ namespace IndoorFootballStrategySimulator.Game {
             float distanceToClosestIntersection = float.MaxValue;
 
             foreach (var detector in entity.WallDetectors) {
-                foreach (var wall in MonoGameWindow.EntityManager.Field.Walls) {
+                foreach (var wall in SimulationWindow.EntityManager.Field.Walls) {
                     if (detector.Intersect(wall, out intersectionPoint)) {
                         float distanceToIntersection = Vector2.Distance(entity.Position, intersectionPoint.Value);
                         if (distanceToIntersection < distanceToClosestIntersection) {
@@ -214,8 +212,8 @@ namespace IndoorFootballStrategySimulator.Game {
         /// <summary>
         ///     Calculates the force that steers <see cref="entity"/> towards a position between <paramref name="targetEntity"/> and <paramref name="otherEntity"/>.
         /// </summary>
-        /// <param name="targetEntity"></param>
-        /// <param name="otherEntity"></param>
+        /// <param name="targetEntity">target entity.</param>
+        /// <param name="otherEntity">another entity moving towards target entity.</param>
         /// <returns>A vector represents the steering force.</returns>
         /// <remarks>
         ///     This method can be applied, for example, when a player wants to intercept the ball from another player.
@@ -263,7 +261,7 @@ namespace IndoorFootballStrategySimulator.Game {
         private Vector2 Separation() {
             Vector2 steeringForce = Vector2.Zero;
 
-            foreach (var player in MonoGameWindow.EntityManager.Players) {
+            foreach (var player in SimulationWindow.EntityManager.Players) {
                 if (entity != player && Vector2.Distance(entity.Position, player.Position) < 200f) {
                     Vector2 offset = entity.Position - player.Position;
                     steeringForce += Vector2.Normalize(offset) / offset.Length();
