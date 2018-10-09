@@ -61,36 +61,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Game\FieldPlayer\FieldPlayer.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="PreviewWindow.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Simulation\Ball.cs" />
+    <Compile Include="Simulation\Entity.cs" />
+    <Compile Include="Simulation\EntityManager.cs" />
+    <Compile Include="Simulation\Extensions.cs" />
+    <Compile Include="Simulation\Field.cs" />
+    <Compile Include="Simulation\Line.cs" />
+    <Compile Include="Simulation\MovingEntity.cs" />
+    <Compile Include="Simulation\Player.cs" />
+    <Compile Include="Simulation\SteeringManager.cs" />
+    <Compile Include="Simulator.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Simulator.Designer.cs">
+      <DependentUpon>Simulator.cs</DependentUpon>
     </Compile>
-    <Compile Include="Game\Ball.cs" />
-    <Compile Include="Game\FieldPlayer\ChaseBall.cs" />
-    <Compile Include="Game\Entity.cs" />
-    <Compile Include="Game\EntityManager.cs" />
-    <Compile Include="Game\Extensions.cs" />
-    <Compile Include="Game\Field.cs" />
-    <Compile Include="Game\FSM.cs" />
-    <Compile Include="Game\GoalKeeper\GoalKeeper.cs" />
-    <Compile Include="Game\FieldPlayer\Idle.cs" />
-    <Compile Include="Game\FieldPlayer\KickBall.cs" />
-    <Compile Include="Game\Line.cs" />
-    <Compile Include="Game\MovingEntity.cs" />
-    <Compile Include="Game\Player.cs" />
-    <Compile Include="Game\State.cs" />
-    <Compile Include="Game\SteeringManager.cs" />
-    <Compile Include="MonoGameWindow.cs">
+    <Compile Include="SimulationWindow.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Game\Team\Team.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="StrategyWindow.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <EmbeddedResource Include="Simulator.resx">
+      <DependentUpon>Simulator.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -101,16 +99,46 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="Content\ball_soccer2.xnb">
+    <None Include="Content\CharacterBlue-1.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Content\characterBlue %281%29.xnb">
+    <None Include="Content\CharacterBlue-2.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Content\characterRed %281%29.xnb">
+    <None Include="Content\CharacterBlue-3.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Content\soccerField.xnb">
+    <None Include="Content\CharacterBlue-4.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\CharacterBlue-5.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\CharacterRed-1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\CharacterRed-2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\CharacterRed-3.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\CharacterRed-4.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\CharacterRed-5.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\SoccerBall.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\SoccerField.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\SoccerGoalLarge.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\SoccerGoalSmall.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
