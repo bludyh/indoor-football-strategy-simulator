@@ -11,7 +11,7 @@ namespace IndoorFootballStrategySimulator.Game {
 
         [Flags]
         public enum SteeringBehavior {
-            NONE = 0, SEEK = 1, ARRIVAL = 2, PURSUIT = 4, WALL_AVOIDANCE = 8, SEPARATION = 10
+            NONE = 0, SEEK = 1, ARRIVAL = 2, PURSUIT = 4, WALL_AVOIDANCE = 8, SEPARATION = 10, INTERPOSE = 12,
         }
         // List player
         private List<Player> listplayers;
@@ -20,6 +20,8 @@ namespace IndoorFootballStrategySimulator.Game {
         private Vector2 targetPos;
         private List<Line> walls;
         private SteeringBehavior steeringBehavior;
+
+        private double interposeDist;
 
         public Vector2 SteeringForce { get; private set; }
 
@@ -207,6 +209,33 @@ namespace IndoorFootballStrategySimulator.Game {
         {
             if (steeringBehavior.HasFlag(SteeringBehavior.SEPARATION))
                 steeringBehavior ^= SteeringBehavior.SEPARATION;
+        }
+
+        //INTERPOSE
+
+        public Vector2 Interpose(Ball ball) {
+
+            //Determine the midpoint between goalkeeper and the ball
+            Vector2 MidPoint = (ball.Position + entity.Position) / 2;
+
+            double TimeToReachMidPoint = Vector2.Distance(entity.Position, MidPoint) / entity.MaxSpeed;
+            Vector2 ballPos = ball.Position + Vector2.Multiply(ball.Velocity,(float)TimeToReachMidPoint);
+            Vector2 entityPos = entity.Position + Vector2.Multiply(entity.Velocity, (float)TimeToReachMidPoint);
+            // predicted position of midpoint
+          return  MidPoint = (ballPos + entityPos) / 2;
+          //  return Arrival(MidPoint);
+        }
+
+        public void InterposeOn(double d) {
+            interposeDist = d;
+            steeringBehavior |= SteeringBehavior.INTERPOSE;
+        }
+        /// <summary>
+        /// Set Target Position
+        /// </summary>
+        /// <param name="t"></param>
+        public void SetTarget(Vector2 t) {
+            targetPos = t;
         }
     }
 }

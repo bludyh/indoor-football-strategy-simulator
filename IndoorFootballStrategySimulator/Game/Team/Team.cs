@@ -10,6 +10,8 @@ namespace IndoorFootballStrategySimulator.Game
 {
     class Team
     {
+        //Change to Goal object later
+        private FieldPlayer homeGoal;
         //Formation
         public enum Formation
         {
@@ -103,6 +105,11 @@ namespace IndoorFootballStrategySimulator.Game
             {
                 player.Update(gameTime);
             }
+        }
+
+        public FieldPlayer HomeGoal()
+        {
+            return homeGoal;
         }
     }
 }
