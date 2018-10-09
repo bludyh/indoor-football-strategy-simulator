@@ -65,14 +65,27 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Simulation\Ball.cs" />
+    <Compile Include="Simulation\ChaseBall.cs" />
     <Compile Include="Simulation\Entity.cs" />
     <Compile Include="Simulation\EntityManager.cs" />
     <Compile Include="Simulation\Extensions.cs" />
     <Compile Include="Simulation\Field.cs" />
+    <Compile Include="Simulation\FieldPlayer.cs" />
+    <Compile Include="Simulation\FSM.cs" />
+    <Compile Include="Simulation\GlobalState.cs" />
+    <Compile Include="Simulation\GoalKeeper.cs" />
+    <Compile Include="Simulation\Idle.cs" />
+    <Compile Include="Simulation\InterceptBall.cs" />
+    <Compile Include="Simulation\KickBall.cs" />
     <Compile Include="Simulation\Line.cs" />
     <Compile Include="Simulation\MovingEntity.cs" />
     <Compile Include="Simulation\Player.cs" />
+    <Compile Include="Simulation\PutBallBackInPlay.cs" />
+    <Compile Include="Simulation\ReturnHome.cs" />
+    <Compile Include="Simulation\State.cs" />
     <Compile Include="Simulation\SteeringManager.cs" />
+    <Compile Include="Simulation\Team.cs" />
+    <Compile Include="Simulation\TendGoal.cs" />
     <Compile Include="Simulator.cs">
       <SubType>Form</SubType>
     </Compile>

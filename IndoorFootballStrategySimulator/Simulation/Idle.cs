@@ -4,26 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IndoorFootballStrategySimulator.Game
+namespace IndoorFootballStrategySimulator.Simulation
 {
-    class ChaseBall:State<FieldPlayer>
+    class Idle:State<FieldPlayer>
     {
-        private static ChaseBall instance = new ChaseBall();
-        public static ChaseBall Instance()
+        private static Idle instance = new Idle();
+        public static Idle Instance()
         {
             return instance;
         }
         public override void OnEnter(FieldPlayer player)
         {
-            player.Steering.StartSeek();
+          
         }
         public override void Handle(FieldPlayer player)
         {
-            throw new NotImplementedException();
+        
         }
         public override void OnExit(FieldPlayer player)
         {
-            player.Steering.StopSeek();
         }
     }
 }

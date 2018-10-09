@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IndoorFootballStrategySimulator.Game
+namespace IndoorFootballStrategySimulator.Simulation
 {
     class Team
     {
