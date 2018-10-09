@@ -72,7 +72,6 @@
     <Compile Include="Simulation\Field.cs" />
     <Compile Include="Simulation\FieldPlayer.cs" />
     <Compile Include="Simulation\FSM.cs" />
-    <Compile Include="Simulation\GlobalState.cs" />
     <Compile Include="Simulation\GoalKeeper.cs" />
     <Compile Include="Simulation\Idle.cs" />
     <Compile Include="Simulation\InterceptBall.cs" />

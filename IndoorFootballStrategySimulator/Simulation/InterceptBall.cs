@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IndoorFootballStrategySimulator.Simulation.GoalKeeper.GoalKeeperState
+namespace IndoorFootballStrategySimulator.Simulation
 {
     class InterceptBall : State<GoalKeeper>
     {

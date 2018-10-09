@@ -17,7 +17,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         {
             //this is the distance the keeper puts between the back of the net 
             //and the ball when using the interpose steering behavior
-            owner.Steering.InterposeOn(20.0);
+            //owner.Steering.InterposeOn(20.0);
            // owner.Steering.SetTarget(owner.R)
         }
 

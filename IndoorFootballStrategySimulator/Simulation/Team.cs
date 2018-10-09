@@ -42,7 +42,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             // Avoid the Wall
             foreach (Player player in listPlayers)
             {
-                player.Steering.StartWallAvoidance(walls);
+                //player.Steering.StartWallAvoidance(walls);
                 if (player is FieldPlayer)
                 {
                     //player.Steering.StartSeparation(listPlayers);
