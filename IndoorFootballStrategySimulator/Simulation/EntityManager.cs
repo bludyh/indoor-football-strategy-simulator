@@ -34,6 +34,9 @@ namespace IndoorFootballStrategySimulator.Simulation {
         /// </summary>
         public List<Player> Players { get; private set; }
 
+        private Team BlueTeam;
+        private Team RedTeam;
+
         /// <summary>
         ///     Initializes all entities.
         /// </summary>
@@ -50,46 +53,8 @@ namespace IndoorFootballStrategySimulator.Simulation {
             Entities.Add(Ball);
 
             Players = new List<Player>();
-
-            for (int i = 0; i < 5; i++) {
-                texture = editor.Content.Load<Texture2D>($"CharacterBlue-{ Simulator.Random.Next(1, 6) }");
-                var player = new Player(
-                    texture, 
-                    Color.White, 
-                    new Vector2(1f, 1f), 
-                    new Vector2(
-                        Simulator.Random.Next((int)(Field.Position.X - Field.Size.X / 2f), (int)Field.Position.X), 
-                        Simulator.Random.Next((int)(Field.Position.Y - Field.Size.Y / 2f), (int)(Field.Position.Y + Field.Size.Y / 2f))), 
-                    0f, 
-                    16f, 
-                    1f, 
-                    200f, 
-                    Simulator.Random.Next(50, 100));
-                player.Steering.StartWallAvoidance();
-                player.Steering.StartSeparation();
-                player.Steering.StartPursuit(Ball);
-                Entities.Add(player);
-                Players.Add(player);
-
-                texture = editor.Content.Load<Texture2D>($"CharacterRed-{ Simulator.Random.Next(1, 6) }");
-                player = new Player(
-                    texture,
-                    Color.White,
-                    new Vector2(1f, 1f),
-                    new Vector2(
-                        Simulator.Random.Next((int)Field.Position.X, (int)(Field.Position.X + Field.Size.X / 2f)),
-                        Simulator.Random.Next((int)(Field.Position.Y - Field.Size.Y / 2f), (int)(Field.Position.Y + Field.Size.Y / 2f))),
-                    MathHelper.Pi,
-                    16f,
-                    1f,
-                    200f,
-                    Simulator.Random.Next(50, 100));
-                player.Steering.StartWallAvoidance();
-                player.Steering.StartSeparation();
-                player.Steering.StartPursuit(Ball);
-                Entities.Add(player);
-                Players.Add(player);
-            }
+            BlueTeam = new Team(Team.TeamColor.Blue, editor);
+            RedTeam = new Team(Team.TeamColor.Red, editor);
         }
 
         /// <summary>

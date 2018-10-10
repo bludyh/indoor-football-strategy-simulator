@@ -6,21 +6,26 @@ using System.Threading.Tasks;
 
 namespace IndoorFootballStrategySimulator.Simulation
 {
-    class ReturnHome : State<GoalKeeper>
+    public class TendGoal : State<GoalKeeper>
     {
-        public override void Handle(GoalKeeper owner)
+        private static TendGoal instance = new TendGoal();
+        public static TendGoal Instance()
         {
-           // throw new NotImplementedException();
+            return instance;
         }
-
-        public override void OnEnter(GoalKeeper owner)
+        public override void Handle(GoalKeeper owner)
         {
             //throw new NotImplementedException();
         }
 
+        public override void OnEnter(GoalKeeper owner)
+        {
+            //owner.Steering.StartInterpose(owner, SimulationWindow.EntityManager.Ball);
+        }
+
         public override void OnExit(GoalKeeper owner)
         {
-           // throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }

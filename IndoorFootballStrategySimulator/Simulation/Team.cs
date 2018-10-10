@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Forms.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,108 +9,111 @@ using System.Threading.Tasks;
 
 namespace IndoorFootballStrategySimulator.Simulation
 {
-    class Team
+    public class Team
     {
-        //Change to Goal object later
-        private FieldPlayer homeGoal;
-        //Formation
-        public enum Formation
-        {
-            A = 400,
-            B = 310,
-            C = 220,
-            D = 211,
-            E = 130,
-            F = 121,
-            G = 112
-        }
         //team color
         public enum TeamColor
         {
             Red, Blue
         }
-        public List<Player> listPlayers = new List<Player>();
-        private Texture2D _texture;
+        public List<Player> Players = new List<Player>();
         private TeamColor teamColor;
-        private Formation teamFormation;
 
-        public Team(Formation formation, TeamColor color, Texture2D texture, List<Line> walls)
+        public Team(TeamColor color, UpdateService editor)
         {
-            teamFormation = formation;
             teamColor = color;
-            _texture = texture;
-            CreatePlayers();
-            // Avoid the Wall
-            foreach (Player player in listPlayers)
-            {
-                //player.Steering.StartWallAvoidance(walls);
-                if (player is FieldPlayer)
-                {
-                    //player.Steering.StartSeparation(listPlayers);
-                }
-            }
+            CreatePlayers(editor);
+            Behaviors();
         }
-        private void CreatePlayers()
+        private void CreatePlayers(UpdateService editor)
         {
             
             if (teamColor == TeamColor.Blue)
             {
                 //Draw Blue Team
+                Texture2D texture = editor.Content.Load<Texture2D>($"CharacterBlue-{ Simulator.Random.Next(1, 6) }");
                 //Goal Keeper
-                listPlayers.Add(new GoalKeeper(_texture, Color.White, new Vector2(1f, 1f), new Vector2(140f, 372f), 0f, 100f, 3f, 75f, 50f));
-                if (teamFormation == Formation.A)
+                GoalKeeper GK = new GoalKeeper(this, 
+                    TendGoal.Instance(), 
+                    texture, 
+                    Color.White, 
+                    new Vector2(1f, 1f), 
+                    new Vector2(80f, 288f), 
+                    0f, 
+                    15f, 
+                    3f, 
+                    75f, 
+                    50f);
+                SimulationWindow.EntityManager.Entities.Add(GK);
+                SimulationWindow.EntityManager.Players.Add(GK);
+                //Field Players
+                for (int i = 0; i < 4; i++)
                 {
-                    //Field Players
-                    listPlayers.Add(new FieldPlayer(Idle.Instance(), _texture, Color.White, new Vector2(1f, 1f), new Vector2(370f, 200f), 0f, 100f, 3f, 75f, 50f));
-                    listPlayers.Add(new FieldPlayer(Idle.Instance(), _texture, Color.White, new Vector2(1f, 1f), new Vector2(370f, 320f), 0f, 100f, 3f, 75f, 50f));
-                    listPlayers.Add(new FieldPlayer(Idle.Instance(), _texture, Color.White, new Vector2(1f, 1f), new Vector2(370f, 440f), 0f, 100f, 3f, 75f, 50f));
-                    listPlayers.Add(new FieldPlayer(Idle.Instance(), _texture, Color.White, new Vector2(1f, 1f), new Vector2(370f, 560f), 0f, 100f, 3f, 75f, 50f));
+                    texture = editor.Content.Load<Texture2D>($"CharacterBlue-{ Simulator.Random.Next(1, 6) }");
+                    FieldPlayer FP = new FieldPlayer(this,
+                        Idle.Instance(), 
+                        texture, 
+                        Color.White, 
+                        new Vector2(1f, 1f),
+                        new Vector2(Simulator.Random.Next(80, 640), Simulator.Random.Next(30, 546)),
+                        0f, 
+                        15f, 
+                        3f,
+                        75f,
+                        Simulator.Random.Next(30, 50));
+                    SimulationWindow.EntityManager.Entities.Add(FP);
+                    SimulationWindow.EntityManager.Players.Add(FP);
                 }
-
             }
             else
             {
                 //Draw Red Team
+                Texture2D texture = editor.Content.Load<Texture2D>($"CharacterRed-{ Simulator.Random.Next(1, 6) }");
                 // Goal Keeper
-                listPlayers.Add(new GoalKeeper(_texture, Color.White, new Vector2(1f, 1f), new Vector2(1230f, 372f), MathHelper.Pi, 100f, 3f, 75f, 50f));
-                if (teamFormation == Formation.A)
+                GoalKeeper GK = new GoalKeeper(this,
+                    TendGoal.Instance(), 
+                    texture, 
+                    Color.White, 
+                    new Vector2(1f, 1f), 
+                    new Vector2(1200f, 288f), 
+                    MathHelper.Pi, 
+                    15f, 
+                    3f, 
+                    75f, 
+                    50f);
+                SimulationWindow.EntityManager.Entities.Add(GK);
+                SimulationWindow.EntityManager.Players.Add(GK);
+                //Field Players
+                for (int i = 0; i < 4; i++)
                 {
-                    //Field Players
-                    listPlayers.Add(new FieldPlayer(Idle.Instance(), _texture, Color.White, new Vector2(1f, 1f), new Vector2(1000f, 200f), MathHelper.Pi, 100f, 3f, 75f, 50f));
-                    listPlayers.Add(new FieldPlayer(Idle.Instance(), _texture, Color.White, new Vector2(1f, 1f), new Vector2(1000f, 320f), MathHelper.Pi, 100f, 3f, 75f, 50f));
-                    listPlayers.Add(new FieldPlayer(Idle.Instance(), _texture, Color.White, new Vector2(1f, 1f), new Vector2(1000f, 440f), MathHelper.Pi, 100f, 3f, 75f, 50f));
-                    listPlayers.Add(new FieldPlayer(Idle.Instance(), _texture, Color.White, new Vector2(1f, 1f), new Vector2(1000f, 560f), MathHelper.Pi, 100f, 3f, 75f, 50f));
+                    texture = editor.Content.Load<Texture2D>($"CharacterRed-{ Simulator.Random.Next(1, 6) }");
+                    FieldPlayer FP = new FieldPlayer(this,
+                        Idle.Instance(), 
+                        texture, 
+                        Color.White,
+                        new Vector2(1f, 1f),
+                        new Vector2(Simulator.Random.Next(640, 1200), Simulator.Random.Next(30, 546)),
+                        MathHelper.Pi, 
+                        15f, 
+                        3f, 
+                        75f,
+                        Simulator.Random.Next(30, 50));
+                    SimulationWindow.EntityManager.Entities.Add(FP);
+                    SimulationWindow.EntityManager.Players.Add(FP);
                 }
-                
             }
         }
-        public void Draw(SpriteBatch spriteBatch) {
-            foreach (Player player in listPlayers)
-            {
-                player.Draw(spriteBatch);
-            }
-        }
-        public void PursuitBall(Ball ball)
+        private void Behaviors()
         {
-            foreach (Player player in listPlayers)
+            foreach (var player in SimulationWindow.EntityManager.Players)
             {
+                player.Steering.StartWallAvoidance();
                 if (player is FieldPlayer)
                 {
-                    player.Steering.StartPursuit(ball);
+                    player.Steering.StartPursuit(SimulationWindow.EntityManager.Ball);
                 }
             }
-        }
-        public void Update(GameTime gameTime)
-        {
-            foreach (Player player in listPlayers)
-            {
-                player.Update(gameTime);
-            }
-        }
-
-        public FieldPlayer HomeGoal()
-        {
-            return homeGoal;
         }
     }
 }
+

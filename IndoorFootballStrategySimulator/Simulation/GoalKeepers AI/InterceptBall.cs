@@ -6,11 +6,16 @@ using System.Threading.Tasks;
 
 namespace IndoorFootballStrategySimulator.Simulation
 {
-    class PutBallBackInPlay : State<GoalKeeper>
+    public class InterceptBall : State<GoalKeeper>
     {
+        private static InterceptBall instance = new InterceptBall();
+        public static InterceptBall Instance()
+        {
+            return instance;
+        }
         public override void Handle(GoalKeeper owner)
         {
-          //  throw new NotImplementedException();
+           // throw new NotImplementedException();
         }
 
         public override void OnEnter(GoalKeeper owner)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,24 +7,24 @@ using System.Threading.Tasks;
 
 namespace IndoorFootballStrategySimulator.Simulation
 {
-    class ChaseBall:State<FieldPlayer>
+    public class KickBall:State<FieldPlayer>
     {
-        private static ChaseBall instance = new ChaseBall();
-        public static ChaseBall Instance()
+        private static KickBall instance = new KickBall();
+
+        public static KickBall Instance()
         {
             return instance;
         }
         public override void OnEnter(FieldPlayer player)
         {
-            //player.Steering.StartSeek();
+           
         }
         public override void Handle(FieldPlayer player)
         {
-            throw new NotImplementedException();
         }
         public override void OnExit(FieldPlayer player)
         {
-            player.Steering.StopSeek();
+            
         }
     }
 }

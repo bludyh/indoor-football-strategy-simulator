@@ -16,7 +16,8 @@ namespace IndoorFootballStrategySimulator.Simulation {
         ///     Gets the <see cref="SteeringManager"/> of the current <see cref="Player"/>.
         /// </summary>
         public SteeringManager Steering { get; private set; }
-
+        public Team Team { get; private set; }
+        
         /// <summary>
         ///     Initializes a new instance of the <see cref="Player"/> class.
         /// </summary>
@@ -29,8 +30,9 @@ namespace IndoorFootballStrategySimulator.Simulation {
         /// <param name="mass"></param>
         /// <param name="maxForce"></param>
         /// <param name="maxSpeed"></param>
-        public Player(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed)
+        public Player(Team team, Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed)
             : base(texture, color, mass, maxForce, maxSpeed) {
+            Team = team;
             Scale = scale;
             Position = pos;
             Rotation = rot;

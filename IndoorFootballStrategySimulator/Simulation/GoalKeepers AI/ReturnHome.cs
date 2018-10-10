@@ -6,24 +6,26 @@ using System.Threading.Tasks;
 
 namespace IndoorFootballStrategySimulator.Simulation
 {
-    class TendGoal : State<GoalKeeper>
+    public class ReturnHome : State<GoalKeeper>
     {
+        private static ReturnHome instance = new ReturnHome();
+        public static ReturnHome Instance()
+        {
+            return instance;
+        }
         public override void Handle(GoalKeeper owner)
         {
-            //throw new NotImplementedException();
+           // throw new NotImplementedException();
         }
 
         public override void OnEnter(GoalKeeper owner)
         {
-            //this is the distance the keeper puts between the back of the net 
-            //and the ball when using the interpose steering behavior
-            //owner.Steering.InterposeOn(20.0);
-           // owner.Steering.SetTarget(owner.R)
+            //throw new NotImplementedException();
         }
 
         public override void OnExit(GoalKeeper owner)
         {
-            //throw new NotImplementedException();
+           // throw new NotImplementedException();
         }
     }
 }
