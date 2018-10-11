@@ -86,6 +86,8 @@
     <Compile Include="Simulation\FieldPlayers AI\KickBall.cs" />
     <Compile Include="Simulation\Line.cs" />
     <Compile Include="Simulation\MovingEntity.cs" />
+    <Compile Include="Simulation\Team AI\Defensive.cs" />
+    <Compile Include="Simulation\Team AI\Offensive.cs" />
     <Compile Include="Simulation\Player.cs" />
     <Compile Include="Simulation\GoalKeepers AI\PutBallBackInPlay.cs" />
     <Compile Include="Simulation\GoalKeepers AI\ReturnHome.cs" />

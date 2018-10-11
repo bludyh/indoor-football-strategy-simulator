@@ -261,13 +261,12 @@ namespace IndoorFootballStrategySimulator.Simulation {
         private Vector2 Separation() {
             Vector2 steeringForce = Vector2.Zero;
 
-            foreach (var player in SimulationWindow.EntityManager.Players) {
-                if (entity != player && Vector2.Distance(entity.Position, player.Position) < 200f) {
-                    Vector2 offset = entity.Position - player.Position;
-                    steeringForce += Vector2.Normalize(offset) / offset.Length();
+            foreach (var _entity in SimulationWindow.EntityManager.Entities) {
+                if (_entity is MovingEntity movingEntity && movingEntity!= entity) {
+                    Vector2 offset = movingEntity.Position - entity.Position;
+                    float overlap = entity.Radius + movingEntity.Radius - offset.Length();
                 }
             }
-
             return steeringForce;
         }
 
