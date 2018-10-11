@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Formation.cs" />
     <Compile Include="PreviewWindow.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -178,6 +179,13 @@
     <None Include="Resources\2-1-12.jpg" />
     <None Include="Resources\2-1-11.jpg" />
     <None Include="Resources\2-1-1.jpg" />
+    <None Include="Resources\103.png" />
+    <None Include="Resources\121.png" />
+    <None Include="Resources\202.png" />
+    <None Include="Resources\211.png" />
+    <None Include="Resources\220.png" />
+    <None Include="Resources\301.png" />
+    <None Include="Resources\field.png" />
     <Content Include="strategy_pictures\1.jpg" />
     <Content Include="strategy_pictures\2.jpg" />
     <Content Include="strategy_pictures\3.jpg" />
