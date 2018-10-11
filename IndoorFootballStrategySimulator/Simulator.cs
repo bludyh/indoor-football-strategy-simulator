@@ -14,18 +14,22 @@ using IndoorFootballStrategySimulator.Simulation;
 
 namespace IndoorFootballStrategySimulator {
     public partial class Simulator : Form {
-		public static bool pause = false;
-		public static bool abort = false;
+		public static bool Pause { get; private set; }
 
         private List<Formation> listStrategy = new List<Formation>();
         private List<Formation> listStrategyAdded = new List<Formation>();
         private Formation formation;
+
         public static Random Random { get; private set; }
+
+        static Simulator() {
+            Pause = true;
+        }
 
         public Simulator() {
             InitializeComponent();
-			
-         Random = new Random();
+
+            Random = new Random();
 
             formation = new Formation("", "2-1-1");
             listStrategy.Add(formation);
@@ -46,10 +50,6 @@ namespace IndoorFootballStrategySimulator {
             dataGridView1.Columns.Add("Home Strategy", "Home Strategy");
             dataGridView1.Columns.Add("Selection", "Name");
 
-            //Set full screen
-            this.WindowState = FormWindowState.Maximized;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
-
         }
 
         //Show List of Formation in the combobox
@@ -64,33 +64,30 @@ namespace IndoorFootballStrategySimulator {
 
         private void Pause_btn_Click(object sender, EventArgs e)
 		{
-			if (pause == false)
+			if (Pause == false)
 			{
-				pause = true;
+				Pause = true;
 				Pause_btn.BackColor = System.Drawing.Color.Yellow;
 			}
 			else
 			{
-				pause = false;
+				Pause = false;
 				Pause_btn.BackColor = System.Drawing.Color.Orange;
 			}
 
-			}
+        }
 
-		private void Start_btn_Click(object sender, EventArgs e)
+        private void Start_btn_Click(object sender, EventArgs e)
 		{
+            Pause = false;
 			tab_ctrl.SelectTab(Simulation_tb);
-			Control x = Home_tab;
-			x.Dispose();
 		}
 
 	
 
 		private void Abort_btn_Click(object sender, EventArgs e)
 		{
-			Simulator.abort = true;
 			tab_ctrl.SelectTab(result_tab);
-			
 		}
 
 		private void radioButton1_CheckedChanged(object sender, EventArgs e)
