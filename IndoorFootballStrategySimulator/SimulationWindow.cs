@@ -40,8 +40,8 @@ namespace IndoorFootballStrategySimulator {
         /// </remarks>
         protected override void Update(GameTime gameTime) {
             base.Update(gameTime);
-			if(!Simulator.pause && !Simulator.abort)
-            EntityManager.Update(gameTime);
+            if (!Simulator.Pause)
+                EntityManager.Update(gameTime);
         }
 
         /// <summary>
