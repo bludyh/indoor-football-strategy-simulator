@@ -1,71 +1,198 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props')" />
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{88615581-B847-44CA-8BA2-30EF5EED448E}</ProjectGuid>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DB31A506-FE00-4214-9B34-2743586027A8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>IndoorFootballStrategySimulator</RootNamespace>
     <AssemblyName>IndoorFootballStrategySimulator</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <MonoGamePlatform>Windows</MonoGamePlatform>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\$(MonoGamePlatform)\$(Platform)\$(Configuration)\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;WINDOWS</DefineConstants>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\$(MonoGamePlatform)\$(Platform)\$(Configuration)\</OutputPath>
-    <DefineConstants>TRACE;WINDOWS</DefineConstants>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>Icon.ico</ApplicationIcon>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
-  </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Simulator.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="MonoGame.Framework">
-      <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
+    <Reference Include="MonoGame.Forms.DX, Version=2.1.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Forms.DX.2.1.0.1\lib\net451\MonoGame.Forms.DX.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework, Version=3.7.0.1114, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Forms.DX.2.1.0.1\lib\net451\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Forms.DX.2.1.0.1\lib\net451\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D11, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Forms.DX.2.1.0.1\lib\net451\SharpDX.Direct3D11.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DXGI, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Forms.DX.2.1.0.1\lib\net451\SharpDX.DXGI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Icon.ico" />
+    <Compile Include="Formation.cs" />
+    <Compile Include="PreviewWindow.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Simulation\Ball.cs" />
+    <Compile Include="Simulation\FieldPlayers AI\Dribble.cs" />
+    <Compile Include="Simulation\FieldPlayers AI\ChaseBall.cs" />
+    <Compile Include="Simulation\Entity.cs" />
+    <Compile Include="Simulation\EntityManager.cs" />
+    <Compile Include="Simulation\Extensions.cs" />
+    <Compile Include="Simulation\Field.cs" />
+    <Compile Include="Simulation\FieldPlayer.cs" />
+    <Compile Include="Simulation\FieldPlayers AI\Support.cs" />
+    <Compile Include="Simulation\FSM.cs" />
+    <Compile Include="Simulation\GoalKeeper.cs" />
+    <Compile Include="Simulation\FieldPlayers AI\Idle.cs" />
+    <Compile Include="Simulation\GoalKeepers AI\InterceptBall.cs" />
+    <Compile Include="Simulation\FieldPlayers AI\KickBall.cs" />
+    <Compile Include="Simulation\Line.cs" />
+    <Compile Include="Simulation\MovingEntity.cs" />
+    <Compile Include="Simulation\Team AI\Defensive.cs" />
+    <Compile Include="Simulation\Team AI\Offensive.cs" />
+    <Compile Include="Simulation\Player.cs" />
+    <Compile Include="Simulation\GoalKeepers AI\PutBallBackInPlay.cs" />
+    <Compile Include="Simulation\GoalKeepers AI\ReturnHome.cs" />
+    <Compile Include="Simulation\State.cs" />
+    <Compile Include="Simulation\SteeringManager.cs" />
+    <Compile Include="Simulation\Team.cs" />
+    <Compile Include="Simulation\GoalKeepers AI\TendGoal.cs" />
+    <Compile Include="Simulator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Simulator.Designer.cs">
+      <DependentUpon>Simulator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SimulationWindow.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StrategyWindow.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <EmbeddedResource Include="Simulator.resx">
+      <DependentUpon>Simulator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Content\CharacterBlue-1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\CharacterBlue-2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\CharacterBlue-3.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\CharacterBlue-4.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\CharacterBlue-5.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\CharacterRed-1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\CharacterRed-2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\CharacterRed-3.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\CharacterRed-4.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\CharacterRed-5.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\SoccerBall.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\SoccerField.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\SoccerGoalLarge.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\SoccerGoalSmall.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <MonoGameContentReference Include="Content\Content.mgcb" />
-    <None Include="app.manifest" />
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Simulation\Team AI\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2-1-12.jpg" />
+    <None Include="Resources\2-1-11.jpg" />
+    <None Include="Resources\2-1-1.jpg" />
+    <None Include="Resources\103.png" />
+    <None Include="Resources\121.png" />
+    <None Include="Resources\202.png" />
+    <None Include="Resources\211.png" />
+    <None Include="Resources\220.png" />
+    <None Include="Resources\301.png" />
+    <None Include="Resources\field.png" />
+    <Content Include="strategy_pictures\1.jpg" />
+    <Content Include="strategy_pictures\2.jpg" />
+    <Content Include="strategy_pictures\3.jpg" />
+    <Content Include="strategy_pictures\4.jpg" />
+    <Content Include="strategy_pictures\5.jpg" />
+    <Content Include="strategy_pictures\6.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
