@@ -75,13 +75,15 @@ namespace IndoorFootballStrategySimulator {
 				Pause_btn.BackColor = System.Drawing.Color.Orange;
 			}
 
-			}
+		}
 
 		private void Start_btn_Click(object sender, EventArgs e)
 		{
 			tab_ctrl.SelectTab(Simulation_tb);
-			Control x = Home_tab;
-			x.Dispose();
+			Control homeTab = Home_tab;
+            Control strategyTab = Strategies_tab;
+            homeTab.Dispose();
+            strategyTab.Dispose();
 		}
 
 	
