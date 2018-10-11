@@ -61,8 +61,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Formation.cs" />
     <Compile Include="PreviewWindow.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Simulation\Ball.cs" />
     <Compile Include="Simulation\FieldPlayers AI\Dribble.cs" />
@@ -108,13 +114,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Content\CharacterBlue-1.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -171,6 +174,26 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Simulation\Team AI\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2-1-12.jpg" />
+    <None Include="Resources\2-1-11.jpg" />
+    <None Include="Resources\2-1-1.jpg" />
+    <None Include="Resources\103.png" />
+    <None Include="Resources\121.png" />
+    <None Include="Resources\202.png" />
+    <None Include="Resources\211.png" />
+    <None Include="Resources\220.png" />
+    <None Include="Resources\301.png" />
+    <None Include="Resources\field.png" />
+    <Content Include="strategy_pictures\1.jpg" />
+    <Content Include="strategy_pictures\2.jpg" />
+    <Content Include="strategy_pictures\3.jpg" />
+    <Content Include="strategy_pictures\4.jpg" />
+    <Content Include="strategy_pictures\5.jpg" />
+    <Content Include="strategy_pictures\6.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
