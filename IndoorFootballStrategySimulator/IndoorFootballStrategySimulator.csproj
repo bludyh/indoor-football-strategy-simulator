@@ -80,6 +80,8 @@
     <Compile Include="Simulation\FieldPlayers AI\KickBall.cs" />
     <Compile Include="Simulation\Line.cs" />
     <Compile Include="Simulation\MovingEntity.cs" />
+    <Compile Include="Simulation\Team AI\Defensive.cs" />
+    <Compile Include="Simulation\Team AI\Offensive.cs" />
     <Compile Include="Simulation\Player.cs" />
     <Compile Include="Simulation\GoalKeepers AI\PutBallBackInPlay.cs" />
     <Compile Include="Simulation\GoalKeepers AI\ReturnHome.cs" />
@@ -169,8 +171,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Simulation\Team AI\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
