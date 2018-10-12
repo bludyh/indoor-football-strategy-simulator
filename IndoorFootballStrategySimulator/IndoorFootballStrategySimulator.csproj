@@ -80,6 +80,7 @@
     <Compile Include="Simulation\FieldPlayer.cs" />
     <Compile Include="Simulation\FieldPlayers AI\Support.cs" />
     <Compile Include="Simulation\FSM.cs" />
+    <Compile Include="Simulation\Goal.cs" />
     <Compile Include="Simulation\GoalKeeper.cs" />
     <Compile Include="Simulation\FieldPlayers AI\Idle.cs" />
     <Compile Include="Simulation\GoalKeepers AI\InterceptBall.cs" />
@@ -153,10 +154,7 @@
     <None Include="Content\SoccerField.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Content\SoccerGoalLarge.xnb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Content\SoccerGoalSmall.xnb">
+    <None Include="Content\SoccerGoal.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
@@ -173,9 +171,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Simulation\Team AI\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\2-1-12.jpg" />
     <None Include="Resources\2-1-11.jpg" />
