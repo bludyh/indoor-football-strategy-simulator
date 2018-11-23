@@ -68,11 +68,13 @@ namespace IndoorFootballStrategySimulator {
 			{
 				Pause = true;
 				Pause_btn.BackColor = System.Drawing.Color.Yellow;
+                Pause_btn.Text = "Resume Simulation";
 			}
 			else
 			{
 				Pause = false;
 				Pause_btn.BackColor = System.Drawing.Color.Orange;
+                Pause_btn.Text = "Pause Simulation";
 			}
 
         }
@@ -87,7 +89,11 @@ namespace IndoorFootballStrategySimulator {
 
 		private void Abort_btn_Click(object sender, EventArgs e)
 		{
-			tab_ctrl.SelectTab(result_tab);
+            DialogResult result = MessageBox.Show("Do you want to abort simulation?","Confirmation", MessageBoxButtons.OKCancel);
+            if (result == DialogResult.OK)
+            {
+                tab_ctrl.SelectTab(result_tab);
+            }
 		}
 
 		private void radioButton1_CheckedChanged(object sender, EventArgs e)
