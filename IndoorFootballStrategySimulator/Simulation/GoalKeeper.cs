@@ -46,6 +46,14 @@ namespace IndoorFootballStrategySimulator.Simulation
                 }
             }
         }
+
+        //public Boolean TooFarFromGoalMouth() {
+        //    return (Vector2.Distance(Position,))
+        //}
+
+        //public Vector2 GetRearInterposeTarget() {
+        //    double xPosTarget = Team.
+        //}
     }
 }
 

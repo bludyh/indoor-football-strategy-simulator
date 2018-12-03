@@ -18,6 +18,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public List<Player> Players = new List<Player>();
         private TeamColor teamColor;
+   
 
         public Team(TeamColor color, UpdateService editor)
         {

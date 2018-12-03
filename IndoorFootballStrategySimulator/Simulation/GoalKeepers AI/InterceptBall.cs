@@ -16,10 +16,15 @@ namespace IndoorFootballStrategySimulator.Simulation
         public override void Handle(GoalKeeper owner)
         {
            // throw new NotImplementedException();
+           
         }
 
         public override void OnEnter(GoalKeeper owner)
         {
+            
+            //owner.Steering.StartPursuit(MovingEntity ball){
+
+            //}
             //throw new NotImplementedException();
         }
 
