@@ -19,6 +19,8 @@ namespace IndoorFootballStrategySimulator.Simulation
         public List<Player> Players = new List<Player>();
         private TeamColor teamColor;
 
+        public Goal Goal { get; private set; }
+
         public Team(TeamColor color, UpdateService editor)
         {
             teamColor = color;
@@ -64,6 +66,10 @@ namespace IndoorFootballStrategySimulator.Simulation
                     SimulationWindow.EntityManager.Entities.Add(FP);
                     SimulationWindow.EntityManager.Players.Add(FP);
                 }
+
+                texture = editor.Content.Load<Texture2D>($"SoccerGoal");
+                Goal = new Goal(texture, Color.White, new Vector2(1f, 1f), new Vector2(40f, 288f), 0f);
+                SimulationWindow.EntityManager.Entities.Add(Goal);
             }
             else
             {
@@ -101,6 +107,10 @@ namespace IndoorFootballStrategySimulator.Simulation
                     SimulationWindow.EntityManager.Entities.Add(FP);
                     SimulationWindow.EntityManager.Players.Add(FP);
                 }
+
+                texture = editor.Content.Load<Texture2D>($"SoccerGoal");
+                Goal = new Goal(texture, Color.White, new Vector2(1f, 1f), new Vector2(1240f, 288f), MathHelper.Pi);
+                SimulationWindow.EntityManager.Entities.Add(Goal);
             }
         }
         private void Behaviors()
