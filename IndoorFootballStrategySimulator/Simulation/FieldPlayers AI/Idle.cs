@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace IndoorFootballStrategySimulator.Simulation
 {
-    public class Idle:State<FieldPlayer>
+    public sealed class Idle:State<FieldPlayer>
     {
-        private static Idle instance = new Idle();
+        private static readonly Idle instance = new Idle();
+        static Idle(){}
+        private Idle(){}
         public static Idle Instance()
         {
             return instance;

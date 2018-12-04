@@ -10,7 +10,7 @@ namespace IndoorFootballStrategySimulator.Simulation
 {
     public class GoalKeeper : Player
     {
-        private FSM<GoalKeeper> gkStateMachine;
+        private readonly FSM<GoalKeeper> gkStateMachine;
         public GoalKeeper(Team team, State<GoalKeeper> startState, Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed)
             : base(team, texture, color, scale, pos, rot, radius, mass, maxForce, maxSpeed)
         {
@@ -28,6 +28,10 @@ namespace IndoorFootballStrategySimulator.Simulation
         public override void Update(GameTime gameTime)
         {
             BounceBall();
+        }
+        public FSM<GoalKeeper> GetFSM()
+        {
+            return gkStateMachine;
         }
         private void BounceBall()
         {

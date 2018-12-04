@@ -18,6 +18,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public List<Player> Players = new List<Player>();
         private TeamColor teamColor;
+        private readonly FSM<Team> teamStateMachine;
 
         public Goal Goal { get; private set; }
 
@@ -26,6 +27,8 @@ namespace IndoorFootballStrategySimulator.Simulation
             teamColor = color;
             CreatePlayers(editor);
             Behaviors();
+            teamStateMachine = new FSM<Team>(this);
+            teamStateMachine.SetCurrentState(Defensive.Instance());
         }
         private void CreatePlayers(UpdateService editor)
         {
