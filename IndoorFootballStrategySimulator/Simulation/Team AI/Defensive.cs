@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace IndoorFootballStrategySimulator.Simulation
 {
-    public class Defensive: State<Team>
+    public sealed class Defensive: State<Team>
     {
-        private static Defensive instance = new Defensive();
+        private static readonly Defensive instance = new Defensive();
+        static Defensive(){}
+        private Defensive(){}
         public static Defensive Instance()
         {
             return instance;

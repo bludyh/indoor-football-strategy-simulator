@@ -28,13 +28,7 @@ namespace IndoorFootballStrategySimulator.Simulation {
         /// <param name="maxForce"></param>
         /// <param name="maxSpeed"></param>
         public Ball(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed)
-            : base(texture, color, mass, maxForce, maxSpeed)
-        {
-            Scale = scale;
-            Position = pos;
-            Rotation = rot;
-            Radius = radius;
-        }
+            : base(texture, color, scale, pos, rot, radius, mass, maxForce, maxSpeed) { }
 
         /// <summary>
         ///     Updates logics of the <see cref="Ball"/>. 

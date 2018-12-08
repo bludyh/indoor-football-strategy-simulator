@@ -10,15 +10,19 @@ namespace IndoorFootballStrategySimulator.Simulation
 {
     public class GoalKeeper : Player
     {
+
         private FSM<GoalKeeper> gkStateMachine;
-        public GoalKeeper(Team team, State<GoalKeeper> startState, Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed)
-            : base(team, texture, color, scale, pos, rot, radius, mass, maxForce, maxSpeed)
+
+        public Area HomeArea { get; set; }
+        public List<Area> Areas { get; set; }
+
+        public GoalKeeper(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed,
+            Team team = null, Area homeArea = null, List<Area> areas = null, State<GoalKeeper> startState = null)
+            : base(texture, color, scale, pos, rot, radius, mass, maxForce, maxSpeed, team)
         {
-            Scale = scale;
-            Position = pos;
-            Rotation = rot;
-            Radius = radius;
             gkStateMachine = new FSM<GoalKeeper>(this);
+            HomeArea = homeArea;
+            Areas = areas;
             if (startState != null)
             {
                 gkStateMachine.SetCurrentState(startState);
@@ -28,6 +32,10 @@ namespace IndoorFootballStrategySimulator.Simulation
         public override void Update(GameTime gameTime)
         {
             BounceBall();
+        }
+        public FSM<GoalKeeper> GetFSM()
+        {
+            return gkStateMachine;
         }
         private void BounceBall()
         {

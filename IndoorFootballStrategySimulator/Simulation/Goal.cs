@@ -9,19 +9,30 @@ using Microsoft.Xna.Framework.Graphics;
 namespace IndoorFootballStrategySimulator.Simulation {
     public class Goal : Entity {
 
-        public Vector2 Facing { get { return new Vector2((float)Math.Cos(Rotation), (float)Math.Sin(Rotation)); } }
-        public Vector2 LeftPostPos { get { return Position + Vector2.Transform(Facing, Matrix.CreateRotationZ(MathHelper.ToRadians(-60f))) * (float)Math.Sqrt(5120); } }
-        public Vector2 RightPostPos { get { return Position + Vector2.Transform(Facing, Matrix.CreateRotationZ(MathHelper.ToRadians(60f))) * (float)Math.Sqrt(5120); } }
-        public Line GoalLine { get; private set; }
+        public Vector2 Facing {
+            get {
+                return new Vector2((float)Math.Cos(Rotation), (float)Math.Sin(Rotation));
+            }
+        }
+        public Vector2 LeftPostPos {
+            get {
+                return Position + Vector2.Transform(Facing, Matrix.CreateRotationZ(MathHelper.ToRadians(-60f))) * (float)Math.Sqrt(Math.Pow(Size.X / 2f, 2) + Math.Pow(Size.Y / 3f, 2));
+            }
+        }
+        public Vector2 RightPostPos {
+            get {
+                return Position + Vector2.Transform(Facing, Matrix.CreateRotationZ(MathHelper.ToRadians(60f))) * (float)Math.Sqrt(Math.Pow(Size.X / 2f, 2) + Math.Pow(Size.Y / 3f, 2));
+            }
+        }
+        public Line GoalLine {
+            get {
+                return new Line(LeftPostPos, RightPostPos);
+            }
+        }
         public int Score { get; private set; }
         public Vector2 Center { get; private set; }
 
-        public Goal(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot) : base(texture, color) {
-            Scale = scale;
-            Position = pos;
-            Rotation = rot;
-            GoalLine = new Line(LeftPostPos, RightPostPos);
-        }
+        public Goal(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot) : base(texture, color, scale, pos, rot, 0f) { }
 
         public override void Update(GameTime gameTime) {
             if (IsScored())
@@ -42,7 +53,7 @@ namespace IndoorFootballStrategySimulator.Simulation {
         public override void Draw(SpriteBatch spriteBatch) {
             base.Draw(spriteBatch);
 
-            SimulationWindow.DrawLine(spriteBatch, GoalLine.Start, GoalLine.End, Color.White);
+            GoalLine.Draw(spriteBatch, Color.White);
         }
 
     }

@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace IndoorFootballStrategySimulator.Simulation
 {
-    public class KickBall:State<FieldPlayer>
+    public sealed class KickBall:State<FieldPlayer>
     {
-        private static KickBall instance = new KickBall();
+        private static readonly KickBall instance = new KickBall();
+        static KickBall(){}
+        private KickBall(){}
 
         public static KickBall Instance()
         {

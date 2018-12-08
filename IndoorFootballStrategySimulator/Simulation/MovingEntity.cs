@@ -58,7 +58,8 @@ namespace IndoorFootballStrategySimulator.Simulation {
         /// </summary>
         public float MaxSpeed { get; private set; }
 
-        protected MovingEntity(Texture2D texture, Color color, float mass, float maxForce, float maxSpeed) : base(texture, color) {
+        protected MovingEntity(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed)
+            : base(texture, color, scale, pos, rot, radius) {
             Mass = mass;
             MaxForce = maxForce;
             MaxSpeed = maxSpeed;

@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace IndoorFootballStrategySimulator.Simulation
 {
-    public class InterceptBall : State<GoalKeeper>
+    public sealed class InterceptBall : State<GoalKeeper>
     {
-        private static InterceptBall instance = new InterceptBall();
+        private static readonly InterceptBall instance = new InterceptBall();
+        static InterceptBall(){}
+        private InterceptBall(){}
         public static InterceptBall Instance()
         {
             return instance;

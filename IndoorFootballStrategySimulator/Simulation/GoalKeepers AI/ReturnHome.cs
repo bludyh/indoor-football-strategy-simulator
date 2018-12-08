@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace IndoorFootballStrategySimulator.Simulation
 {
-    public class ReturnHome : State<GoalKeeper>
+    public sealed class ReturnHome : State<GoalKeeper>
     {
-        private static ReturnHome instance = new ReturnHome();
+        private static readonly ReturnHome instance = new ReturnHome();
+        static ReturnHome(){}
+        private ReturnHome(){}
         public static ReturnHome Instance()
         {
             return instance;

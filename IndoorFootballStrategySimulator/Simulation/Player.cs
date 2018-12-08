@@ -33,13 +33,9 @@ namespace IndoorFootballStrategySimulator.Simulation {
         /// <param name="mass"></param>
         /// <param name="maxForce"></param>
         /// <param name="maxSpeed"></param>
-        public Player(Team team, Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed)
-            : base(texture, color, mass, maxForce, maxSpeed) {
+        public Player(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed, Team team)
+            : base(texture, color, scale, pos, rot, radius, mass, maxForce, maxSpeed) {
             Team = team;
-            Scale = scale;
-            Position = pos;
-            Rotation = rot;
-            Radius = radius;
             Steering = new SteeringManager(this);
         }
 
