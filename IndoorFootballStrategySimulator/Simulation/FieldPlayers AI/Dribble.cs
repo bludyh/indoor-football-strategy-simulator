@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace IndoorFootballStrategySimulator.Simulation
 {
-    public class Dribble: State<FieldPlayer>
+    public sealed class Dribble: State<FieldPlayer>
     {
-        private static Dribble instance = new Dribble();
+        private static readonly Dribble instance = new Dribble();
+        static Dribble(){}
+        private Dribble(){}
         public static Dribble Instance()
         {
             return instance;

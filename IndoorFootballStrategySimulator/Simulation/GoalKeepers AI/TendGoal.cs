@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace IndoorFootballStrategySimulator.Simulation
 {
-    public class TendGoal : State<GoalKeeper>
+    public sealed class TendGoal : State<GoalKeeper>
     {
-        private static TendGoal instance = new TendGoal();
+        private static readonly TendGoal instance = new TendGoal();
+        // Explicit static constructor to tell C# compiler
+        static TendGoal(){}
+        // 
+        private TendGoal(){}
         public static TendGoal Instance()
         {
             return instance;

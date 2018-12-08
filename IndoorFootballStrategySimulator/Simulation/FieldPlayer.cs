@@ -33,6 +33,13 @@ namespace IndoorFootballStrategySimulator.Simulation
                 fpStateMachine.CurrentState.OnEnter(this);
             }
         }
+        public override void Update(GameTime gameTime)
+        {
+        }
+        public FSM<FieldPlayer> GetFSM()
+        {
+            return fpStateMachine;
+        }
 
     }
 }

@@ -33,6 +33,10 @@ namespace IndoorFootballStrategySimulator.Simulation
         {
             BounceBall();
         }
+        public FSM<GoalKeeper> GetFSM()
+        {
+            return gkStateMachine;
+        }
         private void BounceBall()
         {
             if (SimulationWindow.EntityManager.Ball.Position.Y > 176 && SimulationWindow.EntityManager.Ball.Position.Y <400)

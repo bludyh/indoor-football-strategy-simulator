@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace IndoorFootballStrategySimulator.Simulation
 {
-    public class ChaseBall:State<FieldPlayer>
+    public sealed class ChaseBall:State<FieldPlayer>
     {
-        private static ChaseBall instance = new ChaseBall();
+        private static readonly ChaseBall instance = new ChaseBall();
+        static ChaseBall(){}
+        private ChaseBall(){}
         public static ChaseBall Instance()
         {
             return instance;

@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace IndoorFootballStrategySimulator.Simulation
 {
-    public class Support: State<FieldPlayer>
+    public sealed class Support: State<FieldPlayer>
     {
-        private static Support instance = new Support();
+        private static readonly Support instance = new Support();
+        static Support(){}
+        private Support(){}
         public static Support Instance()
         {
             return instance;
