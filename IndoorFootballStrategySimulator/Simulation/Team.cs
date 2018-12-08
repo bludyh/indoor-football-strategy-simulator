@@ -18,6 +18,10 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public List<Player> Players = new List<Player>();
         private TeamColor teamColor;
+        private Player playerClosetToBall;
+        private Player controllingPlayer;
+
+        public Team Opponents { get; set; }
 
         public Goal Goal { get; private set; }
 
@@ -26,6 +30,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             teamColor = color;
             CreatePlayers(editor);
             Behaviors();
+            playerClosetToBall = controllingPlayer= null; 
         }
         private void CreatePlayers(UpdateService editor)
         {
@@ -123,6 +128,24 @@ namespace IndoorFootballStrategySimulator.Simulation
                     player.Steering.StartPursuit(SimulationWindow.EntityManager.Ball);
                 }
             }
+        }
+        public void SetPlayerClosetToBall(Player player) {
+            playerClosetToBall = player;
+        }
+        public Player PlayerClosetToBall() {
+            return playerClosetToBall;
+        }
+        public void SetControllingPlayer(Player player) {
+            controllingPlayer = player;
+        }
+        public void ReturnAllPlayersToHome() {
+            //TODO
+           
+        }
+        public Boolean InControl() {
+            if (controllingPlayer != null)
+                return true;
+            return false;
         }
     }
 }

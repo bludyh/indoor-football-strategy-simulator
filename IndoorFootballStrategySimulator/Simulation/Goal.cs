@@ -14,6 +14,7 @@ namespace IndoorFootballStrategySimulator.Simulation {
         public Vector2 RightPostPos { get { return Position + Vector2.Transform(Facing, Matrix.CreateRotationZ(MathHelper.ToRadians(60f))) * (float)Math.Sqrt(5120); } }
         public Line GoalLine { get; private set; }
         public int Score { get; private set; }
+        public Vector2 Center { get; private set; }
 
         public Goal(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot) : base(texture, color) {
             Scale = scale;

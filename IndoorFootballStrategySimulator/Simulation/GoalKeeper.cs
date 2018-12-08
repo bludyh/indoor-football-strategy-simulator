@@ -46,6 +46,31 @@ namespace IndoorFootballStrategySimulator.Simulation
                 }
             }
         }
+
+        /// <summary>
+        /// when the ball becomes within this distance of the goalkeeper
+        /// changes state to intercept the ball
+        /// Goal keeper intercept range =100
+        /// </summary>
+        /// <returns></returns>
+        public Boolean TooFarFromGoalMouth() {
+            return (Vector2.Distance(Position, GetRearInterposeTarget()) > 100);
+        }
+
+        public Vector2 GetRearInterposeTarget() {
+            //float xPosTarget = Team.Goal.Center.X;
+
+            //float yPosTarget = Field.Position.Y- Vector2.Subtract(Team.Goal.LeftPostPos,Team.Goal.RightPostPos).Length();
+
+            //return new Vector2(xPosTarget,yPosTarget);
+            return new Vector2(1, 2);
+
+        }
+
+        public Boolean BallWithinRangeForIntercept() {
+            //Todo return (Vector2.Distance(Team.Goal.Center,))
+            return false;
+        }
     }
 }
 

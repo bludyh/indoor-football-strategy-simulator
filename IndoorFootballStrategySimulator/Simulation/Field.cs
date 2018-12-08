@@ -16,7 +16,8 @@ namespace IndoorFootballStrategySimulator.Simulation {
         ///     Gets a list of <see cref="Line"/> that defines the border of the <see cref="Field"/>.
         /// </summary>
         public List<Line> Walls { get; private set; }
-
+        
+        public Boolean GoalKeeperHasBall { get;  set; }
         /// <summary>
         ///     Initializes a new instance of the <see cref="Field"/> class.
         /// </summary>
@@ -35,6 +36,7 @@ namespace IndoorFootballStrategySimulator.Simulation {
                 new Line(new Vector2(Position.X + Size.X / 2f - 72f, Position.Y + Size.Y / 2f - 8f), new Vector2(Position.X - Size.X / 2f + 72f, Position.Y + Size.Y / 2f - 8f)),
                 new Line(new Vector2(Position.X - Size.X / 2f + 72f, Position.Y + Size.Y / 2f - 8f), new Vector2(Position.X - Size.X / 2f + 72f, Position.Y - Size.Y / 2f + 8f))
             };
+            GoalKeeperHasBall = false;
         }
 
         public override void Update(GameTime gameTime) { }

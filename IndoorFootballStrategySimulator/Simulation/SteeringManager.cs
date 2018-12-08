@@ -29,6 +29,8 @@ namespace IndoorFootballStrategySimulator.Simulation {
         private Vector2 targetPos;
         private SteeringBehavior steeringBehaviors;
 
+        public Vector2 Target { get; set; }
+
         /// <summary>
         ///     Gets the total steering force.
         /// </summary>

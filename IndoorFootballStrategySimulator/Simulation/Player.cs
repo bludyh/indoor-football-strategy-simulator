@@ -17,6 +17,9 @@ namespace IndoorFootballStrategySimulator.Simulation {
         /// </summary>
         public SteeringManager Steering { get; private set; }
         public Team Team { get; private set; }
+        public Field Field { get; private set; }
+        public float DistanceToBall { get; private set; }
+
         
         /// <summary>
         ///     Initializes a new instance of the <see cref="Player"/> class.
@@ -73,7 +76,27 @@ namespace IndoorFootballStrategySimulator.Simulation {
                 }
             }
         }
+        /// <summary>
+        /// Return true if the player is the closet player in his team to the ball
+        /// </summary>
+        /// <returns></returns>
+        public Boolean isClosetTeamMemberToBall() {
+            if (Team.PlayerClosetToBall() == this)
+                return true;
+            return false;
+        }
 
+        public Boolean isClosetPlayerOnPitchToBall() {
+            // return isClosetPlayerOnPitchToBall() && (DistanceToBall < Team.Opponents().ClosetDisToBall());
+            return false;
+        }
+
+        public Boolean BallWithinKeeperRange() {
+            //TODO 
+            // return (Vector2.Distance(Position,Ball))
+            return false;
+        }
+       
         // Debug code
         //public override void Draw(SpriteBatch spriteBatch) {
         //    base.Draw(spriteBatch);
