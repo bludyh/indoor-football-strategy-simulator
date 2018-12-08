@@ -12,6 +12,13 @@ namespace IndoorFootballStrategySimulator.Simulation {
     /// </summary>
     public class Field : Entity {
 
+        private const int NumberOfColumns = 6;
+        private const int NumberOfRows = 5;
+
+        public Area PlayingArea { get; private set; }
+
+        public List<Area> Areas { get; private set; }
+
         /// <summary>
         ///     Gets a list of <see cref="Line"/> that defines the border of the <see cref="Field"/>.
         /// </summary>
@@ -25,26 +32,41 @@ namespace IndoorFootballStrategySimulator.Simulation {
         /// <param name="scale"></param>
         /// <param name="pos"></param>
         /// <param name="rot"></param>
-        public Field(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot) : base(texture, color) {
-            Scale = scale;
-            Position = pos;
-            Rotation = rot;
+        public Field(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot) : base(texture, color, scale, pos, rot, 0f) {
+            PlayingArea = new Area(
+                Size.X * 9f / 160f,
+                Size.X * 151f / 160f,
+                Size.Y / 72f,
+                Size.Y * 71f / 72f
+                );
+            CreateAreas();
             Walls = new List<Line> {
-                new Line(new Vector2(Position.X - Size.X / 2f + 72f, Position.Y - Size.Y / 2f + 8f), new Vector2(Position.X + Size.X / 2f - 72f, Position.Y - Size.Y / 2f + 8f)),
-                new Line(new Vector2(Position.X + Size.X / 2f - 72f, Position.Y - Size.Y / 2f + 8f), new Vector2(Position.X + Size.X / 2f - 72f, Position.Y + Size.Y / 2f - 8f)),
-                new Line(new Vector2(Position.X + Size.X / 2f - 72f, Position.Y + Size.Y / 2f - 8f), new Vector2(Position.X - Size.X / 2f + 72f, Position.Y + Size.Y / 2f - 8f)),
-                new Line(new Vector2(Position.X - Size.X / 2f + 72f, Position.Y + Size.Y / 2f - 8f), new Vector2(Position.X - Size.X / 2f + 72f, Position.Y - Size.Y / 2f + 8f))
+                new Line(new Vector2(PlayingArea.LeftX, PlayingArea.TopY), new Vector2(PlayingArea.RightX, PlayingArea.TopY)),
+                new Line(new Vector2(PlayingArea.RightX, PlayingArea.TopY), new Vector2(PlayingArea.RightX, PlayingArea.BottomY)),
+                new Line(new Vector2(PlayingArea.RightX, PlayingArea.BottomY), new Vector2(PlayingArea.LeftX, PlayingArea.BottomY)),
+                new Line(new Vector2(PlayingArea.LeftX, PlayingArea.BottomY), new Vector2(PlayingArea.LeftX, PlayingArea.TopY))
             };
+        }
+
+        private void CreateAreas() {
+            Areas = new List<Area>();
+
+            float width = PlayingArea.Width / NumberOfColumns;
+            float height = PlayingArea.Height / NumberOfRows;
+            for (int col = 0; col < NumberOfColumns; col++) {
+                for (int row = 0; row < NumberOfRows; row++) {
+                    Areas.Add(
+                        new Area(
+                            PlayingArea.LeftX + col * width,
+                            PlayingArea.LeftX + (col + 1) * width,
+                            PlayingArea.TopY + row * height,
+                            PlayingArea.TopY + (row + 1) * height
+                            ));
+                }
+            }
         }
 
         public override void Update(GameTime gameTime) { }
 
-        // Debug code
-        public override void Draw(SpriteBatch spriteBatch) {
-            base.Draw(spriteBatch);
-
-            foreach (var line in Walls)
-                SimulationWindow.DrawLine(spriteBatch, line.Start, line.End, Color.Red);
-        }
     }
 }

@@ -24,5 +24,9 @@ namespace IndoorFootballStrategySimulator.Simulation {
             return vector;
         }
 
+        public static float NextFloat(this Random random, float min, float max) {
+            return (float)random.NextDouble() * (max - min) + min;
+        }
+
     }
 }

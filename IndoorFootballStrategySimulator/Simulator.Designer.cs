@@ -47,7 +47,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.Intro = new System.Windows.Forms.Label();
@@ -59,13 +58,15 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.btn_discardChange = new System.Windows.Forms.Button();
-            this.btn_saveStrategy = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.txt_formationName = new System.Windows.Forms.TextBox();
-            this.cbx_formation = new System.Windows.Forms.ComboBox();
+            this.rbDefensive = new System.Windows.Forms.RadioButton();
+            this.btn_saveStrategy = new System.Windows.Forms.Button();
+            this.rbOffensive = new System.Windows.Forms.RadioButton();
+            this.strategyWindow = new IndoorFootballStrategySimulator.StrategyWindow();
+            this.btn_discardChange = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -74,7 +75,6 @@
             this.btn_delete = new System.Windows.Forms.Button();
             this.btn_removeSelection = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
             this.Simulation_tb = new System.Windows.Forms.TabPage();
             this.label56 = new System.Windows.Forms.Label();
             this.label57 = new System.Windows.Forms.Label();
@@ -105,7 +105,7 @@
             this.label31 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
-            this.monoGameWindow1 = new IndoorFootballStrategySimulator.SimulationWindow();
+            this.simulationWindow = new IndoorFootballStrategySimulator.SimulationWindow();
             this.result_tab = new System.Windows.Forms.TabPage();
             this.label41 = new System.Windows.Forms.Label();
             this.label42 = new System.Windows.Forms.Label();
@@ -116,16 +116,13 @@
             this.button24 = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.label43 = new System.Windows.Forms.Label();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.tab_ctrl.SuspendLayout();
             this.Home_tab.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.Strategies_tab.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.Simulation_tb.SuspendLayout();
@@ -292,7 +289,6 @@
             this.radioButton14.TabStop = true;
             this.radioButton14.Text = "2-1-0";
             this.radioButton14.UseVisualStyleBackColor = true;
-            this.radioButton14.CheckedChanged += new System.EventHandler(this.radioButton14_CheckedChanged);
             // 
             // label4
             // 
@@ -328,7 +324,6 @@
             this.radioButton7.TabStop = true;
             this.radioButton7.Text = "1-2-1";
             this.radioButton7.UseVisualStyleBackColor = true;
-            this.radioButton7.CheckedChanged += new System.EventHandler(this.radioButton7_CheckedChanged);
             // 
             // radioButton8
             // 
@@ -341,7 +336,6 @@
             this.radioButton8.TabStop = true;
             this.radioButton8.Text = "3-0-1";
             this.radioButton8.UseVisualStyleBackColor = true;
-            this.radioButton8.CheckedChanged += new System.EventHandler(this.radioButton8_CheckedChanged);
             // 
             // radioButton4
             // 
@@ -354,7 +348,6 @@
             this.radioButton4.TabStop = true;
             this.radioButton4.Text = "2-2-0";
             this.radioButton4.UseVisualStyleBackColor = true;
-            this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
             // 
             // radioButton3
             // 
@@ -367,7 +360,6 @@
             this.radioButton3.TabStop = true;
             this.radioButton3.Text = "2-0-2";
             this.radioButton3.UseVisualStyleBackColor = true;
-            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
             // 
             // rd301
             // 
@@ -380,7 +372,6 @@
             this.rd301.TabStop = true;
             this.rd301.Text = "3-0-1";
             this.rd301.UseVisualStyleBackColor = true;
-            this.rd301.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
             // rd_211
             // 
@@ -393,7 +384,6 @@
             this.rd_211.TabStop = true;
             this.rd_211.Text = "2-1-1";
             this.rd_211.UseVisualStyleBackColor = true;
-            this.rd_211.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
             // label3
             // 
@@ -414,32 +404,19 @@
             this.textBox1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(585, 42);
+            this.textBox1.Size = new System.Drawing.Size(603, 42);
             this.textBox1.TabIndex = 85;
             this.textBox1.Text = resources.GetString("textBox1.Text");
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Silver;
-            this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Controls.Add(this.textBox2);
             this.panel2.Location = new System.Drawing.Point(627, 101);
             this.panel2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(679, 487);
             this.panel2.TabIndex = 88;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.ErrorImage")));
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(97, 8);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(286, 477);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
             // 
             // textBox2
             // 
@@ -541,7 +518,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.Location = new System.Drawing.Point(7, 60);
+            this.label7.Location = new System.Drawing.Point(7, 40);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(76, 15);
@@ -560,103 +537,119 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.Silver;
-            this.panel3.Controls.Add(this.pictureBox2);
-            this.panel3.Controls.Add(this.btn_discardChange);
-            this.panel3.Controls.Add(this.btn_saveStrategy);
-            this.panel3.Controls.Add(this.label9);
+            this.panel3.Controls.Add(this.textBox4);
+            this.panel3.Controls.Add(this.richTextBox1);
             this.panel3.Controls.Add(this.label10);
-            this.panel3.Controls.Add(this.txt_formationName);
-            this.panel3.Controls.Add(this.cbx_formation);
-            this.panel3.Location = new System.Drawing.Point(549, 87);
+            this.panel3.Controls.Add(this.rbDefensive);
+            this.panel3.Controls.Add(this.btn_saveStrategy);
+            this.panel3.Controls.Add(this.rbOffensive);
+            this.panel3.Controls.Add(this.strategyWindow);
+            this.panel3.Controls.Add(this.btn_discardChange);
+            this.panel3.Controls.Add(this.label9);
+            this.panel3.Location = new System.Drawing.Point(303, 58);
             this.panel3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(758, 580);
+            this.panel3.Size = new System.Drawing.Size(1004, 609);
             this.panel3.TabIndex = 84;
             // 
-            // pictureBox2
+            // textBox4
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(34, 18);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(387, 542);
-            this.pictureBox2.TabIndex = 26;
-            this.pictureBox2.TabStop = false;
+            this.textBox4.Location = new System.Drawing.Point(96, 492);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(489, 20);
+            this.textBox4.TabIndex = 31;
             // 
-            // btn_discardChange
+            // richTextBox1
             // 
-            this.btn_discardChange.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btn_discardChange.ForeColor = System.Drawing.Color.White;
-            this.btn_discardChange.Location = new System.Drawing.Point(454, 391);
-            this.btn_discardChange.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.btn_discardChange.Name = "btn_discardChange";
-            this.btn_discardChange.Size = new System.Drawing.Size(245, 56);
-            this.btn_discardChange.TabIndex = 25;
-            this.btn_discardChange.Text = "Discard Changes";
-            this.btn_discardChange.UseVisualStyleBackColor = false;
-            this.btn_discardChange.Click += new System.EventHandler(this.btn_discardChange_Click);
+            this.richTextBox1.Location = new System.Drawing.Point(96, 518);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(489, 78);
+            this.richTextBox1.TabIndex = 30;
+            this.richTextBox1.Text = "";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(17, 518);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(60, 13);
+            this.label10.TabIndex = 29;
+            this.label10.Text = "Description";
+            // 
+            // rbDefensive
+            // 
+            this.rbDefensive.AutoSize = true;
+            this.rbDefensive.Location = new System.Drawing.Point(96, 19);
+            this.rbDefensive.Name = "rbDefensive";
+            this.rbDefensive.Size = new System.Drawing.Size(73, 17);
+            this.rbDefensive.TabIndex = 28;
+            this.rbDefensive.TabStop = true;
+            this.rbDefensive.Text = "Defensive";
+            this.rbDefensive.UseVisualStyleBackColor = true;
             // 
             // btn_saveStrategy
             // 
             this.btn_saveStrategy.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btn_saveStrategy.ForeColor = System.Drawing.Color.White;
-            this.btn_saveStrategy.Location = new System.Drawing.Point(455, 307);
+            this.btn_saveStrategy.Location = new System.Drawing.Point(610, 518);
             this.btn_saveStrategy.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btn_saveStrategy.Name = "btn_saveStrategy";
-            this.btn_saveStrategy.Size = new System.Drawing.Size(245, 56);
+            this.btn_saveStrategy.Size = new System.Drawing.Size(183, 53);
             this.btn_saveStrategy.TabIndex = 24;
             this.btn_saveStrategy.Text = "Save Strategy";
             this.btn_saveStrategy.UseVisualStyleBackColor = false;
-            this.btn_saveStrategy.Click += new System.EventHandler(this.btn_saveStrategy_Click);
+            // 
+            // rbOffensive
+            // 
+            this.rbOffensive.AutoSize = true;
+            this.rbOffensive.Location = new System.Drawing.Point(20, 19);
+            this.rbOffensive.Name = "rbOffensive";
+            this.rbOffensive.Size = new System.Drawing.Size(70, 17);
+            this.rbOffensive.TabIndex = 27;
+            this.rbOffensive.TabStop = true;
+            this.rbOffensive.Text = "Offensive";
+            this.rbOffensive.UseVisualStyleBackColor = true;
+            // 
+            // strategyWindow
+            // 
+            this.strategyWindow.Location = new System.Drawing.Point(20, 42);
+            this.strategyWindow.Name = "strategyWindow";
+            this.strategyWindow.Size = new System.Drawing.Size(960, 432);
+            this.strategyWindow.TabIndex = 26;
+            this.strategyWindow.Text = "strategyWindow";
+            // 
+            // btn_discardChange
+            // 
+            this.btn_discardChange.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btn_discardChange.ForeColor = System.Drawing.Color.White;
+            this.btn_discardChange.Location = new System.Drawing.Point(797, 518);
+            this.btn_discardChange.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btn_discardChange.Name = "btn_discardChange";
+            this.btn_discardChange.Size = new System.Drawing.Size(183, 53);
+            this.btn_discardChange.TabIndex = 25;
+            this.btn_discardChange.Text = "Discard Changes";
+            this.btn_discardChange.UseVisualStyleBackColor = false;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(453, 214);
+            this.label9.Location = new System.Drawing.Point(17, 492);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(35, 13);
             this.label9.TabIndex = 6;
             this.label9.Text = "Name";
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(452, 136);
-            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(53, 13);
-            this.label10.TabIndex = 5;
-            this.label10.Text = "Formation";
-            // 
-            // txt_formationName
-            // 
-            this.txt_formationName.Location = new System.Drawing.Point(456, 241);
-            this.txt_formationName.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.txt_formationName.Multiline = true;
-            this.txt_formationName.Name = "txt_formationName";
-            this.txt_formationName.Size = new System.Drawing.Size(246, 37);
-            this.txt_formationName.TabIndex = 2;
-            // 
-            // cbx_formation
-            // 
-            this.cbx_formation.FormattingEnabled = true;
-            this.cbx_formation.Location = new System.Drawing.Point(455, 172);
-            this.cbx_formation.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.cbx_formation.Name = "cbx_formation";
-            this.cbx_formation.Size = new System.Drawing.Size(246, 21);
-            this.cbx_formation.TabIndex = 1;
-            this.cbx_formation.SelectedIndexChanged += new System.EventHandler(this.cbx_formation_SelectedIndexChanged);
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label11.Location = new System.Drawing.Point(546, 60);
+            this.label11.Location = new System.Drawing.Point(300, 40);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(117, 15);
+            this.label11.Size = new System.Drawing.Size(63, 15);
             this.label11.TabIndex = 85;
-            this.label11.Text = "Preview Strategy:";
+            this.label11.Text = "Strategy:";
             // 
             // textBox5
             // 
@@ -666,7 +659,7 @@
             this.textBox5.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBox5.Multiline = true;
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(505, 18);
+            this.textBox5.Size = new System.Drawing.Size(407, 18);
             this.textBox5.TabIndex = 81;
             this.textBox5.Text = "In this section you can add new strategies, modify existing and delet strategy\r\n\r" +
     "\n";
@@ -688,11 +681,10 @@
             this.panel4.Controls.Add(this.btn_delete);
             this.panel4.Controls.Add(this.btn_removeSelection);
             this.panel4.Controls.Add(this.button5);
-            this.panel4.Controls.Add(this.label13);
-            this.panel4.Location = new System.Drawing.Point(10, 87);
+            this.panel4.Location = new System.Drawing.Point(10, 58);
             this.panel4.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(525, 580);
+            this.panel4.Size = new System.Drawing.Size(275, 609);
             this.panel4.TabIndex = 82;
             // 
             // dataGridView1
@@ -700,40 +692,37 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(44, 139);
+            this.dataGridView1.Location = new System.Drawing.Point(16, 42);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(242, 322);
+            this.dataGridView1.Size = new System.Drawing.Size(242, 432);
             this.dataGridView1.TabIndex = 25;
-            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
             // btn_delete
             // 
             this.btn_delete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btn_delete.ForeColor = System.Drawing.Color.White;
-            this.btn_delete.Location = new System.Drawing.Point(323, 347);
+            this.btn_delete.Location = new System.Drawing.Point(44, 541);
             this.btn_delete.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btn_delete.Name = "btn_delete";
             this.btn_delete.Size = new System.Drawing.Size(183, 55);
             this.btn_delete.TabIndex = 23;
             this.btn_delete.Text = "Delete Strategy";
             this.btn_delete.UseVisualStyleBackColor = false;
-            this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
             // 
             // btn_removeSelection
             // 
             this.btn_removeSelection.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btn_removeSelection.ForeColor = System.Drawing.Color.White;
-            this.btn_removeSelection.Location = new System.Drawing.Point(323, 223);
+            this.btn_removeSelection.Location = new System.Drawing.Point(44, 482);
             this.btn_removeSelection.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btn_removeSelection.Name = "btn_removeSelection";
             this.btn_removeSelection.Size = new System.Drawing.Size(183, 53);
             this.btn_removeSelection.TabIndex = 22;
             this.btn_removeSelection.Text = "Remove Selection";
             this.btn_removeSelection.UseVisualStyleBackColor = false;
-            this.btn_removeSelection.Click += new System.EventHandler(this.button15_Click);
             // 
             // button5
             // 
@@ -746,17 +735,6 @@
             this.button5.TabIndex = 13;
             this.button5.Text = "Delete";
             this.button5.UseVisualStyleBackColor = false;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label13.Location = new System.Drawing.Point(54, 115);
-            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(89, 15);
-            this.label13.TabIndex = 7;
-            this.label13.Text = "Home Team:";
             // 
             // Simulation_tb
             // 
@@ -790,7 +768,7 @@
             this.Simulation_tb.Controls.Add(this.label31);
             this.Simulation_tb.Controls.Add(this.label37);
             this.Simulation_tb.Controls.Add(this.label38);
-            this.Simulation_tb.Controls.Add(this.monoGameWindow1);
+            this.Simulation_tb.Controls.Add(this.simulationWindow);
             this.Simulation_tb.Location = new System.Drawing.Point(4, 22);
             this.Simulation_tb.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Simulation_tb.Name = "Simulation_tb";
@@ -1075,13 +1053,13 @@
             this.label38.TabIndex = 107;
             this.label38.Text = "Home Team";
             // 
-            // monoGameWindow1
+            // simulationWindow
             // 
-            this.monoGameWindow1.Location = new System.Drawing.Point(19, 34);
-            this.monoGameWindow1.Name = "monoGameWindow1";
-            this.monoGameWindow1.Size = new System.Drawing.Size(1280, 576);
-            this.monoGameWindow1.TabIndex = 157;
-            this.monoGameWindow1.Text = "monoGameWindow1";
+            this.simulationWindow.Location = new System.Drawing.Point(19, 34);
+            this.simulationWindow.Name = "simulationWindow";
+            this.simulationWindow.Size = new System.Drawing.Size(1280, 576);
+            this.simulationWindow.TabIndex = 157;
+            this.simulationWindow.Text = "simulationWindow";
             // 
             // result_tab
             // 
@@ -1222,14 +1200,11 @@
             this.panel5.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.Strategies_tab.ResumeLayout(false);
             this.Strategies_tab.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.Simulation_tb.ResumeLayout(false);
             this.Simulation_tb.PerformLayout();
@@ -1261,9 +1236,6 @@
 		private System.Windows.Forms.Button btn_discardChange;
 		private System.Windows.Forms.Button btn_saveStrategy;
 		private System.Windows.Forms.Label label9;
-		private System.Windows.Forms.Label label10;
-		private System.Windows.Forms.TextBox txt_formationName;
-		private System.Windows.Forms.ComboBox cbx_formation;
 		private System.Windows.Forms.Label label11;
 		private System.Windows.Forms.TextBox textBox5;
 		private System.Windows.Forms.Label label12;
@@ -1288,7 +1260,6 @@
 		private System.Windows.Forms.Button button24;
 		private System.Windows.Forms.ListView listView1;
 		private System.Windows.Forms.Label label43;
-		private System.ComponentModel.BackgroundWorker backgroundWorker1;
 		private System.Windows.Forms.Label label56;
 		private System.Windows.Forms.Label label57;
 		private System.Windows.Forms.Label label58;
@@ -1319,7 +1290,7 @@
 		private System.Windows.Forms.RadioButton radioButton3;
 		private System.Windows.Forms.RadioButton rd301;
 		private System.Windows.Forms.RadioButton rd_211;
-        private SimulationWindow monoGameWindow1;
+        private SimulationWindow simulationWindow;
 		private System.Windows.Forms.Panel panel5;
 		private System.Windows.Forms.RadioButton radioButton5;
 		private System.Windows.Forms.RadioButton radioButton9;
@@ -1329,10 +1300,13 @@
 		private System.Windows.Forms.RadioButton radioButton13;
 		private System.Windows.Forms.RadioButton radioButton14;
 		private System.Windows.Forms.Label label4;
-		private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Label label13;
+        private StrategyWindow strategyWindow;
+        private System.Windows.Forms.RadioButton rbDefensive;
+        private System.Windows.Forms.RadioButton rbOffensive;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox textBox4;
     }
 }
 

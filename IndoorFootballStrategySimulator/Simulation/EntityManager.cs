@@ -45,11 +45,11 @@ namespace IndoorFootballStrategySimulator.Simulation {
             Entities = new List<Entity>();
 
             Texture2D texture = editor.Content.Load<Texture2D>("SoccerField");
-            Field = new Field(texture, Color.White, new Vector2(1f, 1f), new Vector2(1280f, 576f) / 2f, 0f);
+            Field = new Field(texture, Color.White, new Vector2(1f, 1f), new Vector2(640f, 288f), 0f);
             Entities.Add(Field);
 
             texture = editor.Content.Load<Texture2D>("SoccerBall");
-            Ball = new Ball(texture, Color.White, new Vector2(1f, 1f), new Vector2(1280f, 576f) / 2f, 0f, 9f, 1f, 0f, 0f);
+            Ball = new Ball(texture, Color.White, new Vector2(1f, 1f), new Vector2(640f, 288f), 0f, 9f, 1f, 0f, 0f);
             Entities.Add(Ball);
 
             Players = new List<Player>();

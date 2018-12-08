@@ -19,42 +19,59 @@ namespace IndoorFootballStrategySimulator.Simulation {
         private Color color;
 
         /// <summary>
-        ///     Return the width and height of the texture sprite as a <see cref="Vector2"/>.
+        ///     Gets the size of the texture sprite.
         /// </summary>
-        public Vector2 Size { get { return texture == null ? Vector2.Zero : new Vector2(texture.Width, texture.Height); } }
+        public Vector2 TextureSize {
+            get {
+                return texture == null ? Vector2.Zero : new Vector2(texture.Width, texture.Height);
+            }
+        }
 
         /// <summary>
-        ///     Get or set the scale of the texture sprite.
+        ///     Gets the size of the <see cref="Entity"/>.
+        /// </summary>
+        public Vector2 Size {
+            get {
+                return TextureSize * Scale;
+            }
+        }
+
+        /// <summary>
+        ///     Gets or sets the scale of the texture sprite.
         /// </summary>
         public Vector2 Scale { get; set; }
 
         /// <summary>
-        ///     Get or set the position of the <see cref="Entity"/>.
+        ///     Gets or sets the position of the <see cref="Entity"/>.
         /// </summary>
         public Vector2 Position { get; set; }
 
         /// <summary>
-        ///     Get or set the rotation of the <see cref="Entity"/>.
+        ///     Gets or sets the rotation of the <see cref="Entity"/>.
         /// </summary>
         public float Rotation { get; set; }
 
         /// <summary>
-        ///     Get or set the bounding circle radius around the <see cref="Entity"/>.
+        ///     Gets or sets the bounding circle radius around the <see cref="Entity"/>.
         /// </summary>
         /// <remarks>
         ///     The bouding radius is used for detecting collisions between entities.
         /// </remarks>
         public float Radius { get; set; }
 
-        protected Entity(Texture2D texture, Color color) {
+        protected Entity(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius) {
             this.texture = texture;
             this.color = color;
+            Scale = scale;
+            Position = pos;
+            Rotation = rot;
+            Radius = radius;
         }
 
         public abstract void Update(GameTime gameTime);
 
         public virtual void Draw(SpriteBatch spriteBatch) {
-            spriteBatch.Draw(texture, Position, null, color, Rotation, Size / 2f, Scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(texture, Position, null, color, Rotation, TextureSize / 2f, Scale, SpriteEffects.None, 0f);
         }
 
     }

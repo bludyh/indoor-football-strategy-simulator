@@ -61,7 +61,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Formation.cs" />
     <Compile Include="PreviewWindow.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -70,12 +69,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Simulation\Area.cs" />
     <Compile Include="Simulation\Ball.cs" />
     <Compile Include="Simulation\FieldPlayers AI\Dribble.cs" />
     <Compile Include="Simulation\FieldPlayers AI\ChaseBall.cs" />
     <Compile Include="Simulation\Entity.cs" />
     <Compile Include="Simulation\EntityManager.cs" />
-    <Compile Include="Simulation\Extensions.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Simulation\Field.cs" />
     <Compile Include="Simulation\FieldPlayer.cs" />
     <Compile Include="Simulation\FieldPlayers AI\Support.cs" />
@@ -87,6 +87,7 @@
     <Compile Include="Simulation\FieldPlayers AI\KickBall.cs" />
     <Compile Include="Simulation\Line.cs" />
     <Compile Include="Simulation\MovingEntity.cs" />
+    <Compile Include="Simulation\Strategy.cs" />
     <Compile Include="Simulation\Team AI\Defensive.cs" />
     <Compile Include="Simulation\Team AI\Offensive.cs" />
     <Compile Include="Simulation\Player.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="StrategyWindow.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Utilities.cs" />
     <EmbeddedResource Include="Simulator.resx">
       <DependentUpon>Simulator.cs</DependentUpon>
     </EmbeddedResource>
@@ -170,19 +172,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <None Include="Resources\2-1-12.jpg" />
-    <None Include="Resources\2-1-11.jpg" />
-    <None Include="Resources\2-1-1.jpg" />
-    <None Include="Resources\103.png" />
-    <None Include="Resources\121.png" />
-    <None Include="Resources\202.png" />
-    <None Include="Resources\211.png" />
-    <None Include="Resources\220.png" />
-    <None Include="Resources\301.png" />
-    <None Include="Resources\field.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
