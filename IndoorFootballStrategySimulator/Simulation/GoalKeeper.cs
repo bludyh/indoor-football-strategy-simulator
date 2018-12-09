@@ -31,6 +31,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
             BounceBall();
         }
         public FSM<GoalKeeper> GetFSM()

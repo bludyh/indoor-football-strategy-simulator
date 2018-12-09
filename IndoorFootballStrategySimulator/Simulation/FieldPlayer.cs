@@ -35,6 +35,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
         }
         public FSM<FieldPlayer> GetFSM()
         {
