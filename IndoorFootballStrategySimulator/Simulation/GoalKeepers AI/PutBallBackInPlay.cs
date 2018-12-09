@@ -22,7 +22,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         {
             Player receiver = null;
             Vector2 BallTarget = new Vector2();
-            
+            //TODO
         }
 
         public override void OnEnter(GoalKeeper owner)

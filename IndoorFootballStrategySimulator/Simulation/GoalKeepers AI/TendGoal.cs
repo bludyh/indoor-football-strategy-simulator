@@ -19,7 +19,6 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void Handle(GoalKeeper owner)
         {
-            FSM<GoalKeeper> newState = new FSM<GoalKeeper>(owner);
             //The rear interpose target will change as the ball position changes
             owner.Steering.Target = owner.GetRearInterposeTarget();
 
@@ -27,18 +26,18 @@ namespace IndoorFootballStrategySimulator.Simulation
             //ball back in play
             if (owner.BallWithinKeeperRange()) {
                 owner.Field.GoalKeeperHasBall = true;
-                newState.ChangeState(PutBallBackInPlay.Instance());
+                owner.GetFSM().ChangeState(PutBallBackInPlay.Instance());
             }
 
             //if ball is within a predefined distance, keeper moves out from 
             //position to try and intercept it
             if (owner.BallWithinRangeForIntercept() && !owner.Team.InControl()) {
-                newState.ChangeState(InterceptBall.Instance());
+                owner.GetFSM().ChangeState(InterceptBall.Instance());
             }
 
             //if keeper is too far away from goal, he should go back to goal region
             if (owner.TooFarFromGoalMouth() && owner.Team.InControl()) {
-                newState.ChangeState(ReturnHome.Instance());
+                owner.GetFSM().ChangeState(ReturnHome.Instance());
             }
 
         }
@@ -46,7 +45,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         public override void OnEnter(GoalKeeper owner)
         {
             //turn on interpose
-
+            // TODO
             owner.Steering.Target = owner.GetRearInterposeTarget();
         }
 

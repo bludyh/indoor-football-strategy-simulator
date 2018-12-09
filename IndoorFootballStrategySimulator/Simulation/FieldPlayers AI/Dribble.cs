@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +18,11 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void OnEnter(FieldPlayer player)
         {
-           
+            player.Team.SetControllingPlayer(player);
         }
         public override void Handle(FieldPlayer player)
         {
-            throw new NotImplementedException();
+            //TODO
         }
         public override void OnExit(FieldPlayer player)
         {

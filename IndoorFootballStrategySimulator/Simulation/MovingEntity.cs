@@ -64,13 +64,5 @@ namespace IndoorFootballStrategySimulator.Simulation {
             MaxForce = maxForce;
             MaxSpeed = maxSpeed;
         }
-
-        // Debug code
-        //public override void Draw(SpriteBatch spriteBatch) {
-        //    base.Draw(spriteBatch);
-
-        //    MonoGameWindow.DrawLine(spriteBatch, Position, Position + Velocity, Color.Blue);
-        //}
-
     }
 }

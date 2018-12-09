@@ -21,9 +21,9 @@ namespace IndoorFootballStrategySimulator.Simulation
 
             //if close enough to home or the opponents get control
             //over the ball and change state to tend goal
+            //TODO
             if (!owner.Team.InControl() /*&& owner.InHomeRegion*/) {
-                FSM<GoalKeeper> newState = new FSM<GoalKeeper>(owner);
-                newState.ChangeState(TendGoal.Instance());
+                owner.GetFSM().ChangeState(TendGoal.Instance());
             }
         }
 

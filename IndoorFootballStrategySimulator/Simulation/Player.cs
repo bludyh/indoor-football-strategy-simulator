@@ -18,6 +18,7 @@ namespace IndoorFootballStrategySimulator.Simulation {
         public SteeringManager Steering { get; private set; }
         public Team Team { get; private set; }
         public Field Field { get; private set; }
+        public Ball Ball { get; private set; }
         public float DistanceToBall { get; private set; }
 
         
@@ -76,29 +77,25 @@ namespace IndoorFootballStrategySimulator.Simulation {
         /// Return true if the player is the closet player in his team to the ball
         /// </summary>
         /// <returns></returns>
-        public Boolean isClosetTeamMemberToBall() {
+        public bool isClosestTeamMemberToBall() {
             if (Team.PlayerClosetToBall() == this)
                 return true;
             return false;
         }
 
-        public Boolean isClosetPlayerOnPitchToBall() {
+        public bool isClosetPlayerOnPitchToBall() {
             // return isClosetPlayerOnPitchToBall() && (DistanceToBall < Team.Opponents().ClosetDisToBall());
             return false;
         }
 
-        public Boolean BallWithinKeeperRange() {
+        public bool BallWithinKeeperRange() {
             //TODO 
             // return (Vector2.Distance(Position,Ball))
             return false;
         }
-       
-        // Debug code
-        //public override void Draw(SpriteBatch spriteBatch) {
-        //    base.Draw(spriteBatch);
-
-        //    MonoGameWindow.DrawLine(spriteBatch, Position, Position + Steering.SteeringForce, Color.Red);
-        //}
-
+        public bool BallWithinKickingRange()
+        {
+            return (Vector2.Distance(SimulationWindow.EntityManager.Ball.Position, this.Position) < 7f);
+        }
     }
 }

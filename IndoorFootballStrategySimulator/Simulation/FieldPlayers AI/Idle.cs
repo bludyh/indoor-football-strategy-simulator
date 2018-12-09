@@ -17,11 +17,11 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void OnEnter(FieldPlayer player)
         {
-          
+            //TODO
         }
         public override void Handle(FieldPlayer player)
         {
-        
+            //TODO
         }
         public override void OnExit(FieldPlayer player)
         {

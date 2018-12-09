@@ -25,6 +25,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         private readonly FSM<Team> teamStateMachine;
 
         public Goal Goal { get; private set; }
+        public Goal HomeGoal { get; private set; }
 
         public Team(TeamColor color, UpdateService editor)
         {
@@ -149,7 +150,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             //TODO
            
         }
-        public Boolean InControl() {
+        public bool InControl() {
             if (controllingPlayer != null)
                 return true;
             return false;

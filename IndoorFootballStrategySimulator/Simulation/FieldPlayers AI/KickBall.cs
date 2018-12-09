@@ -19,7 +19,6 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void OnEnter(FieldPlayer player)
         {
-           
         }
         public override void Handle(FieldPlayer player)
         {
