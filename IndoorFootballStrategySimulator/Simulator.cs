@@ -62,5 +62,16 @@ namespace IndoorFootballStrategySimulator {
             }
 		}
 
+        private void RadioButtons_CheckedChanged(object sender, EventArgs e) {
+            var checkedButton = pnStrategy.Controls.OfType<RadioButton>().FirstOrDefault(rb => rb.Checked);
+            switch (checkedButton.Text) {
+                case "Offensive":
+                    strategyWindow.TeamState = TeamState.OFFENSIVE;
+                    break;
+                case "Defensive":
+                    strategyWindow.TeamState = TeamState.DEFENSIVE;
+                    break;
+            }
+        }
     }
 }

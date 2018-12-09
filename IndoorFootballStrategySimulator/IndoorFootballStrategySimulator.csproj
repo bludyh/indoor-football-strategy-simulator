@@ -97,6 +97,7 @@
     <Compile Include="Simulation\SteeringManager.cs" />
     <Compile Include="Simulation\Team.cs" />
     <Compile Include="Simulation\GoalKeepers AI\TendGoal.cs" />
+    <Compile Include="Simulation\TeamState.cs" />
     <Compile Include="Simulator.cs">
       <SubType>Form</SubType>
     </Compile>
