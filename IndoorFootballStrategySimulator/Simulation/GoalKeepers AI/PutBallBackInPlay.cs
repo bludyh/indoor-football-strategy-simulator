@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Forms.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,12 +20,19 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void Handle(GoalKeeper owner)
         {
-          //  throw new NotImplementedException();
+            Player receiver = null;
+            Vector2 BallTarget = new Vector2();
+            
         }
 
         public override void OnEnter(GoalKeeper owner)
         {
-            //throw new NotImplementedException();
+            //let the team know that keeper is in control
+            owner.Team.SetControllingPlayer(owner);
+
+            //send all the players home
+            owner.Team.Opponents.ReturnAllPlayersToHome();
+            owner.Team.ReturnAllPlayersToHome();
         }
 
         public override void OnExit(GoalKeeper owner)

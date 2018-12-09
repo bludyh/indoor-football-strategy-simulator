@@ -30,6 +30,7 @@ namespace IndoorFootballStrategySimulator.Simulation {
             }
         }
         public int Score { get; private set; }
+        public Vector2 Center { get; private set; }
 
         public Goal(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot) : base(texture, color, scale, pos, rot, 0f) { }
 

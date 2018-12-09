@@ -23,7 +23,8 @@ namespace IndoorFootballStrategySimulator.Simulation {
         ///     Gets a list of <see cref="Line"/> that defines the border of the <see cref="Field"/>.
         /// </summary>
         public List<Line> Walls { get; private set; }
-
+        
+        public Boolean GoalKeeperHasBall { get;  set; }
         /// <summary>
         ///     Initializes a new instance of the <see cref="Field"/> class.
         /// </summary>
@@ -46,6 +47,7 @@ namespace IndoorFootballStrategySimulator.Simulation {
                 new Line(new Vector2(PlayingArea.RightX, PlayingArea.BottomY), new Vector2(PlayingArea.LeftX, PlayingArea.BottomY)),
                 new Line(new Vector2(PlayingArea.LeftX, PlayingArea.BottomY), new Vector2(PlayingArea.LeftX, PlayingArea.TopY))
             };
+            GoalKeeperHasBall = false;
         }
 
         private void CreateAreas() {
