@@ -58,12 +58,13 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.pnStrategy = new System.Windows.Forms.Panel();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.tbStrategyName = new System.Windows.Forms.TextBox();
+            this.tbStrategyDescription = new System.Windows.Forms.RichTextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.rbDefensive = new System.Windows.Forms.RadioButton();
             this.btn_saveStrategy = new System.Windows.Forms.Button();
             this.rbOffensive = new System.Windows.Forms.RadioButton();
+            this.strategyWindow = new IndoorFootballStrategySimulator.StrategyWindow();
             this.btn_discardChange = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -104,6 +105,7 @@
             this.label31 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
+            this.simulationWindow = new IndoorFootballStrategySimulator.SimulationWindow();
             this.result_tab = new System.Windows.Forms.TabPage();
             this.label41 = new System.Windows.Forms.Label();
             this.label42 = new System.Windows.Forms.Label();
@@ -114,8 +116,6 @@
             this.button24 = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.label43 = new System.Windows.Forms.Label();
-            this.strategyWindow = new IndoorFootballStrategySimulator.StrategyWindow();
-            this.simulationWindow = new IndoorFootballStrategySimulator.SimulationWindow();
             this.tab_ctrl.SuspendLayout();
             this.Home_tab.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -537,8 +537,8 @@
             // pnStrategy
             // 
             this.pnStrategy.BackColor = System.Drawing.Color.Silver;
-            this.pnStrategy.Controls.Add(this.textBox4);
-            this.pnStrategy.Controls.Add(this.richTextBox1);
+            this.pnStrategy.Controls.Add(this.tbStrategyName);
+            this.pnStrategy.Controls.Add(this.tbStrategyDescription);
             this.pnStrategy.Controls.Add(this.label10);
             this.pnStrategy.Controls.Add(this.rbDefensive);
             this.pnStrategy.Controls.Add(this.btn_saveStrategy);
@@ -552,20 +552,21 @@
             this.pnStrategy.Size = new System.Drawing.Size(1004, 609);
             this.pnStrategy.TabIndex = 84;
             // 
-            // textBox4
+            // tbStrategyName
             // 
-            this.textBox4.Location = new System.Drawing.Point(96, 492);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(489, 20);
-            this.textBox4.TabIndex = 31;
+            this.tbStrategyName.Location = new System.Drawing.Point(96, 492);
+            this.tbStrategyName.Name = "tbStrategyName";
+            this.tbStrategyName.Size = new System.Drawing.Size(489, 20);
+            this.tbStrategyName.TabIndex = 31;
+            this.tbStrategyName.Text = "Default Strategy";
             // 
-            // richTextBox1
+            // tbStrategyDescription
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(96, 518);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(489, 78);
-            this.richTextBox1.TabIndex = 30;
-            this.richTextBox1.Text = "";
+            this.tbStrategyDescription.Location = new System.Drawing.Point(96, 518);
+            this.tbStrategyDescription.Name = "tbStrategyDescription";
+            this.tbStrategyDescription.Size = new System.Drawing.Size(489, 78);
+            this.tbStrategyDescription.TabIndex = 30;
+            this.tbStrategyDescription.Text = "Default Strategy";
             // 
             // label10
             // 
@@ -611,6 +612,16 @@
             this.rbOffensive.Text = "Offensive";
             this.rbOffensive.UseVisualStyleBackColor = true;
             this.rbOffensive.CheckedChanged += new System.EventHandler(this.RadioButtons_CheckedChanged);
+            // 
+            // strategyWindow
+            // 
+            this.strategyWindow.Location = new System.Drawing.Point(20, 42);
+            this.strategyWindow.Name = "strategyWindow";
+            this.strategyWindow.Size = new System.Drawing.Size(960, 432);
+            this.strategyWindow.Strategy = null;
+            this.strategyWindow.TabIndex = 26;
+            this.strategyWindow.TeamState = IndoorFootballStrategySimulator.Simulation.TeamState.OFFENSIVE;
+            this.strategyWindow.Text = "strategyWindow";
             // 
             // btn_discardChange
             // 
@@ -1047,6 +1058,14 @@
             this.label38.TabIndex = 107;
             this.label38.Text = "Home Team";
             // 
+            // simulationWindow
+            // 
+            this.simulationWindow.Location = new System.Drawing.Point(19, 34);
+            this.simulationWindow.Name = "simulationWindow";
+            this.simulationWindow.Size = new System.Drawing.Size(1280, 576);
+            this.simulationWindow.TabIndex = 157;
+            this.simulationWindow.Text = "simulationWindow";
+            // 
             // result_tab
             // 
             this.result_tab.Controls.Add(this.label41);
@@ -1167,22 +1186,6 @@
             this.label43.TabIndex = 85;
             this.label43.Text = "* 1-2-1 and 2-1-1  proved to ... \"here will explain the results of thestrategy wi" +
     "th the rate of winning %\"";
-            // 
-            // strategyWindow
-            // 
-            this.strategyWindow.Location = new System.Drawing.Point(20, 42);
-            this.strategyWindow.Name = "strategyWindow";
-            this.strategyWindow.Size = new System.Drawing.Size(960, 432);
-            this.strategyWindow.TabIndex = 26;
-            this.strategyWindow.Text = "strategyWindow";
-            // 
-            // simulationWindow
-            // 
-            this.simulationWindow.Location = new System.Drawing.Point(19, 34);
-            this.simulationWindow.Name = "simulationWindow";
-            this.simulationWindow.Size = new System.Drawing.Size(1280, 576);
-            this.simulationWindow.TabIndex = 157;
-            this.simulationWindow.Text = "simulationWindow";
             // 
             // Simulator
             // 
@@ -1306,9 +1309,9 @@
         private StrategyWindow strategyWindow;
         private System.Windows.Forms.RadioButton rbDefensive;
         private System.Windows.Forms.RadioButton rbOffensive;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox tbStrategyDescription;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox tbStrategyName;
     }
 }
 

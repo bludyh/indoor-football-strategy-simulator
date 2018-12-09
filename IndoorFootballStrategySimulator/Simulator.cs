@@ -25,7 +25,6 @@ namespace IndoorFootballStrategySimulator {
 
             dataGridView1.Columns.Add("Home Strategy", "Home Strategy");
             dataGridView1.Columns.Add("Selection", "Name");
-
         }
 
         private void Pause_btn_Click(object sender, EventArgs e)
