@@ -13,11 +13,11 @@ namespace IndoorFootballStrategySimulator.Simulation
 
         private FSM<GoalKeeper> gkStateMachine;
 
-        public Area HomeArea { get; set; }
-        public List<Area> Areas { get; set; }
+        public int HomeArea { get; set; }
+        public List<int> Areas { get; set; }
 
         public GoalKeeper(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed,
-            Team team = null, Area homeArea = null, List<Area> areas = null, State<GoalKeeper> startState = null)
+            Team team = null, int homeArea = -1, List<int> areas = null, State<GoalKeeper> startState = null)
             : base(texture, color, scale, pos, rot, radius, mass, maxForce, maxSpeed, team)
         {
             gkStateMachine = new FSM<GoalKeeper>(this);

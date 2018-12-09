@@ -57,14 +57,13 @@
             this.Strategies_tab = new System.Windows.Forms.TabPage();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.pnStrategy = new System.Windows.Forms.Panel();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.rbDefensive = new System.Windows.Forms.RadioButton();
             this.btn_saveStrategy = new System.Windows.Forms.Button();
             this.rbOffensive = new System.Windows.Forms.RadioButton();
-            this.strategyWindow = new IndoorFootballStrategySimulator.StrategyWindow();
             this.btn_discardChange = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -105,7 +104,6 @@
             this.label31 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
-            this.simulationWindow = new IndoorFootballStrategySimulator.SimulationWindow();
             this.result_tab = new System.Windows.Forms.TabPage();
             this.label41 = new System.Windows.Forms.Label();
             this.label42 = new System.Windows.Forms.Label();
@@ -116,13 +114,15 @@
             this.button24 = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.label43 = new System.Windows.Forms.Label();
+            this.strategyWindow = new IndoorFootballStrategySimulator.StrategyWindow();
+            this.simulationWindow = new IndoorFootballStrategySimulator.SimulationWindow();
             this.tab_ctrl.SuspendLayout();
             this.Home_tab.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
             this.Strategies_tab.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.pnStrategy.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.Simulation_tb.SuspendLayout();
@@ -500,7 +500,7 @@
             // 
             this.Strategies_tab.Controls.Add(this.label7);
             this.Strategies_tab.Controls.Add(this.label8);
-            this.Strategies_tab.Controls.Add(this.panel3);
+            this.Strategies_tab.Controls.Add(this.pnStrategy);
             this.Strategies_tab.Controls.Add(this.label11);
             this.Strategies_tab.Controls.Add(this.textBox5);
             this.Strategies_tab.Controls.Add(this.label12);
@@ -534,23 +534,23 @@
             this.label8.Size = new System.Drawing.Size(0, 13);
             this.label8.TabIndex = 79;
             // 
-            // panel3
+            // pnStrategy
             // 
-            this.panel3.BackColor = System.Drawing.Color.Silver;
-            this.panel3.Controls.Add(this.textBox4);
-            this.panel3.Controls.Add(this.richTextBox1);
-            this.panel3.Controls.Add(this.label10);
-            this.panel3.Controls.Add(this.rbDefensive);
-            this.panel3.Controls.Add(this.btn_saveStrategy);
-            this.panel3.Controls.Add(this.rbOffensive);
-            this.panel3.Controls.Add(this.strategyWindow);
-            this.panel3.Controls.Add(this.btn_discardChange);
-            this.panel3.Controls.Add(this.label9);
-            this.panel3.Location = new System.Drawing.Point(303, 58);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1004, 609);
-            this.panel3.TabIndex = 84;
+            this.pnStrategy.BackColor = System.Drawing.Color.Silver;
+            this.pnStrategy.Controls.Add(this.textBox4);
+            this.pnStrategy.Controls.Add(this.richTextBox1);
+            this.pnStrategy.Controls.Add(this.label10);
+            this.pnStrategy.Controls.Add(this.rbDefensive);
+            this.pnStrategy.Controls.Add(this.btn_saveStrategy);
+            this.pnStrategy.Controls.Add(this.rbOffensive);
+            this.pnStrategy.Controls.Add(this.strategyWindow);
+            this.pnStrategy.Controls.Add(this.btn_discardChange);
+            this.pnStrategy.Controls.Add(this.label9);
+            this.pnStrategy.Location = new System.Drawing.Point(303, 58);
+            this.pnStrategy.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.pnStrategy.Name = "pnStrategy";
+            this.pnStrategy.Size = new System.Drawing.Size(1004, 609);
+            this.pnStrategy.TabIndex = 84;
             // 
             // textBox4
             // 
@@ -583,9 +583,9 @@
             this.rbDefensive.Name = "rbDefensive";
             this.rbDefensive.Size = new System.Drawing.Size(73, 17);
             this.rbDefensive.TabIndex = 28;
-            this.rbDefensive.TabStop = true;
             this.rbDefensive.Text = "Defensive";
             this.rbDefensive.UseVisualStyleBackColor = true;
+            this.rbDefensive.CheckedChanged += new System.EventHandler(this.RadioButtons_CheckedChanged);
             // 
             // btn_saveStrategy
             // 
@@ -602,6 +602,7 @@
             // rbOffensive
             // 
             this.rbOffensive.AutoSize = true;
+            this.rbOffensive.Checked = true;
             this.rbOffensive.Location = new System.Drawing.Point(20, 19);
             this.rbOffensive.Name = "rbOffensive";
             this.rbOffensive.Size = new System.Drawing.Size(70, 17);
@@ -609,14 +610,7 @@
             this.rbOffensive.TabStop = true;
             this.rbOffensive.Text = "Offensive";
             this.rbOffensive.UseVisualStyleBackColor = true;
-            // 
-            // strategyWindow
-            // 
-            this.strategyWindow.Location = new System.Drawing.Point(20, 42);
-            this.strategyWindow.Name = "strategyWindow";
-            this.strategyWindow.Size = new System.Drawing.Size(960, 432);
-            this.strategyWindow.TabIndex = 26;
-            this.strategyWindow.Text = "strategyWindow";
+            this.rbOffensive.CheckedChanged += new System.EventHandler(this.RadioButtons_CheckedChanged);
             // 
             // btn_discardChange
             // 
@@ -1053,14 +1047,6 @@
             this.label38.TabIndex = 107;
             this.label38.Text = "Home Team";
             // 
-            // simulationWindow
-            // 
-            this.simulationWindow.Location = new System.Drawing.Point(19, 34);
-            this.simulationWindow.Name = "simulationWindow";
-            this.simulationWindow.Size = new System.Drawing.Size(1280, 576);
-            this.simulationWindow.TabIndex = 157;
-            this.simulationWindow.Text = "simulationWindow";
-            // 
             // result_tab
             // 
             this.result_tab.Controls.Add(this.label41);
@@ -1182,6 +1168,22 @@
             this.label43.Text = "* 1-2-1 and 2-1-1  proved to ... \"here will explain the results of thestrategy wi" +
     "th the rate of winning %\"";
             // 
+            // strategyWindow
+            // 
+            this.strategyWindow.Location = new System.Drawing.Point(20, 42);
+            this.strategyWindow.Name = "strategyWindow";
+            this.strategyWindow.Size = new System.Drawing.Size(960, 432);
+            this.strategyWindow.TabIndex = 26;
+            this.strategyWindow.Text = "strategyWindow";
+            // 
+            // simulationWindow
+            // 
+            this.simulationWindow.Location = new System.Drawing.Point(19, 34);
+            this.simulationWindow.Name = "simulationWindow";
+            this.simulationWindow.Size = new System.Drawing.Size(1280, 576);
+            this.simulationWindow.TabIndex = 157;
+            this.simulationWindow.Text = "simulationWindow";
+            // 
             // Simulator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1202,8 +1204,8 @@
             this.panel2.PerformLayout();
             this.Strategies_tab.ResumeLayout(false);
             this.Strategies_tab.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
+            this.pnStrategy.ResumeLayout(false);
+            this.pnStrategy.PerformLayout();
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.Simulation_tb.ResumeLayout(false);
@@ -1232,7 +1234,7 @@
 		private System.Windows.Forms.TabPage Strategies_tab;
 		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.Label label8;
-		private System.Windows.Forms.Panel panel3;
+		private System.Windows.Forms.Panel pnStrategy;
 		private System.Windows.Forms.Button btn_discardChange;
 		private System.Windows.Forms.Button btn_saveStrategy;
 		private System.Windows.Forms.Label label9;

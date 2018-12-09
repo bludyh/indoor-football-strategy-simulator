@@ -53,8 +53,8 @@ namespace IndoorFootballStrategySimulator.Simulation {
             Entities.Add(Ball);
 
             Players = new List<Player>();
-            BlueTeam = new Team(Team.TeamColor.Blue, editor);
-            RedTeam = new Team(Team.TeamColor.Red, editor);
+            BlueTeam = new Team(Team.Color.BLUE, editor);
+            RedTeam = new Team(Team.Color.RED, editor);
         }
 
         /// <summary>

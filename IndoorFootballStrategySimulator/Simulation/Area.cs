@@ -73,5 +73,9 @@ namespace IndoorFootballStrategySimulator.Simulation {
             Left.Draw(sb, color);
         }
 
+        public void Fill(SpriteBatch sb, Color color) {
+
+        }
+
     }
 }
