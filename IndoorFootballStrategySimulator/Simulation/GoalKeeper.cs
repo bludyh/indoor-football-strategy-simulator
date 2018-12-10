@@ -3,17 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace IndoorFootballStrategySimulator.Simulation
 {
+    [DataContract]
     public class GoalKeeper : Player
     {
 
         private FSM<GoalKeeper> gkStateMachine;
 
+        [DataMember]
         public int HomeArea { get; set; }
+
+        [DataMember]
         public List<int> Areas { get; set; }
         public static PlayerRole Role { get; private set; }
 
@@ -32,6 +37,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
             BounceBall();
             base.Update(gameTime);
             gkStateMachine.Update(gameTime);

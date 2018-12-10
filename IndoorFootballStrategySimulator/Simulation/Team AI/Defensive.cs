@@ -17,14 +17,17 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void OnEnter(Team team)
         {
+          
 
         }
         public override void Handle(Team team)
         {
-
+           
+            
         }
         public override void OnExit(Team team)
         {
+            
         }
     }
 }

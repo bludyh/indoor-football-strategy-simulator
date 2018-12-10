@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -13,6 +14,7 @@ namespace IndoorFootballStrategySimulator.Simulation {
     /// <remarks>
     ///     This is the base class of every game objects.
     /// </remarks>
+    [DataContract]
     public abstract class Entity {
 
         private Texture2D texture;

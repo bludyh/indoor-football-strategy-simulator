@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -10,8 +11,8 @@ namespace IndoorFootballStrategySimulator.Simulation {
     /// <summary>
     ///     Represents a moving entity.
     /// </summary>
-    public abstract class MovingEntity : Entity
-    {
+    [DataContract]
+    public abstract class MovingEntity : Entity {
 
         /// <summary>
         ///     Gets or sets the velocity of the <see cref="MovingEntity"/>.
