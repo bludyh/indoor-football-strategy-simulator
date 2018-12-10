@@ -12,12 +12,12 @@ namespace IndoorFootballStrategySimulator.Simulation
     public class Team
     {
         //team color
-        public enum TeamColor
+        public enum Color
         {
-            Red, Blue
+            RED, BLUE
         }
         public List<Player> Players = new List<Player>();
-        private TeamColor teamColor;
+        private readonly Color color;
         private Player playerClosetToBall;
         private Player controllingPlayer;
 
@@ -26,9 +26,9 @@ namespace IndoorFootballStrategySimulator.Simulation
 
         public Goal Goal { get; private set; }
 
-        public Team(TeamColor color, UpdateService editor)
+        public Team(Color color, UpdateService editor)
         {
-            teamColor = color;
+            this.color = color;
             CreatePlayers(editor);
             Behaviors();
             teamStateMachine = new FSM<Team>(this);
@@ -38,14 +38,14 @@ namespace IndoorFootballStrategySimulator.Simulation
         private void CreatePlayers(UpdateService editor)
         {
             
-            if (teamColor == TeamColor.Blue)
+            if (color == Color.BLUE)
             {
                 //Draw Blue Team
                 Texture2D texture = editor.Content.Load<Texture2D>($"CharacterBlue-{ Utilities.Random.Next(1, 6) }");
                 //Goal Keeper
                 GoalKeeper GK = new GoalKeeper(
                     texture,
-                    Color.White,
+                    Microsoft.Xna.Framework.Color.White,
                     new Vector2(1f, 1f),
                     new Vector2(80f, 288f),
                     0f,
@@ -63,7 +63,7 @@ namespace IndoorFootballStrategySimulator.Simulation
                     texture = editor.Content.Load<Texture2D>($"CharacterBlue-{ Utilities.Random.Next(1, 6) }");
                     FieldPlayer FP = new FieldPlayer(
                         texture,
-                        Color.White,
+                        Microsoft.Xna.Framework.Color.White,
                         new Vector2(1f, 1f),
                         new Vector2(Utilities.Random.Next(80, 640), Utilities.Random.Next(30, 546)),
                         0f,
@@ -78,7 +78,7 @@ namespace IndoorFootballStrategySimulator.Simulation
                 }
 
                 texture = editor.Content.Load<Texture2D>($"SoccerGoal");
-                Goal = new Goal(texture, Color.White, new Vector2(1f, 1f), new Vector2(40f, 288f), 0f);
+                Goal = new Goal(texture, Microsoft.Xna.Framework.Color.White, new Vector2(1f, 1f), new Vector2(40f, 288f), 0f);
                 SimulationWindow.EntityManager.Entities.Add(Goal);
             }
             else
@@ -88,7 +88,7 @@ namespace IndoorFootballStrategySimulator.Simulation
                 // Goal Keeper
                 GoalKeeper GK = new GoalKeeper(
                     texture,
-                    Color.White,
+                    Microsoft.Xna.Framework.Color.White,
                     new Vector2(1f, 1f),
                     new Vector2(1200f, 288f),
                     MathHelper.Pi,
@@ -106,7 +106,7 @@ namespace IndoorFootballStrategySimulator.Simulation
                     texture = editor.Content.Load<Texture2D>($"CharacterRed-{ Utilities.Random.Next(1, 6) }");
                     FieldPlayer FP = new FieldPlayer(
                         texture,
-                        Color.White,
+                        Microsoft.Xna.Framework.Color.White,
                         new Vector2(1f, 1f),
                         new Vector2(Utilities.Random.Next(640, 1200), Utilities.Random.Next(30, 546)),
                         MathHelper.Pi,
@@ -121,7 +121,7 @@ namespace IndoorFootballStrategySimulator.Simulation
                 }
 
                 texture = editor.Content.Load<Texture2D>($"SoccerGoal");
-                Goal = new Goal(texture, Color.White, new Vector2(1f, 1f), new Vector2(1240f, 288f), MathHelper.Pi);
+                Goal = new Goal(texture, Microsoft.Xna.Framework.Color.White, new Vector2(1f, 1f), new Vector2(1240f, 288f), MathHelper.Pi);
                 SimulationWindow.EntityManager.Entities.Add(Goal);
             }
         }

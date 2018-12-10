@@ -3,21 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace IndoorFootballStrategySimulator.Simulation
 {
+    [DataContract]
     public class GoalKeeper : Player
     {
 
         private FSM<GoalKeeper> gkStateMachine;
 
-        public Area HomeArea { get; set; }
-        public List<Area> Areas { get; set; }
+        [DataMember]
+        public int HomeArea { get; set; }
+
+        [DataMember]
+        public List<int> Areas { get; set; }
 
         public GoalKeeper(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed,
-            Team team = null, Area homeArea = null, List<Area> areas = null, State<GoalKeeper> startState = null)
+            Team team = null, int homeArea = -1, List<int> areas = null, State<GoalKeeper> startState = null)
             : base(texture, color, scale, pos, rot, radius, mass, maxForce, maxSpeed, team)
         {
             gkStateMachine = new FSM<GoalKeeper>(this);
@@ -31,6 +36,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
             BounceBall();
         }
         public FSM<GoalKeeper> GetFSM()

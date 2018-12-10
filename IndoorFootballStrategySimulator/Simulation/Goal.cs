@@ -50,11 +50,11 @@ namespace IndoorFootballStrategySimulator.Simulation {
         }
 
         // Debug code
-        public override void Draw(SpriteBatch spriteBatch) {
-            base.Draw(spriteBatch);
+        //public override void Draw(SpriteBatch spriteBatch) {
+        //    base.Draw(spriteBatch);
 
-            GoalLine.Draw(spriteBatch, Color.White);
-        }
+        //    GoalLine.Draw(spriteBatch, Color.White);
+        //}
 
     }
 }

@@ -10,7 +10,7 @@ using MonoGame.Forms.Controls;
 using IndoorFootballStrategySimulator.Simulation;
 
 namespace IndoorFootballStrategySimulator {
-    public class SimulationWindow : UpdateWindow {
+    class SimulationWindow : ExtendedUpdateWindow {
 		
         /// <summary>
         ///     Gets the manager that controls all entities.
@@ -22,9 +22,6 @@ namespace IndoorFootballStrategySimulator {
         /// </summary>
         protected override void Initialize() {
             base.Initialize();
-
-            Utilities.SimpleTexture = new Texture2D(GraphicsDevice, 1, 1);
-            Utilities.SimpleTexture.SetData(new Color[] { Color.White });
 
             EntityManager = new EntityManager();
             EntityManager.Initialize(Editor);
