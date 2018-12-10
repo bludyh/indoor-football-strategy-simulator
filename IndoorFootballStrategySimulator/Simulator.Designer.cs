@@ -26,9 +26,27 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Simulator));
             this.tab_ctrl = new System.Windows.Forms.TabControl();
             this.Home_tab = new System.Windows.Forms.TabPage();
+            this.pnAwayTeam = new System.Windows.Forms.Panel();
+            this.lbAwayStrategyDescription = new System.Windows.Forms.Label();
+            this.rbAwayDefensive = new System.Windows.Forms.RadioButton();
+            this.lbAwayStrategyName = new System.Windows.Forms.Label();
+            this.rbAwayOffensive = new System.Windows.Forms.RadioButton();
+            this.label4 = new System.Windows.Forms.Label();
+            this.strategyPreviewWindowAway = new IndoorFootballStrategySimulator.StrategyPreviewWindow();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.dgvAwayStrategies = new System.Windows.Forms.DataGridView();
+            this.AwayStrategyName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvHomeStrategies = new System.Windows.Forms.DataGridView();
+            this.HomeStrategyName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.pnHomeTeam = new System.Windows.Forms.Panel();
+            this.lbHomeStrategyDescription = new System.Windows.Forms.Label();
+            this.lbHomeStrategyName = new System.Windows.Forms.Label();
+            this.rbHomeDefensive = new System.Windows.Forms.RadioButton();
+            this.rbHomeOffensive = new System.Windows.Forms.RadioButton();
+            this.label3 = new System.Windows.Forms.Label();
+            this.strategyPreviewWindowHome = new IndoorFootballStrategySimulator.StrategyPreviewWindow();
             this.label1 = new System.Windows.Forms.Label();
             this.Intro = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -45,6 +63,7 @@
             this.rbDefensive = new System.Windows.Forms.RadioButton();
             this.btnSaveStrategy = new System.Windows.Forms.Button();
             this.rbOffensive = new System.Windows.Forms.RadioButton();
+            this.strategyEditingWindow = new IndoorFootballStrategySimulator.StrategyEditingWindow();
             this.btnDiscardChanges = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -88,6 +107,7 @@
             this.label31 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
+            this.simulationWindow = new IndoorFootballStrategySimulator.SimulationWindow();
             this.result_tab = new System.Windows.Forms.TabPage();
             this.label41 = new System.Windows.Forms.Label();
             this.label42 = new System.Windows.Forms.Label();
@@ -98,27 +118,19 @@
             this.button24 = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.label43 = new System.Windows.Forms.Label();
-            this.dgvHomeStrategy = new System.Windows.Forms.DataGridView();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.dgvAwayStrategy = new System.Windows.Forms.DataGridView();
-            this.previewWindow2 = new IndoorFootballStrategySimulator.PreviewWindow();
-            this.previewWindow1 = new IndoorFootballStrategySimulator.PreviewWindow();
-            this.strategyWindow = new IndoorFootballStrategySimulator.StrategyWindow();
-            this.simulationWindow = new IndoorFootballStrategySimulator.SimulationWindow();
-            this.HomeStrategy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AwayStrategy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_ctrl.SuspendLayout();
             this.Home_tab.SuspendLayout();
+            this.pnAwayTeam.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAwayStrategies)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHomeStrategies)).BeginInit();
+            this.pnHomeTeam.SuspendLayout();
             this.Strategies_tab.SuspendLayout();
             this.pnStrategy.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStrategies)).BeginInit();
             this.Simulation_tb.SuspendLayout();
             this.result_tab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvHomeStrategy)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAwayStrategy)).BeginInit();
             this.SuspendLayout();
             // 
             // tab_ctrl
@@ -137,10 +149,11 @@
             // 
             // Home_tab
             // 
+            this.Home_tab.Controls.Add(this.pnAwayTeam);
             this.Home_tab.Controls.Add(this.textBox2);
             this.Home_tab.Controls.Add(this.panel1);
             this.Home_tab.Controls.Add(this.textBox1);
-            this.Home_tab.Controls.Add(this.panel2);
+            this.Home_tab.Controls.Add(this.pnHomeTeam);
             this.Home_tab.Controls.Add(this.label1);
             this.Home_tab.Controls.Add(this.Intro);
             this.Home_tab.Controls.Add(this.label6);
@@ -156,16 +169,148 @@
             this.Home_tab.Text = "Home";
             this.Home_tab.UseVisualStyleBackColor = true;
             // 
+            // pnAwayTeam
+            // 
+            this.pnAwayTeam.BackColor = System.Drawing.Color.Silver;
+            this.pnAwayTeam.Controls.Add(this.lbAwayStrategyDescription);
+            this.pnAwayTeam.Controls.Add(this.rbAwayDefensive);
+            this.pnAwayTeam.Controls.Add(this.lbAwayStrategyName);
+            this.pnAwayTeam.Controls.Add(this.rbAwayOffensive);
+            this.pnAwayTeam.Controls.Add(this.label4);
+            this.pnAwayTeam.Controls.Add(this.strategyPreviewWindowAway);
+            this.pnAwayTeam.Enabled = false;
+            this.pnAwayTeam.Location = new System.Drawing.Point(428, 381);
+            this.pnAwayTeam.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.pnAwayTeam.Name = "pnAwayTeam";
+            this.pnAwayTeam.Size = new System.Drawing.Size(878, 288);
+            this.pnAwayTeam.TabIndex = 89;
+            // 
+            // lbAwayStrategyDescription
+            // 
+            this.lbAwayStrategyDescription.AutoSize = true;
+            this.lbAwayStrategyDescription.Location = new System.Drawing.Point(20, 110);
+            this.lbAwayStrategyDescription.Name = "lbAwayStrategyDescription";
+            this.lbAwayStrategyDescription.Size = new System.Drawing.Size(0, 13);
+            this.lbAwayStrategyDescription.TabIndex = 100;
+            // 
+            // rbAwayDefensive
+            // 
+            this.rbAwayDefensive.AutoSize = true;
+            this.rbAwayDefensive.Location = new System.Drawing.Point(99, 50);
+            this.rbAwayDefensive.Name = "rbAwayDefensive";
+            this.rbAwayDefensive.Size = new System.Drawing.Size(73, 17);
+            this.rbAwayDefensive.TabIndex = 97;
+            this.rbAwayDefensive.Text = "Defensive";
+            this.rbAwayDefensive.UseVisualStyleBackColor = true;
+            this.rbAwayDefensive.CheckedChanged += new System.EventHandler(this.RadioButtons_CheckedChanged);
+            // 
+            // lbAwayStrategyName
+            // 
+            this.lbAwayStrategyName.AutoSize = true;
+            this.lbAwayStrategyName.Location = new System.Drawing.Point(20, 80);
+            this.lbAwayStrategyName.Name = "lbAwayStrategyName";
+            this.lbAwayStrategyName.Size = new System.Drawing.Size(0, 13);
+            this.lbAwayStrategyName.TabIndex = 99;
+            // 
+            // rbAwayOffensive
+            // 
+            this.rbAwayOffensive.AutoSize = true;
+            this.rbAwayOffensive.Checked = true;
+            this.rbAwayOffensive.Location = new System.Drawing.Point(23, 50);
+            this.rbAwayOffensive.Name = "rbAwayOffensive";
+            this.rbAwayOffensive.Size = new System.Drawing.Size(70, 17);
+            this.rbAwayOffensive.TabIndex = 96;
+            this.rbAwayOffensive.TabStop = true;
+            this.rbAwayOffensive.Text = "Offensive";
+            this.rbAwayOffensive.UseVisualStyleBackColor = true;
+            this.rbAwayOffensive.CheckedChanged += new System.EventHandler(this.RadioButtons_CheckedChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(20, 20);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(79, 15);
+            this.label4.TabIndex = 95;
+            this.label4.Text = "Away Team";
+            // 
+            // strategyPreviewWindowAway
+            // 
+            this.strategyPreviewWindowAway.Location = new System.Drawing.Point(238, 0);
+            this.strategyPreviewWindowAway.Name = "strategyPreviewWindowAway";
+            this.strategyPreviewWindowAway.Size = new System.Drawing.Size(640, 288);
+            this.strategyPreviewWindowAway.TabIndex = 0;
+            this.strategyPreviewWindowAway.TeamState = IndoorFootballStrategySimulator.Simulation.TeamState.OFFENSIVE;
+            this.strategyPreviewWindowAway.Text = "Away";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(145, 583);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(67, 20);
+            this.textBox2.TabIndex = 93;
+            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Silver;
-            this.panel1.Controls.Add(this.dgvAwayStrategy);
-            this.panel1.Controls.Add(this.dgvHomeStrategy);
+            this.panel1.Controls.Add(this.dgvAwayStrategies);
+            this.panel1.Controls.Add(this.dgvHomeStrategies);
             this.panel1.Location = new System.Drawing.Point(12, 93);
             this.panel1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(400, 478);
             this.panel1.TabIndex = 86;
+            // 
+            // dgvAwayStrategies
+            // 
+            this.dgvAwayStrategies.AllowUserToAddRows = false;
+            this.dgvAwayStrategies.AllowUserToDeleteRows = false;
+            this.dgvAwayStrategies.AllowUserToResizeColumns = false;
+            this.dgvAwayStrategies.AllowUserToResizeRows = false;
+            this.dgvAwayStrategies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvAwayStrategies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAwayStrategies.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.AwayStrategyName});
+            this.dgvAwayStrategies.Location = new System.Drawing.Point(200, 0);
+            this.dgvAwayStrategies.MultiSelect = false;
+            this.dgvAwayStrategies.Name = "dgvAwayStrategies";
+            this.dgvAwayStrategies.ReadOnly = true;
+            this.dgvAwayStrategies.RowHeadersVisible = false;
+            this.dgvAwayStrategies.Size = new System.Drawing.Size(200, 478);
+            this.dgvAwayStrategies.TabIndex = 32;
+            this.dgvAwayStrategies.SelectionChanged += new System.EventHandler(this.DgvAwayStrategies_SelectionChanged);
+            // 
+            // AwayStrategyName
+            // 
+            this.AwayStrategyName.HeaderText = "Away Team";
+            this.AwayStrategyName.Name = "AwayStrategyName";
+            this.AwayStrategyName.ReadOnly = true;
+            // 
+            // dgvHomeStrategies
+            // 
+            this.dgvHomeStrategies.AllowUserToAddRows = false;
+            this.dgvHomeStrategies.AllowUserToDeleteRows = false;
+            this.dgvHomeStrategies.AllowUserToResizeColumns = false;
+            this.dgvHomeStrategies.AllowUserToResizeRows = false;
+            this.dgvHomeStrategies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvHomeStrategies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvHomeStrategies.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.HomeStrategyName});
+            this.dgvHomeStrategies.Location = new System.Drawing.Point(0, 0);
+            this.dgvHomeStrategies.MultiSelect = false;
+            this.dgvHomeStrategies.Name = "dgvHomeStrategies";
+            this.dgvHomeStrategies.ReadOnly = true;
+            this.dgvHomeStrategies.RowHeadersVisible = false;
+            this.dgvHomeStrategies.Size = new System.Drawing.Size(200, 478);
+            this.dgvHomeStrategies.TabIndex = 31;
+            this.dgvHomeStrategies.SelectionChanged += new System.EventHandler(this.DgvHomeStrategies_SelectionChanged);
+            // 
+            // HomeStrategyName
+            // 
+            this.HomeStrategyName.HeaderText = "Home Team";
+            this.HomeStrategyName.Name = "HomeStrategyName";
+            this.HomeStrategyName.ReadOnly = true;
             // 
             // textBox1
             // 
@@ -179,16 +324,81 @@
             this.textBox1.TabIndex = 85;
             this.textBox1.Text = resources.GetString("textBox1.Text");
             // 
-            // panel2
+            // pnHomeTeam
             // 
-            this.panel2.BackColor = System.Drawing.Color.Silver;
-            this.panel2.Controls.Add(this.previewWindow2);
-            this.panel2.Controls.Add(this.previewWindow1);
-            this.panel2.Location = new System.Drawing.Point(428, 93);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(878, 576);
-            this.panel2.TabIndex = 88;
+            this.pnHomeTeam.BackColor = System.Drawing.Color.Silver;
+            this.pnHomeTeam.Controls.Add(this.lbHomeStrategyDescription);
+            this.pnHomeTeam.Controls.Add(this.lbHomeStrategyName);
+            this.pnHomeTeam.Controls.Add(this.rbHomeDefensive);
+            this.pnHomeTeam.Controls.Add(this.rbHomeOffensive);
+            this.pnHomeTeam.Controls.Add(this.label3);
+            this.pnHomeTeam.Controls.Add(this.strategyPreviewWindowHome);
+            this.pnHomeTeam.Enabled = false;
+            this.pnHomeTeam.Location = new System.Drawing.Point(428, 93);
+            this.pnHomeTeam.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.pnHomeTeam.Name = "pnHomeTeam";
+            this.pnHomeTeam.Size = new System.Drawing.Size(878, 288);
+            this.pnHomeTeam.TabIndex = 88;
+            // 
+            // lbHomeStrategyDescription
+            // 
+            this.lbHomeStrategyDescription.AutoSize = true;
+            this.lbHomeStrategyDescription.Location = new System.Drawing.Point(20, 110);
+            this.lbHomeStrategyDescription.Name = "lbHomeStrategyDescription";
+            this.lbHomeStrategyDescription.Size = new System.Drawing.Size(0, 13);
+            this.lbHomeStrategyDescription.TabIndex = 98;
+            // 
+            // lbHomeStrategyName
+            // 
+            this.lbHomeStrategyName.AutoSize = true;
+            this.lbHomeStrategyName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbHomeStrategyName.Location = new System.Drawing.Point(20, 80);
+            this.lbHomeStrategyName.Name = "lbHomeStrategyName";
+            this.lbHomeStrategyName.Size = new System.Drawing.Size(0, 13);
+            this.lbHomeStrategyName.TabIndex = 97;
+            // 
+            // rbHomeDefensive
+            // 
+            this.rbHomeDefensive.AutoSize = true;
+            this.rbHomeDefensive.Location = new System.Drawing.Point(99, 50);
+            this.rbHomeDefensive.Name = "rbHomeDefensive";
+            this.rbHomeDefensive.Size = new System.Drawing.Size(73, 17);
+            this.rbHomeDefensive.TabIndex = 96;
+            this.rbHomeDefensive.Text = "Defensive";
+            this.rbHomeDefensive.UseVisualStyleBackColor = true;
+            this.rbHomeDefensive.CheckedChanged += new System.EventHandler(this.RadioButtons_CheckedChanged);
+            // 
+            // rbHomeOffensive
+            // 
+            this.rbHomeOffensive.AutoSize = true;
+            this.rbHomeOffensive.Checked = true;
+            this.rbHomeOffensive.Location = new System.Drawing.Point(23, 50);
+            this.rbHomeOffensive.Name = "rbHomeOffensive";
+            this.rbHomeOffensive.Size = new System.Drawing.Size(70, 17);
+            this.rbHomeOffensive.TabIndex = 95;
+            this.rbHomeOffensive.TabStop = true;
+            this.rbHomeOffensive.Text = "Offensive";
+            this.rbHomeOffensive.UseVisualStyleBackColor = true;
+            this.rbHomeOffensive.CheckedChanged += new System.EventHandler(this.RadioButtons_CheckedChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(20, 20);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(85, 15);
+            this.label3.TabIndex = 94;
+            this.label3.Text = "Home Team";
+            // 
+            // strategyPreviewWindowHome
+            // 
+            this.strategyPreviewWindowHome.Location = new System.Drawing.Point(238, 0);
+            this.strategyPreviewWindowHome.Name = "strategyPreviewWindowHome";
+            this.strategyPreviewWindowHome.Size = new System.Drawing.Size(640, 288);
+            this.strategyPreviewWindowHome.TabIndex = 0;
+            this.strategyPreviewWindowHome.TeamState = IndoorFootballStrategySimulator.Simulation.TeamState.OFFENSIVE;
+            this.strategyPreviewWindowHome.Text = "Home";
             // 
             // label1
             // 
@@ -227,9 +437,9 @@
             this.label5.Location = new System.Drawing.Point(425, 75);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(117, 15);
+            this.label5.Size = new System.Drawing.Size(57, 15);
             this.label5.TabIndex = 89;
-            this.label5.Text = "Preview Strategy:";
+            this.label5.Text = "Preview";
             // 
             // Start_btn
             // 
@@ -251,9 +461,9 @@
             this.label2.Location = new System.Drawing.Point(9, 75);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(107, 15);
+            this.label2.Size = new System.Drawing.Size(116, 15);
             this.label2.TabIndex = 87;
-            this.label2.Text = "Select Strategy:";
+            this.label2.Text = "Select Strategies";
             // 
             // Strategies_tab
             // 
@@ -280,9 +490,9 @@
             this.label7.Location = new System.Drawing.Point(7, 40);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(76, 15);
+            this.label7.Size = new System.Drawing.Size(72, 15);
             this.label7.TabIndex = 83;
-            this.label7.Text = "Strategies:";
+            this.label7.Text = "Strategies";
             // 
             // label8
             // 
@@ -302,7 +512,7 @@
             this.pnStrategy.Controls.Add(this.rbDefensive);
             this.pnStrategy.Controls.Add(this.btnSaveStrategy);
             this.pnStrategy.Controls.Add(this.rbOffensive);
-            this.pnStrategy.Controls.Add(this.strategyWindow);
+            this.pnStrategy.Controls.Add(this.strategyEditingWindow);
             this.pnStrategy.Controls.Add(this.btnDiscardChanges);
             this.pnStrategy.Controls.Add(this.label9);
             this.pnStrategy.Enabled = false;
@@ -373,6 +583,15 @@
             this.rbOffensive.UseVisualStyleBackColor = true;
             this.rbOffensive.CheckedChanged += new System.EventHandler(this.RadioButtons_CheckedChanged);
             // 
+            // strategyEditingWindow
+            // 
+            this.strategyEditingWindow.Location = new System.Drawing.Point(0, 42);
+            this.strategyEditingWindow.Name = "strategyEditingWindow";
+            this.strategyEditingWindow.Size = new System.Drawing.Size(960, 432);
+            this.strategyEditingWindow.TabIndex = 26;
+            this.strategyEditingWindow.TeamState = IndoorFootballStrategySimulator.Simulation.TeamState.OFFENSIVE;
+            this.strategyEditingWindow.Text = "Strategy";
+            // 
             // btnDiscardChanges
             // 
             this.btnDiscardChanges.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
@@ -403,9 +622,9 @@
             this.label11.Location = new System.Drawing.Point(345, 40);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(63, 15);
+            this.label11.Size = new System.Drawing.Size(59, 15);
             this.label11.TabIndex = 85;
-            this.label11.Text = "Strategy:";
+            this.label11.Text = "Strategy";
             // 
             // textBox5
             // 
@@ -837,6 +1056,14 @@
             this.label38.TabIndex = 107;
             this.label38.Text = "Home Team";
             // 
+            // simulationWindow
+            // 
+            this.simulationWindow.Location = new System.Drawing.Point(19, 34);
+            this.simulationWindow.Name = "simulationWindow";
+            this.simulationWindow.Size = new System.Drawing.Size(1280, 576);
+            this.simulationWindow.TabIndex = 157;
+            this.simulationWindow.Text = "Simulation";
+            // 
             // result_tab
             // 
             this.result_tab.Controls.Add(this.label41);
@@ -958,92 +1185,6 @@
             this.label43.Text = "* 1-2-1 and 2-1-1  proved to ... \"here will explain the results of thestrategy wi" +
     "th the rate of winning %\"";
             // 
-            // dgvHomeStrategy
-            // 
-            this.dgvHomeStrategy.AllowUserToAddRows = false;
-            this.dgvHomeStrategy.AllowUserToDeleteRows = false;
-            this.dgvHomeStrategy.AllowUserToResizeColumns = false;
-            this.dgvHomeStrategy.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvHomeStrategy.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvHomeStrategy.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.HomeStrategy});
-            this.dgvHomeStrategy.Location = new System.Drawing.Point(0, 0);
-            this.dgvHomeStrategy.MultiSelect = false;
-            this.dgvHomeStrategy.Name = "dgvHomeStrategy";
-            this.dgvHomeStrategy.ReadOnly = true;
-            this.dgvHomeStrategy.RowHeadersVisible = false;
-            this.dgvHomeStrategy.Size = new System.Drawing.Size(200, 478);
-            this.dgvHomeStrategy.TabIndex = 31;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(145, 583);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(67, 20);
-            this.textBox2.TabIndex = 93;
-            // 
-            // dgvAwayStrategy
-            // 
-            this.dgvAwayStrategy.AllowUserToAddRows = false;
-            this.dgvAwayStrategy.AllowUserToDeleteRows = false;
-            this.dgvAwayStrategy.AllowUserToResizeColumns = false;
-            this.dgvAwayStrategy.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvAwayStrategy.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAwayStrategy.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.AwayStrategy});
-            this.dgvAwayStrategy.Location = new System.Drawing.Point(200, 0);
-            this.dgvAwayStrategy.MultiSelect = false;
-            this.dgvAwayStrategy.Name = "dgvAwayStrategy";
-            this.dgvAwayStrategy.ReadOnly = true;
-            this.dgvAwayStrategy.RowHeadersVisible = false;
-            this.dgvAwayStrategy.Size = new System.Drawing.Size(200, 478);
-            this.dgvAwayStrategy.TabIndex = 32;
-            // 
-            // previewWindow2
-            // 
-            this.previewWindow2.Location = new System.Drawing.Point(0, 288);
-            this.previewWindow2.Name = "previewWindow2";
-            this.previewWindow2.Size = new System.Drawing.Size(640, 288);
-            this.previewWindow2.TabIndex = 1;
-            this.previewWindow2.Text = "previewWindow2";
-            // 
-            // previewWindow1
-            // 
-            this.previewWindow1.Location = new System.Drawing.Point(0, 0);
-            this.previewWindow1.Name = "previewWindow1";
-            this.previewWindow1.Size = new System.Drawing.Size(640, 288);
-            this.previewWindow1.TabIndex = 0;
-            this.previewWindow1.Text = "previewWindow1";
-            // 
-            // strategyWindow
-            // 
-            this.strategyWindow.Location = new System.Drawing.Point(0, 42);
-            this.strategyWindow.Name = "strategyWindow";
-            this.strategyWindow.Size = new System.Drawing.Size(960, 432);
-            this.strategyWindow.TabIndex = 26;
-            this.strategyWindow.TeamState = IndoorFootballStrategySimulator.Simulation.TeamState.OFFENSIVE;
-            this.strategyWindow.Text = "strategyWindow";
-            // 
-            // simulationWindow
-            // 
-            this.simulationWindow.Location = new System.Drawing.Point(19, 34);
-            this.simulationWindow.Name = "simulationWindow";
-            this.simulationWindow.Size = new System.Drawing.Size(1280, 576);
-            this.simulationWindow.TabIndex = 157;
-            this.simulationWindow.Text = "simulationWindow";
-            // 
-            // HomeStrategy
-            // 
-            this.HomeStrategy.HeaderText = "Home Team";
-            this.HomeStrategy.Name = "HomeStrategy";
-            this.HomeStrategy.ReadOnly = true;
-            // 
-            // AwayStrategy
-            // 
-            this.AwayStrategy.HeaderText = "Away Team";
-            this.AwayStrategy.Name = "AwayStrategy";
-            this.AwayStrategy.ReadOnly = true;
-            // 
             // Simulator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1056,8 +1197,13 @@
             this.tab_ctrl.ResumeLayout(false);
             this.Home_tab.ResumeLayout(false);
             this.Home_tab.PerformLayout();
+            this.pnAwayTeam.ResumeLayout(false);
+            this.pnAwayTeam.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAwayStrategies)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHomeStrategies)).EndInit();
+            this.pnHomeTeam.ResumeLayout(false);
+            this.pnHomeTeam.PerformLayout();
             this.Strategies_tab.ResumeLayout(false);
             this.Strategies_tab.PerformLayout();
             this.pnStrategy.ResumeLayout(false);
@@ -1068,8 +1214,6 @@
             this.Simulation_tb.PerformLayout();
             this.result_tab.ResumeLayout(false);
             this.result_tab.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvHomeStrategy)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAwayStrategy)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1079,7 +1223,7 @@
 		private System.Windows.Forms.TabPage Home_tab;
 		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.TextBox textBox1;
-		private System.Windows.Forms.Panel panel2;
+		private System.Windows.Forms.Panel pnHomeTeam;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label Intro;
 		private System.Windows.Forms.Label label6;
@@ -1141,7 +1285,7 @@
 		private System.Windows.Forms.Button Abort_btn;
 		private System.Windows.Forms.Label label55;
         private SimulationWindow simulationWindow;
-        private StrategyWindow strategyWindow;
+        private StrategyEditingWindow strategyEditingWindow;
         private System.Windows.Forms.RadioButton rbDefensive;
         private System.Windows.Forms.RadioButton rbOffensive;
         private System.Windows.Forms.RichTextBox rtbStrategyDescription;
@@ -1151,13 +1295,24 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn StrategyName;
         private System.Windows.Forms.DataGridViewTextBoxColumn CreationDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ModifiedDate;
-        private PreviewWindow previewWindow2;
-        private PreviewWindow previewWindow1;
+        private StrategyPreviewWindow strategyPreviewWindowHome;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.DataGridView dgvAwayStrategy;
-        private System.Windows.Forms.DataGridView dgvHomeStrategy;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AwayStrategy;
-        private System.Windows.Forms.DataGridViewTextBoxColumn HomeStrategy;
+        private System.Windows.Forms.DataGridView dgvAwayStrategies;
+        private System.Windows.Forms.DataGridView dgvHomeStrategies;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AwayStrategyName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HomeStrategyName;
+        private System.Windows.Forms.Panel pnAwayTeam;
+        private StrategyPreviewWindow strategyPreviewWindowAway;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.RadioButton rbHomeDefensive;
+        private System.Windows.Forms.RadioButton rbHomeOffensive;
+        private System.Windows.Forms.RadioButton rbAwayDefensive;
+        private System.Windows.Forms.RadioButton rbAwayOffensive;
+        private System.Windows.Forms.Label lbHomeStrategyDescription;
+        private System.Windows.Forms.Label lbHomeStrategyName;
+        private System.Windows.Forms.Label lbAwayStrategyDescription;
+        private System.Windows.Forms.Label lbAwayStrategyName;
     }
 }
 

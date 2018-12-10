@@ -62,7 +62,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PreviewWindow.cs">
+    <Compile Include="ExtendedUpdateWindow.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="StrategyPreviewWindow.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -110,6 +113,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StrategyEditingWindow.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="StrategyWindow.cs">
       <SubType>Component</SubType>
     </Compile>
