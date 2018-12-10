@@ -17,16 +17,17 @@ namespace IndoorFootballStrategySimulator {
         private Player selectedPlayer;
         private MouseState currentMouseState, previousMouseState;
         private Vector2 mousePos;
+        private Strategy strategy;
         private TeamState teamState;
         private bool isPlayerBeingDragged;
 
-        public Strategy Strategy { get; set; }
+        public Strategy Strategy {
+            get { return strategy; }
+            private set => SetStrategy(value);
+        }
         public TeamState TeamState {
             get { return teamState; }
-            set {
-                teamState = value;
-                OnTeamStateChanged();
-            }
+            set => SetTeamState(value);
         }
 
         protected override void Initialize() {
@@ -41,10 +42,108 @@ namespace IndoorFootballStrategySimulator {
                 new Goal(Editor.Content.Load<Texture2D>($"SoccerGoal"), Color.White, new Vector2(0.75f, 0.75f), new Vector2(30f, 216f), 0f),
                 new Goal(Editor.Content.Load<Texture2D>($"SoccerGoal"), Color.White, new Vector2(0.75f, 0.75f), new Vector2(930, 216f), MathHelper.Pi)
             };
+        }
 
+        private void SetStrategy(Strategy strategy) {
+            this.strategy = strategy;
+            selectedPlayer = null;
+        }
+
+        private void SetTeamState(TeamState teamState) {
+            this.teamState = teamState;
+
+            if (Strategy == null)
+                return;
+
+            foreach (var player in Strategy.Players) {
+                if (player is FieldPlayer fieldPlayer)
+                    fieldPlayer.Position = GetPlayerHomeArea(fieldPlayer).Center;
+            }
+        }
+
+        private Area GetPlayerHomeArea(Player player) {
+            if (player is GoalKeeper goalKeeper)
+                return field.Areas[goalKeeper.HomeArea];
+            else if (player is FieldPlayer fieldPlayer) {
+                switch (TeamState) {
+                    case TeamState.OFFENSIVE:
+                        return field.Areas[fieldPlayer.OffensiveHomeArea];
+                    case TeamState.DEFENSIVE:
+                        return field.Areas[fieldPlayer.DefensiveHomeArea];
+                }
+            }
+            return null;
+        }
+
+        private void SetPlayerHomeArea(Player player, int area) {
+            if (player is FieldPlayer fieldPlayer) {
+                switch (TeamState) {
+                    case TeamState.OFFENSIVE:
+                        fieldPlayer.OffensiveHomeArea = area;
+                        fieldPlayer.OffensiveAreas.Clear();
+                        fieldPlayer.OffensiveAreas.Add(area);
+                        break;
+                    case TeamState.DEFENSIVE:
+                        fieldPlayer.DefensiveHomeArea = area;
+                        fieldPlayer.DefensiveAreas.Clear();
+                        fieldPlayer.DefensiveAreas.Add(area);
+                        break;
+                }
+            }
+        }
+
+        private List<Area> GetPlayerAreas(Player player) {
+            List<Area> areas = new List<Area>();
+
+            if (player is GoalKeeper goalKeeper) {
+                foreach (var area in goalKeeper.Areas) {
+                    areas.Add(field.Areas[area]);
+                }
+            }
+            else if (player is FieldPlayer fieldPlayer) {
+                switch (TeamState) {
+                    case TeamState.OFFENSIVE:
+                        foreach (var area in fieldPlayer.OffensiveAreas) {
+                            areas.Add(field.Areas[area]);
+                        }
+                        break;
+                    case TeamState.DEFENSIVE:
+                        foreach (var area in fieldPlayer.DefensiveAreas) {
+                            areas.Add(field.Areas[area]);
+                        }
+                        break;
+                }
+            }
+            return areas;
+        }
+
+        private void SetPlayerAreas(Player player, int area) {
+            if (player is  FieldPlayer fieldPlayer) {
+                switch (TeamState) {
+                    case TeamState.OFFENSIVE:
+                        if (area != fieldPlayer.OffensiveHomeArea) {
+                            if (fieldPlayer.OffensiveAreas.Contains(area))
+                                fieldPlayer.OffensiveAreas.Remove(area);
+                            else
+                                fieldPlayer.OffensiveAreas.Add(area);
+                        }
+                        break;
+                    case TeamState.DEFENSIVE:
+                        if (area != fieldPlayer.DefensiveHomeArea) {
+                            if (fieldPlayer.DefensiveAreas.Contains(area))
+                                fieldPlayer.DefensiveAreas.Remove(area);
+                            else
+                                fieldPlayer.DefensiveAreas.Add(area);
+                        }
+                        break;
+                }
+            }
+        }
+
+        public void CreateNewStrategy() {
             Strategy = new Strategy(
-                "Default Strategy",
-                "Default Strategy",
+                "New Strategy",
+                "New Strategy",
                 new List<Player> {
                     new GoalKeeper(
                         Editor.Content.Load<Texture2D>($"CharacterBlue-1"),
@@ -117,96 +216,62 @@ namespace IndoorFootballStrategySimulator {
                 });
         }
 
-        private void OnTeamStateChanged() {
-            if (Strategy != null) {
-                foreach (var player in Strategy.Players) {
-                    if (player is FieldPlayer fieldPlayer)
-                        fieldPlayer.Position = GetPlayerHomeArea(fieldPlayer).Center;
-                }
-            }
+        public void SaveStrategyToFile(string fileName) {
+            Utilities.Serialize(Strategy, fileName);
         }
 
-        private Area GetPlayerHomeArea(Player player) {
-            if (player is GoalKeeper goalKeeper)
-                return field.Areas[goalKeeper.HomeArea];
-            else if (player is FieldPlayer fieldPlayer) {
-                switch (TeamState) {
-                    case TeamState.OFFENSIVE:
-                        return field.Areas[fieldPlayer.OffensiveHomeArea];
-                    case TeamState.DEFENSIVE:
-                        return field.Areas[fieldPlayer.DefensiveHomeArea];
+        public void LoadStrategyFromFile(string fileName) {
+            Strategy = Utilities.Deserialize<Strategy>(fileName);
+
+            var players = new List<Player>();
+
+            for (int i = 0; i < Strategy.Players.Count; i++) {
+                var player = Strategy.Players[i];
+                if (player is GoalKeeper goalKeeper) {
+                    players.Add(new GoalKeeper(
+                        Editor.Content.Load<Texture2D>($"CharacterBlue-{ i + 1 }"),
+                        Color.White,
+                        Vector2.One,
+                        field.Areas[goalKeeper.HomeArea].Center,
+                        0f,
+                        15f,
+                        0f,
+                        0f,
+                        0f,
+                        homeArea: goalKeeper.HomeArea,
+                        areas: goalKeeper.Areas
+                        ));
+                }
+                else if (player is FieldPlayer fieldPlayer) {
+                    players.Add(new FieldPlayer(
+                        Editor.Content.Load<Texture2D>($"CharacterBlue-{ i + 1 }"),
+                        Color.White,
+                        Vector2.One,
+                        field.Areas[fieldPlayer.OffensiveHomeArea].Center,
+                        0f,
+                        15f,
+                        0f,
+                        0f,
+                        0f,
+                        offHomeArea: fieldPlayer.OffensiveHomeArea,
+                        offAreas: fieldPlayer.OffensiveAreas,
+                        defHomeArea: fieldPlayer.DefensiveHomeArea,
+                        defAreas: fieldPlayer.DefensiveAreas
+                        ));
                 }
             }
-            return null;
+            Strategy.Players = players;
         }
 
-        private void SetPlayerHomeArea(Player player, int area) {
-            if (player is FieldPlayer fieldPlayer) {
-                switch (TeamState) {
-                    case TeamState.OFFENSIVE:
-                        fieldPlayer.OffensiveHomeArea = area;
-                        fieldPlayer.OffensiveAreas.Clear();
-                        fieldPlayer.OffensiveAreas.Add(area);
-                        break;
-                    case TeamState.DEFENSIVE:
-                        fieldPlayer.DefensiveHomeArea = area;
-                        fieldPlayer.DefensiveAreas.Clear();
-                        fieldPlayer.DefensiveAreas.Add(area);
-                        break;
-                }
-            }
-        }
-
-        private List<Area> GetPlayerAreas(Player player) {
-            List<Area> areas = new List<Area>();
-
-            if (player is GoalKeeper goalKeeper) {
-                foreach (var area in goalKeeper.Areas) {
-                    areas.Add(field.Areas[area]);
-                }
-            }
-            else if (player is FieldPlayer fieldPlayer) {
-                switch (TeamState) {
-                    case TeamState.OFFENSIVE:
-                        foreach (var area in fieldPlayer.OffensiveAreas) {
-                            areas.Add(field.Areas[area]);
-                        }
-                        break;
-                    case TeamState.DEFENSIVE:
-                        foreach (var area in fieldPlayer.DefensiveAreas) {
-                            areas.Add(field.Areas[area]);
-                        }
-                        break;
-                }
-            }
-            return areas;
-        }
-
-        private void SetPlayerAreas(Player player, int area) {
-            if (player is  FieldPlayer fieldPlayer) {
-                switch (TeamState) {
-                    case TeamState.OFFENSIVE:
-                        if (area != fieldPlayer.OffensiveHomeArea) {
-                            if (fieldPlayer.OffensiveAreas.Contains(area))
-                                fieldPlayer.OffensiveAreas.Remove(area);
-                            else
-                                fieldPlayer.OffensiveAreas.Add(area);
-                        }
-                        break;
-                    case TeamState.DEFENSIVE:
-                        if (area != fieldPlayer.OffensiveHomeArea) {
-                            if (fieldPlayer.DefensiveAreas.Contains(area))
-                                fieldPlayer.DefensiveAreas.Remove(area);
-                            else
-                                fieldPlayer.DefensiveAreas.Add(area);
-                        }
-                        break;
-                }
-            }
+        public void DeleteStrategy() {
+            Strategy = null;
         }
 
         protected override void Update(GameTime gameTime) {
             base.Update(gameTime);
+
+            if (Strategy == null)
+                return;
 
             previousMouseState = currentMouseState;
             currentMouseState = Mouse.GetState();
@@ -267,12 +332,13 @@ namespace IndoorFootballStrategySimulator {
                 area.Draw(Editor.spriteBatch, Color.Red);
             foreach (var goal in goals)
                 goal.Draw(Editor.spriteBatch);
-            foreach (var player in Strategy.Players)
-                player.Draw(Editor.spriteBatch);
+            if (Strategy != null) {
+                foreach (var player in Strategy.Players)
+                    player.Draw(Editor.spriteBatch);
+            }
             if (selectedPlayer != null) {
-                foreach (var area in GetPlayerAreas(selectedPlayer)) {
+                foreach (var area in GetPlayerAreas(selectedPlayer))
                     area.Fill(Editor.spriteBatch, Color.Red * 0.2f);
-                }
             }
 
             Editor.spriteBatch.End();

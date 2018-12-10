@@ -3,17 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace IndoorFootballStrategySimulator.Simulation
 {
+    [DataContract]
     public class GoalKeeper : Player
     {
 
         private FSM<GoalKeeper> gkStateMachine;
 
+        [DataMember]
         public int HomeArea { get; set; }
+
+        [DataMember]
         public List<int> Areas { get; set; }
 
         public GoalKeeper(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed,

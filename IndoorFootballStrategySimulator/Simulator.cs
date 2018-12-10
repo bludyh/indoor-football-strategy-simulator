@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -23,8 +24,20 @@ namespace IndoorFootballStrategySimulator {
         public Simulator() {
             InitializeComponent();
 
-            dataGridView1.Columns.Add("Home Strategy", "Home Strategy");
-            dataGridView1.Columns.Add("Selection", "Name");
+            Directory.CreateDirectory(@"Data\Strategies");
+
+            GetStrategyFiles();
+        }
+
+        private void GetStrategyFiles() {
+            dgvStrategies.Rows.Clear();
+
+            var files = Directory.GetFiles(@"Data\Strategies");
+
+            foreach (var file in files) {
+                var fileInfo = new FileInfo(file);
+                dgvStrategies.Rows.Add(Path.GetFileNameWithoutExtension(fileInfo.Name), fileInfo.CreationTime.ToShortDateString(), fileInfo.LastWriteTime.ToShortDateString());
+            }
         }
 
         private void Pause_btn_Click(object sender, EventArgs e)
@@ -72,5 +85,66 @@ namespace IndoorFootballStrategySimulator {
                     break;
             }
         }
+
+        private void BtnSaveStrategy_Click(object sender, EventArgs e) {
+            try {
+                if (string.IsNullOrWhiteSpace(tbStrategyName.Text))
+                    throw new Exception("Please provide a name for the strategy");
+
+                strategyWindow.Strategy.Name = tbStrategyName.Text;
+                strategyWindow.Strategy.Description = rtbStrategyDescription.Text;
+
+                strategyWindow.SaveStrategyToFile($@"Data\Strategies\{ strategyWindow.Strategy.Name }.xml");
+
+                GetStrategyFiles();
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message, "Warning");
+            }
+        }
+
+        private void DgvStrategies_SelectionChanged(object sender, EventArgs e) {
+            try {
+                if (dgvStrategies.SelectedRows.Count > 0) {
+                    strategyWindow.LoadStrategyFromFile($@"Data\Strategies\{ dgvStrategies.CurrentRow.Cells["StrategyName"].Value }.xml");
+
+                    pnStrategy.Enabled = true;
+                    rbOffensive.Checked = true;
+                    tbStrategyName.Text = strategyWindow.Strategy.Name;
+                    rtbStrategyDescription.Text = strategyWindow.Strategy.Description;
+                }
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message, "Warning");
+            }
+        }
+
+        private void BtnDiscardChanges_Click(object sender, EventArgs e) {
+            DgvStrategies_SelectionChanged(sender, e);
+        }
+
+        private void BtnNewStrategy_Click(object sender, EventArgs e) {
+            strategyWindow.CreateNewStrategy();
+
+            pnStrategy.Enabled = true;
+            rbOffensive.Checked = true;
+            tbStrategyName.Text = strategyWindow.Strategy.Name;
+            rtbStrategyDescription.Text = strategyWindow.Strategy.Description;
+            dgvStrategies.ClearSelection();
+        }
+
+        private void BtnDeleteStrategy_Click(object sender, EventArgs e) {
+            if (dgvStrategies.SelectedRows.Count > 0) {
+                strategyWindow.DeleteStrategy();
+                File.Delete($@"Data\Strategies\{ dgvStrategies.CurrentRow.Cells["StrategyName"].Value }.xml");
+
+                pnStrategy.Enabled = false;
+                rbOffensive.Checked = true;
+                tbStrategyName.Text = string.Empty;
+                rtbStrategyDescription.Text = string.Empty;
+                GetStrategyFiles();
+            }
+        }
+
     }
 }
