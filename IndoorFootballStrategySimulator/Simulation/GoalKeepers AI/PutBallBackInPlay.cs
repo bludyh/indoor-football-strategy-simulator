@@ -28,7 +28,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         public override void OnEnter(GoalKeeper owner)
         {
             //let the team know that keeper is in control
-            owner.Team.SetControllingPlayer(owner);
+            owner.Team.ControllingPlayer = owner;
 
             //send all the players home
             owner.Team.Opponents.ReturnAllPlayersToHome();

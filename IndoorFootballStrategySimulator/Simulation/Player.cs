@@ -19,7 +19,8 @@ namespace IndoorFootballStrategySimulator.Simulation {
         public Team Team { get; private set; }
         public Field Field { get; private set; }
         public Ball Ball { get; private set; }
-        public float DistanceToBall { get; private set; }
+        public float DistanceToBall { get; set; }
+        public PlayerRole PlayerRole { get; private set; }
 
         
         /// <summary>
@@ -34,9 +35,12 @@ namespace IndoorFootballStrategySimulator.Simulation {
         /// <param name="mass"></param>
         /// <param name="maxForce"></param>
         /// <param name="maxSpeed"></param>
-        public Player(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed, Team team)
+        public Player(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed, Team team, PlayerRole role)
             : base(texture, color, scale, pos, rot, radius, mass, maxForce, maxSpeed) {
             Team = team;
+            Field = SimulationWindow.EntityManager.Field;
+            Ball = SimulationWindow.EntityManager.Ball;
+            PlayerRole = role;
             Steering = new SteeringManager(this);
         }
 
@@ -78,24 +82,84 @@ namespace IndoorFootballStrategySimulator.Simulation {
         /// </summary>
         /// <returns></returns>
         public bool isClosestTeamMemberToBall() {
-            if (Team.PlayerClosetToBall() == this)
+            if (Team.PlayerClosestToBall == this)
                 return true;
             return false;
         }
 
-        public bool isClosetPlayerOnPitchToBall() {
+        public bool isClosestPlayerOnPitchToBall() {
             // return isClosetPlayerOnPitchToBall() && (DistanceToBall < Team.Opponents().ClosetDisToBall());
             return false;
         }
 
         public bool BallWithinKeeperRange() {
-            //TODO 
-            // return (Vector2.Distance(Position,Ball))
-            return false;
+            return (Vector2.DistanceSquared(this.Position, Ball.Position) < (10f * 10f));
         }
         public bool BallWithinKickingRange()
         {
-            return (Vector2.Distance(SimulationWindow.EntityManager.Ball.Position, this.Position) < 7f);
+            return (Vector2.DistanceSquared(Ball.Position, this.Position) < (10f*10f));
+        }
+        public bool AtTarget()
+        {
+            return (Vector2.DistanceSquared(this.Position, this.Steering.Target) < (10f*10f));
+        }
+        public void TrackBall()
+        {
+            RotateHeadingToFacePosition(Ball.Position);
+        }
+        public bool isControllingPlayer()
+        {
+            return (Team.ControllingPlayer == this);
+        }
+        public bool isAheadOfAttacker()
+        {
+            return (Math.Abs(this.Position.X - Team.OpponentsGoal.Center.X)
+                    < Math.Abs(Team.ControllingPlayer.Position.X - Team.OpponentsGoal.Center.X));
+        }
+        public void FindSupport()
+        {
+            //if there is no support we need to find a suitable player.
+            if (Team.SupportingPlayer == null)
+            {
+                Player bestSupportPlayer = Team.DetermineBestSupportingAttacker();
+                Team.SupportingPlayer = bestSupportPlayer;
+            }
+
+            Player BestSupportPlayer = Team.DetermineBestSupportingAttacker();
+
+            //if the best player available to support the attacker changes, update
+            //the pointers and send messages to the relevant players to update their
+            //states
+            if (BestSupportPlayer != null && (BestSupportPlayer != Team.SupportingPlayer))
+            {
+                Team.SupportingPlayer = BestSupportPlayer;
+            }
+        }
+        public bool isThreatened()
+        {
+            //check against all opponents to make sure non are within this
+            //player's comfort zone
+            foreach (Player oppPlayer in Team.Opponents.listMembers)
+            {
+                if (PositionInFrontOfPlayer(oppPlayer.Position) && (Vector2.DistanceSquared(this.Position,oppPlayer.Position)<(60f*60f)))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        public bool PositionInFrontOfPlayer(Vector2 position)
+        {
+            Vector2 ToSubject = Vector2.Subtract(position, this.Position);
+
+            if (Vector2.Dot(ToSubject,this.Heading) > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

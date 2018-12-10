@@ -28,6 +28,8 @@ namespace IndoorFootballStrategySimulator.Simulation {
         ///     Gets the <see cref="Simulation.Ball"/> object.
         /// </summary>
         public Ball Ball { get; private set; }
+        public Goal BlueGoal { get; private set; }
+        public Goal RedGoal { get; private set; }
 
         /// <summary>
         ///     Gets a list of all players.
@@ -52,9 +54,20 @@ namespace IndoorFootballStrategySimulator.Simulation {
             Ball = new Ball(texture, Color.White, new Vector2(1f, 1f), new Vector2(640f, 288f), 0f, 9f, 1f, 0f, 0f);
             Entities.Add(Ball);
 
+            // Draw Goal
+            //Draw Goal
+            texture = editor.Content.Load<Texture2D>($"SoccerGoal");
+            BlueGoal = new Goal(texture,Color.White, new Vector2(1f, 1f), new Vector2(40f, 288f), 0f);
+            Entities.Add(BlueGoal);
+
+            //Draw Goal
+            texture = editor.Content.Load<Texture2D>($"SoccerGoal");
+            RedGoal = new Goal(texture, Color.White, new Vector2(1f, 1f), new Vector2(1240f, 288f), MathHelper.Pi);
+            Entities.Add(RedGoal);
+
             Players = new List<Player>();
-            BlueTeam = new Team(Team.Color.BLUE, editor);
-            RedTeam = new Team(Team.Color.RED, editor);
+            BlueTeam = new Team(BlueGoal, RedGoal, Team.Color.BLUE, editor);
+            RedTeam = new Team(RedGoal, BlueGoal, Team.Color.RED, editor);
         }
 
         /// <summary>
@@ -64,6 +77,8 @@ namespace IndoorFootballStrategySimulator.Simulation {
         public void Update(GameTime gameTime) {
             foreach (var entity in Entities)
                 entity.Update(gameTime);
+            BlueTeam.Update(gameTime);
+            RedTeam.Update(gameTime);
         }
 
         /// <summary>

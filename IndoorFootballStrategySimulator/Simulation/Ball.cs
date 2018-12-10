@@ -81,5 +81,17 @@ namespace IndoorFootballStrategySimulator.Simulation {
             if (closestWall != null && Vector2.Dot(Vector2.Normalize(Velocity), closestWall.Normal) < 0)
                 Velocity = Vector2.Reflect(Velocity, closestWall.Normal) * 0.8f;
         }
+        public static Vector2 AddNoiseToKick(Vector2 BallPos, Vector2 BallTarget)
+        {
+
+            float displacement = (float)(MathHelper.Pi - MathHelper.Pi * 0.99) * new Random().NextFloat(0, 1f);
+
+            Vector2 toTarget = Vector2.Subtract(BallTarget, BallPos);
+            Matrix rotationMatrix = Matrix.CreateRotationZ(displacement);
+
+            SupportCalculate.TransformVector2(rotationMatrix, toTarget);
+
+            return Vector2.Add(toTarget, BallPos);
+        }
     }
 }

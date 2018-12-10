@@ -12,15 +12,15 @@ namespace IndoorFootballStrategySimulator.Simulation
     {
 
         private FSM<FieldPlayer> fpStateMachine;
-
         public int OffensiveHomeArea { get; set; }
         public List<int> OffensiveAreas { get; set; }
         public int DefensiveHomeArea { get; set; }
         public List<int> DefensiveAreas { get; set; }
+        public static PlayerRole Role { get; private set; }
 
         public FieldPlayer(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed,
-            Team team = null, int offHomeArea = -1, List<int> offAreas = null, int defHomeArea = -1, List<int> defAreas = null, State<FieldPlayer> startState = null) 
-            : base(texture, color, scale, pos, rot, radius, mass, maxForce, maxSpeed, team)
+            Team team= null, int offHomeArea = -1, List<int> offAreas = null, int defHomeArea = -1, List<int> defAreas = null, State<FieldPlayer> startState = null) 
+            : base(texture, color, scale, pos, rot, radius, mass, maxForce, maxSpeed, team, Role)
         {
             fpStateMachine = new FSM<FieldPlayer>(this);
             OffensiveHomeArea = offHomeArea;
@@ -35,6 +35,8 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
+            fpStateMachine.Update(gameTime);
         }
         public FSM<FieldPlayer> GetFSM()
         {

@@ -24,7 +24,7 @@ namespace IndoorFootballStrategySimulator.Simulation {
         /// </summary>
         public List<Line> Walls { get; private set; }
         
-        public Boolean GoalKeeperHasBall { get;  set; }
+        public bool GoalKeeperHasBall { get;  set; }
         /// <summary>
         ///     Initializes a new instance of the <see cref="Field"/> class.
         /// </summary>

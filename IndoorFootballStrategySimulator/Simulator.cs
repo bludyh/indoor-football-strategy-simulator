@@ -15,9 +15,11 @@ using IndoorFootballStrategySimulator.Simulation;
 namespace IndoorFootballStrategySimulator {
     public partial class Simulator : Form {
 		public static bool Pause { get; private set; }
+        public static bool isGameOn { get; private set; }
 
         static Simulator() {
             Pause = true;
+            isGameOn = false;
         }
 
         public Simulator() {
@@ -47,6 +49,7 @@ namespace IndoorFootballStrategySimulator {
 
         private void Start_btn_Click(object sender, EventArgs e)
 		{
+            isGameOn = true;
             Pause = false;
 			tab_ctrl.SelectTab(Simulation_tb);
 		}
