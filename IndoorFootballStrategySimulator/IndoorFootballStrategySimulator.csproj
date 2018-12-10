@@ -95,6 +95,7 @@
     <Compile Include="Simulation\GoalKeepers AI\ReturnHome.cs" />
     <Compile Include="Simulation\State.cs" />
     <Compile Include="Simulation\SteeringManager.cs" />
+    <Compile Include="Simulation\Team AI\PrepareForKickOff.cs" />
     <Compile Include="Simulation\Team.cs" />
     <Compile Include="Simulation\GoalKeepers AI\TendGoal.cs" />
     <Compile Include="Simulator.cs">
