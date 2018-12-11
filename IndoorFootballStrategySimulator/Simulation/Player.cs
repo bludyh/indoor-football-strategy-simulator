@@ -25,8 +25,8 @@ namespace IndoorFootballStrategySimulator.Simulation {
         public Ball Ball { get { return SimulationWindow.EntityManager.Ball; }}
         public float DistanceToBall { get; set; }
         public PlayerRole PlayerRole { get; private set; }
+        public Area HomeRegion { get {return GetPlayerHomeArea(this); }}
 
-        
         /// <summary>
         ///     Initializes a new instance of the <see cref="Player"/> class.
         /// </summary>
@@ -52,7 +52,7 @@ namespace IndoorFootballStrategySimulator.Simulation {
         /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime) {
             HandleOverlapping();
-
+          
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             Vector2 force = Steering.Calculate();
             Vector2 acceleration = force / Mass;
@@ -157,17 +157,32 @@ namespace IndoorFootballStrategySimulator.Simulation {
         {
             return Math.Abs(Position.X - Team.OpponentsGoal.Center.X) < Field.PlayingArea.Length / 3f;
         }
-
+        protected Area GetPlayerHomeArea(Player player)
+        {
+            if (player is GoalKeeper goalKeeper)
+                return Field.Areas[goalKeeper.HomeArea];
+            else if (player is FieldPlayer fieldPlayer)
+            {
+                switch (Team.TeamState)
+                {
+                    case TeamState.OFFENSIVE:
+                        return Field.Areas[fieldPlayer.OffensiveHomeArea];
+                    case TeamState.DEFENSIVE:
+                        return Field.Areas[fieldPlayer.DefensiveHomeArea];
+                }
+            }
+            return null;
+        }
         #region TODO
         public bool InHomeRegion()
         {
             if (PlayerRole == PlayerRole.GoalKeeper)
             {
-                return false;
+                return HomeRegion.Inside(Position,Area.AreaModifer.Normal);
             }
             else
             {
-                return true;
+                return HomeRegion.Inside(Position,Area.AreaModifer.HalfSize);
             }
         }
         //Missing Event

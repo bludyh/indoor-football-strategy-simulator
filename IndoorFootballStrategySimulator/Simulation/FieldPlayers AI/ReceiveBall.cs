@@ -63,7 +63,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             }
             else
             {
-                //owner.Steering.StartPursuit();
+                owner.Steering.StartPursuit(SimulationWindow.EntityManager.Ball);
             }
 
         }

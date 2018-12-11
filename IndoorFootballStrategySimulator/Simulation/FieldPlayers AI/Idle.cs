@@ -20,7 +20,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         {
             if (!Simulator.isGameOn)
             {
-                //player.Steering.Target = player.HomeArea.Center;
+                player.Steering.Target = player.HomeRegion.Center;
             }
         }
         public override void Handle(FieldPlayer player)
@@ -28,7 +28,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             //if the player has been jostled out of position, get back in position  
             if (!player.AtTarget())
             {
-                //player.Steering.StartArrival();
+                player.Steering.StartArrival(player.Steering.Target);
                 return;
             }
             else

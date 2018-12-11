@@ -16,6 +16,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         {
             RED, BLUE
         }
+        public TeamState TeamState { get; set; }
         public List<Player> listMembers = new List<Player>(5);
         public Player PlayerClosestToBall { get; set; }
         public Player ControllingPlayer { get; set; }
@@ -290,7 +291,7 @@ namespace IndoorFootballStrategySimulator.Simulation
                     FieldPlayer player = (FieldPlayer)curPlayer;
                     if (player.GetFSM().IsInState(Idle.Instance()) || player.GetFSM().IsInState(ReturnToHomeRegion.Instance()))
                     {
-                        //player.Steering.Target = player.HomeArea.Center;
+                        player.Steering.Target = player.HomeRegion.Center;
                     }
                 }
             }
