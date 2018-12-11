@@ -58,6 +58,9 @@ namespace IndoorFootballStrategySimulator.Simulation {
         public void Update(GameTime gameTime) {
             foreach (var entity in Entities)
                 entity.Update(gameTime);
+
+            BlueTeam.Update(gameTime);
+            RedTeam.Update(gameTime);
         }
 
         /// <summary>

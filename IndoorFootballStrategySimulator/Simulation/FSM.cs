@@ -22,7 +22,6 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public void Update(GameTime gameTime)
         {
-
             if (CurrentState != null)
             {
                 CurrentState.Handle(Owner);

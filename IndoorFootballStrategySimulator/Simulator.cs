@@ -18,6 +18,7 @@ namespace IndoorFootballStrategySimulator {
     public partial class Simulator : Form {
 
 		public static bool Pause { get; private set; }
+        public static bool isGameOn { get; set; }
 
         private string[] StrategyFiles {
             get {
@@ -27,6 +28,7 @@ namespace IndoorFootballStrategySimulator {
 
         static Simulator() {
             Pause = true;
+            isGameOn = false;
         }
 
         public Simulator() {
@@ -137,7 +139,7 @@ namespace IndoorFootballStrategySimulator {
 		}
 
         private void DgvHomeStrategies_SelectionChanged(object sender, EventArgs e) {
-            try {
+            //try {
                 if (dgvHomeStrategies.SelectedCells.Count > 0) {
                     strategyPreviewWindowHome.LoadStrategyFromFile($@"Data\Strategies\{ dgvHomeStrategies.CurrentCell.Value }.xml");
 
@@ -146,14 +148,14 @@ namespace IndoorFootballStrategySimulator {
                     lbHomeStrategyName.Text = strategyPreviewWindowHome.Strategy.Name;
                     lbHomeStrategyDescription.Text = strategyPreviewWindowHome.Strategy.Description;
                 }
-            }
-            catch (Exception ex) {
-                MessageBox.Show(ex.Message, "Warning");
-            }
+            //}
+            //catch (Exception ex) {
+            //    MessageBox.Show(ex.Message, "Warning");
+            //}
         }
 
         private void DgvAwayStrategies_SelectionChanged(object sender, EventArgs e) {
-            try {
+            //try {
                 if (dgvAwayStrategies.SelectedCells.Count > 0) {
                     strategyPreviewWindowAway.LoadStrategyFromFile($@"Data\Strategies\{ dgvAwayStrategies.CurrentCell.Value }.xml");
 
@@ -162,10 +164,10 @@ namespace IndoorFootballStrategySimulator {
                     lbAwayStrategyName.Text = strategyPreviewWindowAway.Strategy.Name;
                     lbAwayStrategyDescription.Text = strategyPreviewWindowAway.Strategy.Description;
                 }
-            }
-            catch (Exception ex) {
-                MessageBox.Show(ex.Message, "Warning");
-            }
+            //}
+            //catch (Exception ex) {
+            //    MessageBox.Show(ex.Message, "Warning");
+            //}
         }
 
         private void RadioButtons_CheckedChanged(object sender, EventArgs e) {

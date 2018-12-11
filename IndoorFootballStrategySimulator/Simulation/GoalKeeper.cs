@@ -20,10 +20,11 @@ namespace IndoorFootballStrategySimulator.Simulation
 
         [DataMember]
         public List<int> Areas { get; set; }
+        public static PlayerRole Role { get; private set; }
 
         public GoalKeeper(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed,
             Team team = null, int homeArea = -1, List<int> areas = null, State<GoalKeeper> startState = null)
-            : base(texture, color, scale, pos, rot, radius, mass, maxForce, maxSpeed, team)
+            : base(texture, color, scale, pos, rot, radius, mass, maxForce, maxSpeed, team, Role)
         {
             gkStateMachine = new FSM<GoalKeeper>(this);
             HomeArea = homeArea;
@@ -38,6 +39,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         {
             base.Update(gameTime);
             BounceBall();
+            gkStateMachine.Update(gameTime);
         }
         public FSM<GoalKeeper> GetFSM()
         {
@@ -67,23 +69,21 @@ namespace IndoorFootballStrategySimulator.Simulation
         /// Goal keeper intercept range =100
         /// </summary>
         /// <returns></returns>
-        public Boolean TooFarFromGoalMouth() {
-            return (Vector2.Distance(Position, GetRearInterposeTarget()) > 100);
+        public bool TooFarFromGoalMouth() {
+            return (Vector2.DistanceSquared(Position, GetRearInterposeTarget()) > (100f*100f));
         }
 
         public Vector2 GetRearInterposeTarget() {
-            //float xPosTarget = Team.Goal.Center.X;
+            float xPosTarget = Team.Goal.Center.X;
 
-            //float yPosTarget = Field.Position.Y- Vector2.Subtract(Team.Goal.LeftPostPos,Team.Goal.RightPostPos).Length();
+            float yPosTarget = Field.PlayingArea.Center.Y- Vector2.Distance(Team.Goal.LeftPostPos,Team.Goal.RightPostPos)*0.5f
+                +(Ball.Position.Y * Vector2.Distance(Team.Goal.LeftPostPos, Team.Goal.RightPostPos)) / Field.PlayingArea.Height;
 
-            //return new Vector2(xPosTarget,yPosTarget);
-            return new Vector2(1, 2);
-
+            return new Vector2(xPosTarget,yPosTarget);
         }
 
-        public Boolean BallWithinRangeForIntercept() {
-            //Todo return (Vector2.Distance(Team.Goal.Center,))
-            return false;
+        public bool BallWithinRangeForIntercept() {
+            return (Vector2.DistanceSquared(Team.Goal.Center, SimulationWindow.EntityManager.Ball.Position) < (100f *100f));
         }
     }
 }

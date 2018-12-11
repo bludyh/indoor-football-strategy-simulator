@@ -10,7 +10,10 @@ using MonoGame.Forms.Controls;
 
 namespace IndoorFootballStrategySimulator.Simulation {
     public class Area {
-
+        public enum AreaModifer
+        {
+            HalfSize, Normal
+        }
         public float LeftX { get; private set; }
         public float RightX { get; private set; }
         public float TopY { get; private set; }
@@ -50,7 +53,10 @@ namespace IndoorFootballStrategySimulator.Simulation {
                 return new Vector2((LeftX + RightX) / 2f, (TopY + BottomY) / 2f);
             }
         }
-
+        public float Length
+        {
+            get { return Math.Max(Width, Height); }
+        }
         public Area(float leftX, float rightX, float topY, float bottomY) {
             LeftX = leftX;
             RightX = rightX;
@@ -76,6 +82,28 @@ namespace IndoorFootballStrategySimulator.Simulation {
         public void Fill(SpriteBatch sb, Color color) {
             sb.Draw(Utilities.SimpleTexture, new Rectangle((int)LeftX, (int)TopY, (int)Width, (int)Height), color);
         }
+        /* returns true if the given position lays inside the region. 
+         * The region modifier can be used to contract the region bounderies */
+        public bool Inside(Vector2 position)
+        {
+            return Inside(position, AreaModifer.Normal);
+        }
 
+        public bool Inside(Vector2 position, AreaModifer areaModifer)
+        {
+            if (areaModifer == AreaModifer.Normal)
+            {
+                return ((position.X > LeftX) && (position.X < RightX)
+                        && (position.Y > TopY) && (position.Y < BottomY));
+            }
+            else
+            {
+                float marginX = Width * 0.25f;
+                float marginY = Height * 0.25f;
+
+                return ((position.X > (LeftX + marginX)) && (position.X < (RightX - marginX))
+                        && (position.Y > (TopY + marginY)) && (position.Y < (BottomY - marginY)));
+            }
+        }
     }
 }

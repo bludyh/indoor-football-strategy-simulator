@@ -17,14 +17,25 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void OnEnter(Team team)
         {
-
+            //if a player is in either the Wait or ReturnToHomeRegion states, its
+            //steering target must be updated to that of its new home region to enable
+            //it to move into the correct position.
+            team.UpdateTargetsOfWaitingPlayers();
         }
         public override void Handle(Team team)
         {
-
+            //if this team is no longer in control change states
+            if (!team.InControl())
+            {
+                team.GetFSM().ChangeState(Defensive.Instance());
+                return;
+            }
+            //calculate the best position for any supporting attacker to move to
+            SupportCalculate.DetermineBestSupportingPosition();
         }
         public override void OnExit(Team team)
         {
+            team.SupportingPlayer = null;
         }
     }
 }
