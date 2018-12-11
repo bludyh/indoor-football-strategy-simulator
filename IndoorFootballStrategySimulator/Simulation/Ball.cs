@@ -84,14 +84,18 @@ namespace IndoorFootballStrategySimulator.Simulation {
         public static Vector2 AddNoiseToKick(Vector2 BallPos, Vector2 BallTarget)
         {
 
-            float displacement = (float)(MathHelper.Pi - MathHelper.Pi * 0.99) * new Random().NextFloat(0, 1f);
+            float displacement = (float)(MathHelper.Pi - MathHelper.Pi * 0.99) * (SupportCalculate.RandFloat() - SupportCalculate.RandFloat());
 
             Vector2 toTarget = Vector2.Subtract(BallTarget, BallPos);
             Matrix rotationMatrix = Matrix.CreateRotationZ(displacement);
-
             SupportCalculate.TransformVector2(rotationMatrix, toTarget);
 
             return Vector2.Add(toTarget, BallPos);
         }
+        public void Trap()
+        {
+            Velocity = Vector2.Zero;
+        }
+
     }
 }

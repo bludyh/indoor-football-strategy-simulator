@@ -39,7 +39,6 @@ namespace IndoorFootballStrategySimulator.Simulation
         {
             base.Update(gameTime);
             BounceBall();
-            base.Update(gameTime);
             gkStateMachine.Update(gameTime);
         }
         public FSM<GoalKeeper> GetFSM()

@@ -17,7 +17,7 @@ using IndoorFootballStrategySimulator.Simulation;
 namespace IndoorFootballStrategySimulator {
     public partial class Simulator : Form {
 		public static bool Pause { get; private set; }
-        public static bool isGameOn { get; private set; }
+        public static bool isGameOn { get; set; }
 
         static Simulator() {
             Pause = true;
@@ -98,6 +98,7 @@ namespace IndoorFootballStrategySimulator {
             DialogResult result = MessageBox.Show("Do you want to abort simulation?","Confirmation", MessageBoxButtons.OKCancel);
             if (result == DialogResult.OK)
             {
+                isGameOn = false;
                 tab_ctrl.SelectTab(result_tab);
             }
 		}

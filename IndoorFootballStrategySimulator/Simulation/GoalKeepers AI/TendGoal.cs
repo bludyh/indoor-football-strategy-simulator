@@ -25,8 +25,10 @@ namespace IndoorFootballStrategySimulator.Simulation
             //if the ball comes in range the keeper traps t and then changes state to put
             //ball back in play
             if (owner.BallWithinKeeperRange()) {
+                owner.Ball.Trap();
                 owner.Field.GoalKeeperHasBall = true;
                 owner.GetFSM().ChangeState(PutBallBackInPlay.Instance());
+                return;
             }
 
             //if ball is within a predefined distance, keeper moves out from 
@@ -38,6 +40,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             //if keeper is too far away from goal, he should go back to goal region
             if (owner.TooFarFromGoalMouth() && owner.Team.InControl()) {
                 owner.GetFSM().ChangeState(ReturnHome.Instance());
+                return;
             }
 
         }

@@ -16,23 +16,26 @@ namespace IndoorFootballStrategySimulator.Simulation.Team_AI
         }
         public override void Handle(Team team)
         {
-            throw new NotImplementedException();
+            if (team.AllPlayersAtHome() && team.Opponents.AllPlayersAtHome())
+            {
+                team.GetFSM().ChangeState(Defensive.Instance());
+            }
         }
 
         public override void OnEnter(Team team)
         {
             //reset Key player pointers
             team.SetControllingPlayer(null);
-            team.SetPlayerClosetToBall(null);
-            //team.SetSupportingPlayer(null);
-            //team.SetReceiver(null);
+            team.PlayerClosestToBall = null;
+            team.SupportingPlayer = null;
+            team.ReceivingPlayer = null;
 
             team.ReturnAllPlayersToHome();
         }
 
         public override void OnExit(Team team)
         {
-            throw new NotImplementedException();
+            Simulator.isGameOn = true;
         }
     }
 }

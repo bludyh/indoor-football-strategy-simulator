@@ -82,12 +82,9 @@ namespace IndoorFootballStrategySimulator.Simulation {
             }
             //The next few lines use a rotation matrix to rotate the player's heading
             //vector accordingly
-            Matrix rotationMatrix =
-                Matrix.CreateRotationZ(angle * SupportCalculate.Sign(Heading,toTarget));
-
-           SupportCalculate.TransformVector2(rotationMatrix, Heading);
-           SupportCalculate.TransformVector2(rotationMatrix, Velocity);
-
+            Matrix rotationMatrix = Matrix.CreateRotationZ(angle * SupportCalculate.Sign(Heading,toTarget));
+            SupportCalculate.TransformVector2(rotationMatrix, Heading);
+            SupportCalculate.TransformVector2(rotationMatrix, Velocity);
             return false;
         }
     }

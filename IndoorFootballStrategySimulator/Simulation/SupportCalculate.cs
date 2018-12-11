@@ -126,24 +126,23 @@ namespace IndoorFootballStrategySimulator.Simulation
             }
         }
         public static Vector2 DetermineBestSupportingPosition()
-        {
-            //only update the spots every few frames                              
+        {                             
             if ( bestSupportingSpot != null)
             {
                 return bestSupportingSpot.Position;
             }
             //reset the best supporting spot
             bestSupportingSpot = null;
-            double BestScoreSoFar = 0.0;
+            double BestScoreSoFar = 0;
             foreach (SupportSpot spot in SpotsList)
             {
-                spot.Score = 1.0;
-                if (Team.isPassSafeFromAllOpponents(Team.ControllingPlayer.Position,spot.Position,null, 30f))
+                spot.Score = 1;
+                if (Team.isPassSafeFromAllOpponents(Team.ControllingPlayer.Position,spot.Position,null, 3f))
                 {
-                    spot.Score += 2.0;
+                    spot.Score += 2;
                 }
                 //Test 2. Determine if a goal can be scored from this position.  
-                if (Team.CanShoot(spot.Position,60f))
+                if (Team.CanShoot(spot.Position,6f))
                 {
                     spot.Score += 1.0;
                 }
@@ -152,7 +151,7 @@ namespace IndoorFootballStrategySimulator.Simulation
                 //away than OptimalDistance pixels do not receive a score.
                 if (Team.SupportingPlayer != null)
                 {
-                    const float OptimalDistance = 200.0f;
+                    const float OptimalDistance = 200f;
 
                     float dist = Vector2.Distance(Team.ControllingPlayer.Position, spot.Position);
 
@@ -199,6 +198,11 @@ namespace IndoorFootballStrategySimulator.Simulation
             T2.Y = C.Y + R * (R * PmC.Y - PmC.X * Root) * InvSqrLen;
 
             return true;
+        }
+        public static float RandFloat()
+        {
+
+            return (float)new Random().NextDouble();
         }
     }
 }

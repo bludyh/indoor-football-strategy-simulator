@@ -36,7 +36,10 @@ namespace IndoorFootballStrategySimulator.Simulation {
 
         public override void Update(GameTime gameTime) {
             if (IsScored())
+            {
                 Score++;
+                Simulator.isGameOn = false;
+            }
         }
 
         private bool IsScored() {

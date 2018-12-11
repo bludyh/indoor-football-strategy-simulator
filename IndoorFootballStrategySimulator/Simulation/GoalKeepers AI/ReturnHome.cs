@@ -17,19 +17,18 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void Handle(GoalKeeper owner)
         {
-            //  owner.Steering.Target = owner.HomeRegion.Center;
-
+            //  owner.Steering.Target = owner.HomeArea.Center;
             //if close enough to home or the opponents get control
             //over the ball and change state to tend goal
             //TODO
-            if (!owner.Team.InControl() /*&& owner.InHomeRegion*/) {
+            if (!owner.Team.InControl() /*&& owner.InHomeArea*/) {
                 owner.GetFSM().ChangeState(TendGoal.Instance());
             }
         }
 
         public override void OnEnter(GoalKeeper owner)
         {
-            owner.Steering.StartArrival(owner.Team.Goal.Center);
+            //owner.Steering.StartArrival();
         }
 
         public override void OnExit(GoalKeeper owner)

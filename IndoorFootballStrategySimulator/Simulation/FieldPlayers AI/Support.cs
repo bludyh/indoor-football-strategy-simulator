@@ -20,7 +20,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         {
             //player.Steering.StartArrival();
 
-            player.Steering.Target = player.Team.GetSupportSpot();
+            player.Steering.Target = SupportCalculate.GetBestSupportingSpot();
         }
         public override void Handle(FieldPlayer player)
         {
@@ -32,9 +32,9 @@ namespace IndoorFootballStrategySimulator.Simulation
             }
 
             //if the best supporting spot changes, change the steering target
-            if (player.Team.GetSupportSpot() != player.Steering.Target)
+            if (SupportCalculate.GetBestSupportingSpot() != player.Steering.Target)
             {
-                player.Steering.Target = player.Team.GetSupportSpot();
+                player.Steering.Target = SupportCalculate.GetBestSupportingSpot();
 
                 //player.Steering.StartArrival();
             }
@@ -67,6 +67,11 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void OnExit(FieldPlayer player)
         {
+            // set supporting player to null so that the team knows it has to
+            //determine a new one.
+            player.Team.SupportingPlayer = null;
+
+            player.Steering.StopArrival();
         }
     }
 }

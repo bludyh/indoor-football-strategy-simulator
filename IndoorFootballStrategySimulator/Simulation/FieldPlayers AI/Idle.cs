@@ -20,7 +20,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         {
             if (!Simulator.isGameOn)
             {
-                player.Steering.Target = player.Position;
+                //player.Steering.Target = player.HomeArea.Center;
             }
         }
         public override void Handle(FieldPlayer player)
@@ -28,16 +28,13 @@ namespace IndoorFootballStrategySimulator.Simulation
             //if the player has been jostled out of position, get back in position  
             if (!player.AtTarget())
             {
-                player.Steering.StartArrival(player.Position);
-
+                //player.Steering.StartArrival();
                 return;
             }
             else
             {
                 player.Steering.StopArrival();
-
                 player.Velocity = new Vector2(0, 0);
-
                 //the player should keep his eyes on the ball!
                 player.TrackBall();
             }
@@ -48,7 +45,6 @@ namespace IndoorFootballStrategySimulator.Simulation
                     && player.isAheadOfAttacker())
             {
                 player.Team.RequestPass(player);
-
                 return;
             }
 

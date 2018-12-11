@@ -65,6 +65,7 @@
     <Compile Include="ExtendedUpdateWindow.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Simulation\FieldPlayers AI\ReceiveBall.cs" />
     <Compile Include="StrategyPreviewWindow.cs">
       <SubType>Component</SubType>
     </Compile>

@@ -18,7 +18,6 @@ namespace IndoorFootballStrategySimulator.Simulation
         public override void OnEnter(FieldPlayer player)
         {
             player.Steering.StartSeek(SimulationWindow.EntityManager.Ball.Position);
-
         }
         public override void Handle(FieldPlayer player)
         {

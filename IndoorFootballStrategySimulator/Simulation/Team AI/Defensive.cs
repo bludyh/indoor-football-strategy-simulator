@@ -17,13 +17,16 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void OnEnter(Team team)
         {
-          
-
+            team.UpdateTargetsOfWaitingPlayers();
         }
         public override void Handle(Team team)
         {
-           
-            
+            //if in control change states
+            if (team.InControl())
+            {
+                team.GetFSM().ChangeState(Offensive.Instance());
+                return;
+            }
         }
         public override void OnExit(Team team)
         {

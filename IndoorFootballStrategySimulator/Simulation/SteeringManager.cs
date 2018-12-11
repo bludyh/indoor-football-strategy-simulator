@@ -154,7 +154,10 @@ namespace IndoorFootballStrategySimulator.Simulation {
             if (steeringBehaviors.HasFlag(SteeringBehavior.PURSUIT))
                 steeringBehaviors ^= SteeringBehavior.PURSUIT;
         }
-
+        public bool PursuitIsOn()
+        {
+            return (steeringBehaviors.HasFlag(SteeringBehavior.PURSUIT));
+        }
         /// <summary>
         ///     Calculates the force that steers <see cref="entity"/> away from any nearby walls.
         /// </summary>
