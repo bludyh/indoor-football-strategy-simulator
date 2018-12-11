@@ -44,7 +44,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             {
                 for (int y = 0; y < numY; ++y)
                 {
-                    if (Team.Color == TeamColor.BLUE)
+                    if (Team.TeamColor == Team.Color.BLUE)
                     {
                         SpotsList.Add(new SupportSpot(new Vector2(left + x * SliceX, top + y * SliceY), 0.0));
                     }

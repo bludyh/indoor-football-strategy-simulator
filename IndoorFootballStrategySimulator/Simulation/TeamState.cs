@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace IndoorFootballStrategySimulator.Simulation {
-    enum TeamState {
+    public enum TeamState {
         OFFENSIVE, DEFENSIVE
     }
 }

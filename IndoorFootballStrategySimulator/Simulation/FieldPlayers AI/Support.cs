@@ -36,7 +36,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             {
                 player.Steering.Target = SupportCalculate.GetBestSupportingSpot();
 
-                //player.Steering.StartArrival();
+                player.Steering.StartArrival(player.Steering.Target);
             }
 
             //if this player has a shot at the goal AND the attacker can pass

@@ -34,26 +34,26 @@ namespace IndoorFootballStrategySimulator.Simulation
             //if game is on and close enough to home, change state to wait and set the 
             //player target to his current position.(so that if he gets jostled out of 
             //position he can move back to it)
-            //if (Simulator.isGameOn && owner.HomeArea.Inside(owner.Position, Area.AreaModifer.HalfSize))
-            //{
-            //    owner.Steering.Target = owner.Position;
-            //    owner.GetFSM().ChangeState(Idle.Instance());
-            //} //if game is not on the player must return much closer to the center of his
-            //  //home region
-            //else if (!Simulator.isGameOn && owner.AtTarget())
-            //{
-            //    owner.GetFSM().ChangeState(Idle.Instance());
-            //}
+            if (Simulator.isGameOn && owner.HomeRegion.Inside(owner.Position, Area.AreaModifer.HalfSize))
+            {
+                owner.Steering.Target = owner.Position;
+                owner.GetFSM().ChangeState(Idle.Instance());
+            } //if game is not on the player must return much closer to the center of his
+              //home region
+            else if (!Simulator.isGameOn && owner.AtTarget())
+            {
+                owner.GetFSM().ChangeState(Idle.Instance());
+            }
         }
 
         public override void OnEnter(FieldPlayer owner)
         {
-            //owner.Steering.StartArrival();
+            owner.Steering.StartArrival(owner.Steering.Target);
 
-            //if (!owner.HomeArea.Inside(owner.Steering.Target, Area.AreaModifer.HalfSize))
-            //{
-            //    owner.Steering.Target = owner.HomeArea.Center);
-            //}
+            if (!owner.HomeRegion.Inside(owner.Steering.Target, Area.AreaModifer.HalfSize))
+            {
+                owner.Steering.Target = owner.HomeRegion.Center;
+            }
         }
 
         public override void OnExit(FieldPlayer owner)
