@@ -29,32 +29,26 @@ namespace IndoorFootballStrategySimulator.Simulation {
         /// </summary>
         public Ball Ball { get; private set; }
 
-        /// <summary>
-        ///     Gets a list of all players.
-        /// </summary>
-        public List<Player> Players { get; private set; }
+        public Team BlueTeam { get; private set; }
+        public Team RedTeam { get; private set; }
 
-        private Team BlueTeam;
-        private Team RedTeam;
+        public EntityManager() {
+            Entities = new List<Entity>();
+        }
 
         /// <summary>
         ///     Initializes all entities.
         /// </summary>
         /// <param name="editor"></param>
         public void Initialize(UpdateService editor) {
-            Entities = new List<Entity>();
-
-            Texture2D texture = editor.Content.Load<Texture2D>("SoccerField");
-            Field = new Field(texture, Color.White, new Vector2(1f, 1f), new Vector2(640f, 288f), 0f);
+            Field = new Field(editor.Content.Load<Texture2D>("SoccerField"), Color.White, new Vector2(1f), new Vector2(640f, 288f), 0f);
             Entities.Add(Field);
 
-            texture = editor.Content.Load<Texture2D>("SoccerBall");
-            Ball = new Ball(texture, Color.White, new Vector2(1f, 1f), new Vector2(640f, 288f), 0f, 9f, 1f, 0f, 0f);
+            Ball = new Ball(editor.Content.Load<Texture2D>("SoccerBall"), Color.White, new Vector2(1f), new Vector2(640f, 288f), 0f, 9f, 1f, 0f, 0f);
             Entities.Add(Ball);
 
-            Players = new List<Player>();
-            BlueTeam = new Team(Team.Color.BLUE, editor);
-            RedTeam = new Team(Team.Color.RED, editor);
+            BlueTeam = new Team(editor, TeamColor.BLUE);
+            RedTeam = new Team(editor, TeamColor.RED);
         }
 
         /// <summary>

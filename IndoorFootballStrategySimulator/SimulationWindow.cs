@@ -17,13 +17,16 @@ namespace IndoorFootballStrategySimulator {
         /// </summary>
         public static EntityManager EntityManager { get; private set; }
 
+        static SimulationWindow() {
+            EntityManager = new EntityManager();
+        }
+
         /// <summary>
         ///     Initializes custom contents.
         /// </summary>
         protected override void Initialize() {
             base.Initialize();
 
-            EntityManager = new EntityManager();
             EntityManager.Initialize(Editor);
         }
 

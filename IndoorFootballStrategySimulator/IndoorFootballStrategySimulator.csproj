@@ -65,6 +65,7 @@
     <Compile Include="ExtendedUpdateWindow.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Simulation\TeamColor.cs" />
     <Compile Include="StrategyPreviewWindow.cs">
       <SubType>Component</SubType>
     </Compile>

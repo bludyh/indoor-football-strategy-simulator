@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 
 namespace IndoorFootballStrategySimulator.Simulation {
     [DataContract]
-    class Strategy {
+    public class Strategy {
 
         [DataMember]
         public string Name { get; set; }

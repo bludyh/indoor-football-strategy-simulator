@@ -19,6 +19,10 @@ namespace IndoorFootballStrategySimulator.Simulation {
 
         public List<Area> Areas { get; private set; }
 
+        public List<Area> HomeTeamSpawnAreas { get; private set; }
+
+        public List<Area> AwayTeamSpawnAreas { get; private set; }
+
         /// <summary>
         ///     Gets a list of <see cref="Line"/> that defines the border of the <see cref="Field"/>.
         /// </summary>
@@ -41,6 +45,8 @@ namespace IndoorFootballStrategySimulator.Simulation {
                 Size.Y * 71f / 72f
                 );
             CreateAreas();
+            HomeTeamSpawnAreas = new List<Area> { Areas[2], Areas[6], Areas[8], Areas[11], Areas[13] };
+            AwayTeamSpawnAreas = new List<Area> { Areas[27], Areas[23], Areas[21], Areas[18], Areas[16] };
             Walls = new List<Line> {
                 new Line(new Vector2(PlayingArea.LeftX, PlayingArea.TopY), new Vector2(PlayingArea.RightX, PlayingArea.TopY)),
                 new Line(new Vector2(PlayingArea.RightX, PlayingArea.TopY), new Vector2(PlayingArea.RightX, PlayingArea.BottomY)),

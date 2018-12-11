@@ -24,15 +24,14 @@
         /// </summary>
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Simulator));
-            this.tab_ctrl = new System.Windows.Forms.TabControl();
-            this.Home_tab = new System.Windows.Forms.TabPage();
+            this.tab = new System.Windows.Forms.TabControl();
+            this.tabHome = new System.Windows.Forms.TabPage();
             this.pnAwayTeam = new System.Windows.Forms.Panel();
             this.lbAwayStrategyDescription = new System.Windows.Forms.Label();
             this.rbAwayDefensive = new System.Windows.Forms.RadioButton();
             this.lbAwayStrategyName = new System.Windows.Forms.Label();
             this.rbAwayOffensive = new System.Windows.Forms.RadioButton();
             this.label4 = new System.Windows.Forms.Label();
-            this.strategyPreviewWindowAway = new IndoorFootballStrategySimulator.StrategyPreviewWindow();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgvAwayStrategies = new System.Windows.Forms.DataGridView();
@@ -46,14 +45,13 @@
             this.rbHomeDefensive = new System.Windows.Forms.RadioButton();
             this.rbHomeOffensive = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
-            this.strategyPreviewWindowHome = new IndoorFootballStrategySimulator.StrategyPreviewWindow();
             this.label1 = new System.Windows.Forms.Label();
             this.Intro = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.Start_btn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.Strategies_tab = new System.Windows.Forms.TabPage();
+            this.tabStrategies = new System.Windows.Forms.TabPage();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.pnStrategy = new System.Windows.Forms.Panel();
@@ -63,7 +61,6 @@
             this.rbDefensive = new System.Windows.Forms.RadioButton();
             this.btnSaveStrategy = new System.Windows.Forms.Button();
             this.rbOffensive = new System.Windows.Forms.RadioButton();
-            this.strategyEditingWindow = new IndoorFootballStrategySimulator.StrategyEditingWindow();
             this.btnDiscardChanges = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -77,7 +74,7 @@
             this.btnDeleteStrategy = new System.Windows.Forms.Button();
             this.btnNewStrategy = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.Simulation_tb = new System.Windows.Forms.TabPage();
+            this.tabSimulation = new System.Windows.Forms.TabPage();
             this.label56 = new System.Windows.Forms.Label();
             this.label57 = new System.Windows.Forms.Label();
             this.label58 = new System.Windows.Forms.Label();
@@ -107,8 +104,7 @@
             this.label31 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
-            this.simulationWindow = new IndoorFootballStrategySimulator.SimulationWindow();
-            this.result_tab = new System.Windows.Forms.TabPage();
+            this.tabResults = new System.Windows.Forms.TabPage();
             this.label41 = new System.Windows.Forms.Label();
             this.label42 = new System.Windows.Forms.Label();
             this.button20 = new System.Windows.Forms.Button();
@@ -118,56 +114,60 @@
             this.button24 = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.label43 = new System.Windows.Forms.Label();
-            this.tab_ctrl.SuspendLayout();
-            this.Home_tab.SuspendLayout();
+            this.strategyPreviewWindowAway = new IndoorFootballStrategySimulator.StrategyPreviewWindow();
+            this.strategyPreviewWindowHome = new IndoorFootballStrategySimulator.StrategyPreviewWindow();
+            this.strategyEditingWindow = new IndoorFootballStrategySimulator.StrategyEditingWindow();
+            this.simulationWindow = new IndoorFootballStrategySimulator.SimulationWindow();
+            this.tab.SuspendLayout();
+            this.tabHome.SuspendLayout();
             this.pnAwayTeam.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAwayStrategies)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHomeStrategies)).BeginInit();
             this.pnHomeTeam.SuspendLayout();
-            this.Strategies_tab.SuspendLayout();
+            this.tabStrategies.SuspendLayout();
             this.pnStrategy.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStrategies)).BeginInit();
-            this.Simulation_tb.SuspendLayout();
-            this.result_tab.SuspendLayout();
+            this.tabSimulation.SuspendLayout();
+            this.tabResults.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tab_ctrl
+            // tab
             // 
-            this.tab_ctrl.Controls.Add(this.Home_tab);
-            this.tab_ctrl.Controls.Add(this.Strategies_tab);
-            this.tab_ctrl.Controls.Add(this.Simulation_tb);
-            this.tab_ctrl.Controls.Add(this.result_tab);
-            this.tab_ctrl.Location = new System.Drawing.Point(8, 9);
-            this.tab_ctrl.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.tab_ctrl.Multiline = true;
-            this.tab_ctrl.Name = "tab_ctrl";
-            this.tab_ctrl.SelectedIndex = 0;
-            this.tab_ctrl.Size = new System.Drawing.Size(1329, 709);
-            this.tab_ctrl.TabIndex = 1;
+            this.tab.Controls.Add(this.tabHome);
+            this.tab.Controls.Add(this.tabStrategies);
+            this.tab.Controls.Add(this.tabSimulation);
+            this.tab.Controls.Add(this.tabResults);
+            this.tab.Location = new System.Drawing.Point(8, 9);
+            this.tab.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.tab.Multiline = true;
+            this.tab.Name = "tab";
+            this.tab.SelectedIndex = 0;
+            this.tab.Size = new System.Drawing.Size(1329, 709);
+            this.tab.TabIndex = 1;
             // 
-            // Home_tab
+            // tabHome
             // 
-            this.Home_tab.Controls.Add(this.pnAwayTeam);
-            this.Home_tab.Controls.Add(this.textBox2);
-            this.Home_tab.Controls.Add(this.panel1);
-            this.Home_tab.Controls.Add(this.textBox1);
-            this.Home_tab.Controls.Add(this.pnHomeTeam);
-            this.Home_tab.Controls.Add(this.label1);
-            this.Home_tab.Controls.Add(this.Intro);
-            this.Home_tab.Controls.Add(this.label6);
-            this.Home_tab.Controls.Add(this.label5);
-            this.Home_tab.Controls.Add(this.Start_btn);
-            this.Home_tab.Controls.Add(this.label2);
-            this.Home_tab.Location = new System.Drawing.Point(4, 22);
-            this.Home_tab.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.Home_tab.Name = "Home_tab";
-            this.Home_tab.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.Home_tab.Size = new System.Drawing.Size(1321, 683);
-            this.Home_tab.TabIndex = 0;
-            this.Home_tab.Text = "Home";
-            this.Home_tab.UseVisualStyleBackColor = true;
+            this.tabHome.Controls.Add(this.pnAwayTeam);
+            this.tabHome.Controls.Add(this.textBox2);
+            this.tabHome.Controls.Add(this.panel1);
+            this.tabHome.Controls.Add(this.textBox1);
+            this.tabHome.Controls.Add(this.pnHomeTeam);
+            this.tabHome.Controls.Add(this.label1);
+            this.tabHome.Controls.Add(this.Intro);
+            this.tabHome.Controls.Add(this.label6);
+            this.tabHome.Controls.Add(this.label5);
+            this.tabHome.Controls.Add(this.Start_btn);
+            this.tabHome.Controls.Add(this.label2);
+            this.tabHome.Location = new System.Drawing.Point(4, 22);
+            this.tabHome.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.tabHome.Name = "tabHome";
+            this.tabHome.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.tabHome.Size = new System.Drawing.Size(1321, 683);
+            this.tabHome.TabIndex = 0;
+            this.tabHome.Text = "Home";
+            this.tabHome.UseVisualStyleBackColor = true;
             // 
             // pnAwayTeam
             // 
@@ -207,6 +207,7 @@
             // lbAwayStrategyName
             // 
             this.lbAwayStrategyName.AutoSize = true;
+            this.lbAwayStrategyName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbAwayStrategyName.Location = new System.Drawing.Point(20, 80);
             this.lbAwayStrategyName.Name = "lbAwayStrategyName";
             this.lbAwayStrategyName.Size = new System.Drawing.Size(0, 13);
@@ -234,15 +235,6 @@
             this.label4.Size = new System.Drawing.Size(79, 15);
             this.label4.TabIndex = 95;
             this.label4.Text = "Away Team";
-            // 
-            // strategyPreviewWindowAway
-            // 
-            this.strategyPreviewWindowAway.Location = new System.Drawing.Point(238, 0);
-            this.strategyPreviewWindowAway.Name = "strategyPreviewWindowAway";
-            this.strategyPreviewWindowAway.Size = new System.Drawing.Size(640, 288);
-            this.strategyPreviewWindowAway.TabIndex = 0;
-            this.strategyPreviewWindowAway.TeamState = IndoorFootballStrategySimulator.Simulation.TeamState.OFFENSIVE;
-            this.strategyPreviewWindowAway.Text = "Away";
             // 
             // textBox2
             // 
@@ -391,15 +383,6 @@
             this.label3.TabIndex = 94;
             this.label3.Text = "Home Team";
             // 
-            // strategyPreviewWindowHome
-            // 
-            this.strategyPreviewWindowHome.Location = new System.Drawing.Point(238, 0);
-            this.strategyPreviewWindowHome.Name = "strategyPreviewWindowHome";
-            this.strategyPreviewWindowHome.Size = new System.Drawing.Size(640, 288);
-            this.strategyPreviewWindowHome.TabIndex = 0;
-            this.strategyPreviewWindowHome.TeamState = IndoorFootballStrategySimulator.Simulation.TeamState.OFFENSIVE;
-            this.strategyPreviewWindowHome.Text = "Home";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -465,23 +448,23 @@
             this.label2.TabIndex = 87;
             this.label2.Text = "Select Strategies";
             // 
-            // Strategies_tab
+            // tabStrategies
             // 
-            this.Strategies_tab.Controls.Add(this.label7);
-            this.Strategies_tab.Controls.Add(this.label8);
-            this.Strategies_tab.Controls.Add(this.pnStrategy);
-            this.Strategies_tab.Controls.Add(this.label11);
-            this.Strategies_tab.Controls.Add(this.textBox5);
-            this.Strategies_tab.Controls.Add(this.label12);
-            this.Strategies_tab.Controls.Add(this.panel4);
-            this.Strategies_tab.Location = new System.Drawing.Point(4, 22);
-            this.Strategies_tab.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.Strategies_tab.Name = "Strategies_tab";
-            this.Strategies_tab.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.Strategies_tab.Size = new System.Drawing.Size(1321, 683);
-            this.Strategies_tab.TabIndex = 1;
-            this.Strategies_tab.Text = "Strategies";
-            this.Strategies_tab.UseVisualStyleBackColor = true;
+            this.tabStrategies.Controls.Add(this.label7);
+            this.tabStrategies.Controls.Add(this.label8);
+            this.tabStrategies.Controls.Add(this.pnStrategy);
+            this.tabStrategies.Controls.Add(this.label11);
+            this.tabStrategies.Controls.Add(this.textBox5);
+            this.tabStrategies.Controls.Add(this.label12);
+            this.tabStrategies.Controls.Add(this.panel4);
+            this.tabStrategies.Location = new System.Drawing.Point(4, 22);
+            this.tabStrategies.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.tabStrategies.Name = "tabStrategies";
+            this.tabStrategies.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.tabStrategies.Size = new System.Drawing.Size(1321, 683);
+            this.tabStrategies.TabIndex = 1;
+            this.tabStrategies.Text = "Strategies";
+            this.tabStrategies.UseVisualStyleBackColor = true;
             // 
             // label7
             // 
@@ -582,15 +565,6 @@
             this.rbOffensive.Text = "Offensive";
             this.rbOffensive.UseVisualStyleBackColor = true;
             this.rbOffensive.CheckedChanged += new System.EventHandler(this.RadioButtons_CheckedChanged);
-            // 
-            // strategyEditingWindow
-            // 
-            this.strategyEditingWindow.Location = new System.Drawing.Point(0, 42);
-            this.strategyEditingWindow.Name = "strategyEditingWindow";
-            this.strategyEditingWindow.Size = new System.Drawing.Size(960, 432);
-            this.strategyEditingWindow.TabIndex = 26;
-            this.strategyEditingWindow.TeamState = IndoorFootballStrategySimulator.Simulation.TeamState.OFFENSIVE;
-            this.strategyEditingWindow.Text = "Strategy";
             // 
             // btnDiscardChanges
             // 
@@ -739,47 +713,47 @@
             this.button5.Text = "Delete";
             this.button5.UseVisualStyleBackColor = false;
             // 
-            // Simulation_tb
+            // tabSimulation
             // 
-            this.Simulation_tb.AutoScroll = true;
-            this.Simulation_tb.Controls.Add(this.label56);
-            this.Simulation_tb.Controls.Add(this.label57);
-            this.Simulation_tb.Controls.Add(this.label58);
-            this.Simulation_tb.Controls.Add(this.label59);
-            this.Simulation_tb.Controls.Add(this.label60);
-            this.Simulation_tb.Controls.Add(this.label61);
-            this.Simulation_tb.Controls.Add(this.label62);
-            this.Simulation_tb.Controls.Add(this.label63);
-            this.Simulation_tb.Controls.Add(this.label64);
-            this.Simulation_tb.Controls.Add(this.label44);
-            this.Simulation_tb.Controls.Add(this.label45);
-            this.Simulation_tb.Controls.Add(this.label46);
-            this.Simulation_tb.Controls.Add(this.label47);
-            this.Simulation_tb.Controls.Add(this.label48);
-            this.Simulation_tb.Controls.Add(this.label49);
-            this.Simulation_tb.Controls.Add(this.label50);
-            this.Simulation_tb.Controls.Add(this.label51);
-            this.Simulation_tb.Controls.Add(this.label52);
-            this.Simulation_tb.Controls.Add(this.label53);
-            this.Simulation_tb.Controls.Add(this.label54);
-            this.Simulation_tb.Controls.Add(this.Pause_btn);
-            this.Simulation_tb.Controls.Add(this.Abort_btn);
-            this.Simulation_tb.Controls.Add(this.label55);
-            this.Simulation_tb.Controls.Add(this.label18);
-            this.Simulation_tb.Controls.Add(this.label28);
-            this.Simulation_tb.Controls.Add(this.label30);
-            this.Simulation_tb.Controls.Add(this.label31);
-            this.Simulation_tb.Controls.Add(this.label37);
-            this.Simulation_tb.Controls.Add(this.label38);
-            this.Simulation_tb.Controls.Add(this.simulationWindow);
-            this.Simulation_tb.Location = new System.Drawing.Point(4, 22);
-            this.Simulation_tb.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.Simulation_tb.Name = "Simulation_tb";
-            this.Simulation_tb.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.Simulation_tb.Size = new System.Drawing.Size(1321, 683);
-            this.Simulation_tb.TabIndex = 2;
-            this.Simulation_tb.Text = "Simulation";
-            this.Simulation_tb.UseVisualStyleBackColor = true;
+            this.tabSimulation.AutoScroll = true;
+            this.tabSimulation.Controls.Add(this.label56);
+            this.tabSimulation.Controls.Add(this.label57);
+            this.tabSimulation.Controls.Add(this.label58);
+            this.tabSimulation.Controls.Add(this.label59);
+            this.tabSimulation.Controls.Add(this.label60);
+            this.tabSimulation.Controls.Add(this.label61);
+            this.tabSimulation.Controls.Add(this.label62);
+            this.tabSimulation.Controls.Add(this.label63);
+            this.tabSimulation.Controls.Add(this.label64);
+            this.tabSimulation.Controls.Add(this.label44);
+            this.tabSimulation.Controls.Add(this.label45);
+            this.tabSimulation.Controls.Add(this.label46);
+            this.tabSimulation.Controls.Add(this.label47);
+            this.tabSimulation.Controls.Add(this.label48);
+            this.tabSimulation.Controls.Add(this.label49);
+            this.tabSimulation.Controls.Add(this.label50);
+            this.tabSimulation.Controls.Add(this.label51);
+            this.tabSimulation.Controls.Add(this.label52);
+            this.tabSimulation.Controls.Add(this.label53);
+            this.tabSimulation.Controls.Add(this.label54);
+            this.tabSimulation.Controls.Add(this.Pause_btn);
+            this.tabSimulation.Controls.Add(this.Abort_btn);
+            this.tabSimulation.Controls.Add(this.label55);
+            this.tabSimulation.Controls.Add(this.label18);
+            this.tabSimulation.Controls.Add(this.label28);
+            this.tabSimulation.Controls.Add(this.label30);
+            this.tabSimulation.Controls.Add(this.label31);
+            this.tabSimulation.Controls.Add(this.label37);
+            this.tabSimulation.Controls.Add(this.label38);
+            this.tabSimulation.Controls.Add(this.simulationWindow);
+            this.tabSimulation.Location = new System.Drawing.Point(4, 22);
+            this.tabSimulation.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.tabSimulation.Name = "tabSimulation";
+            this.tabSimulation.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.tabSimulation.Size = new System.Drawing.Size(1321, 683);
+            this.tabSimulation.TabIndex = 2;
+            this.tabSimulation.Text = "Simulation";
+            this.tabSimulation.UseVisualStyleBackColor = true;
             // 
             // label56
             // 
@@ -1056,33 +1030,25 @@
             this.label38.TabIndex = 107;
             this.label38.Text = "Home Team";
             // 
-            // simulationWindow
+            // tabResults
             // 
-            this.simulationWindow.Location = new System.Drawing.Point(19, 34);
-            this.simulationWindow.Name = "simulationWindow";
-            this.simulationWindow.Size = new System.Drawing.Size(1280, 576);
-            this.simulationWindow.TabIndex = 157;
-            this.simulationWindow.Text = "Simulation";
-            // 
-            // result_tab
-            // 
-            this.result_tab.Controls.Add(this.label41);
-            this.result_tab.Controls.Add(this.label42);
-            this.result_tab.Controls.Add(this.button20);
-            this.result_tab.Controls.Add(this.button21);
-            this.result_tab.Controls.Add(this.button22);
-            this.result_tab.Controls.Add(this.button23);
-            this.result_tab.Controls.Add(this.button24);
-            this.result_tab.Controls.Add(this.listView1);
-            this.result_tab.Controls.Add(this.label43);
-            this.result_tab.Location = new System.Drawing.Point(4, 22);
-            this.result_tab.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.result_tab.Name = "result_tab";
-            this.result_tab.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.result_tab.Size = new System.Drawing.Size(1321, 683);
-            this.result_tab.TabIndex = 3;
-            this.result_tab.Text = "Results";
-            this.result_tab.UseVisualStyleBackColor = true;
+            this.tabResults.Controls.Add(this.label41);
+            this.tabResults.Controls.Add(this.label42);
+            this.tabResults.Controls.Add(this.button20);
+            this.tabResults.Controls.Add(this.button21);
+            this.tabResults.Controls.Add(this.button22);
+            this.tabResults.Controls.Add(this.button23);
+            this.tabResults.Controls.Add(this.button24);
+            this.tabResults.Controls.Add(this.listView1);
+            this.tabResults.Controls.Add(this.label43);
+            this.tabResults.Location = new System.Drawing.Point(4, 22);
+            this.tabResults.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.tabResults.Name = "tabResults";
+            this.tabResults.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.tabResults.Size = new System.Drawing.Size(1321, 683);
+            this.tabResults.TabIndex = 3;
+            this.tabResults.Text = "Results";
+            this.tabResults.UseVisualStyleBackColor = true;
             // 
             // label41
             // 
@@ -1185,18 +1151,53 @@
             this.label43.Text = "* 1-2-1 and 2-1-1  proved to ... \"here will explain the results of thestrategy wi" +
     "th the rate of winning %\"";
             // 
+            // strategyPreviewWindowAway
+            // 
+            this.strategyPreviewWindowAway.Location = new System.Drawing.Point(238, 0);
+            this.strategyPreviewWindowAway.Name = "strategyPreviewWindowAway";
+            this.strategyPreviewWindowAway.Size = new System.Drawing.Size(640, 288);
+            this.strategyPreviewWindowAway.TabIndex = 0;
+            this.strategyPreviewWindowAway.TeamState = IndoorFootballStrategySimulator.Simulation.TeamState.OFFENSIVE;
+            this.strategyPreviewWindowAway.Text = "Away";
+            // 
+            // strategyPreviewWindowHome
+            // 
+            this.strategyPreviewWindowHome.Location = new System.Drawing.Point(238, 0);
+            this.strategyPreviewWindowHome.Name = "strategyPreviewWindowHome";
+            this.strategyPreviewWindowHome.Size = new System.Drawing.Size(640, 288);
+            this.strategyPreviewWindowHome.TabIndex = 0;
+            this.strategyPreviewWindowHome.TeamState = IndoorFootballStrategySimulator.Simulation.TeamState.OFFENSIVE;
+            this.strategyPreviewWindowHome.Text = "Home";
+            // 
+            // strategyEditingWindow
+            // 
+            this.strategyEditingWindow.Location = new System.Drawing.Point(0, 42);
+            this.strategyEditingWindow.Name = "strategyEditingWindow";
+            this.strategyEditingWindow.Size = new System.Drawing.Size(960, 432);
+            this.strategyEditingWindow.TabIndex = 26;
+            this.strategyEditingWindow.TeamState = IndoorFootballStrategySimulator.Simulation.TeamState.OFFENSIVE;
+            this.strategyEditingWindow.Text = "Strategy";
+            // 
+            // simulationWindow
+            // 
+            this.simulationWindow.Location = new System.Drawing.Point(19, 34);
+            this.simulationWindow.Name = "simulationWindow";
+            this.simulationWindow.Size = new System.Drawing.Size(1280, 576);
+            this.simulationWindow.TabIndex = 157;
+            this.simulationWindow.Text = "Simulation";
+            // 
             // Simulator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1344, 729);
-            this.Controls.Add(this.tab_ctrl);
+            this.Controls.Add(this.tab);
             this.Name = "Simulator";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Indoor Football Strategy Simulator";
-            this.tab_ctrl.ResumeLayout(false);
-            this.Home_tab.ResumeLayout(false);
-            this.Home_tab.PerformLayout();
+            this.tab.ResumeLayout(false);
+            this.tabHome.ResumeLayout(false);
+            this.tabHome.PerformLayout();
             this.pnAwayTeam.ResumeLayout(false);
             this.pnAwayTeam.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -1204,23 +1205,23 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvHomeStrategies)).EndInit();
             this.pnHomeTeam.ResumeLayout(false);
             this.pnHomeTeam.PerformLayout();
-            this.Strategies_tab.ResumeLayout(false);
-            this.Strategies_tab.PerformLayout();
+            this.tabStrategies.ResumeLayout(false);
+            this.tabStrategies.PerformLayout();
             this.pnStrategy.ResumeLayout(false);
             this.pnStrategy.PerformLayout();
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvStrategies)).EndInit();
-            this.Simulation_tb.ResumeLayout(false);
-            this.Simulation_tb.PerformLayout();
-            this.result_tab.ResumeLayout(false);
-            this.result_tab.PerformLayout();
+            this.tabSimulation.ResumeLayout(false);
+            this.tabSimulation.PerformLayout();
+            this.tabResults.ResumeLayout(false);
+            this.tabResults.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-		private System.Windows.Forms.TabControl tab_ctrl;
-		private System.Windows.Forms.TabPage Home_tab;
+		private System.Windows.Forms.TabControl tab;
+		private System.Windows.Forms.TabPage tabHome;
 		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.TextBox textBox1;
 		private System.Windows.Forms.Panel pnHomeTeam;
@@ -1230,7 +1231,7 @@
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.Button Start_btn;
 		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.TabPage Strategies_tab;
+		private System.Windows.Forms.TabPage tabStrategies;
 		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.Label label8;
 		private System.Windows.Forms.Panel pnStrategy;
@@ -1244,14 +1245,14 @@
 		private System.Windows.Forms.Button btnDeleteStrategy;
 		private System.Windows.Forms.Button btnNewStrategy;
 		private System.Windows.Forms.Button button5;
-		private System.Windows.Forms.TabPage Simulation_tb;
+		private System.Windows.Forms.TabPage tabSimulation;
 		private System.Windows.Forms.Label label18;
 		private System.Windows.Forms.Label label28;
 		private System.Windows.Forms.Label label30;
 		private System.Windows.Forms.Label label31;
 		private System.Windows.Forms.Label label37;
 		private System.Windows.Forms.Label label38;
-		private System.Windows.Forms.TabPage result_tab;
+		private System.Windows.Forms.TabPage tabResults;
 		private System.Windows.Forms.Label label41;
 		private System.Windows.Forms.Label label42;
 		private System.Windows.Forms.Button button20;

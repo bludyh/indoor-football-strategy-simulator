@@ -12,6 +12,19 @@ using IndoorFootballStrategySimulator.Simulation;
 namespace IndoorFootballStrategySimulator {
     class StrategyPreviewWindow : StrategyWindow {
 
+        private TeamColor Team {
+            get {
+                switch (Name) {
+                    case "strategyPreviewWindowHome":
+                        return TeamColor.BLUE;
+                    case "strategyPreviewWindowAway":
+                        return TeamColor.RED;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+        }
+
         protected override void Initialize() {
             base.Initialize();
 
@@ -29,40 +42,45 @@ namespace IndoorFootballStrategySimulator {
             var players = new List<Player>();
 
             for (int i = 0; i < Strategy.Players.Count; i++) {
-                var player = Strategy.Players[i];
-                if (player is GoalKeeper goalKeeper) {
-                    players.Add(new GoalKeeper(
-                        Editor.Content.Load<Texture2D>($"CharacterBlue-{ i + 1 }"),
+                var p = Strategy.Players[i];
+                if (p is GoalKeeper goalKeeper) {
+                    var player = new GoalKeeper(
+                        Editor.Content.Load<Texture2D>($"Character{ ((Team == TeamColor.BLUE) ? "Blue" : "Red") }-{ i + 1 }"),
                         Color.White,
-                        new Vector2(0.5f),
-                        field.Areas[goalKeeper.HomeArea].Center,
-                        0f,
+                        Vector2.One,
+                        field.Areas[(Team == TeamColor.BLUE) ? goalKeeper.HomeArea : 29 - goalKeeper.HomeArea].Center,
+                        (Team == TeamColor.BLUE) ? 0f : MathHelper.Pi,
                         15f,
-                        0f,
-                        0f,
-                        0f,
-                        homeArea: goalKeeper.HomeArea,
-                        areas: goalKeeper.Areas
-                        ));
+                        3f,
+                        100f,
+                        100f,
+                        (Team == TeamColor.BLUE) ? SimulationWindow.EntityManager.BlueTeam : SimulationWindow.EntityManager.RedTeam,
+                        (Team == TeamColor.BLUE) ? goalKeeper.HomeArea : 29 - goalKeeper.HomeArea,
+                        (Team == TeamColor.BLUE) ? goalKeeper.Areas : goalKeeper.Areas.Select(a => 29 - a).ToList(),
+                        TendGoal.Instance());
+                    players.Add(player);
                 }
-                else if (player is FieldPlayer fieldPlayer) {
-                    players.Add(new FieldPlayer(
-                        Editor.Content.Load<Texture2D>($"CharacterBlue-{ i + 1 }"),
+                else if (p is FieldPlayer fieldPlayer) {
+                    var player = new FieldPlayer(
+                        Editor.Content.Load<Texture2D>($"Character{ ((Team == TeamColor.BLUE) ? "Blue" : "Red") }-{ i + 1 }"),
                         Color.White,
-                        new Vector2(0.5f),
-                        field.Areas[fieldPlayer.OffensiveHomeArea].Center,
-                        0f,
+                        Vector2.One,
+                        field.Areas[(Team == TeamColor.BLUE) ? fieldPlayer.OffensiveHomeArea : 29 - fieldPlayer.OffensiveHomeArea].Center,
+                        (Team == TeamColor.BLUE) ? 0f : MathHelper.Pi,
                         15f,
-                        0f,
-                        0f,
-                        0f,
-                        offHomeArea: fieldPlayer.OffensiveHomeArea,
-                        offAreas: fieldPlayer.OffensiveAreas,
-                        defHomeArea: fieldPlayer.DefensiveHomeArea,
-                        defAreas: fieldPlayer.DefensiveAreas
-                        ));
+                        3f,
+                        100f,
+                        100f,
+                        (Team == TeamColor.BLUE) ? SimulationWindow.EntityManager.BlueTeam : SimulationWindow.EntityManager.RedTeam,
+                        (Team == TeamColor.BLUE) ? fieldPlayer.OffensiveHomeArea : 29 - fieldPlayer.OffensiveHomeArea,
+                        (Team == TeamColor.BLUE) ? fieldPlayer.OffensiveAreas : fieldPlayer.OffensiveAreas.Select(a => 29 - a).ToList(),
+                        (Team == TeamColor.BLUE) ? fieldPlayer.DefensiveHomeArea : 29 - fieldPlayer.DefensiveHomeArea,
+                        (Team == TeamColor.BLUE) ? fieldPlayer.DefensiveAreas : fieldPlayer.DefensiveAreas.Select(a => 29 - a).ToList(),
+                        ChaseBall.Instance());
+                    players.Add(player);
                 }
             }
+
             Strategy.Players = players;
         }
 

@@ -11,123 +11,68 @@ namespace IndoorFootballStrategySimulator.Simulation
 {
     public class Team
     {
-        //team color
-        public enum Color
-        {
-            RED, BLUE
-        }
-        public List<Player> Players = new List<Player>();
-        private readonly Color color;
+        private readonly FSM<Team> teamStateMachine;
         private Player playerClosetToBall;
         private Player controllingPlayer;
+        private Strategy strategy;
 
-        public Team Opponents { get; set; }
-        private readonly FSM<Team> teamStateMachine;
-
+        public TeamColor Color { get; private set; }
         public Goal Goal { get; private set; }
 
-        public Team(Color color, UpdateService editor)
+        public Team Opponents { get; set; }
+
+        public Strategy Strategy {
+            get { return strategy; }
+            set => SetStrategy(value);
+        }
+
+        public Team(UpdateService editor, TeamColor color)
         {
-            this.color = color;
-            CreatePlayers(editor);
-            Behaviors();
+            Color = color;
+
+            Initialize(editor);
+
             teamStateMachine = new FSM<Team>(this);
             teamStateMachine.SetCurrentState(Defensive.Instance());
             playerClosetToBall = controllingPlayer= null; 
         }
-        private void CreatePlayers(UpdateService editor)
+        private void Initialize(UpdateService editor)
         {
-            
-            if (color == Color.BLUE)
-            {
-                //Draw Blue Team
-                Texture2D texture = editor.Content.Load<Texture2D>($"CharacterBlue-{ Utilities.Random.Next(1, 6) }");
-                //Goal Keeper
-                GoalKeeper GK = new GoalKeeper(
-                    texture,
-                    Microsoft.Xna.Framework.Color.White,
-                    new Vector2(1f, 1f),
-                    new Vector2(80f, 288f),
-                    0f,
-                    15f,
-                    3f,
-                    75f,
-                    50f,
-                    this,
-                    startState: TendGoal.Instance());
-                SimulationWindow.EntityManager.Entities.Add(GK);
-                SimulationWindow.EntityManager.Players.Add(GK);
-                //Field Players
-                for (int i = 0; i < 4; i++)
-                {
-                    texture = editor.Content.Load<Texture2D>($"CharacterBlue-{ Utilities.Random.Next(1, 6) }");
-                    FieldPlayer FP = new FieldPlayer(
-                        texture,
-                        Microsoft.Xna.Framework.Color.White,
-                        new Vector2(1f, 1f),
-                        new Vector2(Utilities.Random.Next(80, 640), Utilities.Random.Next(30, 546)),
-                        0f,
-                        15f,
-                        3f,
-                        75f,
-                        Utilities.Random.Next(30, 50),
-                        this,
-                        startState: Idle.Instance());
-                    SimulationWindow.EntityManager.Entities.Add(FP);
-                    SimulationWindow.EntityManager.Players.Add(FP);
-                }
-
-                texture = editor.Content.Load<Texture2D>($"SoccerGoal");
-                Goal = new Goal(texture, Microsoft.Xna.Framework.Color.White, new Vector2(1f, 1f), new Vector2(40f, 288f), 0f);
-                SimulationWindow.EntityManager.Entities.Add(Goal);
-            }
-            else
-            {
-                //Draw Red Team
-                Texture2D texture = editor.Content.Load<Texture2D>($"CharacterRed-{ Utilities.Random.Next(1, 6) }");
-                // Goal Keeper
-                GoalKeeper GK = new GoalKeeper(
-                    texture,
-                    Microsoft.Xna.Framework.Color.White,
-                    new Vector2(1f, 1f),
-                    new Vector2(1200f, 288f),
-                    MathHelper.Pi,
-                    15f,
-                    3f,
-                    75f,
-                    50f,
-                    this,
-                    startState: TendGoal.Instance());
-                SimulationWindow.EntityManager.Entities.Add(GK);
-                SimulationWindow.EntityManager.Players.Add(GK);
-                //Field Players
-                for (int i = 0; i < 4; i++)
-                {
-                    texture = editor.Content.Load<Texture2D>($"CharacterRed-{ Utilities.Random.Next(1, 6) }");
-                    FieldPlayer FP = new FieldPlayer(
-                        texture,
-                        Microsoft.Xna.Framework.Color.White,
-                        new Vector2(1f, 1f),
-                        new Vector2(Utilities.Random.Next(640, 1200), Utilities.Random.Next(30, 546)),
-                        MathHelper.Pi,
-                        15f,
-                        3f,
-                        75f,
-                        Utilities.Random.Next(30, 50),
-                        this,
-                        startState: Idle.Instance());
-                    SimulationWindow.EntityManager.Entities.Add(FP);
-                    SimulationWindow.EntityManager.Players.Add(FP);
-                }
-
-                texture = editor.Content.Load<Texture2D>($"SoccerGoal");
-                Goal = new Goal(texture, Microsoft.Xna.Framework.Color.White, new Vector2(1f, 1f), new Vector2(1240f, 288f), MathHelper.Pi);
-                SimulationWindow.EntityManager.Entities.Add(Goal);
+            switch (Color) {
+                case TeamColor.BLUE:
+                    Goal = new Goal(editor.Content.Load<Texture2D>($"SoccerGoal"), Microsoft.Xna.Framework.Color.White, new Vector2(1f), new Vector2(40f, 288f), 0f);
+                    SimulationWindow.EntityManager.Entities.Add(Goal);
+                    break;
+                case TeamColor.RED:
+                    Goal = new Goal(editor.Content.Load<Texture2D>($"SoccerGoal"), Microsoft.Xna.Framework.Color.White, new Vector2(1f, 1f), new Vector2(1240f, 288f), MathHelper.Pi);
+                    SimulationWindow.EntityManager.Entities.Add(Goal);
+                    break;
             }
         }
+
+        private void SetStrategy(Strategy strategy) {
+            this.strategy = strategy;
+
+            for (int i = 0; i < Strategy.Players.Count; i++) {
+                var player = Strategy.Players[i];
+
+                switch (Color) {
+                    case TeamColor.BLUE:
+                        player.Position = SimulationWindow.EntityManager.Field.HomeTeamSpawnAreas[i].Center;
+                        break;
+                    case TeamColor.RED:
+                        player.Position = SimulationWindow.EntityManager.Field.AwayTeamSpawnAreas[i].Center;
+                        break;
+                }
+
+                SimulationWindow.EntityManager.Entities.Add(player);
+            }
+        }
+
+        // May delete
         private void Behaviors()
         {
-            foreach (var player in SimulationWindow.EntityManager.Players)
+            foreach (var player in Strategy.Players)
             {
                 player.Steering.StartWallAvoidance();
                 if (player is FieldPlayer)
@@ -136,24 +81,30 @@ namespace IndoorFootballStrategySimulator.Simulation
                 }
             }
         }
+
         public void SetPlayerClosetToBall(Player player) {
             playerClosetToBall = player;
         }
+
         public Player PlayerClosetToBall() {
             return playerClosetToBall;
         }
+
         public void SetControllingPlayer(Player player) {
             controllingPlayer = player;
         }
+
         public void ReturnAllPlayersToHome() {
             //TODO
            
         }
+
         public Boolean InControl() {
             if (controllingPlayer != null)
                 return true;
             return false;
         }
+
     }
 }
 
