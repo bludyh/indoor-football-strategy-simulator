@@ -43,6 +43,35 @@ namespace IndoorFootballStrategySimulator.Simulation
                 fpStateMachine.CurrentState.OnEnter(this);
             }
         }
+
+        public override Area GetHomeArea(Field field) {
+            switch (Team.State) {
+                case TeamState.OFFENSIVE:
+                    return field.Areas[OffensiveHomeArea];
+                case TeamState.DEFENSIVE:
+                    return field.Areas[DefensiveHomeArea];
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        public override List<Area> GetAreas(Field field) {
+            var areas = new List<Area>();
+
+            switch (Team.State) {
+                case TeamState.OFFENSIVE:
+                    foreach (var area in OffensiveAreas)
+                        areas.Add(field.Areas[area]);
+                    break;
+                case TeamState.DEFENSIVE:
+                    foreach (var area in DefensiveAreas)
+                        areas.Add(field.Areas[area]);
+                    break;
+            }
+
+            return areas;
+        }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);

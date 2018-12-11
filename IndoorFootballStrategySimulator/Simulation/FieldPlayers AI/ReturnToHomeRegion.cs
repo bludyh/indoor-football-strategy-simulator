@@ -17,14 +17,17 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void Handle(FieldPlayer owner)
         {
+            var field = SimulationWindow.EntityManager.Field;
+
             if (Simulator.isGameOn)
             {
                 //if the ball is nearer this player than any other team member  &&
                 //there is not an assigned receiver && the goalkeeper does not gave
                 //the ball, go chase it
+
                 if (owner.isClosestTeamMemberToBall()
                         && (owner.Team.ReceivingPlayer == null)
-                        && !owner.Field.GoalKeeperHasBall)
+                        && !field.GoalKeeperHasBall)
                 {
                     owner.GetFSM().ChangeState(ChaseBall.Instance());
                     return;
@@ -34,7 +37,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             //if game is on and close enough to home, change state to wait and set the 
             //player target to his current position.(so that if he gets jostled out of 
             //position he can move back to it)
-            if (Simulator.isGameOn && owner.HomeRegion.Inside(owner.Position, Area.AreaModifer.HalfSize))
+            if (Simulator.isGameOn && owner.GetHomeArea(field).Inside(owner.Position, Area.AreaModifer.HalfSize))
             {
                 owner.Steering.Target = owner.Position;
                 owner.GetFSM().ChangeState(Idle.Instance());
@@ -48,11 +51,13 @@ namespace IndoorFootballStrategySimulator.Simulation
 
         public override void OnEnter(FieldPlayer owner)
         {
+            var field = SimulationWindow.EntityManager.Field;
+
             owner.Steering.StartArrival(owner.Steering.Target);
 
-            if (!owner.HomeRegion.Inside(owner.Steering.Target, Area.AreaModifer.HalfSize))
+            if (!owner.GetHomeArea(field).Inside(owner.Steering.Target, Area.AreaModifer.HalfSize))
             {
-                owner.Steering.Target = owner.HomeRegion.Center;
+                owner.Steering.Target = owner.GetHomeArea(field).Center;
             }
         }
 

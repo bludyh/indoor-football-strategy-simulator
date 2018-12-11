@@ -18,6 +18,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void Handle(FieldPlayer owner)
         {
+            var ball = SimulationWindow.EntityManager.Ball;
             //if the ball comes close enough to the player or if his team lose control
             //he should change state to chase the ball
             if (owner.BallWithinReceivingRange() || !owner.Team.InControl())
@@ -27,7 +28,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             }
             if (owner.Steering.PursuitIsOn())
             {
-                owner.Steering.Target = owner.Ball.Position;
+                owner.Steering.Target = ball.Position;
             }
 
             //if the player has 'arrived' at the steering target he should wait and

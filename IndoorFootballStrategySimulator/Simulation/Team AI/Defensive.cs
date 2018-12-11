@@ -17,7 +17,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void OnEnter(Team team)
         {
-            team.TeamState = TeamState.DEFENSIVE;
+            team.State = TeamState.DEFENSIVE;
             team.UpdateTargetsOfWaitingPlayers();
         }
         public override void Handle(Team team)

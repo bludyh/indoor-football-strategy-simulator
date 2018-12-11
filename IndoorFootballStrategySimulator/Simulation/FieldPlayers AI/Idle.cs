@@ -20,7 +20,8 @@ namespace IndoorFootballStrategySimulator.Simulation
         {
             if (!Simulator.isGameOn)
             {
-                player.Steering.Target = player.HomeRegion.Center;
+                var field = SimulationWindow.EntityManager.Field;
+                player.Steering.Target = player.GetHomeArea(field).Center;
             }
         }
         public override void Handle(FieldPlayer player)
@@ -53,9 +54,11 @@ namespace IndoorFootballStrategySimulator.Simulation
                 //if the ball is nearer this player than any other team member  AND
                 //there is not an assigned receiver AND neither goalkeeper has
                 //the ball, go chase it
+                var field = SimulationWindow.EntityManager.Field;
+
                 if (player.isClosestTeamMemberToBall()
                         && player.Team.ReceivingPlayer == null
-                        && !player.Field.GoalKeeperHasBall)
+                        && !field.GoalKeeperHasBall)
                 {
                     player.GetFSM().ChangeState(ChaseBall.Instance());
 

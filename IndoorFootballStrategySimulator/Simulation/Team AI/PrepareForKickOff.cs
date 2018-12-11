@@ -16,7 +16,7 @@ namespace IndoorFootballStrategySimulator.Simulation.Team_AI
         }
         public override void Handle(Team team)
         {
-            if (team.AllPlayersAtHome() && team.Opponents.AllPlayersAtHome())
+            if (team.AllPlayersAtHome() && team.Opponent.AllPlayersAtHome())
             {
                 team.GetFSM().ChangeState(Defensive.Instance());
             }

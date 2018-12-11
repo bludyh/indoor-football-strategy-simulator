@@ -25,14 +25,16 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void Handle(FieldPlayer player)
         {
+            var field = SimulationWindow.EntityManager.Field;
+            var ball = SimulationWindow.EntityManager.Ball;
             //calculate the dot product of the vector pointing to the ball
             //and the player's heading
-            Vector2 ToBall = Vector2.Subtract(player.Ball.Position, player.Position);
+            Vector2 ToBall = Vector2.Subtract(ball.Position, player.Position);
             float dot = Vector2.Dot(player.Heading, Vector2.Normalize(ToBall));
             //cannot kick the ball if the goalkeeper is in possession or if it is 
             //behind the player or if there is already an assigned receiver. So just
             //continue chasing the ball
-            if (player.Team.ReceivingPlayer != null|| player.Field.GoalKeeperHasBall || (dot < 0))
+            if (player.Team.ReceivingPlayer != null|| field.GoalKeeperHasBall || (dot < 0))
             {
                 player.GetFSM().ChangeState(ChaseBall.Instance());
                 return;
@@ -49,15 +51,15 @@ namespace IndoorFootballStrategySimulator.Simulation
             //if it is determined that the player could score a goal from this position
             //OR if he should just kick the ball anyway, the player will attempt
             //to make the shot
-            if (player.Team.CanShoot(player.Ball.Position, power, BallTarget) || (SupportCalculate.RandFloat() < 0.005f))
+            if (player.Team.CanShoot(ball.Position, power, BallTarget) || (SupportCalculate.RandFloat() < 0.005f))
             {
                 //add some noise to the kick. We don't want players who are 
                 //too accurate! The amount of noise can be adjusted by altering
                 //Prm.PlayerKickingAccuracy
-                BallTarget = Ball.AddNoiseToKick(player.Ball.Position, BallTarget);
+                BallTarget = Ball.AddNoiseToKick(ball.Position, BallTarget);
                 //this is the direction the ball will be kicked in
-                Vector2 KickDirection = Vector2.Subtract(BallTarget, player.Ball.Position);
-                player.Ball.Kick(KickDirection, power);
+                Vector2 KickDirection = Vector2.Subtract(BallTarget, ball.Position);
+                ball.Kick(KickDirection, power);
                 //change state   
                 player.GetFSM().ChangeState(Idle.Instance());
                 player.FindSupport();
@@ -72,9 +74,9 @@ namespace IndoorFootballStrategySimulator.Simulation
                     && player.Team.FindPass(player, receiver, BallTarget, power, 120f))
             {
                 //add some noise to the kick
-                BallTarget = Ball.AddNoiseToKick(player.Ball.Position, BallTarget);
-                Vector2 KickDirection = Vector2.Subtract(BallTarget, player.Ball.Position);
-                player.Ball.Kick(KickDirection, power);
+                BallTarget = Ball.AddNoiseToKick(ball.Position, BallTarget);
+                Vector2 KickDirection = Vector2.Subtract(BallTarget, ball.Position);
+                ball.Kick(KickDirection, power);
                 //the player should wait at his current position unless instruced
                 //otherwise  
                 player.GetFSM().ChangeState(Idle.Instance());

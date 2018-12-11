@@ -17,7 +17,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void OnEnter(Team team)
         {
-            team.TeamState = TeamState.OFFENSIVE;
+            team.State = TeamState.OFFENSIVE;
             //if a player is in either the Wait or ReturnToHomeRegion states, its
             //steering target must be updated to that of its new home region to enable
             //it to move into the correct position.

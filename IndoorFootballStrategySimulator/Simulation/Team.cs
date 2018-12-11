@@ -18,9 +18,10 @@ namespace IndoorFootballStrategySimulator.Simulation
         public Player ControllingPlayer { get; set; }
         public Player ReceivingPlayer { get; set; }
         public Player SupportingPlayer { get; set; }
-
-        public TeamColor Color { get; private set; }
         public Goal Goal { get; private set; }
+        public TeamColor Color { get; private set; }
+        public TeamState State { get; set; }
+        public float ClosestDistancetoBall { get; set; }
 
         public Team Opponent {
             get {
@@ -34,7 +35,6 @@ namespace IndoorFootballStrategySimulator.Simulation
                 }
             }
         }
-        public float ClosestDistancetoBall { get; set; }
 
         public Strategy Strategy {
             get { return strategy; }

@@ -14,15 +14,13 @@ namespace IndoorFootballStrategySimulator.Simulation {
     [DataContract]
     [KnownType(typeof(GoalKeeper))]
     [KnownType(typeof(FieldPlayer))]
-    public class Player : MovingEntity {
+    public abstract class Player : MovingEntity {
 
         /// <summary>
         ///     Gets the <see cref="SteeringManager"/> of the current <see cref="Player"/>.
         /// </summary>
         public SteeringManager Steering { get; private set; }
         public Team Team { get; private set; }
-        public Field Field { get { return SimulationWindow.EntityManager.Field; }}
-        public Ball Ball { get { return SimulationWindow.EntityManager.Ball; }}
         public float DistanceToBall { get; set; }
         public PlayerRole PlayerRole { get; private set; }
 
@@ -44,6 +42,9 @@ namespace IndoorFootballStrategySimulator.Simulation {
             PlayerRole = role;
             Steering = new SteeringManager(this);
         }
+
+        public abstract Area GetHomeArea(Field field);
+        public abstract List<Area> GetAreas(Field field);
 
         /// <summary>
         ///     Updates logics of the <see cref="Player"/>.
@@ -83,15 +84,18 @@ namespace IndoorFootballStrategySimulator.Simulation {
         /// </summary>
         /// <returns></returns>
         public bool BallWithinKeeperRange() {
-            return (Vector2.DistanceSquared(this.Position, Ball.Position) < (10f * 10f));
+            var ball = SimulationWindow.EntityManager.Ball;
+            return (Vector2.DistanceSquared(this.Position, ball.Position) < (10f * 10f));
         }
         public bool BallWithinKickingRange()
         {
-            return (Vector2.DistanceSquared(Ball.Position, this.Position) < (10f*10f));
+            var ball = SimulationWindow.EntityManager.Ball;
+            return (Vector2.DistanceSquared(ball.Position, this.Position) < (10f*10f));
         }
         public bool BallWithinReceivingRange()
         {
-            return (Vector2.DistanceSquared(this.Position, Ball.Position) < 10f*10f);
+            var ball = SimulationWindow.EntityManager.Ball;
+            return (Vector2.DistanceSquared(this.Position, ball.Position) < 10f*10f);
         }
         public bool isThreatened()
         {
@@ -108,7 +112,8 @@ namespace IndoorFootballStrategySimulator.Simulation {
         }
         public void TrackBall()
         {
-            RotateHeadingToFacePosition(Ball.Position);
+            var ball = SimulationWindow.EntityManager.Ball;
+            RotateHeadingToFacePosition(ball.Position);
         }
         public bool isAheadOfAttacker()
         {
@@ -152,44 +157,22 @@ namespace IndoorFootballStrategySimulator.Simulation {
             }
             return false;
         }
-        public bool isControllingPlayer()
-        {
-            if (Team.ControllingPlayer == this)
-            {
-                return true;
-            }
-            return false;
-        }
         public bool InHotRegion()
         {
-            return Math.Abs(Position.X - Team.OpponentsGoal.Center.X) < Field.PlayingArea.Length / 3f;
-        }
-        protected Area GetPlayerHomeArea(Player player)
-        {
-            if (player is GoalKeeper goalKeeper)
-                return Field.Areas[goalKeeper.HomeArea];
-            else if (player is FieldPlayer fieldPlayer)
-            {
-                switch (Team.TeamState)
-                {
-                    case TeamState.OFFENSIVE:
-                        return Field.Areas[fieldPlayer.OffensiveHomeArea];
-                    case TeamState.DEFENSIVE:
-                        return Field.Areas[fieldPlayer.DefensiveHomeArea];
-                }
-            }
-            return null;
+            var field = SimulationWindow.EntityManager.Field;
+            return Math.Abs(Position.X - Team.Opponent.Goal.Center.X) < field.PlayingArea.Length / 3f;
         }
         #region TODO
         public bool InHomeRegion()
         {
+            var field = SimulationWindow.EntityManager.Field;
             if (PlayerRole == PlayerRole.GoalKeeper)
             {
-                return HomeRegion.Inside(Position,Area.AreaModifer.Normal);
+                return GetHomeArea(field).Inside(Position,Area.AreaModifer.Normal);
             }
             else
             {
-                return HomeRegion.Inside(Position,Area.AreaModifer.HalfSize);
+                return GetHomeArea(field).Inside(Position,Area.AreaModifer.HalfSize);
             }
         }
         //Missing Event

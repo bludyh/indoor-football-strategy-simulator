@@ -35,6 +35,21 @@ namespace IndoorFootballStrategySimulator.Simulation
                 gkStateMachine.CurrentState.OnEnter(this);
             }
         }
+
+        public override Area GetHomeArea(Field field) {
+            return field.Areas[HomeArea];
+        }
+
+        public override List<Area> GetAreas(Field field) {
+            var areas = new List<Area>();
+
+            foreach (var area in Areas) {
+                areas.Add(field.Areas[area]);
+            }
+
+            return areas;
+        }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
@@ -74,10 +89,13 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
 
         public Vector2 GetRearInterposeTarget() {
+            var field = SimulationWindow.EntityManager.Field;
+            var ball = SimulationWindow.EntityManager.Ball;
+
             float xPosTarget = Team.Goal.Center.X;
 
-            float yPosTarget = Field.PlayingArea.Center.Y- Vector2.Distance(Team.Goal.LeftPostPos,Team.Goal.RightPostPos)*0.5f
-                +(Ball.Position.Y * Vector2.Distance(Team.Goal.LeftPostPos, Team.Goal.RightPostPos)) / Field.PlayingArea.Height;
+            float yPosTarget = field.PlayingArea.Center.Y- Vector2.Distance(Team.Goal.LeftPostPos,Team.Goal.RightPostPos)*0.5f
+                +(ball.Position.Y * Vector2.Distance(Team.Goal.LeftPostPos, Team.Goal.RightPostPos)) / field.PlayingArea.Height;
 
             return new Vector2(xPosTarget,yPosTarget);
         }

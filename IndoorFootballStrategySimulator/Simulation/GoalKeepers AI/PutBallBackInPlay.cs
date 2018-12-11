@@ -20,6 +20,8 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void Handle(GoalKeeper owner)
         {
+            var field = SimulationWindow.EntityManager.Field;
+            var ball = SimulationWindow.EntityManager.Ball;
             Player receiver = null;
             Vector2 BallTarget = new Vector2();
             //test if there are players further forward on the field we might
@@ -27,9 +29,9 @@ namespace IndoorFootballStrategySimulator.Simulation
             if (owner.Team.FindPass(owner,receiver,BallTarget,3f, 50f))
             {
                 //make the pass   
-                owner.Ball.Kick(Vector2.Normalize(BallTarget - owner.Ball.Position),3f);
+                ball.Kick(Vector2.Normalize(BallTarget - ball.Position),3f);
                 //goalkeeper no longer has ball 
-                owner.Field.GoalKeeperHasBall = false;
+                field.GoalKeeperHasBall = false;
                 //go back to tending the goal   
                 owner.GetFSM().ChangeState(TendGoal.Instance());
                 return;

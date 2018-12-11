@@ -17,7 +17,8 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void Handle(GoalKeeper owner)
         {
-            owner.Steering.Target = owner.HomeRegion.Center;
+            var field = SimulationWindow.EntityManager.Field;
+            owner.Steering.Target = owner.GetHomeArea(field).Center;
             //if close enough to home or the opponents get control
             //over the ball and change state to tend goal
             //TODO

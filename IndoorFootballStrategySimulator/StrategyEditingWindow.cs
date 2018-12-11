@@ -55,31 +55,6 @@ namespace IndoorFootballStrategySimulator {
             }
         }
 
-        private List<Area> GetPlayerAreas(Player player) {
-            List<Area> areas = new List<Area>();
-
-            if (player is GoalKeeper goalKeeper) {
-                foreach (var area in goalKeeper.Areas) {
-                    areas.Add(field.Areas[area]);
-                }
-            }
-            else if (player is FieldPlayer fieldPlayer) {
-                switch (TeamState) {
-                    case TeamState.OFFENSIVE:
-                        foreach (var area in fieldPlayer.OffensiveAreas) {
-                            areas.Add(field.Areas[area]);
-                        }
-                        break;
-                    case TeamState.DEFENSIVE:
-                        foreach (var area in fieldPlayer.DefensiveAreas) {
-                            areas.Add(field.Areas[area]);
-                        }
-                        break;
-                }
-            }
-            return areas;
-        }
-
         private void SetPlayerAreas(Player player, int area) {
             if (player is  FieldPlayer fieldPlayer) {
                 switch (TeamState) {
@@ -260,12 +235,12 @@ namespace IndoorFootballStrategySimulator {
 
                     if (area.Contain(mousePos)) {
                         if (isPlayerBeingDragged) {
-                            if (area != GetPlayerHomeArea(selectedPlayer) && !Strategy.Players.Any(p => p != selectedPlayer && p.Position == area.Center)) {
+                            if (area != selectedPlayer.GetHomeArea(field) && !Strategy.Players.Any(p => p != selectedPlayer && p.Position == area.Center)) {
                                 SetPlayerHomeArea(selectedPlayer, i);
                                 selectedPlayer.Position = area.Center;
                             }
                             else
-                                selectedPlayer.Position = GetPlayerHomeArea(selectedPlayer).Center;
+                                selectedPlayer.Position = selectedPlayer.GetHomeArea(field).Center;
                         }
                         else
                             SetPlayerAreas(selectedPlayer, i);
@@ -296,7 +271,7 @@ namespace IndoorFootballStrategySimulator {
                     player.Draw(Editor.spriteBatch);
             }
             if (selectedPlayer != null) {
-                foreach (var area in GetPlayerAreas(selectedPlayer))
+                foreach (var area in selectedPlayer.GetAreas(field))
                     area.Fill(Editor.spriteBatch, Color.Red * 0.2f);
             }
 

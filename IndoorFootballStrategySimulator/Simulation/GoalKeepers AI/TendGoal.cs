@@ -19,14 +19,17 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void Handle(GoalKeeper owner)
         {
+            var field = SimulationWindow.EntityManager.Field;
+            var ball = SimulationWindow.EntityManager.Ball;
+
             //The rear interpose target will change as the ball position changes
             owner.Steering.Target = owner.GetRearInterposeTarget();
 
             //if the ball comes in range the keeper traps t and then changes state to put
             //ball back in play
             if (owner.BallWithinKeeperRange()) {
-                owner.Ball.Trap();
-                owner.Field.GoalKeeperHasBall = true;
+                ball.Trap();
+                field.GoalKeeperHasBall = true;
                 owner.GetFSM().ChangeState(PutBallBackInPlay.Instance());
                 return;
             }

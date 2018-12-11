@@ -35,22 +35,8 @@ namespace IndoorFootballStrategySimulator {
 
             foreach (var player in Strategy.Players) {
                 if (player is FieldPlayer fieldPlayer)
-                    fieldPlayer.Position = GetPlayerHomeArea(fieldPlayer).Center;
+                    fieldPlayer.Position = fieldPlayer.GetHomeArea(field).Center;
             }
-        }
-
-        protected Area GetPlayerHomeArea(Player player) {
-            if (player is GoalKeeper goalKeeper)
-                return field.Areas[goalKeeper.HomeArea];
-            else if (player is FieldPlayer fieldPlayer) {
-                switch (TeamState) {
-                    case TeamState.OFFENSIVE:
-                        return field.Areas[fieldPlayer.OffensiveHomeArea];
-                    case TeamState.DEFENSIVE:
-                        return field.Areas[fieldPlayer.DefensiveHomeArea];
-                }
-            }
-            return null;
         }
 
         public abstract void LoadStrategyFromFile(string fileName);

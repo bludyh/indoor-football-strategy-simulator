@@ -17,6 +17,8 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void Handle(GoalKeeper owner)
         {
+            var field = SimulationWindow.EntityManager.Field;
+            var ball = SimulationWindow.EntityManager.Ball;
             // if the goalkeeper moves too far away from the goal, he should return to his
             //home region and he is not the person who is the closest to the ball
             //Then he should keep trying to intercep it.
@@ -27,8 +29,8 @@ namespace IndoorFootballStrategySimulator.Simulation
             }
             //if the ball becomes in range of the goalkeeper's hands, he puts the ball bak in play
             if (owner.BallWithinKeeperRange()) {
-                owner.Ball.Trap();
-                owner.Field.GoalKeeperHasBall = true;
+                ball.Trap();
+                field.GoalKeeperHasBall = true;
                 owner.GetFSM().ChangeState(PutBallBackInPlay.Instance());
                 return;
             }

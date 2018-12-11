@@ -22,6 +22,8 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void Handle(FieldPlayer player)
         {
+            var ball = SimulationWindow.EntityManager.Ball;
+
             float dot = Vector2.Dot(player.Team.Goal.Facing, player.Heading);
             //if the ball is between the player and the home goal, it needs to swivel
             // the ball around by doing multiple small kicks and turns until the player 
@@ -35,11 +37,11 @@ namespace IndoorFootballStrategySimulator.Simulation
                 //this value works well whjen the player is attempting to control the
                 //ball and turn at the same time
                 const float KickingForce = 80f;
-                player.Ball.Kick(player.Heading, KickingForce);
+                ball.Kick(player.Heading, KickingForce);
             } //kick the ball down the field
             else
             {
-                player.Ball.Kick(player.Team.Goal.Facing,150f);
+                ball.Kick(player.Team.Goal.Facing,150f);
             }
             //the player has kicked the ball so he must now change state to follow it
             player.GetFSM().ChangeState(ChaseBall.Instance());
