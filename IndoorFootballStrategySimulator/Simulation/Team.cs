@@ -99,13 +99,6 @@ namespace IndoorFootballStrategySimulator.Simulation
             return teamStateMachine;
         }
 
-        private void Behaviors()
-        {
-            foreach (var player in Strategy.Players)
-            {
-                player.Steering.StartWallAvoidance();
-            }
-        }
 
         private void CalculateClosestPlayerToBall()
         {
@@ -261,7 +254,7 @@ namespace IndoorFootballStrategySimulator.Simulation
                     FieldPlayer player = (FieldPlayer)curPlayer;
                     if (player.GetFSM().IsInState(Idle.Instance()) || player.GetFSM().IsInState(ReturnToHomeRegion.Instance()))
                     {
-                        player.Steering.Target = player.GetHomeArea(SimulationWindow.EntityManager.Field).Center;
+                        player.Steering.Target = player.GetHomeArea(SimulationWindow.EntityManager.Field,State).Center;
                     }
                 }
             }
