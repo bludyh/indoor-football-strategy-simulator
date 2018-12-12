@@ -14,6 +14,7 @@ namespace IndoorFootballStrategySimulator.Simulation
     {
 
         private FSM<GoalKeeper> gkStateMachine;
+        private State<GoalKeeper> startState;
 
         [DataMember]
         public int HomeArea { get; set; }
@@ -23,24 +24,20 @@ namespace IndoorFootballStrategySimulator.Simulation
         public static PlayerRole Role { get; private set; }
 
         public GoalKeeper(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed,
-            Team team = null, int homeArea = -1, List<int> areas = null, State<GoalKeeper> startState = null)
+            TeamColor team = TeamColor.BLUE, int homeArea = -1, List<int> areas = null, State<GoalKeeper> startState = null)
             : base(texture, color, scale, pos, rot, radius, mass, maxForce, maxSpeed, team, Role)
         {
-            gkStateMachine = new FSM<GoalKeeper>(this);
             HomeArea = homeArea;
             Areas = areas;
-            if (startState != null)
-            {
-                gkStateMachine.SetCurrentState(startState);
-                gkStateMachine.CurrentState.OnEnter(this);
-            }
+            gkStateMachine = new FSM<GoalKeeper>(this);
+            this.startState = startState;
         }
 
-        public override Area GetHomeArea(Field field) {
+        public override Area GetHomeArea(Field field, TeamState state) {
             return field.Areas[HomeArea];
         }
 
-        public override List<Area> GetAreas(Field field) {
+        public override List<Area> GetAreas(Field field, TeamState state) {
             var areas = new List<Area>();
 
             foreach (var area in Areas) {
@@ -53,6 +50,10 @@ namespace IndoorFootballStrategySimulator.Simulation
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+            if (gkStateMachine.CurrentState == null && startState != null)
+                gkStateMachine.SetCurrentState(startState);
+
             gkStateMachine.Update(gameTime);
         }
         public FSM<GoalKeeper> GetFSM()

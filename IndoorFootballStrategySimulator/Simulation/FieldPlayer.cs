@@ -14,6 +14,7 @@ namespace IndoorFootballStrategySimulator.Simulation
     {
 
         private FSM<FieldPlayer> fpStateMachine;
+        private State<FieldPlayer> startState;
 
         [DataMember]
         public int OffensiveHomeArea { get; set; }
@@ -29,23 +30,19 @@ namespace IndoorFootballStrategySimulator.Simulation
         public static PlayerRole Role { get; private set; }
 
         public FieldPlayer(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed,
-            Team team= null, int offHomeArea = -1, List<int> offAreas = null, int defHomeArea = -1, List<int> defAreas = null, State<FieldPlayer> startState = null) 
+            TeamColor team = TeamColor.BLUE, int offHomeArea = -1, List<int> offAreas = null, int defHomeArea = -1, List<int> defAreas = null, State<FieldPlayer> startState = null) 
             : base(texture, color, scale, pos, rot, radius, mass, maxForce, maxSpeed, team, Role)
         {
-            fpStateMachine = new FSM<FieldPlayer>(this);
             OffensiveHomeArea = offHomeArea;
             OffensiveAreas = offAreas;
             DefensiveHomeArea = defHomeArea;
             DefensiveAreas = defAreas;
-            if (startState != null)
-            {
-                fpStateMachine.SetCurrentState(startState);
-                fpStateMachine.CurrentState.OnEnter(this);
-            }
+            fpStateMachine = new FSM<FieldPlayer>(this);
+            this.startState = startState;
         }
 
-        public override Area GetHomeArea(Field field) {
-            switch (Team.State) {
+        public override Area GetHomeArea(Field field, TeamState state) {
+            switch (state) {
                 case TeamState.OFFENSIVE:
                     return field.Areas[OffensiveHomeArea];
                 case TeamState.DEFENSIVE:
@@ -55,10 +52,10 @@ namespace IndoorFootballStrategySimulator.Simulation
             }
         }
 
-        public override List<Area> GetAreas(Field field) {
+        public override List<Area> GetAreas(Field field, TeamState state) {
             var areas = new List<Area>();
 
-            switch (Team.State) {
+            switch (state) {
                 case TeamState.OFFENSIVE:
                     foreach (var area in OffensiveAreas)
                         areas.Add(field.Areas[area]);
@@ -75,6 +72,10 @@ namespace IndoorFootballStrategySimulator.Simulation
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+            if (fpStateMachine.CurrentState == null && startState != null)
+                fpStateMachine.SetCurrentState(startState);
+
             fpStateMachine.Update(gameTime);
         }
         public FSM<FieldPlayer> GetFSM()

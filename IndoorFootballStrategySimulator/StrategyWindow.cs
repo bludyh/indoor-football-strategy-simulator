@@ -35,7 +35,7 @@ namespace IndoorFootballStrategySimulator {
 
             foreach (var player in Strategy.Players) {
                 if (player is FieldPlayer fieldPlayer)
-                    fieldPlayer.Position = fieldPlayer.GetHomeArea(field).Center;
+                    fieldPlayer.Position = fieldPlayer.GetHomeArea(field, teamState).Center;
             }
         }
 

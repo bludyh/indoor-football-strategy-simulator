@@ -9,29 +9,30 @@ namespace IndoorFootballStrategySimulator.Simulation
 {
     public class FSM<T>
     {
-        private readonly T Owner;
+        private readonly T owner;
         public State<T> CurrentState { get; private set; }
         public FSM(T owner)
         {
-            Owner = owner;
+            this.owner = owner;
         }
 
         public void SetCurrentState(State<T> state)
         {
             CurrentState = state;
+            CurrentState.OnEnter(owner);
         }
         public void Update(GameTime gameTime)
         {
             if (CurrentState != null)
             {
-                CurrentState.Handle(Owner);
+                CurrentState.Handle(owner);
             }
         }
         public void ChangeState(State<T> newState)
         {
-            CurrentState.OnExit(Owner);
+            CurrentState.OnExit(owner);
             CurrentState = newState;
-            CurrentState.OnEnter(Owner);
+            CurrentState.OnEnter(owner);
         }
         public bool IsInState(State<T> state)
         {
