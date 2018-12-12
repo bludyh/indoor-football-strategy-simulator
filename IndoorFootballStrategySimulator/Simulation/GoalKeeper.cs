@@ -53,29 +53,11 @@ namespace IndoorFootballStrategySimulator.Simulation
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            BounceBall();
             gkStateMachine.Update(gameTime);
         }
         public FSM<GoalKeeper> GetFSM()
         {
             return gkStateMachine;
-        }
-        private void BounceBall()
-        {
-            if (SimulationWindow.EntityManager.Ball.Position.Y > 176 && SimulationWindow.EntityManager.Ball.Position.Y <400)
-            {
-            this.Position = new Vector2(this.Position.X, SimulationWindow.EntityManager.Ball.Position.Y);
-            }
-            foreach (var entity in SimulationWindow.EntityManager.Entities)
-            {
-                if (entity is Ball ball)
-                {
-                    Vector2 offset = ball.Position - Position;
-                    float overlap = Radius + ball.Radius - offset.Length();
-                    if (overlap >= 0)
-                        ball.Velocity += Vector2.Normalize(offset) * overlap;
-                }
-            }
         }
 
         /// <summary>

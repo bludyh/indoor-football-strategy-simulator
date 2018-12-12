@@ -70,7 +70,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             Player receiver = null;
             power = 30f * dot;
             //test if there are any potential candidates available to receive a pass
-            if (player.isThreatened()
+            if (player.IsThreatened()
                     && player.Team.FindPass(player, receiver, BallTarget, power, 120f))
             {
                 //add some noise to the kick

@@ -22,7 +22,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             // if the goalkeeper moves too far away from the goal, he should return to his
             //home region and he is not the person who is the closest to the ball
             //Then he should keep trying to intercep it.
-            if (owner.TooFarFromGoalMouth() && !owner.isClosestPlayerOnPitchToBall()) {
+            if (owner.TooFarFromGoalMouth() && !owner.IsClosestPlayerOnPitchToBall()) {
                
                 owner.GetFSM().ChangeState(ReturnHome.Instance());
                 return;

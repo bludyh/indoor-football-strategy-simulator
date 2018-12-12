@@ -58,7 +58,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             //to the opponent's goal
             float PassThreatRadius = 70f;
             if ((owner.InHotRegion() || SupportCalculate.RandFloat() < 0.5f)
-                    && !owner.Team.isOpponentWithinRadius(owner.Position, PassThreatRadius))
+                    && !owner.Team.IsOpponentWithinRadius(owner.Position, PassThreatRadius))
             {
                 //owner.Steering.StartArrival();
             }

@@ -81,6 +81,7 @@ namespace IndoorFootballStrategySimulator.Simulation {
             if (closestWall != null && Vector2.Dot(Vector2.Normalize(Velocity), closestWall.Normal) < 0)
                 Velocity = Vector2.Reflect(Velocity, closestWall.Normal) * 0.8f;
         }
+
         public static Vector2 AddNoiseToKick(Vector2 BallPos, Vector2 BallTarget)
         {
 
@@ -92,10 +93,44 @@ namespace IndoorFootballStrategySimulator.Simulation {
 
             return Vector2.Add(toTarget, BallPos);
         }
+
         public void Trap()
         {
             Velocity = Vector2.Zero;
         }
 
+        public double TimeToCoverDistance(Vector2 A,Vector2 B, float force)
+        {
+            //this will be the velocity of the ball in the next time step *if*
+            //the player was to make the pass. 
+            float speed = force / Mass;
+
+            //calculate the velocity at B using the equation
+            //
+            //  v^2 = u^2 + 2as
+            //
+
+            //first calculate s (the distance between the two positions)
+            float DistanceToCover = Vector2.Distance(A, B);
+
+            float term = (float)(speed * speed + 2.0 * DistanceToCover * Friction);
+
+            //if  (u^2 + 2as) is negative it means the ball cannot reach point B.
+            if (term <= 0.0)
+            {
+                return -1.0;
+            }
+
+            float v = (float)Math.Sqrt(term);
+
+            //it IS possible for the ball to reach B and we know its speed when it
+            //gets there, so now it's easy to calculate the time using the equation
+            //
+            //    t = v-u
+            //        ---
+            //         a
+            //
+            return (v - speed) / Friction;
+        }
     }
 }

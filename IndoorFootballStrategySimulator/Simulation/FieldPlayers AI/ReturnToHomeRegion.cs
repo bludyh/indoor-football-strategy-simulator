@@ -25,7 +25,7 @@ namespace IndoorFootballStrategySimulator.Simulation
                 //there is not an assigned receiver && the goalkeeper does not gave
                 //the ball, go chase it
 
-                if (owner.isClosestTeamMemberToBall()
+                if (owner.IsClosestTeamMemberToBall()
                         && (owner.Team.ReceivingPlayer == null)
                         && !field.GoalKeeperHasBall)
                 {

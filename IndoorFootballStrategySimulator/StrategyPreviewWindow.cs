@@ -56,8 +56,8 @@ namespace IndoorFootballStrategySimulator {
                         100f,
                         (Team == TeamColor.BLUE) ? SimulationWindow.EntityManager.BlueTeam : SimulationWindow.EntityManager.RedTeam,
                         (Team == TeamColor.BLUE) ? goalKeeper.HomeArea : 29 - goalKeeper.HomeArea,
-                        (Team == TeamColor.BLUE) ? goalKeeper.Areas : goalKeeper.Areas.Select(a => 29 - a).ToList(),
-                        TendGoal.Instance());
+                        (Team == TeamColor.BLUE) ? goalKeeper.Areas : goalKeeper.Areas.Select(a => 29 - a).ToList()
+                        /*TendGoal.Instance()*/);
                     players.Add(player);
                 }
                 else if (p is FieldPlayer fieldPlayer) {
@@ -75,8 +75,8 @@ namespace IndoorFootballStrategySimulator {
                         (Team == TeamColor.BLUE) ? fieldPlayer.OffensiveHomeArea : 29 - fieldPlayer.OffensiveHomeArea,
                         (Team == TeamColor.BLUE) ? fieldPlayer.OffensiveAreas : fieldPlayer.OffensiveAreas.Select(a => 29 - a).ToList(),
                         (Team == TeamColor.BLUE) ? fieldPlayer.DefensiveHomeArea : 29 - fieldPlayer.DefensiveHomeArea,
-                        (Team == TeamColor.BLUE) ? fieldPlayer.DefensiveAreas : fieldPlayer.DefensiveAreas.Select(a => 29 - a).ToList(),
-                        ChaseBall.Instance());
+                        (Team == TeamColor.BLUE) ? fieldPlayer.DefensiveAreas : fieldPlayer.DefensiveAreas.Select(a => 29 - a).ToList()
+                        /*Idle.Instance()*/);
                     players.Add(player);
                 }
             }

@@ -30,7 +30,7 @@ namespace IndoorFootballStrategySimulator.Simulation
 
             //if the player is the closest player to the ball then he should keep
             //chasing it
-            if (player.isClosestTeamMemberToBall())
+            if (player.IsClosestTeamMemberToBall())
             {
                 player.Steering.Target = SimulationWindow.EntityManager.Ball.Position;
                 return;

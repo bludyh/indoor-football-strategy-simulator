@@ -87,17 +87,20 @@ namespace IndoorFootballStrategySimulator.Simulation {
             var ball = SimulationWindow.EntityManager.Ball;
             return (Vector2.DistanceSquared(this.Position, ball.Position) < (10f * 10f));
         }
+
         public bool BallWithinKickingRange()
         {
             var ball = SimulationWindow.EntityManager.Ball;
             return (Vector2.DistanceSquared(ball.Position, this.Position) < (10f*10f));
         }
+
         public bool BallWithinReceivingRange()
         {
             var ball = SimulationWindow.EntityManager.Ball;
             return (Vector2.DistanceSquared(this.Position, ball.Position) < 10f*10f);
         }
-        public bool isThreatened()
+
+        public bool IsThreatened()
         {
             //check against all opponents to make sure non are within this
             //player's comfort zone
@@ -110,25 +113,30 @@ namespace IndoorFootballStrategySimulator.Simulation {
             }
             return false;
         }
+
         public void TrackBall()
         {
             var ball = SimulationWindow.EntityManager.Ball;
             RotateHeadingToFacePosition(ball.Position);
         }
-        public bool isAheadOfAttacker()
+
+        public bool IsAheadOfAttacker()
         {
             return (Math.Abs(this.Position.X - Team.Opponent.Goal.Center.X)
                     < Math.Abs(Team.ControllingPlayer.Position.X - Team.Opponent.Goal.Center.X));
         }
+
         public bool AtTarget()
         {
             return (Vector2.DistanceSquared(this.Position, this.Steering.Target) < (10f*10f));
         }
-        public bool isClosestTeamMemberToBall() {
+
+        public bool IsClosestTeamMemberToBall() {
             if (Team.PlayerClosestToBall == this)
                 return true;
             return false;
         }
+
         public bool PositionInFrontOfPlayer(Vector2 position)
         {
             Vector2 ToSubject = Vector2.Subtract(position, this.Position);
@@ -142,14 +150,16 @@ namespace IndoorFootballStrategySimulator.Simulation {
                 return false;
             }
         }
-        public bool isClosestPlayerOnPitchToBall() {
-            if (isClosestTeamMemberToBall() && DistanceToBall < Team.Opponent.ClosestDistancetoBall)
+
+        public bool IsClosestPlayerOnPitchToBall() {
+            if (IsClosestTeamMemberToBall() && DistanceToBall < Team.Opponent.ClosestDistancetoBall)
             {
                 return true;
             }
             return false;
         }
-        public bool isControllingPlayer()
+
+        public bool IsControllingPlayer()
         {
             if (Team.ControllingPlayer == this)
             {
@@ -157,12 +167,13 @@ namespace IndoorFootballStrategySimulator.Simulation {
             }
             return false;
         }
+
         public bool InHotRegion()
         {
             var field = SimulationWindow.EntityManager.Field;
             return Math.Abs(Position.X - Team.Opponent.Goal.Center.X) < field.PlayingArea.Length / 3f;
         }
-        #region TODO
+        
         public bool InHomeRegion()
         {
             var field = SimulationWindow.EntityManager.Field;
@@ -195,6 +206,6 @@ namespace IndoorFootballStrategySimulator.Simulation {
                 Team.SupportingPlayer = BestSupportPlayer;
             }
         }
-        #endregion
+ 
     }
 }

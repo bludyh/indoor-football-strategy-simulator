@@ -89,11 +89,13 @@ namespace IndoorFootballStrategySimulator.Simulation
             CalculateClosestPlayerToBall();
             teamStateMachine.Update(gameTime);
         }
+        
         //Get FSM
         public FSM<Team> GetFSM()
         {
             return teamStateMachine;
         }
+
         private void Behaviors()
         {
             foreach (var player in Strategy.Players)
@@ -101,6 +103,7 @@ namespace IndoorFootballStrategySimulator.Simulation
                 player.Steering.StartWallAvoidance();
             }
         }
+
         private void CalculateClosestPlayerToBall()
         {
             float ClosestSoFar = float.MaxValue;
@@ -118,16 +121,19 @@ namespace IndoorFootballStrategySimulator.Simulation
 
             ClosestDistancetoBall = ClosestSoFar;
         }
+
         public bool CanShoot(Vector2 BallPos, float power)
         {
             return CanShoot(BallPos, power, new Vector2());
         }
+
         public bool InControl()
         {
             if (ControllingPlayer != null)
                 return true;
             return false;
         }
+
         public Player DetermineBestSupportingAttacker() {
             float ClosestSoFar = float.MaxValue;
 
@@ -148,6 +154,7 @@ namespace IndoorFootballStrategySimulator.Simulation
 
             return BestPlayer;
         }
+
         public bool FindPass(Player passer, Player receiver, Vector2 PassTarget, float power, float MinPassingDistance)
         {
             float ClosestToGoalSoFar = float.MaxValue;
@@ -182,7 +189,8 @@ namespace IndoorFootballStrategySimulator.Simulation
             }
             return finded;
         }
-        public bool isOpponentWithinRadius(Vector2 position, float radius)
+
+        public bool IsOpponentWithinRadius(Vector2 position, float radius)
         {
             foreach (Player player in Opponent.Strategy.Players)
             {
@@ -193,6 +201,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             }
             return false;
         }
+
         public bool AllPlayersAtHome()
         {
             foreach (Player player in Strategy.Players)
@@ -204,12 +213,14 @@ namespace IndoorFootballStrategySimulator.Simulation
             }
             return true;
         }
+
         public void SetControllingPlayer(Player player)
         {
             ControllingPlayer = player;
             //rub it in the opponents faces!
             Opponent.LostControl();
         }
+
         public void LostControl()
         {
             ControllingPlayer = null;
@@ -223,7 +234,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             {
                 return;
             }
-            if (isPassSafeFromAllOpponents(ControllingPlayer.Position, requester.Position, requester, 3f))
+            if (IsPassSafeFromAllOpponents(ControllingPlayer.Position, requester.Position, requester, 3f))
             {
 
                 //tell the player to make the pass
@@ -231,12 +242,13 @@ namespace IndoorFootballStrategySimulator.Simulation
 
             }
         }
+
         public void ReturnAllPlayersToHome()
         {
             //TODO
 
         }
-        //Miss HomeArea
+        
         public void UpdateTargetsOfWaitingPlayers()
         {
             foreach (Player curPlayer in Strategy.Players)
@@ -246,16 +258,14 @@ namespace IndoorFootballStrategySimulator.Simulation
                     FieldPlayer player = (FieldPlayer)curPlayer;
                     if (player.GetFSM().IsInState(Idle.Instance()) || player.GetFSM().IsInState(ReturnToHomeRegion.Instance()))
                     {
-                        //player.Steering.Target = player.HomeArea.Center;
+                        player.Steering.Target = player.GetHomeArea(SimulationWindow.EntityManager.Field).Center;
                     }
                 }
             }
         }
         #endregion
 
-        #region TOCHECK
-        // No ball timecovertodistance method
-        public bool isPassSafeFromOpponent(Vector2 from, Vector2 target, Player receiver, Player opp, float PassingForce)
+        public bool IsPassSafeFromOpponent(Vector2 from, Vector2 target, Player receiver, Player opp, float PassingForce)
         {
             //move the opponent into local space.
             Vector2 ToTarget = Vector2.Subtract(target, from);
@@ -273,7 +283,7 @@ namespace IndoorFootballStrategySimulator.Simulation
 
             //if the opponent is further away than the target we need to consider if
             //the opponent can reach the position before the receiver.
-            if (Vector2.Distance(from, target) < Vector2.Distance(opp.Position, from))
+            if (Vector2.DistanceSquared(from, target) < Vector2.DistanceSquared(opp.Position, from))
             {
                 if (receiver != null)
                 {
@@ -293,19 +303,42 @@ namespace IndoorFootballStrategySimulator.Simulation
                     return true;
                 }
             }
+            //calculate how long it takes the ball to cover the distance to the 
+            //position orthogonal to the opponents position
+            double TimeForBall = SimulationWindow.EntityManager.Ball.TimeToCoverDistance(new Vector2(0, 0), new Vector2(LocalPosOpp.X, 0), PassingForce);
+
+            //now calculate how far the opponent can run in this time
+            double reach = opp.MaxSpeed * TimeForBall
+                    + SimulationWindow.EntityManager.Ball.Radius
+                    + opp.Radius;
+
             //if the distance to the opponent's y position is less than his running
             //range plus the radius of the ball and the opponents radius then the
             //ball can be intercepted
-            if (Math.Abs(LocalPosOpp.Y) < SimulationWindow.EntityManager.Ball.Position.Y)
+            if (Math.Abs(LocalPosOpp.Y) < reach)
             {
                 return false;
             }
 
             return true;
         }
+
         public bool GetBestPassToReceiver(Player passer, Player receiver, Vector2 PassTarget, float power)
         {
-            float InterceptRange = receiver.MaxSpeed;
+            var Ball = SimulationWindow.EntityManager.Ball;
+            //first, calculate how much time it will take for the ball to reach 
+            //this receiver, if the receiver was to remain motionless 
+            double time = Ball.TimeToCoverDistance(Ball.Position, receiver.Position, power);
+
+            //return false if ball cannot reach the receiver after having been
+            //kicked with the given power
+            if (time < 0)
+            {
+                return false;
+            }
+
+            //the maximum distance the receiver can cover in this time
+            float InterceptRange = (float)time * receiver.MaxSpeed;
 
             //Scale the intercept range
             float ScalingFactor = 0.3f;
@@ -336,7 +369,7 @@ namespace IndoorFootballStrategySimulator.Simulation
 
                 if ((dist < ClosestSoFar)
                         && SimulationWindow.EntityManager.Field.PlayingArea.Inside(Passes[pass])
-                        && isPassSafeFromAllOpponents(SimulationWindow.EntityManager.Ball.Position,
+                        && IsPassSafeFromAllOpponents(SimulationWindow.EntityManager.Ball.Position,
                         Passes[pass],
                         receiver,
                         power))
@@ -349,6 +382,7 @@ namespace IndoorFootballStrategySimulator.Simulation
 
             return bResult;
         }
+
         public bool CanShoot(Vector2 position, float power, Vector2 shotTarget)
         {
             //the number of randomly created shot targets this method will test 
@@ -365,29 +399,36 @@ namespace IndoorFootballStrategySimulator.Simulation
                 int MinYVal = (int)(Opponent.Goal.LeftPostPos.Y + SimulationWindow.EntityManager.Ball.Radius);
                 int MaxYVal = (int)(Opponent.Goal.RightPostPos.Y - SimulationWindow.EntityManager.Ball.Radius);
 
-                Random rand = new Random();
-                shotTarget.Y = rand.Next(MinYVal, MaxYVal);
-                if (isPassSafeFromAllOpponents(position, shotTarget, null, power))
+                shotTarget.Y = new Random().Next(MinYVal, MaxYVal);
+                //make sure striking the ball with the given power is enough to drive
+                //the ball over the goal line.
+                double time = SimulationWindow.EntityManager.Ball.TimeToCoverDistance(position,shotTarget,power);
+                if (time>=0)
                 {
-                    return true;
+                    if (IsPassSafeFromAllOpponents(position, shotTarget, null, power))
+                    {
+                        return true;
+                    }
                 }
+
             }
 
             return false;
         }
+       
         //Missing event
-        public bool isPassSafeFromAllOpponents(Vector2 from, Vector2 target, Player receiver, float PassingForce)
+        public bool IsPassSafeFromAllOpponents(Vector2 from, Vector2 target, Player receiver, float PassingForce)
         {
             foreach (Player player in Opponent.Strategy.Players)
             {
-                if (!isPassSafeFromOpponent(from, target, receiver, player, PassingForce))
+                if (!IsPassSafeFromOpponent(from, target, receiver, player, PassingForce))
                 {
                     return false;
                 }
             }
             return true;
         }
-        #endregion
+
     }
 }
 

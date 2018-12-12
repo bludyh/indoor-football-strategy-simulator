@@ -42,8 +42,8 @@ namespace IndoorFootballStrategySimulator.Simulation
             //if this player's team is controlling AND this player is not the attacker
             //AND is further up the field than the attacker he should request a pass.
             if (player.Team.InControl()
-                    && (!player.isControllingPlayer())
-                    && player.isAheadOfAttacker())
+                    && (!player.IsControllingPlayer())
+                    && player.IsAheadOfAttacker())
             {
                 player.Team.RequestPass(player);
                 return;
@@ -56,7 +56,7 @@ namespace IndoorFootballStrategySimulator.Simulation
                 //the ball, go chase it
                 var field = SimulationWindow.EntityManager.Field;
 
-                if (player.isClosestTeamMemberToBall()
+                if (player.IsClosestTeamMemberToBall()
                         && player.Team.ReceivingPlayer == null
                         && !field.GoalKeeperHasBall)
                 {

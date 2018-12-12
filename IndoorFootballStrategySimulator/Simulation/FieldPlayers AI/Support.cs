@@ -59,7 +59,7 @@ namespace IndoorFootballStrategySimulator.Simulation
                 player.Velocity = new Vector2(0, 0);
 
                 //if not threatened by another player request a pass
-                if (!player.isThreatened())
+                if (!player.IsThreatened())
                 {
                     player.Team.RequestPass(player);
                 }
