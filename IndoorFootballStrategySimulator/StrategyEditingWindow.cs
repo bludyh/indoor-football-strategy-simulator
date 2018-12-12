@@ -8,13 +8,12 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Forms.Controls;
 using IndoorFootballStrategySimulator.Simulation;
+using System.Windows.Forms;
 
 namespace IndoorFootballStrategySimulator {
     class StrategyEditingWindow : StrategyWindow {
 
         private Player selectedPlayer;
-        private MouseState currentMouseState, previousMouseState;
-        private Vector2 mousePos;
         private bool isPlayerBeingDragged;
 
         public override Strategy Strategy {
@@ -201,18 +200,12 @@ namespace IndoorFootballStrategySimulator {
             Strategy.Players = players;
         }
 
-        protected override void Update(GameTime gameTime) {
-            base.Update(gameTime);
+        protected override void OnMouseDown(MouseEventArgs e) {
+            base.OnMouseDown(e);
 
-            if (Strategy == null)
-                return;
+            var mousePos = new Vector2(e.Location.X, e.Location.Y);
 
-            previousMouseState = currentMouseState;
-            currentMouseState = Mouse.GetState();
-
-            if (currentMouseState.LeftButton == ButtonState.Pressed) {
-                mousePos = new Vector2(currentMouseState.X, currentMouseState.Y);
-
+            if (e.Button == MouseButtons.Left) {
                 foreach (var player in Strategy.Players) {
                     if (Vector2.Distance(mousePos, player.Position) < player.Radius) {
                         if (selectedPlayer == null) {
@@ -224,23 +217,35 @@ namespace IndoorFootballStrategySimulator {
                         break;
                     }
                 }
-
-                if (selectedPlayer != null && isPlayerBeingDragged)
-                    selectedPlayer.Position = mousePos;
             }
+        }
 
-            if (currentMouseState.LeftButton == ButtonState.Released && previousMouseState.LeftButton == ButtonState.Pressed && selectedPlayer != null && selectedPlayer is FieldPlayer) {
+        protected override void OnMouseMove(MouseEventArgs e) {
+            base.OnMouseMove(e);
+
+            var mousePos = new Vector2(e.Location.X, e.Location.Y);
+
+            if (selectedPlayer != null && isPlayerBeingDragged)
+                selectedPlayer.Position = mousePos;
+        }
+
+        protected override void OnMouseUp(MouseEventArgs e) {
+            base.OnMouseUp(e);
+
+            var mousePos = new Vector2(e.Location.X, e.Location.Y);
+
+            if (e.Button == MouseButtons.Left && selectedPlayer != null && selectedPlayer is FieldPlayer) {
                 for (int i = 0; i < field.Areas.Count; i++) {
                     var area = field.Areas[i];
 
                     if (area.Contain(mousePos)) {
                         if (isPlayerBeingDragged) {
-                            if (area != selectedPlayer.GetHomeArea(field) && !Strategy.Players.Any(p => p != selectedPlayer && p.Position == area.Center)) {
+                            if (area != selectedPlayer.GetHomeArea(field, teamState) && !Strategy.Players.Any(p => p != selectedPlayer && p.Position == area.Center)) {
                                 SetPlayerHomeArea(selectedPlayer, i);
                                 selectedPlayer.Position = area.Center;
                             }
                             else
-                                selectedPlayer.Position = selectedPlayer.GetHomeArea(field).Center;
+                                selectedPlayer.Position = selectedPlayer.GetHomeArea(field, teamState).Center;
                         }
                         else
                             SetPlayerAreas(selectedPlayer, i);
@@ -249,8 +254,12 @@ namespace IndoorFootballStrategySimulator {
                 }
                 isPlayerBeingDragged = false;
             }
+        }
 
-            if (currentMouseState.RightButton == ButtonState.Pressed && selectedPlayer != null) {
+        protected override void OnMouseClick(MouseEventArgs e) {
+            base.OnMouseClick(e);
+
+            if (e.Button == MouseButtons.Right && selectedPlayer != null) {
                 selectedPlayer.Scale = Vector2.One;
                 selectedPlayer = null;
             }
@@ -271,7 +280,7 @@ namespace IndoorFootballStrategySimulator {
                     player.Draw(Editor.spriteBatch);
             }
             if (selectedPlayer != null) {
-                foreach (var area in selectedPlayer.GetAreas(field))
+                foreach (var area in selectedPlayer.GetAreas(field, teamState))
                     area.Fill(Editor.spriteBatch, Color.Red * 0.2f);
             }
 

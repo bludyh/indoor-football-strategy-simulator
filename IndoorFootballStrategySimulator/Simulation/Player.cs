@@ -16,11 +16,24 @@ namespace IndoorFootballStrategySimulator.Simulation {
     [KnownType(typeof(FieldPlayer))]
     public abstract class Player : MovingEntity {
 
+        private TeamColor team;
+
         /// <summary>
         ///     Gets the <see cref="SteeringManager"/> of the current <see cref="Player"/>.
         /// </summary>
         public SteeringManager Steering { get; private set; }
-        public Team Team { get; private set; }
+        public Team Team {
+            get {
+                switch (team) {
+                    case TeamColor.BLUE:
+                        return SimulationWindow.EntityManager.BlueTeam;
+                    case TeamColor.RED:
+                        return SimulationWindow.EntityManager.RedTeam;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+        }
         public float DistanceToBall { get; set; }
         public PlayerRole PlayerRole { get; private set; }
 
@@ -36,15 +49,15 @@ namespace IndoorFootballStrategySimulator.Simulation {
         /// <param name="mass"></param>
         /// <param name="maxForce"></param>
         /// <param name="maxSpeed"></param>
-        public Player(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed, Team team, PlayerRole role)
+        public Player(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed, TeamColor team, PlayerRole role)
             : base(texture, color, scale, pos, rot, radius, mass, maxForce, maxSpeed) {
-            Team = team;
+            this.team = team;
             PlayerRole = role;
             Steering = new SteeringManager(this);
         }
 
-        public abstract Area GetHomeArea(Field field);
-        public abstract List<Area> GetAreas(Field field);
+        public abstract Area GetHomeArea(Field field, TeamState state);
+        public abstract List<Area> GetAreas(Field field, TeamState state);
 
         /// <summary>
         ///     Updates logics of the <see cref="Player"/>.
@@ -168,11 +181,11 @@ namespace IndoorFootballStrategySimulator.Simulation {
             var field = SimulationWindow.EntityManager.Field;
             if (PlayerRole == PlayerRole.GoalKeeper)
             {
-                return GetHomeArea(field).Inside(Position,Area.AreaModifer.Normal);
+                return GetHomeArea(field, Team.State).Inside(Position,Area.AreaModifer.Normal);
             }
             else
             {
-                return GetHomeArea(field).Inside(Position,Area.AreaModifer.HalfSize);
+                return GetHomeArea(field, Team.State).Inside(Position,Area.AreaModifer.HalfSize);
             }
         }
         //Missing Event

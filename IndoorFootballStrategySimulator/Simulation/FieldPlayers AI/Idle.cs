@@ -21,7 +21,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             if (!Simulator.isGameOn)
             {
                 var field = SimulationWindow.EntityManager.Field;
-                player.Steering.Target = player.GetHomeArea(field).Center;
+                player.Steering.Target = player.GetHomeArea(field, player.Team.State).Center;
             }
         }
         public override void Handle(FieldPlayer player)

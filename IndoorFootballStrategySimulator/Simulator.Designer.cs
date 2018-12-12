@@ -32,6 +32,7 @@
             this.lbAwayStrategyName = new System.Windows.Forms.Label();
             this.rbAwayOffensive = new System.Windows.Forms.RadioButton();
             this.label4 = new System.Windows.Forms.Label();
+            this.strategyPreviewWindowAway = new IndoorFootballStrategySimulator.StrategyPreviewWindow();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgvAwayStrategies = new System.Windows.Forms.DataGridView();
@@ -45,6 +46,7 @@
             this.rbHomeDefensive = new System.Windows.Forms.RadioButton();
             this.rbHomeOffensive = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
+            this.strategyPreviewWindowHome = new IndoorFootballStrategySimulator.StrategyPreviewWindow();
             this.label1 = new System.Windows.Forms.Label();
             this.Intro = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -61,6 +63,7 @@
             this.rbDefensive = new System.Windows.Forms.RadioButton();
             this.btnSaveStrategy = new System.Windows.Forms.Button();
             this.rbOffensive = new System.Windows.Forms.RadioButton();
+            this.strategyEditingWindow = new IndoorFootballStrategySimulator.StrategyEditingWindow();
             this.btnDiscardChanges = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -104,6 +107,7 @@
             this.label31 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
+            this.simulationWindow = new IndoorFootballStrategySimulator.SimulationWindow();
             this.tabResults = new System.Windows.Forms.TabPage();
             this.label41 = new System.Windows.Forms.Label();
             this.label42 = new System.Windows.Forms.Label();
@@ -114,10 +118,6 @@
             this.button24 = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.label43 = new System.Windows.Forms.Label();
-            this.strategyPreviewWindowAway = new IndoorFootballStrategySimulator.StrategyPreviewWindow();
-            this.strategyPreviewWindowHome = new IndoorFootballStrategySimulator.StrategyPreviewWindow();
-            this.strategyEditingWindow = new IndoorFootballStrategySimulator.StrategyEditingWindow();
-            this.simulationWindow = new IndoorFootballStrategySimulator.SimulationWindow();
             this.tab.SuspendLayout();
             this.tabHome.SuspendLayout();
             this.pnAwayTeam.SuspendLayout();
@@ -235,6 +235,15 @@
             this.label4.Size = new System.Drawing.Size(79, 15);
             this.label4.TabIndex = 95;
             this.label4.Text = "Away Team";
+            // 
+            // strategyPreviewWindowAway
+            // 
+            this.strategyPreviewWindowAway.Location = new System.Drawing.Point(238, 0);
+            this.strategyPreviewWindowAway.Name = "strategyPreviewWindowAway";
+            this.strategyPreviewWindowAway.Size = new System.Drawing.Size(640, 288);
+            this.strategyPreviewWindowAway.TabIndex = 0;
+            this.strategyPreviewWindowAway.TeamState = IndoorFootballStrategySimulator.Simulation.TeamState.OFFENSIVE;
+            this.strategyPreviewWindowAway.Text = "Away";
             // 
             // textBox2
             // 
@@ -382,6 +391,15 @@
             this.label3.Size = new System.Drawing.Size(85, 15);
             this.label3.TabIndex = 94;
             this.label3.Text = "Home Team";
+            // 
+            // strategyPreviewWindowHome
+            // 
+            this.strategyPreviewWindowHome.Location = new System.Drawing.Point(238, 0);
+            this.strategyPreviewWindowHome.Name = "strategyPreviewWindowHome";
+            this.strategyPreviewWindowHome.Size = new System.Drawing.Size(640, 288);
+            this.strategyPreviewWindowHome.TabIndex = 0;
+            this.strategyPreviewWindowHome.TeamState = IndoorFootballStrategySimulator.Simulation.TeamState.OFFENSIVE;
+            this.strategyPreviewWindowHome.Text = "Home";
             // 
             // label1
             // 
@@ -565,6 +583,15 @@
             this.rbOffensive.Text = "Offensive";
             this.rbOffensive.UseVisualStyleBackColor = true;
             this.rbOffensive.CheckedChanged += new System.EventHandler(this.RadioButtons_CheckedChanged);
+            // 
+            // strategyEditingWindow
+            // 
+            this.strategyEditingWindow.Location = new System.Drawing.Point(0, 42);
+            this.strategyEditingWindow.Name = "strategyEditingWindow";
+            this.strategyEditingWindow.Size = new System.Drawing.Size(960, 432);
+            this.strategyEditingWindow.TabIndex = 26;
+            this.strategyEditingWindow.TeamState = IndoorFootballStrategySimulator.Simulation.TeamState.OFFENSIVE;
+            this.strategyEditingWindow.Text = "Strategy";
             // 
             // btnDiscardChanges
             // 
@@ -1030,6 +1057,14 @@
             this.label38.TabIndex = 107;
             this.label38.Text = "Home Team";
             // 
+            // simulationWindow
+            // 
+            this.simulationWindow.Location = new System.Drawing.Point(19, 34);
+            this.simulationWindow.Name = "simulationWindow";
+            this.simulationWindow.Size = new System.Drawing.Size(1280, 576);
+            this.simulationWindow.TabIndex = 157;
+            this.simulationWindow.Text = "Simulation";
+            // 
             // tabResults
             // 
             this.tabResults.Controls.Add(this.label41);
@@ -1150,41 +1185,6 @@
             this.label43.TabIndex = 85;
             this.label43.Text = "* 1-2-1 and 2-1-1  proved to ... \"here will explain the results of thestrategy wi" +
     "th the rate of winning %\"";
-            // 
-            // strategyPreviewWindowAway
-            // 
-            this.strategyPreviewWindowAway.Location = new System.Drawing.Point(238, 0);
-            this.strategyPreviewWindowAway.Name = "strategyPreviewWindowAway";
-            this.strategyPreviewWindowAway.Size = new System.Drawing.Size(640, 288);
-            this.strategyPreviewWindowAway.TabIndex = 0;
-            this.strategyPreviewWindowAway.TeamState = IndoorFootballStrategySimulator.Simulation.TeamState.OFFENSIVE;
-            this.strategyPreviewWindowAway.Text = "Away";
-            // 
-            // strategyPreviewWindowHome
-            // 
-            this.strategyPreviewWindowHome.Location = new System.Drawing.Point(238, 0);
-            this.strategyPreviewWindowHome.Name = "strategyPreviewWindowHome";
-            this.strategyPreviewWindowHome.Size = new System.Drawing.Size(640, 288);
-            this.strategyPreviewWindowHome.TabIndex = 0;
-            this.strategyPreviewWindowHome.TeamState = IndoorFootballStrategySimulator.Simulation.TeamState.OFFENSIVE;
-            this.strategyPreviewWindowHome.Text = "Home";
-            // 
-            // strategyEditingWindow
-            // 
-            this.strategyEditingWindow.Location = new System.Drawing.Point(0, 42);
-            this.strategyEditingWindow.Name = "strategyEditingWindow";
-            this.strategyEditingWindow.Size = new System.Drawing.Size(960, 432);
-            this.strategyEditingWindow.TabIndex = 26;
-            this.strategyEditingWindow.TeamState = IndoorFootballStrategySimulator.Simulation.TeamState.OFFENSIVE;
-            this.strategyEditingWindow.Text = "Strategy";
-            // 
-            // simulationWindow
-            // 
-            this.simulationWindow.Location = new System.Drawing.Point(19, 34);
-            this.simulationWindow.Name = "simulationWindow";
-            this.simulationWindow.Size = new System.Drawing.Size(1280, 576);
-            this.simulationWindow.TabIndex = 157;
-            this.simulationWindow.Text = "Simulation";
             // 
             // Simulator
             // 

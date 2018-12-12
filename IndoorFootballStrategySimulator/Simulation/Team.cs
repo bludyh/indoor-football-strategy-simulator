@@ -48,7 +48,6 @@ namespace IndoorFootballStrategySimulator.Simulation
             Initialize(editor);
 
             teamStateMachine = new FSM<Team>(this);
-            teamStateMachine.SetCurrentState(Defensive.Instance());
         }
         private void Initialize(UpdateService editor)
         {
@@ -79,6 +78,7 @@ namespace IndoorFootballStrategySimulator.Simulation
                         break;
                 }
 
+                player.Steering.StartWallAvoidance();
                 SimulationWindow.EntityManager.Entities.Add(player);
             }
         }
@@ -86,6 +86,9 @@ namespace IndoorFootballStrategySimulator.Simulation
         //Update
         public void Update(GameTime gameTime)
         {
+            if (teamStateMachine.CurrentState == null)
+                teamStateMachine.SetCurrentState(Offensive.Instance());
+
             CalculateClosestPlayerToBall();
             teamStateMachine.Update(gameTime);
         }
@@ -93,13 +96,6 @@ namespace IndoorFootballStrategySimulator.Simulation
         public FSM<Team> GetFSM()
         {
             return teamStateMachine;
-        }
-        private void Behaviors()
-        {
-            foreach (var player in Strategy.Players)
-            {
-                player.Steering.StartWallAvoidance();
-            }
         }
         private void CalculateClosestPlayerToBall()
         {
