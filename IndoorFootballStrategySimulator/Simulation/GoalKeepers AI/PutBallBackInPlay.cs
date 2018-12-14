@@ -26,10 +26,10 @@ namespace IndoorFootballStrategySimulator.Simulation
             Vector2 BallTarget = new Vector2();
             //test if there are players further forward on the field we might
             //be able to pass to. If so, make a pass.
-            if (owner.Team.FindPass(owner,receiver,BallTarget,0.6f, 50f))
+            if (owner.Team.FindPass(owner,receiver,BallTarget,3f, 100f))
             {
                 //make the pass   
-                ball.Kick(Vector2.Normalize(BallTarget - ball.Position),0.6f);
+                ball.Kick(Vector2.Normalize(BallTarget - ball.Position),3f);
                 //goalkeeper no longer has ball 
                 field.GoalKeeperHasBall = false;
                 //let the receiving player know the ball's comin' at him
@@ -43,7 +43,6 @@ namespace IndoorFootballStrategySimulator.Simulation
                 owner.GetFSM().ChangeState(TendGoal.Instance());
                 return;
             }
-            owner.Velocity = new Vector2();
         }
 
         public override void OnEnter(GoalKeeper owner)

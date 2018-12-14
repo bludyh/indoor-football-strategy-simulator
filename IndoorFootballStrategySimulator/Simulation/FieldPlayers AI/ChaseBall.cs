@@ -17,8 +17,8 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void OnEnter(FieldPlayer player)
         {
-            player.Steering.Target = SimulationWindow.EntityManager.Ball.Position;
             player.Steering.StartPursuit(SimulationWindow.EntityManager.Ball);
+            player.Steering.Target = SimulationWindow.EntityManager.Ball.Position;
         }
         public override void Handle(FieldPlayer player)
         {
@@ -33,7 +33,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             //chasing it
             if (player.IsClosestTeamMemberToBall())
             {
-                player.Steering.Target = SimulationWindow.EntityManager.Ball.Position;
+                player.Steering.StartPursuit(SimulationWindow.EntityManager.Ball);
                 return;
             }
 
@@ -43,7 +43,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void OnExit(FieldPlayer player)
         {
-            player.Steering.StopSeek();
+            player.Steering.StopPursuit();
         }
 
         public override bool OnMessage(FieldPlayer owner, Telegram telegram)

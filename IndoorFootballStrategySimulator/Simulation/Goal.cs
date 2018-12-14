@@ -38,7 +38,13 @@ namespace IndoorFootballStrategySimulator.Simulation {
             if (IsScored())
             {
                 Score++;
+                
+                // update if scored.
                 Simulator.isGameOn = false;
+                Team BlueTeam = SimulationWindow.EntityManager.BlueTeam;
+                Team RedTeam = SimulationWindow.EntityManager.RedTeam;
+                BlueTeam.GetFSM().ChangeState(PrepareForKickOff.Instance());
+                RedTeam.GetFSM().ChangeState(PrepareForKickOff.Instance());
             }
         }
 

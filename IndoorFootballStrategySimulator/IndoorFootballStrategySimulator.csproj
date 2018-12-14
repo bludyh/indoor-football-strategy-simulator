@@ -91,7 +91,7 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Simulation\Field.cs" />
     <Compile Include="Simulation\FieldPlayer.cs" />
-    <Compile Include="Simulation\FieldPlayers AI\ReturnToHomeRegion.cs" />
+    <Compile Include="Simulation\FieldPlayers AI\ReturnToHomeArea.cs" />
     <Compile Include="Simulation\FieldPlayers AI\Support.cs" />
     <Compile Include="Simulation\FSM.cs" />
     <Compile Include="Simulation\Goal.cs" />

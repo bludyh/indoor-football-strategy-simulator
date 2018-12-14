@@ -35,7 +35,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         {
             if (receiver == null)
             {
-                Console.WriteLine(string.Format("Warning! No receiver with Id of {0} found", receiver));
+                Console.WriteLine(string.Format("Warning! No receiver found"));
                 return;
             }
 
@@ -61,6 +61,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             {
                 var telegram = priorityQueue.First();
                 var receiver = telegram.Receiver;
+                Discharge(receiver, telegram);
                 priorityQueue.Remove(telegram);
             }
         }
@@ -70,6 +71,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             if (!receiver.HandleMessage(telegram))
             {
                 Console.WriteLine("Message not handled");
+                Console.WriteLine($"{receiver} and {telegram.Message}");
             }
         }
     }

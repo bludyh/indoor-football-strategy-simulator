@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,8 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void Handle(Team team)
         {
+            Ball ball = SimulationWindow.EntityManager.Ball;
+            ball.Position = new Vector2(640f, 288f);
             if (team.AllPlayersAtHome() && team.Opponent.AllPlayersAtHome())
             {
                 team.GetFSM().ChangeState(Defensive.Instance());
@@ -29,7 +32,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             team.PlayerClosestToBall = null;
             team.SupportingPlayer = null;
             team.ReceivingPlayer = null;
-
+            team.State = TeamState.DEFENSIVE;
             team.ReturnAllPlayersToHome();
         }
 
