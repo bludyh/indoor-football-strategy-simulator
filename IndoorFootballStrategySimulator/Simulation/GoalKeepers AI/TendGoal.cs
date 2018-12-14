@@ -40,7 +40,7 @@ namespace IndoorFootballStrategySimulator.Simulation
                 owner.GetFSM().ChangeState(InterceptBall.Instance());
             }
 
-            //if keeper is too far away from goal, he should go back to goal region
+            //if keeper is too far away from goal, he should go back to goal Area
             if (owner.TooFarFromGoalMouth() && owner.Team.InControl()) {
                 owner.GetFSM().ChangeState(ReturnHome.Instance());
                 return;
@@ -50,14 +50,21 @@ namespace IndoorFootballStrategySimulator.Simulation
              
         public override void OnEnter(GoalKeeper owner)
         {
-            //turn on interpose
-            // TODO
+            //interpose will position the agent between the ball position and a target
+            //position situated along the goal mouth.
             owner.Steering.Target = owner.GetRearInterposeTarget();
+            //turn on interpose
+            //owner.Steering.StartInterpose();
         }
 
         public override void OnExit(GoalKeeper owner)
         {
             owner.Steering.StopInterpose();
+        }
+
+        public override bool OnMessage(GoalKeeper owner, Telegram telegram)
+        {
+            return false;
         }
     }
 }

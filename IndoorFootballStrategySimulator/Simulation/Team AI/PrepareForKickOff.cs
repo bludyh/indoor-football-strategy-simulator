@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IndoorFootballStrategySimulator.Simulation.Team_AI
+namespace IndoorFootballStrategySimulator.Simulation
 {
     public sealed class PrepareForKickOff : State<Team>
     {
@@ -36,6 +36,11 @@ namespace IndoorFootballStrategySimulator.Simulation.Team_AI
         public override void OnExit(Team team)
         {
             Simulator.isGameOn = true;
+        }
+
+        public override bool OnMessage(Team owner, Telegram telegram)
+        {
+            return false;
         }
     }
 }

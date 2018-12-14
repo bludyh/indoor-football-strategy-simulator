@@ -35,7 +35,7 @@ namespace IndoorFootballStrategySimulator.Simulation {
             }
         }
         public float DistanceToBall { get; set; }
-        public PlayerRole PlayerRole { get; private set; }
+        public PlayerRole Role { get; private set; }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="Player"/> class.
@@ -52,8 +52,9 @@ namespace IndoorFootballStrategySimulator.Simulation {
         public Player(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed, TeamColor team, PlayerRole role)
             : base(texture, color, scale, pos, rot, radius, mass, maxForce, maxSpeed) {
             this.team = team;
-            PlayerRole = role;
+            Role = role;
             Steering = new SteeringManager(this);
+            DistanceToBall = float.MaxValue;
         }
 
         public abstract Area GetHomeArea(Field field, TeamState state);
@@ -98,19 +99,19 @@ namespace IndoorFootballStrategySimulator.Simulation {
         /// <returns></returns>
         public bool BallWithinKeeperRange() {
             var ball = SimulationWindow.EntityManager.Ball;
-            return (Vector2.DistanceSquared(this.Position, ball.Position) < (10f * 10f));
+            return (Vector2.DistanceSquared(this.Position, ball.Position) < (25f * 25f));
         }
 
         public bool BallWithinKickingRange()
         {
             var ball = SimulationWindow.EntityManager.Ball;
-            return (Vector2.DistanceSquared(ball.Position, this.Position) < (10f*10f));
+            return (Vector2.DistanceSquared(ball.Position, this.Position) < (25f*25f));
         }
 
         public bool BallWithinReceivingRange()
         {
             var ball = SimulationWindow.EntityManager.Ball;
-            return (Vector2.DistanceSquared(this.Position, ball.Position) < 10f*10f);
+            return (Vector2.DistanceSquared(this.Position, ball.Position) < 25f*25f);
         }
 
         public bool IsThreatened()
@@ -119,7 +120,7 @@ namespace IndoorFootballStrategySimulator.Simulation {
             //player's comfort zone
             foreach (Player oppPlayer in Team.Opponent.Strategy.Players)
             {
-                if (PositionInFrontOfPlayer(oppPlayer.Position) && (Vector2.DistanceSquared(this.Position,oppPlayer.Position)<(60f*60f)))
+                if (PositionInFrontOfPlayer(oppPlayer.Position) && (Vector2.DistanceSquared(this.Position,oppPlayer.Position)<(100f*100f)))
                 {
                     return true;
                 }
@@ -141,7 +142,7 @@ namespace IndoorFootballStrategySimulator.Simulation {
 
         public bool AtTarget()
         {
-            return (Vector2.DistanceSquared(this.Position, this.Steering.Target) < (10f*10f));
+            return (Vector2.DistanceSquared(this.Position, this.Steering.Target) < (25f*25f));
         }
 
         public bool IsClosestTeamMemberToBall() {
@@ -181,16 +182,16 @@ namespace IndoorFootballStrategySimulator.Simulation {
             return false;
         }
 
-        public bool InHotRegion()
+        public bool InHotArea()
         {
             var field = SimulationWindow.EntityManager.Field;
             return Math.Abs(Position.X - Team.Opponent.Goal.Center.X) < field.PlayingArea.Length / 3f;
         }
         
-        public bool InHomeRegion()
+        public bool InHomeArea()
         {
             var field = SimulationWindow.EntityManager.Field;
-            if (PlayerRole == PlayerRole.GoalKeeper)
+            if (Role == PlayerRole.GoalKeeper)
             {
                 return GetHomeArea(field, Team.State).Inside(Position,Area.AreaModifer.Normal);
             }
@@ -199,7 +200,6 @@ namespace IndoorFootballStrategySimulator.Simulation {
                 return GetHomeArea(field, Team.State).Inside(Position,Area.AreaModifer.HalfSize);
             }
         }
-        //Missing Event
         public void FindSupport()
         {
             //if there is no support we need to find a suitable player.
@@ -207,6 +207,11 @@ namespace IndoorFootballStrategySimulator.Simulation {
             {
                 Player bestSupportPlayer = Team.DetermineBestSupportingAttacker();
                 Team.SupportingPlayer = bestSupportPlayer;
+                MessageDispatcher.Instance().DispatchMessage(MessageDispatcher.SEND_MESSAGE_IMMEDIATELY,
+                    this,
+                    Team.SupportingPlayer,
+                    MessageTypes.Msg_SupportAttacker,
+                    null);
             }
 
             Player BestSupportPlayer = Team.DetermineBestSupportingAttacker();
@@ -216,7 +221,20 @@ namespace IndoorFootballStrategySimulator.Simulation {
             //states
             if (BestSupportPlayer != null && (BestSupportPlayer != Team.SupportingPlayer))
             {
+                if (Team.SupportingPlayer != null)
+                {
+                    MessageDispatcher.Instance().DispatchMessage(MessageDispatcher.SEND_MESSAGE_IMMEDIATELY,
+                            this,
+                            Team.SupportingPlayer,
+                            MessageTypes.Msg_GoHome,
+                            null);
+                }
                 Team.SupportingPlayer = BestSupportPlayer;
+                MessageDispatcher.Instance().DispatchMessage(MessageDispatcher.SEND_MESSAGE_IMMEDIATELY,
+                    this,
+                    Team.SupportingPlayer,
+                    MessageTypes.Msg_SupportAttacker,
+                    null);
             }
         }
  

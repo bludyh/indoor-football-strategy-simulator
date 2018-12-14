@@ -44,7 +44,7 @@ namespace IndoorFootballStrategySimulator.Simulation {
             Field = new Field(editor.Content.Load<Texture2D>("SoccerField"), Color.White, new Vector2(1f), new Vector2(640f, 288f), 0f);
             Entities.Add(Field);
 
-            Ball = new Ball(editor.Content.Load<Texture2D>("SoccerBall"), Color.White, new Vector2(1f), new Vector2(640f, 288f), 0f, 9f, 1f, 0f, 0f);
+            Ball = new Ball(editor.Content.Load<Texture2D>("SoccerBall"), Color.White, new Vector2(1f), new Vector2(640f, 288f), 0f, 5f, 1f, 0f, 0f);
             Entities.Add(Ball);
 
             BlueTeam = new Team(editor, TeamColor.BLUE);
@@ -71,6 +71,5 @@ namespace IndoorFootballStrategySimulator.Simulation {
             foreach (var entity in Entities)
                 entity.Draw(spriteBatch);
         }
-        
     }
 }

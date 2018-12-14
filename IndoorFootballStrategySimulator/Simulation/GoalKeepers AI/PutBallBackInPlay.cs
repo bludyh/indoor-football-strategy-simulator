@@ -26,12 +26,19 @@ namespace IndoorFootballStrategySimulator.Simulation
             Vector2 BallTarget = new Vector2();
             //test if there are players further forward on the field we might
             //be able to pass to. If so, make a pass.
-            if (owner.Team.FindPass(owner,receiver,BallTarget,3f, 50f))
+            if (owner.Team.FindPass(owner,receiver,BallTarget,0.6f, 50f))
             {
                 //make the pass   
-                ball.Kick(Vector2.Normalize(BallTarget - ball.Position),3f);
+                ball.Kick(Vector2.Normalize(BallTarget - ball.Position),0.6f);
                 //goalkeeper no longer has ball 
                 field.GoalKeeperHasBall = false;
+                //let the receiving player know the ball's comin' at him
+                MessageDispatcher.Instance().DispatchMessage(MessageDispatcher.SEND_MESSAGE_IMMEDIATELY,
+                        owner,
+                        receiver,
+                        MessageTypes.Msg_ReceiveBall,
+                        BallTarget);
+
                 //go back to tending the goal   
                 owner.GetFSM().ChangeState(TendGoal.Instance());
                 return;
@@ -51,6 +58,11 @@ namespace IndoorFootballStrategySimulator.Simulation
 
         public override void OnExit(GoalKeeper owner)
         {
+        }
+
+        public override bool OnMessage(GoalKeeper owner, Telegram telegram)
+        {
+            return false;
         }
     }
 }

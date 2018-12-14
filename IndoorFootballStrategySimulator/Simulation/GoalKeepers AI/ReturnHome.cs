@@ -22,19 +22,24 @@ namespace IndoorFootballStrategySimulator.Simulation
             //if close enough to home or the opponents get control
             //over the ball and change state to tend goal
             //TODO
-            if (!owner.Team.InControl() && owner.InHomeRegion()) {
+            if (!owner.Team.InControl() && owner.InHomeArea()) {
                 owner.GetFSM().ChangeState(TendGoal.Instance());
             }
         }
 
         public override void OnEnter(GoalKeeper owner)
         {
-            //owner.Steering.StartArrival();
+            owner.Steering.StartArrival(owner.Steering.Target);
         }
 
         public override void OnExit(GoalKeeper owner)
         {
             owner.Steering.StopArrival();
+        }
+
+        public override bool OnMessage(GoalKeeper owner, Telegram telegram)
+        {
+            return false;
         }
     }
 }

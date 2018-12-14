@@ -21,11 +21,10 @@ namespace IndoorFootballStrategySimulator.Simulation
 
         [DataMember]
         public List<int> Areas { get; set; }
-        public static PlayerRole Role { get; private set; }
 
         public GoalKeeper(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed,
-            TeamColor team = TeamColor.BLUE, int homeArea = -1, List<int> areas = null, State<GoalKeeper> startState = null)
-            : base(texture, color, scale, pos, rot, radius, mass, maxForce, maxSpeed, team, Role)
+            TeamColor team = TeamColor.BLUE, int homeArea = -1, List<int> areas = null, State<GoalKeeper> startState = null, PlayerRole role= PlayerRole.GoalKeeper)
+            : base(texture, color, scale, pos, rot, radius, mass, maxForce, maxSpeed, team, role)
         {
             HomeArea = homeArea;
             Areas = areas;
@@ -52,7 +51,10 @@ namespace IndoorFootballStrategySimulator.Simulation
             base.Update(gameTime);
 
             if (gkStateMachine.CurrentState == null && startState != null)
+            {
                 gkStateMachine.SetCurrentState(startState);
+                gkStateMachine.SetGlobalState(GlobalGoalKeeperState.Instance());
+            }
 
             gkStateMachine.Update(gameTime);
         }
@@ -85,6 +87,11 @@ namespace IndoorFootballStrategySimulator.Simulation
 
         public bool BallWithinRangeForIntercept() {
             return (Vector2.DistanceSquared(Team.Goal.Center, SimulationWindow.EntityManager.Ball.Position) < (100f *100f));
+        }
+
+        public override bool HandleMessage(Telegram msg)
+        {
+            return gkStateMachine.HandleMessage(msg);
         }
     }
 }

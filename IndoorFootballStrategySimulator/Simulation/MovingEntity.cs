@@ -60,7 +60,7 @@ namespace IndoorFootballStrategySimulator.Simulation {
         /// <summary>
         ///     Gets the maximum speed of the <see cref="MovingEntity"/>.
         /// </summary>
-        public float MaxSpeed { get; private set; }
+        public float MaxSpeed { get; set; }
 
         protected MovingEntity(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed)
             : base(texture, color, scale, pos, rot, radius)
@@ -87,5 +87,6 @@ namespace IndoorFootballStrategySimulator.Simulation {
             SupportCalculate.TransformVector2(rotationMatrix, Velocity);
             return false;
         }
+        public abstract bool HandleMessage(Telegram msg);
     }
 }

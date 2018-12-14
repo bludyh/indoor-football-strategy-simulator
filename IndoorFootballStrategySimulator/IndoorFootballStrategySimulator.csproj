@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,6 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Forms.DX, Version=2.1.0.2, Culture=neutral, processorArchitecture=MSIL">
@@ -65,6 +67,11 @@
     <Compile Include="ExtendedUpdateWindow.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Simulation\FieldPlayers AI\GlobalFieldPlayerState.cs" />
+    <Compile Include="Simulation\GoalKeepers AI\GlobalGoalKeeperState.cs" />
+    <Compile Include="Simulation\MessageDispatcher.cs" />
+    <Compile Include="Simulation\MessageTypes.cs" />
+    <Compile Include="Simulation\Telegram.cs" />
     <Compile Include="Simulation\TeamColor.cs" />
     <Compile Include="Simulation\FieldPlayers AI\ReceiveBall.cs" />
     <Compile Include="StrategyPreviewWindow.cs">

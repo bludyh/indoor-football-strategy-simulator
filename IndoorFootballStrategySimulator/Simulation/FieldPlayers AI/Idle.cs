@@ -48,7 +48,6 @@ namespace IndoorFootballStrategySimulator.Simulation
                 player.Team.RequestPass(player);
                 return;
             }
-
             if (Simulator.isGameOn)
             {
                 //if the ball is nearer this player than any other team member  AND
@@ -65,10 +64,14 @@ namespace IndoorFootballStrategySimulator.Simulation
                     return;
                 }
             }
-
         }
         public override void OnExit(FieldPlayer player)
         {
+        }
+
+        public override bool OnMessage(FieldPlayer owner, Telegram telegram)
+        {
+            return false;
         }
     }
 }

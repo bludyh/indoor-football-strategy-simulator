@@ -264,15 +264,17 @@ namespace IndoorFootballStrategySimulator.Simulation {
         /// </summary>
         /// <returns>A vector represents the steering force.</returns>
         private Vector2 Separation() {
-            Vector2 steeringForce = Vector2.Zero;
-
-            foreach (var _entity in SimulationWindow.EntityManager.Entities) {
-                if (_entity is MovingEntity movingEntity && movingEntity!= entity) {
-                    Vector2 offset = movingEntity.Position - entity.Position;
-                    float overlap = entity.Radius + movingEntity.Radius - offset.Length();
+            Vector2 steeringForce = new Vector2();
+            foreach (var entity in SimulationWindow.EntityManager.Entities)
+            {
+                if (entity is Player player && player != this.entity)
+                {
+                    Vector2 offset = Vector2.Subtract(player.Position, this.entity.Position);
+                    Vector2.Add(steeringForce, Vector2.Divide(Vector2.Normalize(offset), offset.Length()));;
                 }
             }
             return steeringForce;
+
         }
 
         /// <summary>
@@ -310,7 +312,7 @@ namespace IndoorFootballStrategySimulator.Simulation {
             }
 
             if (steeringBehaviors.HasFlag(SteeringBehavior.SEPARATION)) {
-                force += Separation();
+                force += Separation()*20f;
                 if (!AccumulateSteeringForce(force)) return SteeringForce;
             }
 

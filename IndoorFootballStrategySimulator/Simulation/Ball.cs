@@ -132,5 +132,10 @@ namespace IndoorFootballStrategySimulator.Simulation {
             //
             return (v - speed) / Friction;
         }
+
+        public override bool HandleMessage(Telegram msg)
+        {
+            return false;
+        }
     }
 }

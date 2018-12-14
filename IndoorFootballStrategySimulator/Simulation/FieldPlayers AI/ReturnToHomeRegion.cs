@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace IndoorFootballStrategySimulator.Simulation
 {
-    public sealed class ReturnToHomeRegion : State<FieldPlayer>
+    public sealed class ReturnToHomeArea : State<FieldPlayer>
     {
-        private static readonly ReturnToHomeRegion instance = new ReturnToHomeRegion();
-        static ReturnToHomeRegion() { }
-        private ReturnToHomeRegion() { }
-        public static ReturnToHomeRegion Instance()
+        private static readonly ReturnToHomeArea instance = new ReturnToHomeArea();
+        static ReturnToHomeArea() { }
+        private ReturnToHomeArea() { }
+        public static ReturnToHomeArea Instance()
         {
             return instance;
         }
@@ -42,7 +42,7 @@ namespace IndoorFootballStrategySimulator.Simulation
                 owner.Steering.Target = owner.Position;
                 owner.GetFSM().ChangeState(Idle.Instance());
             } //if game is not on the player must return much closer to the center of his
-              //home region
+              //home Area
             else if (!Simulator.isGameOn && owner.AtTarget())
             {
                 owner.GetFSM().ChangeState(Idle.Instance());
@@ -64,6 +64,11 @@ namespace IndoorFootballStrategySimulator.Simulation
         public override void OnExit(FieldPlayer owner)
         {
             owner.Steering.StopArrival();
+        }
+
+        public override bool OnMessage(FieldPlayer owner, Telegram telegram)
+        {
+            return false;
         }
     }
 }

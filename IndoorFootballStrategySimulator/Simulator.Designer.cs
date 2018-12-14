@@ -1220,7 +1220,7 @@
         }
 
         #endregion
-		private System.Windows.Forms.TabControl tab;
+        private System.Windows.Forms.TabControl tab;
 		private System.Windows.Forms.TabPage tabHome;
 		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.TextBox textBox1;

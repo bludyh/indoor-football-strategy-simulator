@@ -11,5 +11,6 @@ namespace IndoorFootballStrategySimulator.Simulation
         public abstract void OnEnter(T owner);
         public abstract void Handle(T owner);
         public abstract void OnExit(T owner);
+        public abstract bool OnMessage(T owner, Telegram telegram);
     }
 }

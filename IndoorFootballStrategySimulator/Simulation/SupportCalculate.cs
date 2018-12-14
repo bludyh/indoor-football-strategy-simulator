@@ -31,14 +31,14 @@ namespace IndoorFootballStrategySimulator.Simulation
             Area playingArea = SimulationWindow.EntityManager.Field.PlayingArea;
             //calculate the positions of each sweet spot, create them and 
             //store them in m_Spots
-            float HeightOfSSRegion = playingArea.Height * 0.8f;
-            float WidthOfSSRegion = playingArea.Width * 0.9f;
-            float SliceX = WidthOfSSRegion / numX;
-            float SliceY = HeightOfSSRegion / numY;
+            float HeightOfSSArea = playingArea.Height * 0.8f;
+            float WidthOfSSArea = playingArea.Width * 0.9f;
+            float SliceX = WidthOfSSArea / numX;
+            float SliceY = HeightOfSSArea / numY;
 
-            float left = playingArea.LeftX + (playingArea.Width - WidthOfSSRegion) / 2.0f + SliceX / 2.0f;
-            float right = playingArea.RightX - (playingArea.Width - WidthOfSSRegion) / 2.0f - SliceX / 2.0f;
-            float top = playingArea.TopY + (playingArea.Height - HeightOfSSRegion) / 2.0f + SliceY / 2.0f;
+            float left = playingArea.LeftX + (playingArea.Width - WidthOfSSArea) / 2.0f + SliceX / 2.0f;
+            float right = playingArea.RightX - (playingArea.Width - WidthOfSSArea) / 2.0f - SliceX / 2.0f;
+            float top = playingArea.TopY + (playingArea.Height - HeightOfSSArea) / 2.0f + SliceY / 2.0f;
 
             for (int x = 0; x < (numX / 2) - 1; ++x)
             {

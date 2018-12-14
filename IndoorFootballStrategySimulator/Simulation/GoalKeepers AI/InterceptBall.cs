@@ -20,7 +20,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             var field = SimulationWindow.EntityManager.Field;
             var ball = SimulationWindow.EntityManager.Ball;
             // if the goalkeeper moves too far away from the goal, he should return to his
-            //home region and he is not the person who is the closest to the ball
+            //home Area and he is not the person who is the closest to the ball
             //Then he should keep trying to intercep it.
             if (owner.TooFarFromGoalMouth() && !owner.IsClosestPlayerOnPitchToBall()) {
                
@@ -38,12 +38,17 @@ namespace IndoorFootballStrategySimulator.Simulation
 
         public override void OnEnter(GoalKeeper owner)
         {
-            //owner.Steering.StartPursuit();
+            owner.Steering.StartPursuit(SimulationWindow.EntityManager.Ball);
         }
 
         public override void OnExit(GoalKeeper owner)
         {
             owner.Steering.StopPursuit();
+        }
+
+        public override bool OnMessage(GoalKeeper owner, Telegram telegram)
+        {
+            return false;
         }
     }
 }

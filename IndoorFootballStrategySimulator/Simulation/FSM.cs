@@ -11,6 +11,7 @@ namespace IndoorFootballStrategySimulator.Simulation
     {
         private readonly T owner;
         public State<T> CurrentState { get; private set; }
+        public State<T> GlobalState { get; private set; }   
         public FSM(T owner)
         {
             this.owner = owner;
@@ -21,11 +22,20 @@ namespace IndoorFootballStrategySimulator.Simulation
             CurrentState = state;
             CurrentState.OnEnter(owner);
         }
+        public void SetGlobalState(State<T> state)
+        {
+            GlobalState = state;
+        }
+
         public void Update(GameTime gameTime)
         {
             if (CurrentState != null)
             {
                 CurrentState.Handle(owner);
+            }
+            if (GlobalState != null)
+            {
+                GlobalState.Handle(owner);
             }
         }
         public void ChangeState(State<T> newState)
@@ -37,6 +47,20 @@ namespace IndoorFootballStrategySimulator.Simulation
         public bool IsInState(State<T> state)
         {
             return CurrentState == state;
+        }
+        public bool HandleMessage(Telegram message)
+        {
+            if (CurrentState != null && CurrentState.OnMessage(owner, message))
+            {
+                return true;
+            }
+
+            if (CurrentState != null && GlobalState.OnMessage(owner, message))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

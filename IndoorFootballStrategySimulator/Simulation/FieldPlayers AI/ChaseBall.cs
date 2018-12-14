@@ -17,7 +17,8 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void OnEnter(FieldPlayer player)
         {
-            player.Steering.StartSeek(SimulationWindow.EntityManager.Ball.Position);
+            player.Steering.Target = SimulationWindow.EntityManager.Ball.Position;
+            player.Steering.StartPursuit(SimulationWindow.EntityManager.Ball);
         }
         public override void Handle(FieldPlayer player)
         {
@@ -37,12 +38,17 @@ namespace IndoorFootballStrategySimulator.Simulation
             }
 
             //if the player is not closest to the ball anymore, he should return back
-            //to his home region and wait for another opportunity
-            player.GetFSM().ChangeState(ReturnToHomeRegion.Instance());
+            //to his home Area and wait for another opportunity
+            player.GetFSM().ChangeState(ReturnToHomeArea.Instance());
         }
         public override void OnExit(FieldPlayer player)
         {
             player.Steering.StopSeek();
+        }
+
+        public override bool OnMessage(FieldPlayer owner, Telegram telegram)
+        {
+            return false;
         }
     }
 }
