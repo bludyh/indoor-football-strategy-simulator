@@ -42,13 +42,12 @@ namespace IndoorFootballStrategySimulator.Simulation
             //if this player's team is controlling AND this player is not the attacker
             //AND is further up the field than the attacker he should request a pass.
             if (player.Team.InControl()
-                    && (!player.isControllingPlayer())
-                    && player.isAheadOfAttacker())
+                    && (!player.IsControllingPlayer())
+                    && player.IsAheadOfAttacker())
             {
                 player.Team.RequestPass(player);
                 return;
             }
-
             if (Simulator.isGameOn)
             {
                 //if the ball is nearer this player than any other team member  AND
@@ -56,7 +55,7 @@ namespace IndoorFootballStrategySimulator.Simulation
                 //the ball, go chase it
                 var field = SimulationWindow.EntityManager.Field;
 
-                if (player.isClosestTeamMemberToBall()
+                if (player.IsClosestTeamMemberToBall()
                         && player.Team.ReceivingPlayer == null
                         && !field.GoalKeeperHasBall)
                 {
@@ -65,10 +64,14 @@ namespace IndoorFootballStrategySimulator.Simulation
                     return;
                 }
             }
-
         }
         public override void OnExit(FieldPlayer player)
         {
+        }
+
+        public override bool OnMessage(FieldPlayer owner, Telegram telegram)
+        {
+            return false;
         }
     }
 }

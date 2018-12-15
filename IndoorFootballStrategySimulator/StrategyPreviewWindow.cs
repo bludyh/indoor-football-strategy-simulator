@@ -72,11 +72,12 @@ namespace IndoorFootballStrategySimulator {
                         75f,
                         50f,
                         Team,
+                        PlayerRole.Attacker,
                         (Team == TeamColor.BLUE) ? fieldPlayer.OffensiveHomeArea : 29 - fieldPlayer.OffensiveHomeArea,
                         (Team == TeamColor.BLUE) ? fieldPlayer.OffensiveAreas : fieldPlayer.OffensiveAreas.Select(a => 29 - a).ToList(),
                         (Team == TeamColor.BLUE) ? fieldPlayer.DefensiveHomeArea : 29 - fieldPlayer.DefensiveHomeArea,
                         (Team == TeamColor.BLUE) ? fieldPlayer.DefensiveAreas : fieldPlayer.DefensiveAreas.Select(a => 29 - a).ToList(),
-                        ChaseBall.Instance());
+                        Idle.Instance());
                     players.Add(player);
                 }
             }

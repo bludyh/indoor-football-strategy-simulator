@@ -86,6 +86,7 @@ namespace IndoorFootballStrategySimulator {
         private void SimulationWindow_Initialized(object sender, EventArgs e) {
             SimulationWindow.EntityManager.BlueTeam.Strategy = strategyPreviewWindowHome.Strategy;
             SimulationWindow.EntityManager.RedTeam.Strategy = strategyPreviewWindowAway.Strategy;
+            SetFirstTarget();
         }
 
         private void Start_btn_Click(object sender, EventArgs e)
@@ -104,7 +105,7 @@ namespace IndoorFootballStrategySimulator {
                 tab.Controls.Remove(tabStrategies);
                 tab.Controls.Remove(tabResults);
                 tab.SelectTab(tabSimulation);
-
+                isGameOn = true;
                 Pause = false;
             }
             catch (Exception ex) {
@@ -249,6 +250,16 @@ namespace IndoorFootballStrategySimulator {
         private void BtnDiscardChanges_Click(object sender, EventArgs e) {
             DgvStrategies_SelectionChanged(sender, e);
         }
-
+        private void SetFirstTarget()
+        {
+            foreach (Player player in SimulationWindow.EntityManager.BlueTeam.Strategy.Players)
+            {
+                player.Steering.Target = player.GetHomeArea(SimulationWindow.EntityManager.Field, player.Team.State).Center;
+            }
+            foreach (Player player in SimulationWindow.EntityManager.RedTeam.Strategy.Players)
+            {
+                player.Steering.Target = player.GetHomeArea(SimulationWindow.EntityManager.Field, player.Team.State).Center;
+            }
+        }
     }
 }

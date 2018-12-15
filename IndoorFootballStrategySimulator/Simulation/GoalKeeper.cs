@@ -21,11 +21,10 @@ namespace IndoorFootballStrategySimulator.Simulation
 
         [DataMember]
         public List<int> Areas { get; set; }
-        public static PlayerRole Role { get; private set; }
 
         public GoalKeeper(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed,
-            TeamColor team = TeamColor.BLUE, int homeArea = -1, List<int> areas = null, State<GoalKeeper> startState = null)
-            : base(texture, color, scale, pos, rot, radius, mass, maxForce, maxSpeed, team, Role)
+            TeamColor team = TeamColor.BLUE, int homeArea = -1, List<int> areas = null, State<GoalKeeper> startState = null, PlayerRole role= PlayerRole.GoalKeeper)
+            : base(texture, color, scale, pos, rot, radius, mass, maxForce, maxSpeed, team, role)
         {
             HomeArea = homeArea;
             Areas = areas;
@@ -52,30 +51,16 @@ namespace IndoorFootballStrategySimulator.Simulation
             base.Update(gameTime);
 
             if (gkStateMachine.CurrentState == null && startState != null)
+            {
                 gkStateMachine.SetCurrentState(startState);
+                gkStateMachine.SetGlobalState(GlobalGoalKeeperState.Instance());
+            }
 
             gkStateMachine.Update(gameTime);
         }
         public FSM<GoalKeeper> GetFSM()
         {
             return gkStateMachine;
-        }
-        private void BounceBall()
-        {
-            if (SimulationWindow.EntityManager.Ball.Position.Y > 176 && SimulationWindow.EntityManager.Ball.Position.Y <400)
-            {
-            this.Position = new Vector2(this.Position.X, SimulationWindow.EntityManager.Ball.Position.Y);
-            }
-            foreach (var entity in SimulationWindow.EntityManager.Entities)
-            {
-                if (entity is Ball ball)
-                {
-                    Vector2 offset = ball.Position - Position;
-                    float overlap = Radius + ball.Radius - offset.Length();
-                    if (overlap >= 0)
-                        ball.Velocity += Vector2.Normalize(offset) * overlap;
-                }
-            }
         }
 
         /// <summary>
@@ -85,7 +70,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         /// </summary>
         /// <returns></returns>
         public bool TooFarFromGoalMouth() {
-            return (Vector2.DistanceSquared(Position, GetRearInterposeTarget()) > (100f*100f));
+            return (Vector2.DistanceSquared(Position, GetRearInterposeTarget()) > (70f*70f));
         }
 
         public Vector2 GetRearInterposeTarget() {
@@ -101,7 +86,12 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
 
         public bool BallWithinRangeForIntercept() {
-            return (Vector2.DistanceSquared(Team.Goal.Center, SimulationWindow.EntityManager.Ball.Position) < (100f *100f));
+            return (Vector2.DistanceSquared(Team.Goal.Center, SimulationWindow.EntityManager.Ball.Position) < (70f *70f));
+        }
+
+        public override bool HandleMessage(Telegram msg)
+        {
+            return gkStateMachine.HandleMessage(msg);
         }
     }
 }

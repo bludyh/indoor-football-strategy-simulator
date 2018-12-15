@@ -26,17 +26,12 @@ namespace IndoorFootballStrategySimulator.Simulation
                 owner.GetFSM().ChangeState(ChaseBall.Instance());
                 return;
             }
-            if (owner.Steering.PursuitIsOn())
-            {
-                owner.Steering.Target = ball.Position;
-            }
 
             //if the player has 'arrived' at the steering target he should wait and
             //turn to face the ball
             if (owner.AtTarget())
             {
                 owner.Steering.StopArrival();
-                owner.Steering.StopPursuit();
                 owner.TrackBall();
                 owner.Velocity = new Vector2(0, 0);
             }
@@ -51,16 +46,15 @@ namespace IndoorFootballStrategySimulator.Simulation
             //there are two types of receive behavior. One uses arrive to direct
             //the receiver to the position sent by the passer in its telegram. The
             //other uses the pursuit behavior to pursue the ball. 
-            //This statement selects between them dependent on the probability
-            //ChanceOfUsingArriveTypeReceiveBehavior, whether or not an opposing
+            //This statement selects between them, whether or not an opposing
             //player is close to the receiving player, and whether or not the receiving
-            //player is in the opponents 'hot region' (the third of the pitch closest
+            //player is in the opponents 'hot Area' (the third of the pitch closest
             //to the opponent's goal
             float PassThreatRadius = 70f;
-            if ((owner.InHotRegion() || SupportCalculate.RandFloat() < 0.5f)
-                    && !owner.Team.isOpponentWithinRadius(owner.Position, PassThreatRadius))
+            if ((owner.InHotArea() || SupportCalculate.RandFloat() < 0.5)
+                    && !owner.Team.IsOpponentWithinRadius(owner.Position, PassThreatRadius))
             {
-                //owner.Steering.StartArrival();
+                owner.Steering.StartArrival(owner.Steering.Target);
             }
             else
             {
@@ -74,6 +68,11 @@ namespace IndoorFootballStrategySimulator.Simulation
             owner.Steering.StopArrival();
             owner.Steering.StopPursuit();
             owner.Team.ReceivingPlayer = null;
+        }
+
+        public override bool OnMessage(FieldPlayer owner, Telegram telegram)
+        {
+            return false;
         }
     }
 }

@@ -36,12 +36,12 @@ namespace IndoorFootballStrategySimulator.Simulation
                 SupportCalculate.TransformVector2(rotationMatrix, player.Heading);
                 //this value works well whjen the player is attempting to control the
                 //ball and turn at the same time
-                const float KickingForce = 80f;
+                const float KickingForce = 0.8f;
                 ball.Kick(player.Heading, KickingForce);
             } //kick the ball down the field
             else
             {
-                ball.Kick(player.Team.Goal.Facing,150f);
+                ball.Kick(player.Team.Goal.Facing,1.5f);
             }
             //the player has kicked the ball so he must now change state to follow it
             player.GetFSM().ChangeState(ChaseBall.Instance());
@@ -50,6 +50,11 @@ namespace IndoorFootballStrategySimulator.Simulation
         public override void OnExit(FieldPlayer player)
         {
             
+        }
+
+        public override bool OnMessage(FieldPlayer owner, Telegram telegram)
+        {
+            return false;
         }
     }
 }

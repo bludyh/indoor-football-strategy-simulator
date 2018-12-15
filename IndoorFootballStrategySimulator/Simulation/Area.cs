@@ -82,8 +82,8 @@ namespace IndoorFootballStrategySimulator.Simulation {
         public void Fill(SpriteBatch sb, Color color) {
             sb.Draw(Utilities.SimpleTexture, new Rectangle((int)LeftX, (int)TopY, (int)Width, (int)Height), color);
         }
-        /* returns true if the given position lays inside the region. 
-         * The region modifier can be used to contract the region bounderies */
+        /* returns true if the given position lays inside the Area. 
+         * The Area modifier can be used to contract the Area bounderies */
         public bool Inside(Vector2 position)
         {
             return Inside(position, AreaModifer.Normal);

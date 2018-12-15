@@ -9,6 +9,10 @@ namespace IndoorFootballStrategySimulator.Simulation
 {
     class SupportCalculate
     {
+        private static List<SupportSpot> SpotsList = new List<SupportSpot>();
+        //a pointer to the highest valued spot from the last update
+        private static SupportSpot bestSupportingSpot;
+        public static Team Team { get; private set; }
         //private class for Spots
         private class SupportSpot
         {
@@ -20,10 +24,6 @@ namespace IndoorFootballStrategySimulator.Simulation
                 Score = value;
             }
         }
-        private static List<SupportSpot> SpotsList = new List<SupportSpot>();
-        //a pointer to the highest valued spot from the last update
-        private static SupportSpot bestSupportingSpot;
-        public static Team Team { get; private set; }
         public SupportCalculate(int numX, int numY, Team team)
         {
             bestSupportingSpot = null;
@@ -31,14 +31,14 @@ namespace IndoorFootballStrategySimulator.Simulation
             Area playingArea = SimulationWindow.EntityManager.Field.PlayingArea;
             //calculate the positions of each sweet spot, create them and 
             //store them in m_Spots
-            float HeightOfSSRegion = playingArea.Height * 0.8f;
-            float WidthOfSSRegion = playingArea.Width * 0.9f;
-            float SliceX = WidthOfSSRegion / numX;
-            float SliceY = HeightOfSSRegion / numY;
+            float HeightOfSSArea = playingArea.Height * 0.8f;
+            float WidthOfSSArea = playingArea.Width * 0.9f;
+            float SliceX = WidthOfSSArea / numX;
+            float SliceY = HeightOfSSArea / numY;
 
-            float left = playingArea.LeftX + (playingArea.Width - WidthOfSSRegion) / 2.0f + SliceX / 2.0f;
-            float right = playingArea.RightX - (playingArea.Width - WidthOfSSRegion) / 2.0f - SliceX / 2.0f;
-            float top = playingArea.TopY + (playingArea.Height - HeightOfSSRegion) / 2.0f + SliceY / 2.0f;
+            float left = playingArea.LeftX + (playingArea.Width - WidthOfSSArea) / 2.0f + SliceX / 2.0f;
+            float right = playingArea.RightX - (playingArea.Width - WidthOfSSArea) / 2.0f - SliceX / 2.0f;
+            float top = playingArea.TopY + (playingArea.Height - HeightOfSSArea) / 2.0f + SliceY / 2.0f;
 
             for (int x = 0; x < (numX / 2) - 1; ++x)
             {
@@ -93,6 +93,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         {
             return new Vector2(-param.Y, param.X);
         }
+
         public static Vector2 PointToLocalSpace(Vector2 point, Vector2 AgentHeading, Vector2 AgentSide, Vector2 AgentPosition)
         {
             //make a copy of the point
@@ -114,6 +115,7 @@ namespace IndoorFootballStrategySimulator.Simulation
 
             return TransPoint;
         }
+
         public static Vector2 GetBestSupportingSpot()
         {
             if (bestSupportingSpot != null)
@@ -125,6 +127,7 @@ namespace IndoorFootballStrategySimulator.Simulation
                 return DetermineBestSupportingPosition();
             }
         }
+
         public static Vector2 DetermineBestSupportingPosition()
         {                             
             if ( bestSupportingSpot != null)
@@ -137,7 +140,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             foreach (SupportSpot spot in SpotsList)
             {
                 spot.Score = 1;
-                if (Team.isPassSafeFromAllOpponents(Team.ControllingPlayer.Position,spot.Position,null, 3f))
+                if (Team.IsPassSafeFromAllOpponents(Team.ControllingPlayer.Position,spot.Position,null, 3f))
                 {
                     spot.Score += 2;
                 }
@@ -174,6 +177,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             }
             return bestSupportingSpot.Position;
         }
+        
         // ---- GetTangentPoints method
          //   Given a point P and a circle of radius R centered at C this function
          // determines the two points on the circle that intersect with the 
@@ -199,6 +203,7 @@ namespace IndoorFootballStrategySimulator.Simulation
 
             return true;
         }
+
         public static float RandFloat()
         {
 

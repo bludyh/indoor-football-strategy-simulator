@@ -18,16 +18,16 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void OnEnter(FieldPlayer player)
         {
-            //player.Steering.StartArrival();
-
             player.Steering.Target = SupportCalculate.GetBestSupportingSpot();
+
+            player.Steering.StartArrival(player.Steering.Target);
         }
         public override void Handle(FieldPlayer player)
         {
             //if his team loses control go back home
             if (!player.Team.InControl())
             {
-                player.GetFSM().ChangeState(ReturnToHomeRegion.Instance());
+                player.GetFSM().ChangeState(ReturnToHomeArea.Instance());
                 return;
             }
 
@@ -41,7 +41,7 @@ namespace IndoorFootballStrategySimulator.Simulation
 
             //if this player has a shot at the goal AND the attacker can pass
             //the ball to him the attacker should pass the ball to this player
-            if (player.Team.CanShoot(player.Position, 60f))
+            if (player.Team.CanShoot(player.Position, 1.2f))
             {
                 player.Team.RequestPass(player);
             }
@@ -59,7 +59,7 @@ namespace IndoorFootballStrategySimulator.Simulation
                 player.Velocity = new Vector2(0, 0);
 
                 //if not threatened by another player request a pass
-                if (!player.isThreatened())
+                if (!player.IsThreatened())
                 {
                     player.Team.RequestPass(player);
                 }
@@ -72,6 +72,11 @@ namespace IndoorFootballStrategySimulator.Simulation
             player.Team.SupportingPlayer = null;
 
             player.Steering.StopArrival();
+        }
+
+        public override bool OnMessage(FieldPlayer owner, Telegram telegram)
+        {
+            return false;
         }
     }
 }

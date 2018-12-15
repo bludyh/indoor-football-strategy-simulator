@@ -30,7 +30,7 @@ namespace IndoorFootballStrategySimulator.Simulation {
             }
         }
         public int Score { get; private set; }
-        public Vector2 Center { get; private set; }
+        public Vector2 Center { get { return Vector2.Divide(Vector2.Add(LeftPostPos, RightPostPos), 2); }}
 
         public Goal(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot) : base(texture, color, scale, pos, rot, 0f) { }
 
@@ -38,7 +38,13 @@ namespace IndoorFootballStrategySimulator.Simulation {
             if (IsScored())
             {
                 Score++;
+                
+                // update if scored.
                 Simulator.isGameOn = false;
+                Team BlueTeam = SimulationWindow.EntityManager.BlueTeam;
+                Team RedTeam = SimulationWindow.EntityManager.RedTeam;
+                BlueTeam.GetFSM().ChangeState(PrepareForKickOff.Instance());
+                RedTeam.GetFSM().ChangeState(PrepareForKickOff.Instance());
             }
         }
 

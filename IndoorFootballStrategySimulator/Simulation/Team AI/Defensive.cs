@@ -33,5 +33,10 @@ namespace IndoorFootballStrategySimulator.Simulation
         {
             
         }
+
+        public override bool OnMessage(Team owner, Telegram telegram)
+        {
+            return false;
+        }
     }
 }
