@@ -32,7 +32,10 @@ namespace IndoorFootballStrategySimulator.Simulation
                 return;
             }
             //calculate the best position for any supporting attacker to move to
-            SupportCalculate.DetermineBestSupportingPosition();
+            if (team.ControllingPlayer !=null)
+            {
+                SupportCalculate.DetermineBestSupportingPosition();
+            }
         }
         public override void OnExit(Team team)
         {

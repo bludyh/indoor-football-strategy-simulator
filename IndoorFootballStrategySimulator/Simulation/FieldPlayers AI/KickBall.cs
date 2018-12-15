@@ -47,7 +47,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             Vector2 BallTarget = new Vector2();
             //the dot product is used to adjust the shooting force. The more
             //directly the ball is ahead, the more forceful the kick
-            float power = 3f * dot;
+            float power = 6f * dot;
             //if it is determined that the player could score a goal from this position
             //OR if he should just kick the ball anyway, the player will attempt
             //to make the shot
@@ -67,7 +67,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             /* Attempt a pass to a player */
             //if a receiver is found this will point to it
             Player receiver = null;
-            power = 1.5f * dot;
+            power = 3f * dot;
             //test if there are any potential candidates available to receive a pass
             if (player.IsThreatened()
                     && player.Team.FindPass(player, receiver, BallTarget, power, 120f))

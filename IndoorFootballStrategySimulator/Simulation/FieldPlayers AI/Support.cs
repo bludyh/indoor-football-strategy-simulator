@@ -18,9 +18,12 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void OnEnter(FieldPlayer player)
         {
-            player.Steering.Target = SupportCalculate.GetBestSupportingSpot();
+            if (player.Team.ControllingPlayer != null)
+            {
+                player.Steering.Target = SupportCalculate.GetBestSupportingSpot();
+                player.Steering.StartArrival(player.Steering.Target);
+            }
 
-            player.Steering.StartArrival(player.Steering.Target);
         }
         public override void Handle(FieldPlayer player)
         {
@@ -32,7 +35,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             }
 
             //if the best supporting spot changes, change the steering target
-            if (SupportCalculate.GetBestSupportingSpot() != player.Steering.Target)
+            if (SupportCalculate.GetBestSupportingSpot() != player.Steering.Target && player.Team.ControllingPlayer != null)
             {
                 player.Steering.Target = SupportCalculate.GetBestSupportingSpot();
 
@@ -41,7 +44,7 @@ namespace IndoorFootballStrategySimulator.Simulation
 
             //if this player has a shot at the goal AND the attacker can pass
             //the ball to him the attacker should pass the ball to this player
-            if (player.Team.CanShoot(player.Position, 1.2f))
+            if (player.Team.CanShoot(player.Position, 6f))
             {
                 player.Team.RequestPass(player);
             }

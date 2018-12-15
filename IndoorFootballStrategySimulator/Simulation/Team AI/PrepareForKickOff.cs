@@ -19,6 +19,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         {
             Ball ball = SimulationWindow.EntityManager.Ball;
             ball.Position = new Vector2(640f, 288f);
+            ball.Trap();
             if (team.AllPlayersAtHome() && team.Opponent.AllPlayersAtHome())
             {
                 team.GetFSM().ChangeState(Defensive.Instance());

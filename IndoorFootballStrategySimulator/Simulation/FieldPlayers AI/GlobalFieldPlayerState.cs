@@ -65,7 +65,10 @@ namespace IndoorFootballStrategySimulator.Simulation
                         }
 
                         //set the target to be the best supporting position
+                        if (owner.Team.ControllingPlayer != null)
+                        {
                         owner.Steering.Target = SupportCalculate.GetBestSupportingSpot();
+                        }
 
                         //change the state
                         owner.GetFSM().ChangeState(Support.Instance());

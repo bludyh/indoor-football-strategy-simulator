@@ -143,7 +143,7 @@ namespace IndoorFootballStrategySimulator.Simulation
 
             foreach (Player player in Strategy.Players)
             {
-                if ((player.Role == PlayerRole.Attacker) && (player != ControllingPlayer))
+                if ((player.Role == PlayerRole.Attacker) && (player != ControllingPlayer) && ControllingPlayer != null)
                 {
                     float dist = Vector2.DistanceSquared(player.Position, SupportCalculate.GetBestSupportingSpot());
                     if (dist < ClosestSoFar)

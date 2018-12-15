@@ -70,7 +70,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         /// </summary>
         /// <returns></returns>
         public bool TooFarFromGoalMouth() {
-            return (Vector2.DistanceSquared(Position, GetRearInterposeTarget()) > (70f*70f));
+            return (Vector2.DistanceSquared(Position, GetRearInterposeTarget()) > (100f*100f));
         }
 
         public Vector2 GetRearInterposeTarget() {
@@ -86,7 +86,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
 
         public bool BallWithinRangeForIntercept() {
-            return (Vector2.DistanceSquared(Team.Goal.Center, SimulationWindow.EntityManager.Ball.Position) < (70f *70f));
+            return (Vector2.DistanceSquared(Team.Goal.Center, SimulationWindow.EntityManager.Ball.Position) < (100f *100f));
         }
 
         public override bool HandleMessage(Telegram msg)

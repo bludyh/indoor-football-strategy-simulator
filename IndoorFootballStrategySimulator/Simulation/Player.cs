@@ -142,7 +142,7 @@ namespace IndoorFootballStrategySimulator.Simulation {
 
         public bool AtTarget()
         {
-            return (Vector2.DistanceSquared(this.Position, this.Steering.Target) < (25f*25f));
+            return (Vector2.DistanceSquared(this.Position, this.Steering.Target) < (10f*10f));
         }
 
         public bool IsClosestTeamMemberToBall() {
