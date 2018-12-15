@@ -19,7 +19,8 @@ namespace IndoorFootballStrategySimulator {
 
 		public static bool Pause { get; private set; }
         public static bool isGameOn { get; set; }
-
+		//public static extern long FinishBeep(string filename, IntPtr hModle, Int32 dwFlags);
+		public int StartTime = 45;
         private string[] StrategyFiles {
             get {
                 return Directory.GetFiles(@"Data\Strategies");
@@ -98,8 +99,10 @@ namespace IndoorFootballStrategySimulator {
                 if (simulationWindow.IsInitialized) {
                     SimulationWindow.EntityManager.BlueTeam.Strategy = strategyPreviewWindowHome.Strategy;
                     SimulationWindow.EntityManager.RedTeam.Strategy = strategyPreviewWindowAway.Strategy;
+					
                 }
-
+				//timer1.Enabled=true;
+				timer1.Start();
                 tab.Controls.Add(tabSimulation);
                 tab.Controls.Remove(tabHome);
                 tab.Controls.Remove(tabStrategies);
@@ -111,6 +114,8 @@ namespace IndoorFootballStrategySimulator {
             catch (Exception ex) {
                 MessageBox.Show(ex.Message, "Warning");
             }
+
+
 		}
 
         private void Pause_btn_Click(object sender, EventArgs e)
@@ -261,5 +266,27 @@ namespace IndoorFootballStrategySimulator {
                 player.Steering.Target = player.GetHomeArea(SimulationWindow.EntityManager.Field, player.Team.State).Center;
             }
         }
-    }
+
+		private void timer1_Tick(object sender, EventArgs e)
+		{
+			if (StartTime>0)
+			{
+				
+				StartTime--;
+				label13.Text = StartTime.ToString();
+				if (StartTime == 0)
+				{
+					Pause = true;
+					timer1.Stop();
+					//PlaySound("", (IntPtr)0, 0);
+				}
+			
+			}
+		}
+
+		private void tabSimulation_Click(object sender, EventArgs e)
+		{
+
+		}
+	}
 }
