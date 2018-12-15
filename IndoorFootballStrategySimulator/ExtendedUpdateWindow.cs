@@ -12,7 +12,7 @@ using IndoorFootballStrategySimulator.Simulation;
 namespace IndoorFootballStrategySimulator {
     abstract class ExtendedUpdateWindow : UpdateWindow {
 
-        private bool isInitialized;
+        public bool IsInitialized { get; private set; }
         public event EventHandler Initialized;
 
         protected override void Initialize() {
@@ -25,8 +25,8 @@ namespace IndoorFootballStrategySimulator {
         protected override void Update(GameTime gameTime) {
             base.Update(gameTime);
 
-            if (Editor != null && !isInitialized) {
-                isInitialized = true;
+            if (!IsInitialized) {
+                IsInitialized = true;
                 Initialized?.Invoke(this, new EventArgs());
             }
         }

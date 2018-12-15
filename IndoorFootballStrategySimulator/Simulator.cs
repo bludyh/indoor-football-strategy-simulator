@@ -94,6 +94,11 @@ namespace IndoorFootballStrategySimulator {
                 if (strategyPreviewWindowHome.Strategy == null || strategyPreviewWindowAway.Strategy == null)
                     throw new Exception("Please select strategies for Home and Away team!");
 
+                if (simulationWindow.IsInitialized) {
+                    SimulationWindow.EntityManager.BlueTeam.Strategy = strategyPreviewWindowHome.Strategy;
+                    SimulationWindow.EntityManager.RedTeam.Strategy = strategyPreviewWindowAway.Strategy;
+                }
+
                 tab.Controls.Add(tabSimulation);
                 tab.Controls.Remove(tabHome);
                 tab.Controls.Remove(tabStrategies);
