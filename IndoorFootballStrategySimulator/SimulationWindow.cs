@@ -16,6 +16,7 @@ namespace IndoorFootballStrategySimulator {
         ///     Gets the manager that controls all entities.
         /// </summary>
         public static EntityManager EntityManager { get; private set; }
+        public static TimeSpan MatchTime { get; private set; }
 
         static SimulationWindow() {
             EntityManager = new EntityManager();
@@ -40,7 +41,15 @@ namespace IndoorFootballStrategySimulator {
         protected override void Update(GameTime gameTime) {
             base.Update(gameTime);
             if (!Simulator.Pause)
+            {
                 EntityManager.Update(gameTime);
+                MatchTime += TimeSpan.FromTicks(gameTime.ElapsedGameTime.Ticks * 30);
+                if (MatchTime == new TimeSpan(0, 90, 00))
+                {
+
+                }
+                Simulator.matchTime.Text = Math.Round(MatchTime.TotalMinutes).ToString()+"\'";
+            }
         }
 
         /// <summary>
