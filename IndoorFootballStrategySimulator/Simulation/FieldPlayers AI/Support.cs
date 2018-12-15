@@ -18,9 +18,9 @@ namespace IndoorFootballStrategySimulator.Simulation
         }
         public override void OnEnter(FieldPlayer player)
         {
-            player.Steering.StartArrival(player.Steering.Target);
-
             player.Steering.Target = SupportCalculate.GetBestSupportingSpot();
+
+            player.Steering.StartArrival(player.Steering.Target);
         }
         public override void Handle(FieldPlayer player)
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,23 +35,39 @@ namespace IndoorFootballStrategySimulator.Simulation
         {
             switch (telegram.Message)
             {
-                case MessageTypes.Msg_GoHome:
-                    {
-                        owner.GetHomeArea(SimulationWindow.EntityManager.Field,owner.Team.State);
-                        owner.GetFSM().ChangeState(ReturnHome.Instance());
-                    }
-
-                    break;
-
                 case MessageTypes.Msg_ReceiveBall:
                     {
                         owner.GetFSM().ChangeState(InterceptBall.Instance());
                     }
 
                     break;
+                case MessageTypes.Msg_PassToMe:
+                    {
+                        //get the position of the player requesting the pass 
+                        FieldPlayer receiver = (FieldPlayer)telegram.ExtraInfo;
 
-            }//end switch
+                        //if the ball is not within kicking range or there is already a 
+                        //receiving player, this player cannot pass the ball to the player
+                        //making the request.
+                        if (owner.Team.ReceivingPlayer != null
+                                || !owner.BallWithinKickingRange())
+                        {
+                            return true;
+                        }
 
+                        //make the pass   
+                        SimulationWindow.EntityManager.Ball.Kick(Vector2.Subtract(receiver.Position, SimulationWindow.EntityManager.Ball.Position), 3f);
+
+                        //let the receiver know a pass is coming 
+                        MessageDispatcher.Instance().DispatchMessage(MessageDispatcher.SEND_MESSAGE_IMMEDIATELY,
+                                owner,
+                                receiver,
+                                MessageTypes.Msg_ReceiveBall,
+                                receiver.Position);
+
+                        return true;
+                    }
+            }
             return false;
         }
     }

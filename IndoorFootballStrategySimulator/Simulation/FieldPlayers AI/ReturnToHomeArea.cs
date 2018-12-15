@@ -53,12 +53,12 @@ namespace IndoorFootballStrategySimulator.Simulation
         {
             var field = SimulationWindow.EntityManager.Field;
 
-            owner.Steering.StartArrival(owner.Steering.Target);
-
             if (!owner.GetHomeArea(field, owner.Team.State).Inside(owner.Steering.Target, Area.AreaModifer.HalfSize))
             {
                 owner.Steering.Target = owner.GetHomeArea(field, owner.Team.State).Center;
             }
+            owner.Steering.StartArrival(owner.Steering.Target);
+
         }
 
         public override void OnExit(FieldPlayer owner)

@@ -26,17 +26,12 @@ namespace IndoorFootballStrategySimulator.Simulation
                 owner.GetFSM().ChangeState(ChaseBall.Instance());
                 return;
             }
-            if (owner.Steering.PursuitIsOn())
-            {
-                owner.Steering.Target = ball.Position;
-            }
 
             //if the player has 'arrived' at the steering target he should wait and
             //turn to face the ball
             if (owner.AtTarget())
             {
                 owner.Steering.StopArrival();
-                owner.Steering.StopPursuit();
                 owner.TrackBall();
                 owner.Velocity = new Vector2(0, 0);
             }

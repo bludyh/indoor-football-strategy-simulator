@@ -110,7 +110,7 @@ namespace IndoorFootballStrategySimulator.Simulation
                         }
 
                         //make the pass   
-                        SimulationWindow.EntityManager.Ball.Kick(Vector2.Subtract(receiver.Position, SimulationWindow.EntityManager.Ball.Position),1.5f);
+                        SimulationWindow.EntityManager.Ball.Kick(Vector2.Subtract(receiver.Position, SimulationWindow.EntityManager.Ball.Position),3f);
 
                         //let the receiver know a pass is coming 
                         MessageDispatcher.Instance().DispatchMessage(MessageDispatcher.SEND_MESSAGE_IMMEDIATELY,

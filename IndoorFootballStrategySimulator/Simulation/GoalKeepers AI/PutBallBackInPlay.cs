@@ -43,6 +43,7 @@ namespace IndoorFootballStrategySimulator.Simulation
                 owner.GetFSM().ChangeState(TendGoal.Instance());
                 return;
             }
+            owner.Velocity = new Vector2();
         }
 
         public override void OnEnter(GoalKeeper owner)

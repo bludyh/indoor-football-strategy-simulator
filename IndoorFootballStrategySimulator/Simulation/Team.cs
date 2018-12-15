@@ -121,7 +121,6 @@ namespace IndoorFootballStrategySimulator.Simulation
                     PlayerClosestToBall = curPlayer;
                 }
             }
-
             ClosestDistancetoBall = ClosestSoFar;
         }
 
@@ -249,6 +248,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         public void ReturnAllPlayersToHome()
         {
             GoalKeeper goalKeeper = (GoalKeeper)Strategy.Players.Find(x => x is GoalKeeper);
+            goalKeeper.GetFSM().ChangeState(ReturnHome.Instance());
             foreach (Player player in Strategy.Players)
             {
                 if (player.Role != PlayerRole.GoalKeeper)
