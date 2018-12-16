@@ -19,7 +19,7 @@ namespace IndoorFootballStrategySimulator {
 
 		public static bool Pause { get; private set; }
         public static bool isGameOn { get; set; }
-		//public static extern long FinishBeep(string filename, IntPtr hModle, Int32 dwFlags);
+	
         private string[] StrategyFiles {
             get {
                 return Directory.GetFiles(@"Data\Strategies");

@@ -99,8 +99,8 @@
             this.Abort_btn = new System.Windows.Forms.Button();
             this.label55 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
+            redTeamScore = new System.Windows.Forms.Label();
+            blueTeamScore = new System.Windows.Forms.Label();
             matchTime = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
@@ -144,7 +144,7 @@
             this.tab.Multiline = true;
             this.tab.Name = "tab";
             this.tab.SelectedIndex = 0;
-            this.tab.Size = new System.Drawing.Size(1329, 709);
+            this.tab.Size = new System.Drawing.Size(1330, 700);
             this.tab.TabIndex = 1;
             // 
             // tabHome
@@ -164,7 +164,7 @@
             this.tabHome.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabHome.Name = "tabHome";
             this.tabHome.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.tabHome.Size = new System.Drawing.Size(1321, 683);
+            this.tabHome.Size = new System.Drawing.Size(1322, 674);
             this.tabHome.TabIndex = 0;
             this.tabHome.Text = "Home";
             this.tabHome.UseVisualStyleBackColor = true;
@@ -740,8 +740,8 @@
             this.tabSimulation.Controls.Add(this.Abort_btn);
             this.tabSimulation.Controls.Add(this.label55);
             this.tabSimulation.Controls.Add(this.label18);
-            this.tabSimulation.Controls.Add(this.label28);
-            this.tabSimulation.Controls.Add(this.label30);
+            this.tabSimulation.Controls.Add(redTeamScore);
+            this.tabSimulation.Controls.Add(blueTeamScore);
             this.tabSimulation.Controls.Add(matchTime);
             this.tabSimulation.Controls.Add(this.label37);
             this.tabSimulation.Controls.Add(this.label38);
@@ -750,7 +750,7 @@
             this.tabSimulation.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabSimulation.Name = "tabSimulation";
             this.tabSimulation.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.tabSimulation.Size = new System.Drawing.Size(1321, 683);
+            this.tabSimulation.Size = new System.Drawing.Size(1322, 674);
             this.tabSimulation.TabIndex = 2;
             this.tabSimulation.Text = "Simulation";
             this.tabSimulation.UseVisualStyleBackColor = true;
@@ -980,25 +980,25 @@
             this.label18.TabIndex = 118;
             this.label18.Text = "-";
             // 
-            // label28
+            // redTeamScore
             // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(661, 19);
-            this.label28.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(13, 13);
-            this.label28.TabIndex = 117;
-            this.label28.Text = "0";
+            redTeamScore.AutoSize = true;
+            redTeamScore.Location = new System.Drawing.Point(661, 19);
+            redTeamScore.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            redTeamScore.Name = "redTeamScore";
+            redTeamScore.Size = new System.Drawing.Size(13, 13);
+            redTeamScore.TabIndex = 117;
+            redTeamScore.Text = "0";
             // 
-            // label30
+            // blueTeamScore
             // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(645, 19);
-            this.label30.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(13, 13);
-            this.label30.TabIndex = 116;
-            this.label30.Text = "2";
+            blueTeamScore.AutoSize = true;
+            blueTeamScore.Location = new System.Drawing.Point(645, 19);
+            blueTeamScore.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            blueTeamScore.Name = "blueTeamScore";
+            blueTeamScore.Size = new System.Drawing.Size(13, 13);
+            blueTeamScore.TabIndex = 116;
+            blueTeamScore.Text = "2";
             // 
             // matchTime
             // 
@@ -1006,7 +1006,7 @@
             matchTime.Location = new System.Drawing.Point(16, 18);
             matchTime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             matchTime.Name = "matchTime";
-            matchTime.Size = new System.Drawing.Size(21, 13);
+            matchTime.Size = new System.Drawing.Size(15, 13);
             matchTime.TabIndex = 115;
             matchTime.Text = "0\'";
             // 
@@ -1190,7 +1190,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1212, 672);
+            this.ClientSize = new System.Drawing.Size(1325, 705);
             this.Controls.Add(this.tab);
             this.Name = "Simulator";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -1247,9 +1247,6 @@
 		private System.Windows.Forms.Button button5;
 		private System.Windows.Forms.TabPage tabSimulation;
 		private System.Windows.Forms.Label label18;
-		private System.Windows.Forms.Label label28;
-		private System.Windows.Forms.Label label30;
-		public static System.Windows.Forms.Label matchTime;
 		private System.Windows.Forms.Label label37;
 		private System.Windows.Forms.Label label38;
 		private System.Windows.Forms.TabPage tabResults;
@@ -1314,6 +1311,9 @@
         private System.Windows.Forms.Label lbHomeStrategyName;
         private System.Windows.Forms.Label lbAwayStrategyDescription;
         private System.Windows.Forms.Label lbAwayStrategyName;
-	}
+        public static System.Windows.Forms.Label redTeamScore;
+        public static System.Windows.Forms.Label blueTeamScore;
+        public static System.Windows.Forms.Label matchTime;
+    }
 }
 
