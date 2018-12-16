@@ -61,7 +61,7 @@ namespace IndoorFootballStrategySimulator.Simulation
                     SimulationWindow.EntityManager.Entities.Add(Goal);
                     break;
                 case TeamColor.RED:
-                    Goal = new Goal(editor.Content.Load<Texture2D>($"SoccerGoal"), Microsoft.Xna.Framework.Color.White, new Vector2(1f, 1f), new Vector2(1240f, 288f), MathHelper.Pi);
+                    Goal = new Goal(editor.Content.Load<Texture2D>($"SoccerGoal"), Microsoft.Xna.Framework.Color.White, new Vector2(1f), new Vector2(1240f, 288f), MathHelper.Pi);
                     SimulationWindow.EntityManager.Entities.Add(Goal);
                     break;
             }
@@ -69,7 +69,7 @@ namespace IndoorFootballStrategySimulator.Simulation
 
         private void SetStrategy(Strategy strategy) {
             this.strategy = strategy;
-
+            SimulationWindow.EntityManager.Entities.RemoveAll(e => e is Player p && p.Team == this);
             for (int i = 0; i < Strategy.Players.Count; i++) {
                 var player = Strategy.Players[i];
 

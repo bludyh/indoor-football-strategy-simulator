@@ -144,6 +144,7 @@ namespace IndoorFootballStrategySimulator {
                     tab.Controls.Remove(tabSimulation);
                     tab.SelectTab(tabResults);
                     RefreshStrategyLists();
+                    tbNrofSimulations.Text = "";
                 }
             }
         }
@@ -206,6 +207,7 @@ namespace IndoorFootballStrategySimulator {
                 tab.Controls.Remove(tabSimulation);
                 tab.SelectTab(tabResults);
                 RefreshStrategyLists();
+                tbNrofSimulations.Text = "";
             }
 		}
 

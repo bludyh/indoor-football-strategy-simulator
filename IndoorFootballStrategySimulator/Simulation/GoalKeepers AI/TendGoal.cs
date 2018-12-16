@@ -52,14 +52,14 @@ namespace IndoorFootballStrategySimulator.Simulation
         {
             //interpose will position the agent between the ball position and a target
             //position situated along the goal mouth.
-           // owner.Steering.Target = owner.GetRearInterposeTarget();
+            owner.Steering.Target = owner.GetRearInterposeTarget();
             //turn on interpose
-            //owner.Steering.StartInterpose();
+            owner.Steering.StartInterpose(SimulationWindow.EntityManager.Ball, owner.Steering.Target);
         }
 
         public override void OnExit(GoalKeeper owner)
         {
-           // owner.Steering.StopInterpose();
+           owner.Steering.StopInterpose();
         }
 
         public override bool OnMessage(GoalKeeper owner, Telegram telegram)

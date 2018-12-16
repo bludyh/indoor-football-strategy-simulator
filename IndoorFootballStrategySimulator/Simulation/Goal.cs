@@ -14,14 +14,16 @@ namespace IndoorFootballStrategySimulator.Simulation {
                 return new Vector2((float)Math.Cos(Rotation), (float)Math.Sin(Rotation));
             }
         }
-        public Vector2 LeftPostPos {
-            get {
-                return Position + Vector2.Transform(Facing, Matrix.CreateRotationZ(MathHelper.ToRadians(-60f))) * (float)Math.Sqrt(Math.Pow(Size.X / 2f, 2) + Math.Pow(Size.Y / 3f, 2));
+        public Vector2 LeftPostPos
+        {
+            get
+            {
+                return new Vector2(Position.X, Position.Y - Size.Y / 2);
             }
         }
         public Vector2 RightPostPos {
             get {
-                return Position + Vector2.Transform(Facing, Matrix.CreateRotationZ(MathHelper.ToRadians(60f))) * (float)Math.Sqrt(Math.Pow(Size.X / 2f, 2) + Math.Pow(Size.Y / 3f, 2));
+                return new Vector2(Position.X, Position.Y + Size.Y / 2);
             }
         }
         public Line GoalLine {

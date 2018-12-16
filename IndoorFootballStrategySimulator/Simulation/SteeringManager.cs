@@ -25,7 +25,6 @@ namespace IndoorFootballStrategySimulator.Simulation {
 
         private MovingEntity entity;
         private MovingEntity targetEntity;
-        private MovingEntity otherEntity;
         private Vector2 targetPos;
         private SteeringBehavior steeringBehaviors;
 
@@ -213,34 +212,29 @@ namespace IndoorFootballStrategySimulator.Simulation {
         /// <summary>
         ///     Calculates the force that steers <see cref="entity"/> towards a position between <paramref name="targetEntity"/> and <paramref name="otherEntity"/>.
         /// </summary>
-        /// <param name="targetEntity">target entity.</param>
-        /// <param name="otherEntity">another entity moving towards target entity.</param>
+        /// <param name="movingEntity">target entity.</param>
+        /// <param name="target">another entity moving towards target entity.</param>
         /// <returns>A vector represents the steering force.</returns>
         /// <remarks>
         ///     This method can be applied, for example, when a player wants to intercept the ball from another player.
         /// </remarks>
-        private Vector2 Interpose(MovingEntity targetEntity, MovingEntity otherEntity) {
-            Vector2 midPoint = (targetEntity.Position + otherEntity.Position) / 2;
-            float timeToMidPoint = Vector2.Distance(entity.Position, midPoint) / entity.MaxSpeed;
-
-            Vector2 predictedTargetEntityPos = targetEntity.Position + targetEntity.Velocity * timeToMidPoint;
-            Vector2 predictedOtherEntityPos = otherEntity.Position + otherEntity.Velocity * timeToMidPoint;
-            midPoint = (predictedTargetEntityPos + predictedOtherEntityPos) / 2;
-
-            return Arrival(midPoint);
+        private Vector2 Interpose(MovingEntity movingEntity, Vector2 target)
+        {
+            return Arrival(Vector2.Add(target, Vector2.Multiply(Vector2.Normalize(Vector2.Subtract(movingEntity.Position, target)),
+                    20f)));
         }
 
         /// <summary>
         ///     Start the interpose behavior.
         /// </summary>
         /// <param name="targetEntity"></param>
-        /// <param name="otherEntity"></param>
+        /// <param name="target"></param>
         /// <remarks>
         ///     This method sets the target entity and other entity and toggles on the interpose bit in <see cref="steeringBehaviors"/>.
         /// </remarks>
-        public void StartInterpose(MovingEntity targetEntity, MovingEntity otherEntity) {
+        public void StartInterpose(MovingEntity targetEntity, Vector2 target) {
             this.targetEntity = targetEntity;
-            this.otherEntity = otherEntity;
+            this.targetPos = target;
             steeringBehaviors |= SteeringBehavior.INTERPOSE;
         }
 
@@ -328,7 +322,7 @@ namespace IndoorFootballStrategySimulator.Simulation {
             }
 
             if (steeringBehaviors.HasFlag(SteeringBehavior.INTERPOSE)) {
-                force += Interpose(targetEntity, otherEntity);
+                force += Interpose(targetEntity, targetPos);
                 if (!AccumulateSteeringForce(force)) return SteeringForce;
             }
 

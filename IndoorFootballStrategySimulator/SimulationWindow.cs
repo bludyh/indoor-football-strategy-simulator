@@ -49,7 +49,7 @@ namespace IndoorFootballStrategySimulator {
                     EntityManager.Update(gameTime);
                     if (Simulator.isGameOn)
                     {
-                        MatchTime += TimeSpan.FromTicks(gameTime.ElapsedGameTime.Ticks * 180);
+                        MatchTime += TimeSpan.FromTicks(gameTime.ElapsedGameTime.Ticks * 30);
                     }
                 }
             }
