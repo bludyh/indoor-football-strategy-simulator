@@ -35,7 +35,7 @@ namespace IndoorFootballStrategySimulator.Simulation {
         public Goal(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot) : base(texture, color, scale, pos, rot, 0f) { }
 
         public override void Update(GameTime gameTime) {
-            if (IsScored())
+            if (IsScored() && Simulator.isGameOn)
             {
                 Score++;
                 

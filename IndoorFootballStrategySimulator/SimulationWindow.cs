@@ -17,9 +17,9 @@ namespace IndoorFootballStrategySimulator {
         /// </summary>
         /// 
         public static EntityManager EntityManager { get; private set; }
-        private static TimeSpan MatchTime;
+        public static TimeSpan MatchTime { get; set; }
 
-        private bool IsGameEND = false;
+
         static SimulationWindow() {
             EntityManager = new EntityManager();
         }
@@ -42,24 +42,16 @@ namespace IndoorFootballStrategySimulator {
         /// </remarks>
         protected override void Update(GameTime gameTime) {
             base.Update(gameTime);
-            if (!Simulator.Pause && !IsGameEND)
+            if(Simulator.NumberofSimulations >0)
             {
-                EntityManager.Update(gameTime);
-                MatchTime += TimeSpan.FromTicks(gameTime.ElapsedGameTime.Ticks * 30);
-                if (Math.Round(MatchTime.TotalMinutes) == 45)
+                if (!Simulator.Pause)
                 {
-
+                    EntityManager.Update(gameTime);
+                    if (Simulator.isGameOn)
+                    {
+                        MatchTime += TimeSpan.FromTicks(gameTime.ElapsedGameTime.Ticks * 180);
+                    }
                 }
-                if (Math.Round(MatchTime.TotalMinutes) == 90)
-                {
-                    EntityManager.BlueTeam.Goal.ResetScore();
-                    EntityManager.RedTeam.Goal.ResetScore();
-                    Simulator.isGameOn = false;
-                    IsGameEND = true;
-                }
-                Simulator.matchTime.Text = Math.Round(MatchTime.TotalMinutes).ToString()+"\'";
-                Simulator.redTeamScore.Text = EntityManager.BlueTeam.Goal.Score.ToString();
-                Simulator.blueTeamScore.Text = EntityManager.RedTeam.Goal.Score.ToString();
             }
         }
 

@@ -39,7 +39,11 @@ namespace IndoorFootballStrategySimulator.Simulation
 
         public override void OnExit(Team team)
         {
-            Simulator.isGameOn = true;
+            if (team.AllPlayersAtHome() && team.Opponent.AllPlayersAtHome())
+            {
+                Simulator.isGameOn = true;
+            }
+
         }
 
         public override bool OnMessage(Team owner, Telegram telegram)

@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Simulator));
             this.tab = new System.Windows.Forms.TabControl();
             this.tabHome = new System.Windows.Forms.TabPage();
@@ -32,7 +33,7 @@
             this.lbAwayStrategyName = new System.Windows.Forms.Label();
             this.rbAwayOffensive = new System.Windows.Forms.RadioButton();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tbNrofSimulations = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgvAwayStrategies = new System.Windows.Forms.DataGridView();
             this.AwayStrategyName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -99,9 +100,9 @@
             this.Abort_btn = new System.Windows.Forms.Button();
             this.label55 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            redTeamScore = new System.Windows.Forms.Label();
-            blueTeamScore = new System.Windows.Forms.Label();
-            matchTime = new System.Windows.Forms.Label();
+            this.redTeamScore = new System.Windows.Forms.Label();
+            this.blueTeamScore = new System.Windows.Forms.Label();
+            this.matchTime = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
             this.tabResults = new System.Windows.Forms.TabPage();
@@ -114,10 +115,12 @@
             this.button24 = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.label43 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.strategyPreviewWindowAway = new IndoorFootballStrategySimulator.StrategyPreviewWindow();
             this.strategyPreviewWindowHome = new IndoorFootballStrategySimulator.StrategyPreviewWindow();
             this.strategyEditingWindow = new IndoorFootballStrategySimulator.StrategyEditingWindow();
             this.simulationWindow = new IndoorFootballStrategySimulator.SimulationWindow();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.tab.SuspendLayout();
             this.tabHome.SuspendLayout();
             this.pnAwayTeam.SuspendLayout();
@@ -150,7 +153,7 @@
             // tabHome
             // 
             this.tabHome.Controls.Add(this.pnAwayTeam);
-            this.tabHome.Controls.Add(this.textBox2);
+            this.tabHome.Controls.Add(this.tbNrofSimulations);
             this.tabHome.Controls.Add(this.panel1);
             this.tabHome.Controls.Add(this.textBox1);
             this.tabHome.Controls.Add(this.pnHomeTeam);
@@ -236,12 +239,12 @@
             this.label4.TabIndex = 95;
             this.label4.Text = "Away Team";
             // 
-            // textBox2
+            // tbNrofSimulations
             // 
-            this.textBox2.Location = new System.Drawing.Point(145, 583);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(67, 20);
-            this.textBox2.TabIndex = 93;
+            this.tbNrofSimulations.Location = new System.Drawing.Point(145, 583);
+            this.tbNrofSimulations.Name = "tbNrofSimulations";
+            this.tbNrofSimulations.Size = new System.Drawing.Size(67, 20);
+            this.tbNrofSimulations.TabIndex = 93;
             // 
             // panel1
             // 
@@ -461,7 +464,7 @@
             this.tabStrategies.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabStrategies.Name = "tabStrategies";
             this.tabStrategies.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.tabStrategies.Size = new System.Drawing.Size(1321, 683);
+            this.tabStrategies.Size = new System.Drawing.Size(1322, 674);
             this.tabStrategies.TabIndex = 1;
             this.tabStrategies.Text = "Strategies";
             this.tabStrategies.UseVisualStyleBackColor = true;
@@ -740,9 +743,9 @@
             this.tabSimulation.Controls.Add(this.Abort_btn);
             this.tabSimulation.Controls.Add(this.label55);
             this.tabSimulation.Controls.Add(this.label18);
-            this.tabSimulation.Controls.Add(redTeamScore);
-            this.tabSimulation.Controls.Add(blueTeamScore);
-            this.tabSimulation.Controls.Add(matchTime);
+            this.tabSimulation.Controls.Add(this.redTeamScore);
+            this.tabSimulation.Controls.Add(this.blueTeamScore);
+            this.tabSimulation.Controls.Add(this.matchTime);
             this.tabSimulation.Controls.Add(this.label37);
             this.tabSimulation.Controls.Add(this.label38);
             this.tabSimulation.Controls.Add(this.simulationWindow);
@@ -982,33 +985,33 @@
             // 
             // redTeamScore
             // 
-            redTeamScore.AutoSize = true;
-            redTeamScore.Location = new System.Drawing.Point(661, 19);
-            redTeamScore.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            redTeamScore.Name = "redTeamScore";
-            redTeamScore.Size = new System.Drawing.Size(13, 13);
-            redTeamScore.TabIndex = 117;
-            redTeamScore.Text = "0";
+            this.redTeamScore.AutoSize = true;
+            this.redTeamScore.Location = new System.Drawing.Point(661, 19);
+            this.redTeamScore.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.redTeamScore.Name = "redTeamScore";
+            this.redTeamScore.Size = new System.Drawing.Size(13, 13);
+            this.redTeamScore.TabIndex = 117;
+            this.redTeamScore.Text = "0";
             // 
             // blueTeamScore
             // 
-            blueTeamScore.AutoSize = true;
-            blueTeamScore.Location = new System.Drawing.Point(645, 19);
-            blueTeamScore.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            blueTeamScore.Name = "blueTeamScore";
-            blueTeamScore.Size = new System.Drawing.Size(13, 13);
-            blueTeamScore.TabIndex = 116;
-            blueTeamScore.Text = "2";
+            this.blueTeamScore.AutoSize = true;
+            this.blueTeamScore.Location = new System.Drawing.Point(645, 19);
+            this.blueTeamScore.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.blueTeamScore.Name = "blueTeamScore";
+            this.blueTeamScore.Size = new System.Drawing.Size(13, 13);
+            this.blueTeamScore.TabIndex = 116;
+            this.blueTeamScore.Text = "2";
             // 
             // matchTime
             // 
-            matchTime.AutoSize = true;
-            matchTime.Location = new System.Drawing.Point(16, 18);
-            matchTime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            matchTime.Name = "matchTime";
-            matchTime.Size = new System.Drawing.Size(15, 13);
-            matchTime.TabIndex = 115;
-            matchTime.Text = "0\'";
+            this.matchTime.AutoSize = true;
+            this.matchTime.Location = new System.Drawing.Point(16, 18);
+            this.matchTime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.matchTime.Name = "matchTime";
+            this.matchTime.Size = new System.Drawing.Size(15, 13);
+            this.matchTime.TabIndex = 115;
+            this.matchTime.Text = "0\'";
             // 
             // label37
             // 
@@ -1045,7 +1048,7 @@
             this.tabResults.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabResults.Name = "tabResults";
             this.tabResults.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.tabResults.Size = new System.Drawing.Size(1321, 683);
+            this.tabResults.Size = new System.Drawing.Size(1322, 674);
             this.tabResults.TabIndex = 3;
             this.tabResults.Text = "Results";
             this.tabResults.UseVisualStyleBackColor = true;
@@ -1294,7 +1297,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CreationDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ModifiedDate;
         private StrategyPreviewWindow strategyPreviewWindowHome;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tbNrofSimulations;
         private System.Windows.Forms.DataGridView dgvAwayStrategies;
         private System.Windows.Forms.DataGridView dgvHomeStrategies;
         private System.Windows.Forms.DataGridViewTextBoxColumn AwayStrategyName;
@@ -1311,9 +1314,11 @@
         private System.Windows.Forms.Label lbHomeStrategyName;
         private System.Windows.Forms.Label lbAwayStrategyDescription;
         private System.Windows.Forms.Label lbAwayStrategyName;
-        public static System.Windows.Forms.Label redTeamScore;
-        public static System.Windows.Forms.Label blueTeamScore;
-        public static System.Windows.Forms.Label matchTime;
+        private System.Windows.Forms.Label redTeamScore;
+        private System.Windows.Forms.Label blueTeamScore;
+        private System.Windows.Forms.Label matchTime;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timer2;
     }
 }
 

@@ -19,7 +19,7 @@ namespace IndoorFootballStrategySimulator {
 
 		public static bool Pause { get; private set; }
         public static bool isGameOn { get; set; }
-	
+        public static int NumberofSimulations { get; private set; }
         private string[] StrategyFiles {
             get {
                 return Directory.GetFiles(@"Data\Strategies");
@@ -100,6 +100,11 @@ namespace IndoorFootballStrategySimulator {
                     SimulationWindow.EntityManager.RedTeam.Strategy = strategyPreviewWindowAway.Strategy;
 					
                 }
+                NumberofSimulations = Convert.ToInt32(tbNrofSimulations.Text);
+                if (NumberofSimulations == 0)
+                {
+                    throw new Exception("Invalid number of simulations");
+                }
                 tab.Controls.Add(tabSimulation);
                 tab.Controls.Remove(tabHome);
                 tab.Controls.Remove(tabStrategies);
@@ -107,13 +112,71 @@ namespace IndoorFootballStrategySimulator {
                 tab.SelectTab(tabSimulation);
                 isGameOn = true;
                 Pause = false;
+                timer1.Start();
+                timer2.Start();
+                timer2.Tick += Timer2_Tick;
+                timer1.Tick += Timer1_Tick;
             }
             catch (Exception ex) {
                 MessageBox.Show(ex.Message, "Warning");
             }
-
-
 		}
+
+        private void Timer2_Tick(object sender, EventArgs e)
+        {
+            if (isGameOn && Math.Round(SimulationWindow.MatchTime.TotalMinutes) == 46)
+            {
+                timer1.Tick += Timer1_Tick;
+            }
+            if (isGameOn && Math.Round(SimulationWindow.MatchTime.TotalMinutes) == 0)
+            {
+                timer1.Tick += Timer1_Tick;
+            }
+            if (NumberofSimulations == 0)
+            {
+                timer2.Tick -= Timer2_Tick;
+                DialogResult dialog = MessageBox.Show("END SIMULATION", "Futsal Simulation",MessageBoxButtons.OK);
+                if (dialog == DialogResult.OK)
+                {
+                    tab.Controls.Add(tabHome);
+                    tab.Controls.Add(tabStrategies);
+                    tab.Controls.Add(tabResults);
+                    tab.Controls.Remove(tabSimulation);
+                    tab.SelectTab(tabResults);
+                    RefreshStrategyLists();
+                }
+            }
+        }
+
+        private void Timer1_Tick(object sender, EventArgs e)
+        {
+            if (Math.Round(SimulationWindow.MatchTime.TotalMinutes) == 45)
+            {
+                timer1.Tick -= Timer1_Tick;
+                isGameOn = false;
+                Team BlueTeam = SimulationWindow.EntityManager.BlueTeam;
+                Team RedTeam = SimulationWindow.EntityManager.RedTeam;
+                BlueTeam.GetFSM().ChangeState(PrepareForKickOff.Instance());
+                RedTeam.GetFSM().ChangeState(PrepareForKickOff.Instance());
+                SimulationWindow.MatchTime = new TimeSpan(0,45,0);
+            }
+            if (Math.Round(SimulationWindow.MatchTime.TotalMinutes) >= 90)
+            {
+                timer1.Tick -= Timer1_Tick;
+                SimulationWindow.EntityManager.BlueTeam.Goal.ResetScore();
+                SimulationWindow.EntityManager.RedTeam.Goal.ResetScore();
+                isGameOn = false;
+                NumberofSimulations--;
+                Team BlueTeam = SimulationWindow.EntityManager.BlueTeam;
+                Team RedTeam = SimulationWindow.EntityManager.RedTeam;
+                BlueTeam.GetFSM().ChangeState(PrepareForKickOff.Instance());
+                RedTeam.GetFSM().ChangeState(PrepareForKickOff.Instance());
+                SimulationWindow.MatchTime = new TimeSpan(); 
+            }
+            matchTime.Text = Math.Round(SimulationWindow.MatchTime.TotalMinutes).ToString() + "\'";
+            redTeamScore.Text = SimulationWindow.EntityManager.BlueTeam.Goal.Score.ToString();
+            blueTeamScore.Text = SimulationWindow.EntityManager.RedTeam.Goal.Score.ToString();
+        }
 
         private void Pause_btn_Click(object sender, EventArgs e)
 		{
