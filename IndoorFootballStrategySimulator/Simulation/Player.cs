@@ -35,7 +35,6 @@ namespace IndoorFootballStrategySimulator.Simulation {
             }
         }
         public float DistanceToBall { get; set; }
-        public PlayerRole Role { get; private set; }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="Player"/> class.
@@ -49,10 +48,9 @@ namespace IndoorFootballStrategySimulator.Simulation {
         /// <param name="mass"></param>
         /// <param name="maxForce"></param>
         /// <param name="maxSpeed"></param>
-        public Player(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed, TeamColor team, PlayerRole role)
+        public Player(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed, TeamColor team)
             : base(texture, color, scale, pos, rot, radius, mass, maxForce, maxSpeed) {
             this.team = team;
-            Role = role;
             Steering = new SteeringManager(this);
             DistanceToBall = float.MaxValue;
         }
@@ -191,14 +189,7 @@ namespace IndoorFootballStrategySimulator.Simulation {
         public bool InHomeArea()
         {
             var field = SimulationWindow.EntityManager.Field;
-            if (Role == PlayerRole.GoalKeeper)
-            {
-                return GetHomeArea(field, Team.State).Inside(Position,Area.AreaModifer.Normal);
-            }
-            else
-            {
-                return GetHomeArea(field, Team.State).Inside(Position,Area.AreaModifer.HalfSize);
-            }
+            return GetHomeArea(field, Team.State).Contain(Position);
         }
         public void FindSupport()
         {

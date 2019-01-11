@@ -29,8 +29,8 @@ namespace IndoorFootballStrategySimulator.Simulation
         public List<int> DefensiveAreas { get; set; }
 
         public FieldPlayer(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed,
-            TeamColor team = TeamColor.BLUE, PlayerRole role= PlayerRole.Attacker, int offHomeArea = -1, List<int> offAreas = null, int defHomeArea = -1, List<int> defAreas = null, State<FieldPlayer> startState = null) 
-            : base(texture, color, scale, pos, rot, radius, mass, maxForce, maxSpeed, team, role)
+            TeamColor team = TeamColor.BLUE, int offHomeArea = -1, List<int> offAreas = null, int defHomeArea = -1, List<int> defAreas = null, State<FieldPlayer> startState = null) 
+            : base(texture, color, scale, pos, rot, radius, mass, maxForce, maxSpeed, team)
         {
             OffensiveHomeArea = offHomeArea;
             OffensiveAreas = offAreas;

@@ -31,7 +31,7 @@ namespace IndoorFootballStrategySimulator {
             field = new Field(Editor.Content.Load<Texture2D>("SoccerField"), Color.White, new Vector2(0.5f), new Vector2(640, 288) / 2f, 0f);
 
             goals = new List<Goal>{
-                new Goal(Editor.Content.Load<Texture2D>($"SoccerGoal"), Color.White, new Vector2(0.5f), new Vector2(20f, 144), 0f),
+                new Goal(Editor.Content.Load<Texture2D>($"SoccerGoal"), Color.White, new Vector2(0.5f), new Vector2(20f, 144f), 0f),
                 new Goal(Editor.Content.Load<Texture2D>($"SoccerGoal"), Color.White, new Vector2(0.5f), new Vector2(620, 144f), MathHelper.Pi)
             };
         }
@@ -72,7 +72,6 @@ namespace IndoorFootballStrategySimulator {
                         50f,
                         80f,
                         Team,
-                        PlayerRole.Attacker,
                         (Team == TeamColor.BLUE) ? fieldPlayer.OffensiveHomeArea : 29 - fieldPlayer.OffensiveHomeArea,
                         (Team == TeamColor.BLUE) ? fieldPlayer.OffensiveAreas : fieldPlayer.OffensiveAreas.Select(a => 29 - a).ToList(),
                         (Team == TeamColor.BLUE) ? fieldPlayer.DefensiveHomeArea : 29 - fieldPlayer.DefensiveHomeArea,

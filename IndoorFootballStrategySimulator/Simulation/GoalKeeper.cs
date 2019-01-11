@@ -23,8 +23,8 @@ namespace IndoorFootballStrategySimulator.Simulation
         public List<int> Areas { get; set; }
 
         public GoalKeeper(Texture2D texture, Color color, Vector2 scale, Vector2 pos, float rot, float radius, float mass, float maxForce, float maxSpeed,
-            TeamColor team = TeamColor.BLUE, int homeArea = -1, List<int> areas = null, State<GoalKeeper> startState = null, PlayerRole role= PlayerRole.GoalKeeper)
-            : base(texture, color, scale, pos, rot, radius, mass, maxForce, maxSpeed, team, role)
+            TeamColor team = TeamColor.BLUE, int homeArea = -1, List<int> areas = null, State<GoalKeeper> startState = null)
+            : base(texture, color, scale, pos, rot, radius, mass, maxForce, maxSpeed, team)
         {
             HomeArea = homeArea;
             Areas = areas;

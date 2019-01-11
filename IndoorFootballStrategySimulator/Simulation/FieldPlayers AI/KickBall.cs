@@ -55,7 +55,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             {
                 //add some noise to the kick. We don't want players who are 
                 //too accurate!
-                BallTarget = Ball.AddNoiseToKick(ball.Position, BallTarget);
+                //BallTarget = Ball.AddNoiseToKick(ball.Position, BallTarget);
                 //this is the direction the ball will be kicked in
                 Vector2 KickDirection = Vector2.Subtract(BallTarget, ball.Position);
                 ball.Kick(KickDirection, power);
@@ -73,7 +73,7 @@ namespace IndoorFootballStrategySimulator.Simulation
                     && player.Team.FindPass(player, receiver, BallTarget, power, 120f))
             {
                 //add some noise to the kick
-                BallTarget = Ball.AddNoiseToKick(ball.Position, BallTarget);
+                //BallTarget = Ball.AddNoiseToKick(ball.Position, BallTarget);
                 Vector2 KickDirection = Vector2.Subtract(BallTarget, ball.Position);
                 ball.Kick(KickDirection, power);
                 //let the receiver know a pass is coming 

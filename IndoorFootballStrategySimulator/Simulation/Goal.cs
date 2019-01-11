@@ -18,12 +18,12 @@ namespace IndoorFootballStrategySimulator.Simulation {
         {
             get
             {
-                return new Vector2(Position.X, Position.Y - Size.Y / 2);
+                return Position + Vector2.Transform(Facing, Matrix.CreateRotationZ(MathHelper.ToRadians(-60f))) * (float)Math.Sqrt(Math.Pow(Size.X / 2f, 2) + Math.Pow(Size.Y / 3f, 2));
             }
         }
         public Vector2 RightPostPos {
             get {
-                return new Vector2(Position.X, Position.Y + Size.Y / 2);
+                return Position + Vector2.Transform(Facing, Matrix.CreateRotationZ(MathHelper.ToRadians(60f))) * (float)Math.Sqrt(Math.Pow(Size.X / 2f, 2) + Math.Pow(Size.Y / 3f, 2));
             }
         }
         public Line GoalLine {
@@ -40,7 +40,6 @@ namespace IndoorFootballStrategySimulator.Simulation {
             if (IsScored() && Simulator.isGameOn)
             {
                 Score++;
-                
                 // update if scored.
                 Simulator.isGameOn = false;
                 Team BlueTeam = SimulationWindow.EntityManager.BlueTeam;
@@ -52,8 +51,23 @@ namespace IndoorFootballStrategySimulator.Simulation {
 
         private bool IsScored() {
             Ball ball = SimulationWindow.EntityManager.Ball;
-
-            return GoalLine.Intersect(ball.Position, ball.Radius, out Vector2? intersectionOne, out Vector2? intersectionTwo);
+            bool IsIntersect = GoalLine.Intersect(ball.Position, ball.Radius, out Vector2? intersectionOne, out Vector2? intersectionTwo);
+            if (LeftPostPos.Y > RightPostPos.Y)
+            {
+                if (IsIntersect && ball.Position.Y < LeftPostPos.Y && ball.Position.Y > RightPostPos.Y)
+                {
+                    return true;
+                }
+                return false;
+            }
+            else
+            {
+                if (IsIntersect && ball.Position.Y > LeftPostPos.Y && ball.Position.Y < RightPostPos.Y)
+                {
+                    return true;
+                }
+                return false;
+            }
         }
 
         public void ResetScore() {

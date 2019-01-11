@@ -143,7 +143,7 @@ namespace IndoorFootballStrategySimulator.Simulation
 
             foreach (Player player in Strategy.Players)
             {
-                if ((player.Role == PlayerRole.Attacker) && (player != ControllingPlayer) && ControllingPlayer != null)
+                if ((player != ControllingPlayer) && ControllingPlayer != null)
                 {
                     float dist = Vector2.DistanceSquared(player.Position, SupportCalculate.GetBestSupportingSpot());
                     if (dist < ClosestSoFar)
@@ -251,7 +251,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             goalKeeper.GetFSM().ChangeState(ReturnHome.Instance());
             foreach (Player player in Strategy.Players)
             {
-                if (player.Role != PlayerRole.GoalKeeper)
+                if (player is FieldPlayer)
                 {
                     MessageDispatcher.Instance().DispatchMessage(MessageDispatcher.SEND_MESSAGE_IMMEDIATELY,
                         goalKeeper,
@@ -267,9 +267,8 @@ namespace IndoorFootballStrategySimulator.Simulation
         {
             foreach (Player curPlayer in Strategy.Players)
             {
-                if (curPlayer.Role != PlayerRole.GoalKeeper)
+                if (curPlayer is FieldPlayer player)
                 {
-                    FieldPlayer player = (FieldPlayer)curPlayer;
                     if (player.GetFSM().IsInState(Idle.Instance()) || player.GetFSM().IsInState(ReturnToHomeArea.Instance()))
                     {
                         player.Steering.Target = player.GetHomeArea(SimulationWindow.EntityManager.Field,State).Center;
@@ -381,7 +380,7 @@ namespace IndoorFootballStrategySimulator.Simulation
                 float dist = Math.Abs(Passes[pass].X - Opponent.Goal.Center.X);
 
                 if ((dist < ClosestSoFar)
-                        && SimulationWindow.EntityManager.Field.PlayingArea.Inside(Passes[pass])
+                        && SimulationWindow.EntityManager.Field.PlayingArea.Contain(Passes[pass])
                         && IsPassSafeFromAllOpponents(SimulationWindow.EntityManager.Ball.Position,
                         Passes[pass],
                         receiver,
@@ -410,14 +409,7 @@ namespace IndoorFootballStrategySimulator.Simulation
                 //the y value of the shot position should lay somewhere between two
                 //goalposts (taking into consideration the ball diameter)
                 float minValue = Opponent.Goal.LeftPostPos.Y , maxValue = Opponent.Goal.RightPostPos.Y;
-                if (minValue >= maxValue )
-                {
-                    minValue = Opponent.Goal.RightPostPos.Y;
-                    maxValue = Opponent.Goal.LeftPostPos.Y;
-                }
-                float MinYVal = (minValue+ SimulationWindow.EntityManager.Ball.Radius);
-                float MaxYVal =(maxValue - SimulationWindow.EntityManager.Ball.Radius);
-                shotTarget.Y = new Random().NextFloat(MinYVal, MaxYVal);
+                shotTarget.Y = new Random().NextFloat(minValue, maxValue);
                 //make sure striking the ball with the given power is enough to drive
                 //the ball over the goal line.
                 double time = SimulationWindow.EntityManager.Ball.TimeToCoverDistance(position,shotTarget,power);

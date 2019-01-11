@@ -10,10 +10,6 @@ using MonoGame.Forms.Controls;
 
 namespace IndoorFootballStrategySimulator.Simulation {
     public class Area {
-        public enum AreaModifer
-        {
-            HalfSize, Normal
-        }
         public float LeftX { get; private set; }
         public float RightX { get; private set; }
         public float TopY { get; private set; }
@@ -81,29 +77,6 @@ namespace IndoorFootballStrategySimulator.Simulation {
 
         public void Fill(SpriteBatch sb, Color color) {
             sb.Draw(Utilities.SimpleTexture, new Rectangle((int)LeftX, (int)TopY, (int)Width, (int)Height), color);
-        }
-        /* returns true if the given position lays inside the Area. 
-         * The Area modifier can be used to contract the Area bounderies */
-        public bool Inside(Vector2 position)
-        {
-            return Inside(position, AreaModifer.Normal);
-        }
-
-        public bool Inside(Vector2 position, AreaModifer areaModifer)
-        {
-            if (areaModifer == AreaModifer.Normal)
-            {
-                return ((position.X > LeftX) && (position.X < RightX)
-                        && (position.Y > TopY) && (position.Y < BottomY));
-            }
-            else
-            {
-                float marginX = Width * 0.25f;
-                float marginY = Height * 0.25f;
-
-                return ((position.X > (LeftX + marginX)) && (position.X < (RightX - marginX))
-                        && (position.Y > (TopY + marginY)) && (position.Y < (BottomY - marginY)));
-            }
         }
     }
 }

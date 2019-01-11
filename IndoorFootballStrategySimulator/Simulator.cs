@@ -208,6 +208,8 @@ namespace IndoorFootballStrategySimulator {
                 tab.SelectTab(tabResults);
                 RefreshStrategyLists();
                 tbNrofSimulations.Text = "";
+                timer1.Stop();
+                timer2.Stop();
             }
 		}
 
