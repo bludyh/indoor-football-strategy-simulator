@@ -25,6 +25,8 @@ namespace IndoorFootballStrategySimulator {
                 return Directory.GetFiles(@"Data\Strategies");
             }
         }
+        public List<Result> Results { get; set; }
+
 
         static Simulator() {
             Pause = true;
@@ -41,6 +43,8 @@ namespace IndoorFootballStrategySimulator {
             simulationWindow.Initialized += SimulationWindow_Initialized;
 
             Directory.CreateDirectory(@"Data\Strategies");
+
+            Results = new List<Result>();
         }
 
         private void RefreshStrategyLists() {
@@ -145,6 +149,7 @@ namespace IndoorFootballStrategySimulator {
                     tab.SelectTab(tabResults);
                     RefreshStrategyLists();
                     tbNrofSimulations.Text = "";
+                    ConcludeResults(Results);
                 }
             }
         }
@@ -172,7 +177,8 @@ namespace IndoorFootballStrategySimulator {
                 Team RedTeam = SimulationWindow.EntityManager.RedTeam;
                 BlueTeam.GetFSM().ChangeState(PrepareForKickOff.Instance());
                 RedTeam.GetFSM().ChangeState(PrepareForKickOff.Instance());
-                SimulationWindow.MatchTime = new TimeSpan(); 
+                SimulationWindow.MatchTime = new TimeSpan();
+                Results.Add(new Result(BlueTeam.Strategy, RedTeam.Strategy, RedTeam.Goal.Score, BlueTeam.Goal.Score));               
             }
             matchTime.Text = Math.Round(SimulationWindow.MatchTime.TotalMinutes).ToString() + "\'";
             redTeamScore.Text = SimulationWindow.EntityManager.BlueTeam.Goal.Score.ToString();
@@ -210,6 +216,7 @@ namespace IndoorFootballStrategySimulator {
                 tbNrofSimulations.Text = "";
                 timer1.Stop();
                 timer2.Stop();
+                ConcludeResults(Results);
             }
 		}
 
@@ -328,6 +335,60 @@ namespace IndoorFootballStrategySimulator {
             foreach (Player player in SimulationWindow.EntityManager.RedTeam.Strategy.Players)
             {
                 player.Steering.Target = player.GetHomeArea(SimulationWindow.EntityManager.Field, player.Team.State).Center;
+            }
+        }
+
+        // Method that displays the conclusion of a set of results
+        // Assuming all results for a particular match up
+        private void ConcludeResults(List<Result> results)
+        {
+            List<int> pointsBlue = new List<int>();
+            int wins = 0;
+            int draws = 0;
+            int losses = 0;
+
+            if (results.Count > 0)
+            {
+                foreach (var result in results)
+                {
+                    if (result.ScoreHomeTeam > result.ScoreAwayTeam)
+                    {
+                        pointsBlue.Add(3);
+                        wins++;
+                    }
+                    else if (result.ScoreHomeTeam == result.ScoreAwayTeam)
+                    {
+                        pointsBlue.Add(1);
+                        draws++;
+                    }
+                    else
+                    {
+                        pointsBlue.Add(0);
+                        losses++;
+                    }                    
+                }
+
+                string homeStrategy = Results[0].HomeTeamStrategy.Name;
+                string awayStrategy = Results[0].AwayTeamStrategy.Name;
+
+                lblHomeStrategy.Text = homeStrategy;
+                lblAwayStrategy.Text = awayStrategy;
+                lblWins.Text = wins.ToString();
+                lblDraws.Text = draws.ToString();
+                lblLosses.Text = losses.ToString();
+
+                lblConclusion.Text = "";
+                lblConclusion.Text += homeStrategy + " recorded a win rate of " + 100 * ((double)wins) / Results.Count + "% against " + awayStrategy;
+            }
+        }
+
+        private void btnAllResults_Click(object sender, EventArgs e)
+        {
+            foreach (var result in Results)
+            {
+                string[] row = result.ToListViewRow().ToArray();
+                var listViewItem = new ListViewItem(row);
+                listViewResults.Items.Add(listViewItem);
             }
         }
     }
