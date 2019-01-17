@@ -71,6 +71,7 @@
     <Compile Include="Simulation\GoalKeepers AI\GlobalGoalKeeperState.cs" />
     <Compile Include="Simulation\MessageDispatcher.cs" />
     <Compile Include="Simulation\MessageTypes.cs" />
+    <Compile Include="Simulation\Result.cs" />
     <Compile Include="Simulation\Telegram.cs" />
     <Compile Include="Simulation\TeamColor.cs" />
     <Compile Include="Simulation\FieldPlayers AI\ReceiveBall.cs" />
