@@ -170,6 +170,7 @@ namespace IndoorFootballStrategySimulator {
             }
             if (Math.Round(SimulationWindow.MatchTime.TotalMinutes) >= 90)
             {
+                Results.Add(new Result(SimulationWindow.EntityManager.BlueTeam.Strategy, SimulationWindow.EntityManager.RedTeam.Strategy, SimulationWindow.EntityManager.RedTeam.Goal.Score, SimulationWindow.EntityManager.BlueTeam.Goal.Score));
                 timer1.Tick -= Timer1_Tick;
                 SimulationWindow.EntityManager.BlueTeam.Goal.ResetScore();
                 SimulationWindow.EntityManager.RedTeam.Goal.ResetScore();
@@ -179,8 +180,7 @@ namespace IndoorFootballStrategySimulator {
                 Team RedTeam = SimulationWindow.EntityManager.RedTeam;
                 BlueTeam.GetFSM().ChangeState(PrepareForKickOff.Instance());
                 RedTeam.GetFSM().ChangeState(PrepareForKickOff.Instance());
-                SimulationWindow.MatchTime = new TimeSpan();
-                Results.Add(new Result(BlueTeam.Strategy, RedTeam.Strategy, RedTeam.Goal.Score, BlueTeam.Goal.Score));               
+                SimulationWindow.MatchTime = new TimeSpan();              
             }
             matchTime.Text = Math.Round(SimulationWindow.MatchTime.TotalMinutes).ToString() + "\'";
             redTeamScore.Text = SimulationWindow.EntityManager.BlueTeam.Goal.Score.ToString();
@@ -386,6 +386,7 @@ namespace IndoorFootballStrategySimulator {
 
         private void btnAllResults_Click(object sender, EventArgs e)
         {
+            listViewResults.Items.Clear();
             foreach (var result in Results)
             {
                 string[] row = result.ToListViewRow().ToArray();

@@ -1253,7 +1253,7 @@
             this.btnExportCSV.Name = "btnExportCSV";
             this.btnExportCSV.Size = new System.Drawing.Size(367, 79);
             this.btnExportCSV.TabIndex = 88;
-            this.btnExportCSV.Text = "Export as CSV";
+            this.btnExportCSV.Text = "Export to Excel";
             this.btnExportCSV.UseVisualStyleBackColor = false;
             this.btnExportCSV.Click += new System.EventHandler(this.btnExportCSV_Click);
             // 
