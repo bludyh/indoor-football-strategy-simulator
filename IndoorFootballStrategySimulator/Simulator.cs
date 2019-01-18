@@ -391,5 +391,10 @@ namespace IndoorFootballStrategySimulator {
                 listViewResults.Items.Add(listViewItem);
             }
         }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
