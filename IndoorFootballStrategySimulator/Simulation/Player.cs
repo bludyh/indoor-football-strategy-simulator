@@ -189,7 +189,15 @@ namespace IndoorFootballStrategySimulator.Simulation {
         public bool InHomeArea()
         {
             var field = SimulationWindow.EntityManager.Field;
-            return GetHomeArea(field, Team.State).Contain(Position);
+            if (this is GoalKeeper)
+            {
+                return GetHomeArea(field, Team.State).Inside(Position, Area.AreaModifer.Normal);
+            }
+            else
+            {
+                return GetHomeArea(field, Team.State).Inside(Position, Area.AreaModifer.HalfSize);
+            }
+
         }
         public void FindSupport()
         {

@@ -37,7 +37,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             //if game is on and close enough to home, change state to wait and set the 
             //player target to his current position.(so that if he gets jostled out of 
             //position he can move back to it)
-            if (Simulator.isGameOn && owner.GetHomeArea(field, owner.Team.State).Contain(owner.Position))
+            if (Simulator.isGameOn && owner.GetHomeArea(field, owner.Team.State).Inside(owner.Position, Area.AreaModifer.HalfSize))
             {
                 owner.Steering.Target = owner.Position;
                 owner.GetFSM().ChangeState(Idle.Instance());
@@ -53,7 +53,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         {
             var field = SimulationWindow.EntityManager.Field;
 
-            if (!owner.GetHomeArea(field, owner.Team.State).Contain(owner.Steering.Target))
+            if (!owner.GetHomeArea(field, owner.Team.State).Inside(owner.Steering.Target, Area.AreaModifer.HalfSize))
             {
                 owner.Steering.Target = owner.GetHomeArea(field, owner.Team.State).Center;
             }

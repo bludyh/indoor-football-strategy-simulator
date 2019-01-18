@@ -380,7 +380,7 @@ namespace IndoorFootballStrategySimulator.Simulation
                 float dist = Math.Abs(Passes[pass].X - Opponent.Goal.Center.X);
 
                 if ((dist < ClosestSoFar)
-                        && SimulationWindow.EntityManager.Field.PlayingArea.Contain(Passes[pass])
+                        && SimulationWindow.EntityManager.Field.PlayingArea.Inside(Passes[pass])
                         && IsPassSafeFromAllOpponents(SimulationWindow.EntityManager.Ball.Position,
                         Passes[pass],
                         receiver,
