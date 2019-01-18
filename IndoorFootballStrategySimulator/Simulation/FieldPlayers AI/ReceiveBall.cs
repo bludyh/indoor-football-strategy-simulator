@@ -21,7 +21,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             var ball = SimulationWindow.EntityManager.Ball;
             //if the ball comes close enough to the player or if his team lose control
             //he should change state to chase the ball
-            if (owner.BallWithinReceivingRange() || !owner.Team.InControl())
+            if (owner.BallWithinRange() || !owner.Team.InControl())
             {
                 owner.GetFSM().ChangeState(ChaseBall.Instance());
                 return;

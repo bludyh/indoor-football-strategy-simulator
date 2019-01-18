@@ -27,7 +27,7 @@ namespace IndoorFootballStrategySimulator.Simulation
 
             //if the ball comes in range the keeper traps t and then changes state to put
             //ball back in play
-            if (owner.BallWithinKeeperRange()) {
+            if (owner.BallWithinRange()) {
                 ball.Trap();
                 field.GoalKeeperHasBall = true;
                 owner.GetFSM().ChangeState(PutBallBackInPlay.Instance());

@@ -238,7 +238,7 @@ namespace IndoorFootballStrategySimulator {
                 for (int i = 0; i < field.Areas.Count; i++) {
                     var area = field.Areas[i];
 
-                    if (area.Contain(mousePos)) {
+                    if (area.Inside(mousePos)) {
                         if (isPlayerBeingDragged) {
                             if (area != selectedPlayer.GetHomeArea(field, teamState) && !Strategy.Players.Any(p => p != selectedPlayer && p.Position == area.Center)) {
                                 SetPlayerHomeArea(selectedPlayer, i);

@@ -13,11 +13,13 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Forms.Controls;
 using IndoorFootballStrategySimulator.Simulation;
+using Spire.DataExport.TXT;
+using Spire.DataExport.Common;
 
 namespace IndoorFootballStrategySimulator {
-    public partial class Simulator : Form {
+    public partial class Simulator : Form {       
 
-		public static bool Pause { get; private set; }
+        public static bool Pause { get; private set; }
         public static bool isGameOn { get; set; }
         public static int NumberofSimulations { get; private set; }
         private string[] StrategyFiles {
@@ -168,6 +170,7 @@ namespace IndoorFootballStrategySimulator {
             }
             if (Math.Round(SimulationWindow.MatchTime.TotalMinutes) >= 90)
             {
+                Results.Add(new Result(SimulationWindow.EntityManager.BlueTeam.Strategy, SimulationWindow.EntityManager.RedTeam.Strategy, SimulationWindow.EntityManager.RedTeam.Goal.Score, SimulationWindow.EntityManager.BlueTeam.Goal.Score));
                 timer1.Tick -= Timer1_Tick;
                 SimulationWindow.EntityManager.BlueTeam.Goal.ResetScore();
                 SimulationWindow.EntityManager.RedTeam.Goal.ResetScore();
@@ -177,8 +180,7 @@ namespace IndoorFootballStrategySimulator {
                 Team RedTeam = SimulationWindow.EntityManager.RedTeam;
                 BlueTeam.GetFSM().ChangeState(PrepareForKickOff.Instance());
                 RedTeam.GetFSM().ChangeState(PrepareForKickOff.Instance());
-                SimulationWindow.MatchTime = new TimeSpan();
-                Results.Add(new Result(BlueTeam.Strategy, RedTeam.Strategy, RedTeam.Goal.Score, BlueTeam.Goal.Score));               
+                SimulationWindow.MatchTime = new TimeSpan();              
             }
             matchTime.Text = Math.Round(SimulationWindow.MatchTime.TotalMinutes).ToString() + "\'";
             redTeamScore.Text = SimulationWindow.EntityManager.BlueTeam.Goal.Score.ToString();
@@ -384,6 +386,7 @@ namespace IndoorFootballStrategySimulator {
 
         private void btnAllResults_Click(object sender, EventArgs e)
         {
+            listViewResults.Items.Clear();
             foreach (var result in Results)
             {
                 string[] row = result.ToListViewRow().ToArray();
@@ -392,9 +395,38 @@ namespace IndoorFootballStrategySimulator {
             }
         }
 
+<<<<<<< HEAD
         private void button24_Click(object sender, EventArgs e)
         {
 
+=======
+        private void btnExportPDF_Click(object sender, EventArgs e)
+        {
+            Spire.DataExport.PDF.PDFExport PDFExport = new Spire.DataExport.PDF.PDFExport();
+            PDFExport.DataSource = Spire.DataExport.Common.ExportSource.ListView;
+            PDFExport.ListView = this.listViewResults;
+            PDFExport.ActionAfterExport = Spire.DataExport.Common.ActionType.OpenView;
+            PDFExport.SaveToFile("Results.pdf");
+        }
+
+        private void btnExportCSV_Click(object sender, EventArgs e)
+        {
+            var txtExport = new Spire.DataExport.TXT.TXTExport();
+            
+            txtExport.ActionAfterExport = Spire.DataExport.Common.ActionType.OpenView;
+            txtExport.DataFormats.CultureName = "en-us";
+            txtExport.DataFormats.Currency = "c";
+            txtExport.DataFormats.DateTime = "yyyy-M-d H:mm";
+            txtExport.DataFormats.Float = "g";
+            txtExport.DataFormats.Integer = "g";
+            txtExport.DataFormats.Time = "H:mm";
+            txtExport.DataEncoding = Spire.DataExport.Common.EncodingType.ASCII;
+            txtExport.DataSource = ExportSource.ListView;
+            txtExport.ListView = this.listViewResults;
+            txtExport.ExportType = TextExportType.CSV;
+            txtExport.FileName = "sample.csv";
+            txtExport.SaveToFile();
+>>>>>>> 7af21c46b7977086155568a22866a9668106ff33
         }
     }
 }

@@ -19,7 +19,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         public override void Handle(FieldPlayer owner)
         {
             //if a player is in possession and close to the ball reduce his max speed
-            if ((owner.BallWithinReceivingRange()) && (owner.IsControllingPlayer()))
+            if ((owner.BallWithinRange()) && (owner.IsControllingPlayer()))
             {
                 owner.MaxSpeed = 60f;
             }
@@ -107,7 +107,7 @@ namespace IndoorFootballStrategySimulator.Simulation
                         //receiving player, this player cannot pass the ball to the player
                         //making the request.
                         if (owner.Team.ReceivingPlayer != null
-                                || !owner.BallWithinKickingRange())
+                                || !owner.BallWithinRange())
                         {
                             return true;
                         }

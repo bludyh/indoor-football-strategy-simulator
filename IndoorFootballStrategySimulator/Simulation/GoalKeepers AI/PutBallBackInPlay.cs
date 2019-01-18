@@ -26,7 +26,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             Vector2 BallTarget = new Vector2();
             //test if there are players further forward on the field we might
             //be able to pass to. If so, make a pass.
-            if (owner.Team.FindPass(owner,receiver,BallTarget,3f, 50f))
+            if (owner.Team.FindPass(owner,receiver,ref BallTarget,3f, 50f))
             {
                 //make the pass   
                 ball.Kick(Vector2.Normalize(BallTarget - ball.Position),3f);

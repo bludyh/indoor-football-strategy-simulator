@@ -1,0 +1,345 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="IndoorFootballStrategySimulator.ExtendedUpdateWindow" Collapsed="true">
+    <Position X="2.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>ExtendedUpdateWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Program" Collapsed="true">
+    <Position X="41.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.SimulationWindow" Collapsed="true">
+    <Position X="0.5" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAwACABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SimulationWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulator" Collapsed="true">
+    <Position X="39.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>/1TgKCAEIbgEYriSKEmBhgADAsAMgIhhEUAEIeYQ0DQ=</HashCode>
+      <FileName>Simulator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.StrategyEditingWindow" Collapsed="true">
+    <Position X="2.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAgAAAAAAwAgAAAAAAEAABBAIAAAIgCAABACIAA=</HashCode>
+      <FileName>StrategyEditingWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.StrategyPreviewWindow" Collapsed="true">
+    <Position X="5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAwAgAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>StrategyPreviewWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.StrategyWindow" Collapsed="true">
+    <Position X="3.75" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAAEAAAEBAQAgAAAAAAAAAAAAAAAAAAAgBBAAAAA=</HashCode>
+      <FileName>StrategyWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Utilities" Collapsed="true">
+    <Position X="41.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACBABAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Utilities.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.Extensions" Collapsed="true">
+    <Position X="41.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Extensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.Area" Collapsed="true">
+    <Position X="38" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAhAAAIgAAAAAQAEBIAAAICAAACACAIAAIAAQ=</HashCode>
+      <FileName>Simulation\Area.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.Ball" Collapsed="true">
+    <Position X="9.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAABAEAACgAAAAAAAAAAAAAAAAAEAAAAAAAAAgAA=</HashCode>
+      <FileName>Simulation\Ball.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.Entity" Collapsed="true">
+    <Position X="5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQIAAAAAAAAgoAgAAIAAAAAgAAAAgCAAAAAAAAAAAA=</HashCode>
+      <FileName>Simulation\Entity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.EntityManager" Collapsed="true">
+    <Position X="39.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAwAAAAAAAAAgAACAAAAAAAEAAAAAgIA=</HashCode>
+      <FileName>Simulation\EntityManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.Field" Collapsed="true">
+    <Position X="2.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAACAAAAIBAAgCAAAAAgAAAAgCAEAA=</HashCode>
+      <FileName>Simulation\Field.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.FieldPlayer" Collapsed="true">
+    <Position X="5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQkAAhEAAAAAgAAAAAAAIAAACAAAAABAAEAAAAAAAA=</HashCode>
+      <FileName>Simulation\FieldPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.ChaseBall" Collapsed="true">
+    <Position X="8.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABQAAIAQICAAAAAAAA=</HashCode>
+      <FileName>Simulation\FieldPlayers AI\ChaseBall.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.Dribble" Collapsed="true">
+    <Position X="15.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABQAAIAQICAAAAAAAA=</HashCode>
+      <FileName>Simulation\FieldPlayers AI\Dribble.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.GlobalFieldPlayerState" Collapsed="true">
+    <Position X="19.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABQAAIAQICAAAAAAAA=</HashCode>
+      <FileName>Simulation\FieldPlayers AI\GlobalFieldPlayerState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.Idle" Collapsed="true">
+    <Position X="22" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABQAAIAQICAAAAAAAA=</HashCode>
+      <FileName>Simulation\FieldPlayers AI\Idle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.KickBall" Collapsed="true">
+    <Position X="24.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABQAAIAQICAAAAAAAA=</HashCode>
+      <FileName>Simulation\FieldPlayers AI\KickBall.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.ReceiveBall" Collapsed="true">
+    <Position X="31" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABQAAIAQICAAAAAAAA=</HashCode>
+      <FileName>Simulation\FieldPlayers AI\ReceiveBall.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.ReturnToHomeArea" Collapsed="true">
+    <Position X="1.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABQAAIAQICAAAAAAAA=</HashCode>
+      <FileName>Simulation\FieldPlayers AI\ReturnToHomeArea.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.Support" Collapsed="true">
+    <Position X="10.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABQAAIAQICAAAAAAAA=</HashCode>
+      <FileName>Simulation\FieldPlayers AI\Support.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.FSM&lt;T&gt;" Collapsed="true">
+    <Position X="43.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEABAAAABhAAAAAAAACAAAAAgAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Simulation\FSM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.Goal" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQAAAAAAAAwAAgAAIAAAAAAAAAAEAAAAAAACAAIAAA=</HashCode>
+      <FileName>Simulation\Goal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.GoalKeeper" Collapsed="true">
+    <Position X="7.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQgAABCACAAAgAAAEAAAIAAACCAAAIAAgAAAAAAAAA=</HashCode>
+      <FileName>Simulation\GoalKeeper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.GlobalGoalKeeperState" Collapsed="true">
+    <Position X="26.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABQAAIAQICAAAAAAAA=</HashCode>
+      <FileName>Simulation\GoalKeepers AI\GlobalGoalKeeperState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.InterceptBall" Collapsed="true">
+    <Position X="33.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABQAAIAQICAAAAAAAA=</HashCode>
+      <FileName>Simulation\GoalKeepers AI\InterceptBall.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.PutBallBackInPlay" Collapsed="true">
+    <Position X="4" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABQAAIAQICAAAAAAAA=</HashCode>
+      <FileName>Simulation\GoalKeepers AI\PutBallBackInPlay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.ReturnHome" Collapsed="true">
+    <Position X="13" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABQAAIAQICAAAAAAAA=</HashCode>
+      <FileName>Simulation\GoalKeepers AI\ReturnHome.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.TendGoal" Collapsed="true">
+    <Position X="17.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABQAAIAQICAAAAAAAA=</HashCode>
+      <FileName>Simulation\GoalKeepers AI\TendGoal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.Line" Collapsed="true">
+    <Position X="38" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAACAAAgAAAAAEAAAAAAAIAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Simulation\Line.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.MessageDispatcher" Collapsed="true">
+    <Position X="39.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAACAAAAAAAAAAAIAABAAAAUQAAAAAAAAAA=</HashCode>
+      <FileName>Simulation\MessageDispatcher.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.MovingEntity" Collapsed="true">
+    <Position X="7.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAgAAAAAAEAIAAAAAAAACAAAAAACCECAA=</HashCode>
+      <FileName>Simulation\MovingEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.Player" Collapsed="true">
+    <Position X="6.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQwEASAECAAAAAgAABAAICBCAAQIAwgkAAAAAAIAAA=</HashCode>
+      <FileName>Simulation\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.State&lt;T&gt;" Collapsed="true">
+    <Position X="18.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAIAAICAAAAAAAA=</HashCode>
+      <FileName>Simulation\State.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.SteeringManager" Collapsed="true">
+    <Position X="41.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IABABBQAAAQgCAAACkAAACMQgCAiAAAAAgEQAAAIAYA=</HashCode>
+      <FileName>Simulation\SteeringManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.Strategy" Collapsed="true">
+    <Position X="43.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAQAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Simulation\Strategy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.SupportCalculate" Collapsed="true">
+    <Position X="38" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAACAQAAAAABAAAAAAAAAAAAAAACAEEABQgAAAAAA=</HashCode>
+      <FileName>Simulation\SupportCalculate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.Defensive" Collapsed="true">
+    <Position X="28.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABQAAIAQICAAAAAAAA=</HashCode>
+      <FileName>Simulation\Team AI\Defensive.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.Offensive" Collapsed="true">
+    <Position X="35.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABQAAIAQICAAAAAAAA=</HashCode>
+      <FileName>Simulation\Team AI\Offensive.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.PrepareForKickOff" Collapsed="true">
+    <Position X="6.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABQAAIAQICAAAAAAAA=</HashCode>
+      <FileName>Simulation\Team AI\PrepareForKickOff.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Simulation.Team" Collapsed="true">
+    <Position X="39.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>FQQMgAAABwAJASgAAwlAAAkAQCEAAACAAAAAphAAAAI=</HashCode>
+      <FileName>Simulation\Team.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Properties.Resources" Collapsed="true">
+    <Position X="43.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndoorFootballStrategySimulator.Properties.Settings" Collapsed="true">
+    <Position X="38" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="IndoorFootballStrategySimulator.Simulation.Telegram" Collapsed="true">
+    <Position X="38" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAABAAAAAAAAAAAAEAAAAAgAAIAAIAAA=</HashCode>
+      <FileName>Simulation\Telegram.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="IndoorFootballStrategySimulator.Simulation.MessageTypes" Collapsed="true">
+    <Position X="38" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAggAABBAAAIAA=</HashCode>
+      <FileName>Simulation\MessageTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="IndoorFootballStrategySimulator.Simulation.TeamColor" Collapsed="true">
+    <Position X="39.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Simulation\TeamColor.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="IndoorFootballStrategySimulator.Simulation.TeamState" Collapsed="true">
+    <Position X="41.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Simulation\TeamState.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
