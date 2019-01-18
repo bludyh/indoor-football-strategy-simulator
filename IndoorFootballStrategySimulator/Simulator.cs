@@ -13,11 +13,13 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Forms.Controls;
 using IndoorFootballStrategySimulator.Simulation;
+using Spire.DataExport.TXT;
+using Spire.DataExport.Common;
 
 namespace IndoorFootballStrategySimulator {
-    public partial class Simulator : Form {
+    public partial class Simulator : Form {       
 
-		public static bool Pause { get; private set; }
+        public static bool Pause { get; private set; }
         public static bool isGameOn { get; set; }
         public static int NumberofSimulations { get; private set; }
         private string[] StrategyFiles {
@@ -390,6 +392,34 @@ namespace IndoorFootballStrategySimulator {
                 var listViewItem = new ListViewItem(row);
                 listViewResults.Items.Add(listViewItem);
             }
+        }
+
+        private void btnExportPDF_Click(object sender, EventArgs e)
+        {
+            Spire.DataExport.PDF.PDFExport PDFExport = new Spire.DataExport.PDF.PDFExport();
+            PDFExport.DataSource = Spire.DataExport.Common.ExportSource.ListView;
+            PDFExport.ListView = this.listViewResults;
+            PDFExport.ActionAfterExport = Spire.DataExport.Common.ActionType.OpenView;
+            PDFExport.SaveToFile("Results.pdf");
+        }
+
+        private void btnExportCSV_Click(object sender, EventArgs e)
+        {
+            var txtExport = new Spire.DataExport.TXT.TXTExport();
+            
+            txtExport.ActionAfterExport = Spire.DataExport.Common.ActionType.OpenView;
+            txtExport.DataFormats.CultureName = "en-us";
+            txtExport.DataFormats.Currency = "c";
+            txtExport.DataFormats.DateTime = "yyyy-M-d H:mm";
+            txtExport.DataFormats.Float = "g";
+            txtExport.DataFormats.Integer = "g";
+            txtExport.DataFormats.Time = "H:mm";
+            txtExport.DataEncoding = Spire.DataExport.Common.EncodingType.ASCII;
+            txtExport.DataSource = ExportSource.ListView;
+            txtExport.ListView = this.listViewResults;
+            txtExport.ExportType = TextExportType.CSV;
+            txtExport.FileName = "sample.csv";
+            txtExport.SaveToFile();
         }
     }
 }

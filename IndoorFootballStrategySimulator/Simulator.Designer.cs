@@ -121,15 +121,15 @@
             this.button20 = new System.Windows.Forms.Button();
             this.btnAllResults = new System.Windows.Forms.Button();
             this.button22 = new System.Windows.Forms.Button();
-            this.button23 = new System.Windows.Forms.Button();
-            this.button24 = new System.Windows.Forms.Button();
+            this.btnExportCSV = new System.Windows.Forms.Button();
+            this.btnExportPDF = new System.Windows.Forms.Button();
             this.listViewResults = new System.Windows.Forms.ListView();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.colHomeStrategy = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colHomeScore = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colAwayScore = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colAwayStrategy = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.strategyPreviewWindowAway = new IndoorFootballStrategySimulator.StrategyPreviewWindow();
             this.strategyPreviewWindowHome = new IndoorFootballStrategySimulator.StrategyPreviewWindow();
             this.strategyEditingWindow = new IndoorFootballStrategySimulator.StrategyEditingWindow();
@@ -1087,8 +1087,8 @@
             this.tabResults.Controls.Add(this.button20);
             this.tabResults.Controls.Add(this.btnAllResults);
             this.tabResults.Controls.Add(this.button22);
-            this.tabResults.Controls.Add(this.button23);
-            this.tabResults.Controls.Add(this.button24);
+            this.tabResults.Controls.Add(this.btnExportCSV);
+            this.tabResults.Controls.Add(this.btnExportPDF);
             this.tabResults.Controls.Add(this.listViewResults);
             this.tabResults.Location = new System.Drawing.Point(4, 25);
             this.tabResults.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -1244,29 +1244,31 @@
             this.button22.Text = "Discard results";
             this.button22.UseVisualStyleBackColor = false;
             // 
-            // button23
+            // btnExportCSV
             // 
-            this.button23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.button23.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button23.Location = new System.Drawing.Point(917, 735);
-            this.button23.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button23.Name = "button23";
-            this.button23.Size = new System.Drawing.Size(367, 79);
-            this.button23.TabIndex = 88;
-            this.button23.Text = "Export as CSV";
-            this.button23.UseVisualStyleBackColor = false;
+            this.btnExportCSV.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnExportCSV.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnExportCSV.Location = new System.Drawing.Point(917, 735);
+            this.btnExportCSV.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnExportCSV.Name = "btnExportCSV";
+            this.btnExportCSV.Size = new System.Drawing.Size(367, 79);
+            this.btnExportCSV.TabIndex = 88;
+            this.btnExportCSV.Text = "Export as CSV";
+            this.btnExportCSV.UseVisualStyleBackColor = false;
+            this.btnExportCSV.Click += new System.EventHandler(this.btnExportCSV_Click);
             // 
-            // button24
+            // btnExportPDF
             // 
-            this.button24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.button24.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button24.Location = new System.Drawing.Point(467, 735);
-            this.button24.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button24.Name = "button24";
-            this.button24.Size = new System.Drawing.Size(367, 79);
-            this.button24.TabIndex = 87;
-            this.button24.Text = "Export as PDF";
-            this.button24.UseVisualStyleBackColor = false;
+            this.btnExportPDF.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnExportPDF.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnExportPDF.Location = new System.Drawing.Point(467, 735);
+            this.btnExportPDF.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnExportPDF.Name = "btnExportPDF";
+            this.btnExportPDF.Size = new System.Drawing.Size(367, 79);
+            this.btnExportPDF.TabIndex = 87;
+            this.btnExportPDF.Text = "Export as PDF";
+            this.btnExportPDF.UseVisualStyleBackColor = false;
+            this.btnExportPDF.Click += new System.EventHandler(this.btnExportPDF_Click);
             // 
             // listViewResults
             // 
@@ -1414,8 +1416,8 @@
 		private System.Windows.Forms.Button button20;
 		private System.Windows.Forms.Button btnAllResults;
 		private System.Windows.Forms.Button button22;
-		private System.Windows.Forms.Button button23;
-		private System.Windows.Forms.Button button24;
+		private System.Windows.Forms.Button btnExportCSV;
+		private System.Windows.Forms.Button btnExportPDF;
 		private System.Windows.Forms.ListView listViewResults;
 		private System.Windows.Forms.Label label56;
 		private System.Windows.Forms.Label label57;
