@@ -395,11 +395,6 @@ namespace IndoorFootballStrategySimulator {
             }
         }
 
-<<<<<<< HEAD
-        private void button24_Click(object sender, EventArgs e)
-        {
-
-=======
         private void btnExportPDF_Click(object sender, EventArgs e)
         {
             Spire.DataExport.PDF.PDFExport PDFExport = new Spire.DataExport.PDF.PDFExport();
@@ -426,7 +421,6 @@ namespace IndoorFootballStrategySimulator {
             txtExport.ExportType = TextExportType.CSV;
             txtExport.FileName = "sample.csv";
             txtExport.SaveToFile();
->>>>>>> 7af21c46b7977086155568a22866a9668106ff33
         }
     }
 }

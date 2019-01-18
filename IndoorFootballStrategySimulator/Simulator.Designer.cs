@@ -233,16 +233,9 @@
             // 
             // strategyPreviewWindowAway
             // 
-<<<<<<< HEAD
-            this.strategyPreviewWindowAway.Location = new System.Drawing.Point(317, 0);
-            this.strategyPreviewWindowAway.Margin = new System.Windows.Forms.Padding(4);
-            this.strategyPreviewWindowAway.Name = "strategyPreviewWindowAway";
-            this.strategyPreviewWindowAway.Size = new System.Drawing.Size(853, 354);
-=======
             this.strategyPreviewWindowAway.Location = new System.Drawing.Point(238, 0);
             this.strategyPreviewWindowAway.Name = "strategyPreviewWindowAway";
             this.strategyPreviewWindowAway.Size = new System.Drawing.Size(640, 288);
->>>>>>> 7af21c46b7977086155568a22866a9668106ff33
             this.strategyPreviewWindowAway.TabIndex = 0;
             this.strategyPreviewWindowAway.TeamState = IndoorFootballStrategySimulator.Simulation.TeamState.OFFENSIVE;
             this.strategyPreviewWindowAway.Text = "Away";
@@ -396,16 +389,9 @@
             // 
             // strategyPreviewWindowHome
             // 
-<<<<<<< HEAD
-            this.strategyPreviewWindowHome.Location = new System.Drawing.Point(317, 0);
-            this.strategyPreviewWindowHome.Margin = new System.Windows.Forms.Padding(4);
-            this.strategyPreviewWindowHome.Name = "strategyPreviewWindowHome";
-            this.strategyPreviewWindowHome.Size = new System.Drawing.Size(853, 354);
-=======
             this.strategyPreviewWindowHome.Location = new System.Drawing.Point(238, 0);
             this.strategyPreviewWindowHome.Name = "strategyPreviewWindowHome";
             this.strategyPreviewWindowHome.Size = new System.Drawing.Size(640, 288);
->>>>>>> 7af21c46b7977086155568a22866a9668106ff33
             this.strategyPreviewWindowHome.TabIndex = 0;
             this.strategyPreviewWindowHome.TeamState = IndoorFootballStrategySimulator.Simulation.TeamState.OFFENSIVE;
             this.strategyPreviewWindowHome.Text = "Home";
@@ -595,16 +581,9 @@
             // 
             // strategyEditingWindow
             // 
-<<<<<<< HEAD
-            this.strategyEditingWindow.Location = new System.Drawing.Point(0, 52);
-            this.strategyEditingWindow.Margin = new System.Windows.Forms.Padding(4);
-            this.strategyEditingWindow.Name = "strategyEditingWindow";
-            this.strategyEditingWindow.Size = new System.Drawing.Size(1280, 532);
-=======
             this.strategyEditingWindow.Location = new System.Drawing.Point(0, 42);
             this.strategyEditingWindow.Name = "strategyEditingWindow";
             this.strategyEditingWindow.Size = new System.Drawing.Size(960, 432);
->>>>>>> 7af21c46b7977086155568a22866a9668106ff33
             this.strategyEditingWindow.TabIndex = 26;
             this.strategyEditingWindow.TeamState = IndoorFootballStrategySimulator.Simulation.TeamState.OFFENSIVE;
             this.strategyEditingWindow.Text = "Strategy";
@@ -865,16 +844,9 @@
             // 
             // simulationWindow
             // 
-<<<<<<< HEAD
-            this.simulationWindow.Location = new System.Drawing.Point(25, 42);
-            this.simulationWindow.Margin = new System.Windows.Forms.Padding(4);
-            this.simulationWindow.Name = "simulationWindow";
-            this.simulationWindow.Size = new System.Drawing.Size(1707, 709);
-=======
             this.simulationWindow.Location = new System.Drawing.Point(19, 34);
             this.simulationWindow.Name = "simulationWindow";
             this.simulationWindow.Size = new System.Drawing.Size(1280, 576);
->>>>>>> 7af21c46b7977086155568a22866a9668106ff33
             this.simulationWindow.TabIndex = 157;
             this.simulationWindow.Text = "Simulation";
             // 
@@ -1064,32 +1036,6 @@
             this.button22.Text = "Discard results";
             this.button22.UseVisualStyleBackColor = false;
             // 
-<<<<<<< HEAD
-            // button23
-            // 
-            this.button23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.button23.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button23.Location = new System.Drawing.Point(917, 735);
-            this.button23.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button23.Name = "button23";
-            this.button23.Size = new System.Drawing.Size(367, 79);
-            this.button23.TabIndex = 88;
-            this.button23.Text = "Export as CSV";
-            this.button23.UseVisualStyleBackColor = false;
-            // 
-            // button24
-            // 
-            this.button24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.button24.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button24.Location = new System.Drawing.Point(467, 735);
-            this.button24.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button24.Name = "button24";
-            this.button24.Size = new System.Drawing.Size(367, 79);
-            this.button24.TabIndex = 87;
-            this.button24.Text = "Export as PDF";
-            this.button24.UseVisualStyleBackColor = false;
-            this.button24.Click += new System.EventHandler(this.button24_Click);
-=======
             // btnExportCSV
             // 
             this.btnExportCSV.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
@@ -1115,7 +1061,6 @@
             this.btnExportPDF.Text = "Export as PDF";
             this.btnExportPDF.UseVisualStyleBackColor = false;
             this.btnExportPDF.Click += new System.EventHandler(this.btnExportPDF_Click);
->>>>>>> 7af21c46b7977086155568a22866a9668106ff33
             // 
             // listViewResults
             // 
