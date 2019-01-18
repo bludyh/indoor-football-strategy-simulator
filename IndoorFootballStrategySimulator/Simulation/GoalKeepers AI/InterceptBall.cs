@@ -28,7 +28,7 @@ namespace IndoorFootballStrategySimulator.Simulation
                 return;
             }
             //if the ball becomes in range of the goalkeeper's hands, he puts the ball bak in play
-            if (owner.BallWithinKeeperRange()) {
+            if (owner.BallWithinRange()) {
                 ball.Trap();
                 field.GoalKeeperHasBall = true;
                 owner.GetFSM().ChangeState(PutBallBackInPlay.Instance());

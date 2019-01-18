@@ -182,7 +182,7 @@ namespace IndoorFootballStrategySimulator.Simulation
          //   Given a point P and a circle of radius R centered at C this function
          // determines the two points on the circle that intersect with the 
          //  tangents from P to the circle. Returns false if P is within the circle.
-        public static bool GetTangentPoints(Vector2 C, float R, Vector2 P, Vector2 T1, Vector2 T2)
+        public static bool GetTangentPoints(Vector2 C, float R, Vector2 P, ref Vector2 T1, ref Vector2 T2)
         {
             Vector2 PmC = Vector2.Subtract(P, C);
             float SqrLen = PmC.LengthSquared();
@@ -192,16 +192,18 @@ namespace IndoorFootballStrategySimulator.Simulation
                 // P is inside or on the circle
                 return false;
             }
+            else
+            {
+                float InvSqrLen = 1 / SqrLen;
+                float Root = (float)Math.Sqrt(Math.Abs(SqrLen - RSqr));
 
-            float InvSqrLen = 1 / SqrLen;
-            float Root = (float)Math.Sqrt(Math.Abs(SqrLen - RSqr));
+                T1.X = C.X + R * (R * PmC.X - PmC.Y * Root) * InvSqrLen;
+                T1.Y = C.Y + R * (R * PmC.Y + PmC.X * Root) * InvSqrLen;
+                T2.X = C.X + R * (R * PmC.X + PmC.Y * Root) * InvSqrLen;
+                T2.Y = C.Y + R * (R * PmC.Y - PmC.X * Root) * InvSqrLen;
 
-            T1.X = C.X + R * (R * PmC.X - PmC.Y * Root) * InvSqrLen;
-            T1.Y = C.Y + R * (R * PmC.Y + PmC.X * Root) * InvSqrLen;
-            T2.X = C.X + R * (R * PmC.X + PmC.Y * Root) * InvSqrLen;
-            T2.Y = C.Y + R * (R * PmC.Y - PmC.X * Root) * InvSqrLen;
-
-            return true;
+                return true;
+            }
         }
 
         public static float RandFloat()

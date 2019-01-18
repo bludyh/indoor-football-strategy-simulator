@@ -95,18 +95,8 @@ namespace IndoorFootballStrategySimulator.Simulation {
         /// Return true if the player is the closet player in his team to the ball
         /// </summary>
         /// <returns></returns>
-        public bool BallWithinKeeperRange() {
-            var ball = SimulationWindow.EntityManager.Ball;
-            return (Vector2.DistanceSquared(this.Position, ball.Position) < (25f * 25f));
-        }
 
-        public bool BallWithinKickingRange()
-        {
-            var ball = SimulationWindow.EntityManager.Ball;
-            return (Vector2.DistanceSquared(ball.Position, this.Position) < (25f * 25f));
-        }
-
-        public bool BallWithinReceivingRange()
+        public bool BallWithinRange()
         {
             var ball = SimulationWindow.EntityManager.Ball;
             return (Vector2.DistanceSquared(this.Position, ball.Position) < (25f * 25f));
@@ -145,7 +135,9 @@ namespace IndoorFootballStrategySimulator.Simulation {
 
         public bool IsClosestTeamMemberToBall() {
             if (Team.PlayerClosestToBall == this)
+            {
                 return true;
+            }
             return false;
         }
 

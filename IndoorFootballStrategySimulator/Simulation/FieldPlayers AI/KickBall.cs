@@ -51,7 +51,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             //if it is determined that the player could score a goal from this position
             //OR if he should just kick the ball anyway, the player will attempt
             //to make the shot
-            if (player.Team.CanShoot(ball.Position, power, BallTarget) || (SupportCalculate.RandFloat() < 0.005))
+            if (player.Team.CanShoot(ball.Position, power, ref BallTarget) || (SupportCalculate.RandFloat() < 0.005))
             {
                 //add some noise to the kick. We don't want players who are 
                 //too accurate!
@@ -70,7 +70,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             power = 3f * dot;
             //test if there are any potential candidates available to receive a pass
             if (player.IsThreatened()
-                    && player.Team.FindPass(player, receiver, BallTarget, power, 120f))
+                    && player.Team.FindPass(player, receiver, ref BallTarget, power, 120f))
             {
                 //add some noise to the kick
                 //BallTarget = Ball.AddNoiseToKick(ball.Position, BallTarget);

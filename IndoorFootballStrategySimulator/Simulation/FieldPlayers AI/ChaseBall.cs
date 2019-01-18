@@ -23,7 +23,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         public override void Handle(FieldPlayer player)
         {
             //if the ball is within kicking range the player changes state to KickBall.
-            if (player.BallWithinKickingRange())
+            if (player.BallWithinRange())
             {
                 player.GetFSM().ChangeState(KickBall.Instance());
                 return;
@@ -36,10 +36,11 @@ namespace IndoorFootballStrategySimulator.Simulation
                 player.Steering.StartPursuit(SimulationWindow.EntityManager.Ball);
                 return;
             }
-
-            //if the player is not closest to the ball anymore, he should return back
-            //to his home Area and wait for another opportunity
-            player.GetFSM().ChangeState(ReturnToHomeArea.Instance());
+            else
+            {
+                player.GetFSM().ChangeState(ReturnToHomeArea.Instance());
+                return;
+            }
         }
         public override void OnExit(FieldPlayer player)
         {

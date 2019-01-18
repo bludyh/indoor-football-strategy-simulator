@@ -126,7 +126,8 @@ namespace IndoorFootballStrategySimulator.Simulation
 
         public bool CanShoot(Vector2 BallPos, float power)
         {
-            return CanShoot(BallPos, power, new Vector2());
+            Vector2 shotTarget = new Vector2();
+            return CanShoot(BallPos, power, ref shotTarget);
         }
 
         public bool InControl()
@@ -156,7 +157,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             return BestPlayer;
         }
 
-        public bool FindPass(Player passer, Player receiver, Vector2 PassTarget, float power, float MinPassingDistance)
+        public bool FindPass(Player passer, Player receiver, ref Vector2 PassTarget, float power, float MinPassingDistance)
         {
             float ClosestToGoalSoFar = float.MaxValue;
             Vector2 target = new Vector2();
@@ -167,7 +168,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             {
                 if ((curPlayer != passer) && (Vector2.DistanceSquared(passer.Position, curPlayer.Position) > MinPassingDistance * MinPassingDistance))
                 {
-                    if (GetBestPassToReceiver(passer, curPlayer, target, power))
+                    if (GetBestPassToReceiver(passer, curPlayer, ref target, power))
                     {
                         //if the pass target is the closest to the opponent's goal line found
                         // so far, keep a record of it
@@ -193,7 +194,7 @@ namespace IndoorFootballStrategySimulator.Simulation
         {
             foreach (Player player in Opponent.Strategy.Players)
             {
-                if (Vector2.DistanceSquared(position, player.Position) < radius * radius)
+                if (Vector2.DistanceSquared(position, player.Position) < radius * radius * 4f)
                 {
                     return true;
                 }
@@ -215,9 +216,16 @@ namespace IndoorFootballStrategySimulator.Simulation
 
         public void SetControllingPlayer(Player player)
         {
-            ControllingPlayer = player;
-            //rub it in the opponents faces!
-            Opponent.LostControl();
+            if (player != null)
+            {
+                if (player.BallWithinRange())
+                {
+                    ControllingPlayer = player;
+                    //rub it in the opponents faces!
+                    Opponent.LostControl();
+                }
+            }
+           
         }
 
         public void LostControl()
@@ -335,7 +343,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             return true;
         }
 
-        public bool GetBestPassToReceiver(Player passer, Player receiver, Vector2 PassTarget, float power)
+        public bool GetBestPassToReceiver(Player passer, Player receiver, ref Vector2 PassTarget, float power)
         {
             var Ball = SimulationWindow.EntityManager.Ball;
             //first, calculate how much time it will take for the ball to reach 
@@ -360,7 +368,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             //of the tangents from the ball to the receiver's range circle.
             Vector2 ip1 = new Vector2(), ip2 = new Vector2();
 
-            SupportCalculate.GetTangentPoints(receiver.Position,InterceptRange, SimulationWindow.EntityManager.Ball.Position, ip1,ip2);
+            SupportCalculate.GetTangentPoints(receiver.Position,InterceptRange, SimulationWindow.EntityManager.Ball.Position, ref ip1, ref ip2);
 
             Vector2[] Passes = { ip1, receiver.Position, ip2 };
             int NumPassesToTry = Passes.Length;
@@ -395,7 +403,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             return bResult;
         }
 
-        public bool CanShoot(Vector2 position, float power, Vector2 shotTarget)
+        public bool CanShoot(Vector2 position, float power, ref Vector2 shotTarget)
         {
             //the number of randomly created shot targets this method will test 
             int NumAttempts = 5;

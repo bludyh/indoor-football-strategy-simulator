@@ -50,7 +50,7 @@ namespace IndoorFootballStrategySimulator.Simulation
                         //receiving player, this player cannot pass the ball to the player
                         //making the request.
                         if (owner.Team.ReceivingPlayer != null
-                                || !owner.BallWithinKickingRange())
+                                || !owner.BallWithinRange())
                         {
                             return true;
                         }
