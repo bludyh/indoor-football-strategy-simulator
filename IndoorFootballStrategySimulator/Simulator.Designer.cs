@@ -101,9 +101,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.lblConclusion = new System.Windows.Forms.Label();
             this.label42 = new System.Windows.Forms.Label();
-            this.button20 = new System.Windows.Forms.Button();
             this.btnAllResults = new System.Windows.Forms.Button();
-            this.button22 = new System.Windows.Forms.Button();
             this.btnExportCSV = new System.Windows.Forms.Button();
             this.btnExportPDF = new System.Windows.Forms.Button();
             this.listViewResults = new System.Windows.Forms.ListView();
@@ -864,9 +862,7 @@
             this.tabResults.Controls.Add(this.label13);
             this.tabResults.Controls.Add(this.lblConclusion);
             this.tabResults.Controls.Add(this.label42);
-            this.tabResults.Controls.Add(this.button20);
             this.tabResults.Controls.Add(this.btnAllResults);
-            this.tabResults.Controls.Add(this.button22);
             this.tabResults.Controls.Add(this.btnExportCSV);
             this.tabResults.Controls.Add(this.btnExportPDF);
             this.tabResults.Controls.Add(this.listViewResults);
@@ -999,23 +995,11 @@
             this.label42.TabIndex = 83;
             this.label42.Text = "Simulation Results";
             // 
-            // button20
-            // 
-            this.button20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.button20.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button20.Location = new System.Drawing.Point(530, 145);
-            this.button20.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(249, 47);
-            this.button20.TabIndex = 82;
-            this.button20.Text = "save results";
-            this.button20.UseVisualStyleBackColor = false;
-            // 
             // btnAllResults
             // 
             this.btnAllResults.BackColor = System.Drawing.Color.Blue;
             this.btnAllResults.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnAllResults.Location = new System.Drawing.Point(277, 145);
+            this.btnAllResults.Location = new System.Drawing.Point(531, 145);
             this.btnAllResults.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnAllResults.Name = "btnAllResults";
             this.btnAllResults.Size = new System.Drawing.Size(249, 47);
@@ -1023,18 +1007,6 @@
             this.btnAllResults.Text = "See all results";
             this.btnAllResults.UseVisualStyleBackColor = false;
             this.btnAllResults.Click += new System.EventHandler(this.btnAllResults_Click);
-            // 
-            // button22
-            // 
-            this.button22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button22.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button22.Location = new System.Drawing.Point(784, 145);
-            this.button22.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(249, 47);
-            this.button22.TabIndex = 80;
-            this.button22.Text = "Discard results";
-            this.button22.UseVisualStyleBackColor = false;
             // 
             // btnExportCSV
             // 
@@ -1165,9 +1137,7 @@
 		private System.Windows.Forms.TabPage tabResults;
 		private System.Windows.Forms.Label lblConclusion;
 		private System.Windows.Forms.Label label42;
-		private System.Windows.Forms.Button button20;
 		private System.Windows.Forms.Button btnAllResults;
-		private System.Windows.Forms.Button button22;
 		private System.Windows.Forms.Button btnExportCSV;
 		private System.Windows.Forms.Button btnExportPDF;
 		private System.Windows.Forms.ListView listViewResults;

@@ -56,7 +56,7 @@ namespace IndoorFootballStrategySimulator.Simulation
                 var field = SimulationWindow.EntityManager.Field;
 
                 if (player.IsClosestTeamMemberToBall()
-                        && player.Team.ReceivingPlayer == null
+                        //&& player.Team.ReceivingPlayer == null
                         && !field.GoalKeeperHasBall)
                 {
                     player.GetFSM().ChangeState(ChaseBall.Instance());

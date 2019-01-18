@@ -106,7 +106,6 @@ namespace IndoorFootballStrategySimulator.Simulation
             return teamStateMachine;
         }
 
-
         private void CalculateClosestPlayerToBall()
         {
             float ClosestSoFar = float.MaxValue;
@@ -157,7 +156,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             return BestPlayer;
         }
 
-        public bool FindPass(Player passer, Player receiver, ref Vector2 PassTarget, float power, float MinPassingDistance)
+        public bool FindPass(Player passer, ref Player receiver, ref Vector2 PassTarget, float power, float MinPassingDistance)
         {
             float ClosestToGoalSoFar = float.MaxValue;
             Vector2 target = new Vector2();

@@ -23,7 +23,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             var ball = SimulationWindow.EntityManager.Ball;
 
             //The rear interpose target will change as the ball position changes
-            //owner.Steering.Target = owner.GetRearInterposeTarget();
+            owner.Steering.Target = owner.GetRearInterposeTarget();
 
             //if the ball comes in range the keeper traps t and then changes state to put
             //ball back in play

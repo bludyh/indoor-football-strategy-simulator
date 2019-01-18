@@ -419,7 +419,7 @@ namespace IndoorFootballStrategySimulator {
             txtExport.DataSource = ExportSource.ListView;
             txtExport.ListView = this.listViewResults;
             txtExport.ExportType = TextExportType.CSV;
-            txtExport.FileName = "sample.csv";
+            txtExport.FileName = "Results.csv";
             txtExport.SaveToFile();
         }
     }

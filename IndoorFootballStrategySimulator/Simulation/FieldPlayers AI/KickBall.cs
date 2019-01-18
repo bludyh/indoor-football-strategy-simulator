@@ -34,7 +34,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             //cannot kick the ball if the goalkeeper is in possession or if it is 
             //behind the player or if there is already an assigned receiver. So just
             //continue chasing the ball
-            if (player.Team.ReceivingPlayer != null|| field.GoalKeeperHasBall || (dot < 0))
+            if (field.GoalKeeperHasBall || (dot < 0))
             {
                 player.GetFSM().ChangeState(ChaseBall.Instance());
                 return;
@@ -53,9 +53,6 @@ namespace IndoorFootballStrategySimulator.Simulation
             //to make the shot
             if (player.Team.CanShoot(ball.Position, power, ref BallTarget) || (SupportCalculate.RandFloat() < 0.005))
             {
-                //add some noise to the kick. We don't want players who are 
-                //too accurate!
-                //BallTarget = Ball.AddNoiseToKick(ball.Position, BallTarget);
                 //this is the direction the ball will be kicked in
                 Vector2 KickDirection = Vector2.Subtract(BallTarget, ball.Position);
                 ball.Kick(KickDirection, power);
@@ -70,7 +67,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             power = 3f * dot;
             //test if there are any potential candidates available to receive a pass
             if (player.IsThreatened()
-                    && player.Team.FindPass(player, receiver, ref BallTarget, power, 120f))
+                    && player.Team.FindPass(player, ref receiver, ref BallTarget, power, 120f))
             {
                 //add some noise to the kick
                 //BallTarget = Ball.AddNoiseToKick(ball.Position, BallTarget);

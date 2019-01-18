@@ -36,6 +36,7 @@ namespace IndoorFootballStrategySimulator.Simulation
             if (receiver == null)
             {
                 Console.WriteLine(string.Format("Warning! No receiver found"));
+                Console.WriteLine($"{sender} - {message}");
                 return;
             }
 
