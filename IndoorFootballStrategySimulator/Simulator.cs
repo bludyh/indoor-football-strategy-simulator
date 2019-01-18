@@ -421,6 +421,6 @@ namespace IndoorFootballStrategySimulator {
             txtExport.ExportType = TextExportType.CSV;
             txtExport.FileName = "Results.csv";
             txtExport.SaveToFile();
-        }
+
     }
 }
