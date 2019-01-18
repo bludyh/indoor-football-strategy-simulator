@@ -144,7 +144,7 @@ namespace IndoorFootballStrategySimulator.Simulation
 
             foreach (Player player in Strategy.Players)
             {
-                if ((player != ControllingPlayer) && ControllingPlayer != null)
+                if ((player != ControllingPlayer) && ControllingPlayer != null && player is FieldPlayer)
                 {
                     float dist = Vector2.DistanceSquared(player.Position, SupportCalculate.GetBestSupportingSpot());
                     if (dist < ClosestSoFar)
