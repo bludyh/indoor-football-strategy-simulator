@@ -137,44 +137,47 @@ namespace IndoorFootballStrategySimulator.Simulation
             //reset the best supporting spot
             bestSupportingSpot = null;
             double BestScoreSoFar = 0;
-            foreach (SupportSpot spot in SpotsList)
+            if (SpotsList.Count > 0)
             {
-                spot.Score = 1;
-                if (Team.IsPassSafeFromAllOpponents(Team.ControllingPlayer.Position,spot.Position,null, 3f))
+                foreach (SupportSpot spot in SpotsList)
                 {
-                    spot.Score += 2;
-                }
-                //Test 2. Determine if a goal can be scored from this position.  
-                if (Team.CanShoot(spot.Position,6f))
-                {
-                    spot.Score += 1.0;
-                }
-                //Test 3. calculate how far this spot is away from the controlling
-                //player. The further away, the higher the score. Any distances further
-                //away than OptimalDistance pixels do not receive a score.
-                if (Team.SupportingPlayer != null)
-                {
-                    const float OptimalDistance = 200f;
-
-                    float dist = Vector2.Distance(Team.ControllingPlayer.Position, spot.Position);
-
-                    float temp = Math.Abs(OptimalDistance - dist);
-
-                    if (temp < OptimalDistance)
+                    spot.Score = 1;
+                    if (Team.IsPassSafeFromAllOpponents(Team.ControllingPlayer.Position, spot.Position, null, 3f))
                     {
-                        //normalize the distance and add it to the score
-                        spot.Score += 2.0* (OptimalDistance - temp) / OptimalDistance;
+                        spot.Score += 2;
+                    }
+                    //Test 2. Determine if a goal can be scored from this position.  
+                    if (Team.CanShoot(spot.Position, 6f))
+                    {
+                        spot.Score += 1.0;
+                    }
+                    //Test 3. calculate how far this spot is away from the controlling
+                    //player. The further away, the higher the score. Any distances further
+                    //away than OptimalDistance pixels do not receive a score.
+                    if (Team.SupportingPlayer != null)
+                    {
+                        const float OptimalDistance = 200f;
+
+                        float dist = Vector2.Distance(Team.ControllingPlayer.Position, spot.Position);
+
+                        float temp = Math.Abs(OptimalDistance - dist);
+
+                        if (temp < OptimalDistance)
+                        {
+                            //normalize the distance and add it to the score
+                            spot.Score += 2.0 * (OptimalDistance - temp) / OptimalDistance;
+                        }
+                    }
+
+                    //check to see if this spot has the highest score so far
+                    if (spot.Score > BestScoreSoFar)
+                    {
+                        BestScoreSoFar = spot.Score;
+
+                        bestSupportingSpot = spot;
                     }
                 }
-
-                //check to see if this spot has the highest score so far
-                if (spot.Score > BestScoreSoFar)
-                {
-                    BestScoreSoFar = spot.Score;
-
-                    bestSupportingSpot = spot;
-                }
-            }
+            }            
             return bestSupportingSpot.Position;
         }
         

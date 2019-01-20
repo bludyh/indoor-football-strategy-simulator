@@ -16,26 +16,32 @@ using IndoorFootballStrategySimulator.Simulation;
 using Spire.DataExport.TXT;
 using Spire.DataExport.Common;
 
-namespace IndoorFootballStrategySimulator {
-    public partial class Simulator : Form {       
+namespace IndoorFootballStrategySimulator
+{
+    public partial class Simulator : Form
+    {
 
         public static bool Pause { get; private set; }
         public static bool isGameOn { get; set; }
         public static int NumberofSimulations { get; private set; }
-        private string[] StrategyFiles {
-            get {
+        private string[] StrategyFiles
+        {
+            get
+            {
                 return Directory.GetFiles(@"Data\Strategies");
             }
         }
         public List<Result> Results { get; set; }
 
 
-        static Simulator() {
+        static Simulator()
+        {
             Pause = true;
             isGameOn = false;
         }
 
-        public Simulator() {
+        public Simulator()
+        {
             InitializeComponent();
 
             tab.Controls.Remove(tabSimulation);
@@ -49,12 +55,14 @@ namespace IndoorFootballStrategySimulator {
             Results = new List<Result>();
         }
 
-        private void RefreshStrategyLists() {
+        private void RefreshStrategyLists()
+        {
             dgvHomeStrategies.Rows.Clear();
             dgvAwayStrategies.Rows.Clear();
             dgvStrategies.Rows.Clear();
 
-            foreach (var file in StrategyFiles) {
+            foreach (var file in StrategyFiles)
+            {
                 var fileInfo = new FileInfo(file);
                 dgvHomeStrategies.Rows.Add(Path.GetFileNameWithoutExtension(fileInfo.Name));
                 dgvAwayStrategies.Rows.Add(Path.GetFileNameWithoutExtension(fileInfo.Name));
@@ -62,49 +70,58 @@ namespace IndoorFootballStrategySimulator {
             }
         }
 
-        private void StrategyPreviewWindowHome_Initialized(object sender, EventArgs e) {
+        private void StrategyPreviewWindowHome_Initialized(object sender, EventArgs e)
+        {
             dgvHomeStrategies.Rows.Clear();
 
-            foreach (var file in StrategyFiles) {
+            foreach (var file in StrategyFiles)
+            {
                 var fileInfo = new FileInfo(file);
                 dgvHomeStrategies.Rows.Add(Path.GetFileNameWithoutExtension(fileInfo.Name));
             }
         }
 
-        private void StrategyPreviewWindowAway_Initialized(object sender, EventArgs e) {
+        private void StrategyPreviewWindowAway_Initialized(object sender, EventArgs e)
+        {
             dgvAwayStrategies.Rows.Clear();
 
-            foreach (var file in StrategyFiles) {
+            foreach (var file in StrategyFiles)
+            {
                 var fileInfo = new FileInfo(file);
                 dgvAwayStrategies.Rows.Add(Path.GetFileNameWithoutExtension(fileInfo.Name));
             }
         }
 
-        private void StrategyEditingWindow_Initialized(object sender, EventArgs e) {
+        private void StrategyEditingWindow_Initialized(object sender, EventArgs e)
+        {
             dgvStrategies.Rows.Clear();
 
-            foreach (var file in StrategyFiles) {
+            foreach (var file in StrategyFiles)
+            {
                 var fileInfo = new FileInfo(file);
                 dgvStrategies.Rows.Add(Path.GetFileNameWithoutExtension(fileInfo.Name), fileInfo.CreationTime.ToShortDateString(), fileInfo.LastWriteTime.ToShortDateString());
             }
         }
 
-        private void SimulationWindow_Initialized(object sender, EventArgs e) {
+        private void SimulationWindow_Initialized(object sender, EventArgs e)
+        {
             SimulationWindow.EntityManager.BlueTeam.Strategy = strategyPreviewWindowHome.Strategy;
             SimulationWindow.EntityManager.RedTeam.Strategy = strategyPreviewWindowAway.Strategy;
             SetFirstTarget();
         }
 
         private void Start_btn_Click(object sender, EventArgs e)
-		{
-            try {
+        {
+            try
+            {
                 if (strategyPreviewWindowHome.Strategy == null || strategyPreviewWindowAway.Strategy == null)
                     throw new Exception("Please select strategies for Home and Away team!");
 
-                if (simulationWindow.IsInitialized) {
+                if (simulationWindow.IsInitialized)
+                {
                     SimulationWindow.EntityManager.BlueTeam.Strategy = strategyPreviewWindowHome.Strategy;
                     SimulationWindow.EntityManager.RedTeam.Strategy = strategyPreviewWindowAway.Strategy;
-					
+
                 }
                 NumberofSimulations = Convert.ToInt32(tbNrofSimulations.Text);
                 if (NumberofSimulations == 0)
@@ -123,10 +140,11 @@ namespace IndoorFootballStrategySimulator {
                 timer2.Tick += Timer2_Tick;
                 timer1.Tick += Timer1_Tick;
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 MessageBox.Show(ex.Message, "Warning");
             }
-		}
+        }
 
         private void Timer2_Tick(object sender, EventArgs e)
         {
@@ -141,7 +159,7 @@ namespace IndoorFootballStrategySimulator {
             if (NumberofSimulations == 0)
             {
                 timer2.Tick -= Timer2_Tick;
-                DialogResult dialog = MessageBox.Show("END SIMULATION", "Futsal Simulation",MessageBoxButtons.OK);
+                DialogResult dialog = MessageBox.Show("END SIMULATION", "Futsal Simulation", MessageBoxButtons.OK);
                 if (dialog == DialogResult.OK)
                 {
                     tab.Controls.Add(tabHome);
@@ -166,7 +184,7 @@ namespace IndoorFootballStrategySimulator {
                 Team RedTeam = SimulationWindow.EntityManager.RedTeam;
                 BlueTeam.GetFSM().ChangeState(PrepareForKickOff.Instance());
                 RedTeam.GetFSM().ChangeState(PrepareForKickOff.Instance());
-                SimulationWindow.MatchTime = new TimeSpan(0,45,0);
+                SimulationWindow.MatchTime = new TimeSpan(0, 45, 0);
             }
             if (Math.Round(SimulationWindow.MatchTime.TotalMinutes) >= 90)
             {
@@ -180,7 +198,7 @@ namespace IndoorFootballStrategySimulator {
                 Team RedTeam = SimulationWindow.EntityManager.RedTeam;
                 BlueTeam.GetFSM().ChangeState(PrepareForKickOff.Instance());
                 RedTeam.GetFSM().ChangeState(PrepareForKickOff.Instance());
-                SimulationWindow.MatchTime = new TimeSpan();              
+                SimulationWindow.MatchTime = new TimeSpan();
             }
             matchTime.Text = Math.Round(SimulationWindow.MatchTime.TotalMinutes).ToString() + "\'";
             redTeamScore.Text = SimulationWindow.EntityManager.BlueTeam.Goal.Score.ToString();
@@ -188,25 +206,25 @@ namespace IndoorFootballStrategySimulator {
         }
 
         private void Pause_btn_Click(object sender, EventArgs e)
-		{
-			if (Pause == false)
-			{
-				Pause = true;
-				Pause_btn.BackColor = System.Drawing.Color.Yellow;
+        {
+            if (Pause == false)
+            {
+                Pause = true;
+                Pause_btn.BackColor = System.Drawing.Color.Yellow;
                 Pause_btn.Text = "Resume Simulation";
-			}
-			else
-			{
-				Pause = false;
-				Pause_btn.BackColor = System.Drawing.Color.Orange;
+            }
+            else
+            {
+                Pause = false;
+                Pause_btn.BackColor = System.Drawing.Color.Orange;
                 Pause_btn.Text = "Pause Simulation";
-			}
+            }
 
         }
 
-		private void Abort_btn_Click(object sender, EventArgs e)
-		{
-            DialogResult result = MessageBox.Show("Do you want to abort simulation?","Confirmation", MessageBoxButtons.OKCancel);
+        private void Abort_btn_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Do you want to abort simulation?", "Confirmation", MessageBoxButtons.OKCancel);
             if (result == DialogResult.OK)
             {
                 tab.Controls.Add(tabHome);
@@ -220,46 +238,52 @@ namespace IndoorFootballStrategySimulator {
                 timer2.Stop();
                 ConcludeResults(Results);
             }
-		}
+        }
 
-        private void DgvHomeStrategies_SelectionChanged(object sender, EventArgs e) {
+        private void DgvHomeStrategies_SelectionChanged(object sender, EventArgs e)
+        {
             //try {
-                if (dgvHomeStrategies.SelectedCells.Count > 0) {
-                    strategyPreviewWindowHome.LoadStrategyFromFile($@"Data\Strategies\{ dgvHomeStrategies.CurrentCell.Value }.xml");
+            if (dgvHomeStrategies.SelectedCells.Count > 0)
+            {
+                strategyPreviewWindowHome.LoadStrategyFromFile($@"Data\Strategies\{ dgvHomeStrategies.CurrentCell.Value }.xml");
 
-                    pnHomeTeam.Enabled = true;
-                    rbHomeOffensive.Checked = true;
-                    lbHomeStrategyName.Text = strategyPreviewWindowHome.Strategy.Name;
-                    lbHomeStrategyDescription.Text = strategyPreviewWindowHome.Strategy.Description;
-                }
+                pnHomeTeam.Enabled = true;
+                rbHomeOffensive.Checked = true;
+                lbHomeStrategyName.Text = strategyPreviewWindowHome.Strategy.Name;
+                lbHomeStrategyDescription.Text = strategyPreviewWindowHome.Strategy.Description;
+            }
             //}
             //catch (Exception ex) {
             //    MessageBox.Show(ex.Message, "Warning");
             //}
         }
 
-        private void DgvAwayStrategies_SelectionChanged(object sender, EventArgs e) {
+        private void DgvAwayStrategies_SelectionChanged(object sender, EventArgs e)
+        {
             //try {
-                if (dgvAwayStrategies.SelectedCells.Count > 0) {
-                    strategyPreviewWindowAway.LoadStrategyFromFile($@"Data\Strategies\{ dgvAwayStrategies.CurrentCell.Value }.xml");
+            if (dgvAwayStrategies.SelectedCells.Count > 0)
+            {
+                strategyPreviewWindowAway.LoadStrategyFromFile($@"Data\Strategies\{ dgvAwayStrategies.CurrentCell.Value }.xml");
 
-                    pnAwayTeam.Enabled = true;
-                    rbAwayOffensive.Checked = true;
-                    lbAwayStrategyName.Text = strategyPreviewWindowAway.Strategy.Name;
-                    lbAwayStrategyDescription.Text = strategyPreviewWindowAway.Strategy.Description;
-                }
+                pnAwayTeam.Enabled = true;
+                rbAwayOffensive.Checked = true;
+                lbAwayStrategyName.Text = strategyPreviewWindowAway.Strategy.Name;
+                lbAwayStrategyDescription.Text = strategyPreviewWindowAway.Strategy.Description;
+            }
             //}
             //catch (Exception ex) {
             //    MessageBox.Show(ex.Message, "Warning");
             //}
         }
 
-        private void RadioButtons_CheckedChanged(object sender, EventArgs e) {
+        private void RadioButtons_CheckedChanged(object sender, EventArgs e)
+        {
             var radioButton = (RadioButton)sender;
             var checkedButton = radioButton.Parent.Controls.OfType<RadioButton>().FirstOrDefault(rb => rb.Checked);
             var strategyWindow = radioButton.Parent.Controls.OfType<StrategyWindow>().FirstOrDefault();
 
-            switch (checkedButton.Text) {
+            switch (checkedButton.Text)
+            {
                 case "Offensive":
                     strategyWindow.TeamState = TeamState.OFFENSIVE;
                     break;
@@ -269,9 +293,12 @@ namespace IndoorFootballStrategySimulator {
             }
         }
 
-        private void DgvStrategies_SelectionChanged(object sender, EventArgs e) {
-            try {
-                if (dgvStrategies.SelectedRows.Count > 0) {
+        private void DgvStrategies_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvStrategies.SelectedRows.Count > 0)
+                {
                     strategyEditingWindow.LoadStrategyFromFile($@"Data\Strategies\{ dgvStrategies.CurrentRow.Cells["StrategyName"].Value }.xml");
 
                     pnStrategy.Enabled = true;
@@ -280,12 +307,14 @@ namespace IndoorFootballStrategySimulator {
                     rtbStrategyDescription.Text = strategyEditingWindow.Strategy.Description;
                 }
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 MessageBox.Show(ex.Message, "Warning");
             }
         }
 
-        private void BtnNewStrategy_Click(object sender, EventArgs e) {
+        private void BtnNewStrategy_Click(object sender, EventArgs e)
+        {
             strategyEditingWindow.CreateNewStrategy();
 
             pnStrategy.Enabled = true;
@@ -295,8 +324,10 @@ namespace IndoorFootballStrategySimulator {
             dgvStrategies.ClearSelection();
         }
 
-        private void BtnDeleteStrategy_Click(object sender, EventArgs e) {
-            if (dgvStrategies.SelectedRows.Count > 0) {
+        private void BtnDeleteStrategy_Click(object sender, EventArgs e)
+        {
+            if (dgvStrategies.SelectedRows.Count > 0)
+            {
                 strategyEditingWindow.ClearStrategy();
                 File.Delete($@"Data\Strategies\{ dgvStrategies.CurrentRow.Cells["StrategyName"].Value }.xml");
 
@@ -308,8 +339,10 @@ namespace IndoorFootballStrategySimulator {
             }
         }
 
-        private void BtnSaveStrategy_Click(object sender, EventArgs e) {
-            try {
+        private void BtnSaveStrategy_Click(object sender, EventArgs e)
+        {
+            try
+            {
                 if (string.IsNullOrWhiteSpace(tbStrategyName.Text))
                     throw new Exception("Please provide a name for the strategy");
 
@@ -320,12 +353,14 @@ namespace IndoorFootballStrategySimulator {
 
                 RefreshStrategyLists();
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 MessageBox.Show(ex.Message, "Warning");
             }
         }
 
-        private void BtnDiscardChanges_Click(object sender, EventArgs e) {
+        private void BtnDiscardChanges_Click(object sender, EventArgs e)
+        {
             DgvStrategies_SelectionChanged(sender, e);
         }
         private void SetFirstTarget()
@@ -367,7 +402,7 @@ namespace IndoorFootballStrategySimulator {
                     {
                         pointsBlue.Add(0);
                         losses++;
-                    }                    
+                    }
                 }
 
                 string homeStrategy = Results[0].HomeTeamStrategy.Name;
@@ -407,7 +442,7 @@ namespace IndoorFootballStrategySimulator {
         private void btnExportCSV_Click(object sender, EventArgs e)
         {
             var txtExport = new Spire.DataExport.TXT.TXTExport();
-            
+
             txtExport.ActionAfterExport = Spire.DataExport.Common.ActionType.OpenView;
             txtExport.DataFormats.CultureName = "en-us";
             txtExport.DataFormats.Currency = "c";
@@ -422,5 +457,6 @@ namespace IndoorFootballStrategySimulator {
             txtExport.FileName = "Results.csv";
             txtExport.SaveToFile();
 
+        }
     }
 }
